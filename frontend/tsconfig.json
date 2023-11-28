@@ -23,9 +23,10 @@
     // 'baseUrl'을 기준으로 상대 위치로 가져오기를 다시 매핑하는 항목 설정
     "paths": {
       "@components/*": ["src/components/*"],
+      "@styles/*": ["src/styles/*"],
       "@apis/*": ["src/apis/*"],
+      "@assets/*": ["src/assets/*"],
       "@constants/*": ["src/constants/*"],
-      "@features/*": ["src/features/*"],
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@public/*": ["public/*"],
