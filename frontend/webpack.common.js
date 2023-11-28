@@ -9,6 +9,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     clean: true,
   },
   plugins: [
@@ -23,11 +24,14 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
     alias: {
       '@components': path.resolve(__dirname, 'src/components'),
-      '@assets': path.resolve(__dirname, 'src/assets'),
-      '@styles': path.resolve(__dirname, 'src/styles'),
-      '@contexts': path.resolve(__dirname, 'src/contexts'),
+      '@apis': path.resolve(__dirname, 'src/apis'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@constants': path.resolve(__dirname, 'src/constants'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@public': path.resolve(__dirname, 'public'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
+      '@contexts': path.resolve(__dirname, 'src/contexts'),
     },
   },
   module: {
