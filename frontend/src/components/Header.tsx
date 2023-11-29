@@ -1,12 +1,14 @@
 import { styled } from 'styled-components';
 import Logo from '@assets/logo/dukpool-logo.svg';
-const Header = () => {
-  return (
-    <StyledHeader>
-      <StyledLogo src={Logo} />
-    </StyledHeader>
-  );
-};
+import { memo } from 'react';
+
+const Header = memo(() => (
+  <StyledHeader>
+    <StyledLogo src={Logo} />
+  </StyledHeader>
+));
+
+Header.displayName = 'Header';
 
 const StyledHeader = styled.header`
   display: flex;
