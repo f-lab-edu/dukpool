@@ -24,14 +24,15 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
     alias: {
       '@components': path.resolve(__dirname, 'src/components'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
       '@apis': path.resolve(__dirname, 'src/apis'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@constants': path.resolve(__dirname, 'src/constants'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@public': path.resolve(__dirname, 'public'),
-      '@styles': path.resolve(__dirname, 'src/styles'),
-      '@contexts': path.resolve(__dirname, 'src/contexts'),
+      '@config': path.resolve(__dirname, 'config.ts'),
     },
   },
   module: {
@@ -48,6 +49,18 @@ module.exports = {
       {
         test: /\.(png|jpe?g|webp)$/,
         type: 'asset',
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'url-loader'],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)?$/,
+        type: 'asset',
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
