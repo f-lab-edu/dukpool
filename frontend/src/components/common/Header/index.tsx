@@ -1,24 +1,28 @@
+import { memo } from 'react';
 import { styled } from 'styled-components';
 import Logo from '@assets/logo/dukpool-logo.svg';
-import { memo } from 'react';
+import Navbar from '../Navbar';
 
 const Header = memo(() => (
   <StyledHeader>
     <StyledLogo src={Logo} />
+    <Navbar />
   </StyledHeader>
 ));
 
 Header.displayName = 'Header';
 
 const StyledHeader = styled.header`
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 80px;
   padding: 1.2rem 2.4rem;
+  margin: 0 auto;
   background-color: white;
-  border-bottom: 1px solid gray;
+  box-shadow: 0px 0px 5px var(--gray-4);
 `;
 
 const StyledLogo = styled.img`
