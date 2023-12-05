@@ -2,11 +2,14 @@ package com.dukpool.backend.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -25,6 +28,10 @@ public class User {
 
     @Column(length = 20)
     private String phone;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Image> images;
+
 
     private Character gender;
     private LocalDateTime createdAt;
