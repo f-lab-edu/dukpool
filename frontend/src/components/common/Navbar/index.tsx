@@ -3,35 +3,33 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { media } from '@styles/media';
 
-type NavbarProps = {
-  id: number;
-  text: string;
-  path: string;
-};
-
-const NAVBAR_LIST: NavbarProps[] = [
-  { id: 1, text: '홈', path: '/' },
-  { id: 2, text: '덕질자랑', path: '/article' },
-  { id: 3, text: '덕질토크', path: '/talk' },
-  { id: 4, text: '내정보', path: '/mypage' },
-];
-
-const Navbar = memo(() => (
-  <StyledNavbar>
-    <StyledUl>
-      {NAVBAR_LIST.map(({ id, text, path }) => (
-        <StyledList key={id}>
-          <Link to={path}>{text}</Link>
+const Navbar = memo(() => {
+  // 유저 로그인 유무 확인
+  return (
+    <StyledNavbar>
+      <StyledUl>
+        <StyledList>
+          <Link to="/">홈</Link>
         </StyledList>
-      ))}
-    </StyledUl>
-  </StyledNavbar>
-));
+        <StyledList>
+          <Link to="/article">덕질자랑</Link>
+        </StyledList>
+        <StyledList>
+          <Link to="/talk">덕질토크</Link>
+        </StyledList>
+        {/** 로그인 유무에 따라 로그인 또는 내정보 링크로 분기 */}
+        <StyledList>
+          <Link to="/mypage">내정보</Link>
+        </StyledList>
+      </StyledUl>
+    </StyledNavbar>
+  );
+});
 
 Navbar.displayName = 'Navbar';
 
 const StyledNavbar = styled.nav`
-  ${media.phone`
+  ${media.tablet`
     display: none;
   `}
 `;
