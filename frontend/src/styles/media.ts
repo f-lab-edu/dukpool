@@ -1,4 +1,5 @@
-import { css, CSSObject } from 'styled-components';
+import { mapValues } from 'lodash';
+import { css, CSSObject, Interpolation } from 'styled-components';
 
 type DeviceType = 'desktop' | 'tablet' | 'phone';
 
@@ -7,19 +8,17 @@ const sizes: Record<DeviceType, number> = {
   tablet: 768,
   phone: 600,
 };
-
-const media = Object.entries(sizes).reduce((acc, [key, value]) => {
-  return {
-    ...acc,
-    [key]: (
+const media = mapValues(
+  sizes,
+  (value) =>
+    (
       first: CSSObject | TemplateStringsArray,
-      ...interpolations: any[]
+      ...interpolations: Interpolation<object>[]
     ) => css`
       @media (max-width: ${value}px) {
         ${css(first, ...interpolations)}
       }
     `,
-  };
-}, {}) as Record<DeviceType, any>;
+);
 
 export { media };
