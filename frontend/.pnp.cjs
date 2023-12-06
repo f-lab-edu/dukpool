@@ -36,6 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/babel__core", "npm:7.20.4"],\
             ["@types/babel__preset-env", "npm:7.9.5"],\
             ["@types/eslint", "npm:8.44.7"],\
+            ["@types/lodash", "npm:4.14.202"],\
             ["@types/react", "npm:18.2.37"],\
             ["@types/react-dom", "npm:18.2.15"],\
             ["@types/styled-components", "npm:5.1.32"],\
@@ -47,6 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:9.0.0"],\
             ["eslint-plugin-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.0.1"],\
             ["html-webpack-plugin", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.5.3"],\
+            ["lodash", "npm:4.17.21"],\
             ["prettier", "npm:3.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:18.2.0"],\
@@ -4868,6 +4870,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/lodash", [\
+        ["npm:4.14.202", {\
+          "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.202-76de3e302b-a91acf3564.zip/node_modules/@types/lodash/",\
+          "packageDependencies": [\
+            ["@types/lodash", "npm:4.14.202"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/mime", [\
         ["npm:1.3.5", {\
           "packageLocation": "./.yarn/cache/@types-mime-npm-1.3.5-48d28990db-e29a5f9c47.zip/node_modules/@types/mime/",\
@@ -6975,6 +6986,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/babel__core", "npm:7.20.4"],\
             ["@types/babel__preset-env", "npm:7.9.5"],\
             ["@types/eslint", "npm:8.44.7"],\
+            ["@types/lodash", "npm:4.14.202"],\
             ["@types/react", "npm:18.2.37"],\
             ["@types/react-dom", "npm:18.2.15"],\
             ["@types/styled-components", "npm:5.1.32"],\
@@ -6986,6 +6998,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:9.0.0"],\
             ["eslint-plugin-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.0.1"],\
             ["html-webpack-plugin", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.5.3"],\
+            ["lodash", "npm:4.17.21"],\
             ["prettier", "npm:3.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:18.2.0"],\
