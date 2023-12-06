@@ -15,9 +15,11 @@ AuthLayout.displayName = 'AuthLayout';
 
 const StyledAuthLayout = styled.div`
   display: flex;
+  flex-direction: column;
   margin: 0px auto;
   max-width: 1240px;
-  min-height: 1048px;
+  min-height: 100vh;
+  padding-top: 80px;
 `;
 
 export default AuthLayout;

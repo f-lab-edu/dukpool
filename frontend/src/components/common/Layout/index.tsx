@@ -16,7 +16,7 @@ const StyledLayout = styled.div`
   flex-direction: column;
   margin: 0px auto;
   max-width: 1240px;
-  min-height: 1048px;
+  min-height: 100vh;
   padding-top: 80px;
 `;
 
