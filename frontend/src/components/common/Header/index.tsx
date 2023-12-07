@@ -2,10 +2,14 @@ import { memo } from 'react';
 import { styled } from 'styled-components';
 import Logo from '@assets/logo/dukpool-logo.svg';
 import Navbar from '../Navbar';
+import { media } from '@styles/media';
+import { Link } from 'react-router-dom';
 
 const Header = memo(() => (
   <StyledHeader>
-    <StyledLogo src={Logo} />
+    <Link to={'/'}>
+      <StyledLogo src={Logo} />
+    </Link>
     <Navbar />
   </StyledHeader>
 ));
@@ -23,6 +27,9 @@ const StyledHeader = styled.header`
   margin: 0 auto;
   background-color: white;
   box-shadow: 0px 0px 5px var(--gray-4);
+  ${media.tablet`
+  justify-content: center;
+  `}
 `;
 
 const StyledLogo = styled.img`
