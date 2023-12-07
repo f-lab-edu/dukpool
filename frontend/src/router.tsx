@@ -7,6 +7,7 @@ import Home from '@pages/Home';
 import MyPage from '@pages/MyPage';
 import NotFound from '@pages/NotFound';
 import Search from '@pages/Search';
+import Talk from '@pages/Talk';
 
 type routeElement = {
   path: string;
@@ -22,9 +23,10 @@ const routes: routeElement[] = [
     errorElement: <NotFound />,
     children: [
       { path: '', element: <Home />, auth: false },
+      { path: 'article', element: <Article />, auth: false },
+      { path: 'talk', element: <Talk />, auth: false },
       { path: 'mypage', element: <MyPage />, auth: true },
       { path: 'search/:searchId', element: <Search />, auth: false },
-      { path: 'article', element: <Article />, auth: false },
     ],
   },
 ];
