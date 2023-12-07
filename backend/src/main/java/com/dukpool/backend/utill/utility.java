@@ -10,7 +10,7 @@ public class utility {
     if (dotIndex == -1 || dotIndex == fileName.length() - 1) {
       return ""; // 확장자가 없습니다.
     }
-정
+
     // 점 이후의 문자열을 반환합니다.
     return fileName.substring(dotIndex + 1);
   }
