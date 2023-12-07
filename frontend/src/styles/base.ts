@@ -2,10 +2,10 @@ import { css } from 'styled-components';
 
 const base = css`
   :root {
-    --primary-1: #25bc5d;
-    --primary-2: #74ad89;
+    --primary: #515ce6;
     --success: #3159b3;
     --error: #ba1e45;
+    --disabled: #828bed;
     --gray-1: #8e8e93;
     --gray-2: #aeaeb2;
     --gray-3: #c7c7cc;

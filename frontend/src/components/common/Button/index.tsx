@@ -21,7 +21,7 @@ Button.displayName = 'Button';
 const StyledButton = styled.button<{ $colorType: 'dark' | 'light' }>`
   width: 100px;
   padding: 1.2rem 1.2rem;
-  background-color: var(--primary-1);
+  background-color: var(--primary);
   color: ${({ $colorType }) =>
     $colorType === 'dark' ? 'var(--white)' : 'var(--black)'};
   font-size: 14px;

@@ -48,8 +48,7 @@ const StyledUl = styled.ul`
 
 const StyledList = styled.li<{ $active: boolean }>`
   padding: 1.2rem 2rem;
-  background-color: ${({ $active }) =>
-    $active ? 'var(--primary-1)' : 'white'};
+  background-color: ${({ $active }) => ($active ? 'var(--primary)' : 'white')};
   & > p {
     color: ${({ $active }) => ($active ? 'var(--white)' : 'var(--black)')};
   }
