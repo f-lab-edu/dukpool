@@ -1,26 +1,34 @@
 import { memo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { media } from '@styles/media';
 
 const Navbar = memo(() => {
   // 유저 로그인 유무 확인
+  const { pathname } = useLocation();
   return (
     <StyledNavbar>
       <StyledUl>
-        <StyledList>
-          <Link to="/">홈</Link>
-        </StyledList>
-        <StyledList>
-          <Link to="/article">덕질자랑</Link>
-        </StyledList>
-        <StyledList>
-          <Link to="/talk">덕질토크</Link>
-        </StyledList>
-        {/** 로그인 유무에 따라 로그인 또는 내정보 링크로 분기 */}
-        <StyledList>
-          <Link to="/mypage">내정보</Link>
-        </StyledList>
+        <Link to="/">
+          <StyledList $active={pathname === '/' ? true : false}>
+            <p>홈</p>
+          </StyledList>
+        </Link>
+        <Link to="/article">
+          <StyledList $active={pathname.includes('/article') ? true : false}>
+            <p>덕질자랑</p>
+          </StyledList>
+        </Link>
+        <Link to="/talk">
+          <StyledList $active={pathname.includes('/talk') ? true : false}>
+            <p>덕질토크</p>
+          </StyledList>
+        </Link>
+        <Link to="/mypage">
+          <StyledList $active={pathname.includes('/mypage') ? true : false}>
+            <p>내정보</p>
+          </StyledList>
+        </Link>
       </StyledUl>
     </StyledNavbar>
   );
@@ -38,8 +46,14 @@ const StyledUl = styled.ul`
   display: flex;
 `;
 
-const StyledList = styled.li`
-  padding: 1.2rem 2.4rem;
+const StyledList = styled.li<{ $active: boolean }>`
+  padding: 1.2rem 2rem;
+  background-color: ${({ $active }) =>
+    $active ? 'var(--primary-1)' : 'white'};
+  & > p {
+    color: ${({ $active }) => ($active ? 'var(--white)' : 'var(--black)')};
+  }
+  border-radius: 12px;
 `;
 
 export default Navbar;
