@@ -2079,6 +2079,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4":
+  version: 4.14.202
+  resolution: "@types/lodash@npm:4.14.202"
+  checksum: a91acf3564a568c6f199912f3eb2c76c99c5a0d7e219394294213b3f2d54f672619f0fde4da22b29dc5d4c31457cd799acc2e5cb6bd90f9af04a1578483b6ff7
+  languageName: node
+  linkType: hard
+
 "@types/mime@npm:*":
   version: 3.0.4
   resolution: "@types/mime@npm:3.0.4"
@@ -3687,6 +3694,7 @@ __metadata:
     "@types/babel__core": ^7
     "@types/babel__preset-env": ^7
     "@types/eslint": ^8
+    "@types/lodash": ^4
     "@types/react": ^18.2.37
     "@types/react-dom": ^18.2.15
     "@types/styled-components": ^5.1.32
@@ -3698,6 +3706,7 @@ __metadata:
     eslint-config-prettier: ^9.0.0
     eslint-plugin-prettier: ^5.0.1
     html-webpack-plugin: ^5.5.3
+    lodash: ^4.17.21
     prettier: ^3.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
