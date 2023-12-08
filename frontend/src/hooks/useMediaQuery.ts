@@ -16,7 +16,6 @@ const useMediaQuery = (): { isMobile: boolean } => {
 
   function handleChange() {
     setMatches(getMatches(NON_DESKTOP_QUERY));
-    console.log('asdasd');
   }
 
   useEffect(() => {
