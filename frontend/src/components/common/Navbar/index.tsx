@@ -10,24 +10,24 @@ const Navbar = memo(() => {
     <StyledNavbar>
       <StyledUl>
         <Link to="/">
-          <StyledList $active={pathname === '/' ? true : false}>
+          <StyledItem $active={pathname === '/'}>
             <p>홈</p>
-          </StyledList>
+          </StyledItem>
         </Link>
         <Link to="/article">
-          <StyledList $active={pathname.includes('/article') ? true : false}>
+          <StyledItem $active={pathname.includes('/article')}>
             <p>덕질자랑</p>
-          </StyledList>
+          </StyledItem>
         </Link>
         <Link to="/talk">
-          <StyledList $active={pathname.includes('/talk') ? true : false}>
+          <StyledItem $active={pathname.includes('/talk')}>
             <p>덕질토크</p>
-          </StyledList>
+          </StyledItem>
         </Link>
         <Link to="/mypage">
-          <StyledList $active={pathname.includes('/mypage') ? true : false}>
+          <StyledItem $active={pathname.includes('/mypage')}>
             <p>내정보</p>
-          </StyledList>
+          </StyledItem>
         </Link>
       </StyledUl>
     </StyledNavbar>
@@ -46,7 +46,7 @@ const StyledUl = styled.ul`
   display: flex;
 `;
 
-const StyledList = styled.li<{ $active: boolean }>`
+const StyledItem = styled.li<{ $active: boolean }>`
   padding: 1.2rem 2rem;
   background-color: ${({ $active }) => ($active ? 'var(--primary)' : 'white')};
   & > p {
