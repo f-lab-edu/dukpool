@@ -16,34 +16,34 @@ const MobileNavbar = memo(() => {
     <StyledNavbar>
       <StyledUl>
         <Link to="/">
-          <StyledList>
+          <StyledItem>
             <StyledLogo src={pathname === '/' ? FocusedHomeIcon : HomeIcon} />
             <p>홈</p>
-          </StyledList>
+          </StyledItem>
         </Link>
         <Link to="/article">
-          <StyledList>
+          <StyledItem>
             <StyledLogo
               src={pathname.includes('/article') ? FocusedEmojiIcon : EmojiIcon}
             />
             <p>덕질자랑</p>
-          </StyledList>
+          </StyledItem>
         </Link>
         <Link to="/talk">
-          <StyledList>
+          <StyledItem>
             <StyledLogo
               src={pathname.includes('/talk') ? FocusedCoffeeIcon : CoffeeIcon}
             />
             <p>덕질토크</p>
-          </StyledList>
+          </StyledItem>
         </Link>
         <Link to="/mypage">
-          <StyledList>
+          <StyledItem>
             <StyledLogo
               src={pathname.includes('/mypage') ? FocusedUserIcon : UserIcon}
             />
             <p>내정보</p>
-          </StyledList>
+          </StyledItem>
         </Link>
       </StyledUl>
     </StyledNavbar>
@@ -64,7 +64,7 @@ const StyledUl = styled.ul`
   justify-content: space-evenly;
 `;
 
-const StyledList = styled.li`
+const StyledItem = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
