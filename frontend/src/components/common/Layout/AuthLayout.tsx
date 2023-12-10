@@ -1,13 +1,23 @@
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
+import { getToken } from '@utils/token';
+import { useNavigate } from 'react-router-dom';
 
 type AuthLayoutProps = {
   children: React.ReactNode;
 };
 
 const AuthLayout = memo(({ children }: AuthLayoutProps) => {
-  // 로그인 유무 처리
-  // 비로그인 시 로그인 페이지로 이동
-  return <>{children}</>;
+  const [isLogined, setIsLogined] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const goToLoginPage = () => navigate('/login');
+
+  useEffect(() => {
+    const token = getToken();
+    if (!token) goToLoginPage();
+    else setIsLogined(true);
+  }, []);
+
+  return isLogined ? <>{children}</> : null;
 });
 
 AuthLayout.displayName = 'AuthLayout';
