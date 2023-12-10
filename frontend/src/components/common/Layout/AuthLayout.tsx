@@ -1,22 +1,12 @@
-import { memo, useEffect, useState } from 'react';
-import { getToken } from '@utils/token';
-import { useNavigate } from 'react-router-dom';
+import { memo } from 'react';
+import useAuthCheck from '@hooks/useAuthCheck';
 
 type AuthLayoutProps = {
   children: React.ReactNode;
 };
 
 const AuthLayout = memo(({ children }: AuthLayoutProps) => {
-  const [isLogined, setIsLogined] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const goToLoginPage = () => navigate('/login');
-
-  useEffect(() => {
-    const token = getToken();
-    if (!token) goToLoginPage();
-    else setIsLogined(true);
-  }, []);
-
+  const { isLogined } = useAuthCheck();
   return isLogined ? <>{children}</> : null;
 });
 
