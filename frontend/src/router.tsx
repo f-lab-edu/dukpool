@@ -8,6 +8,8 @@ import MyPage from '@pages/MyPage';
 import NotFound from '@pages/NotFound';
 import Search from '@pages/Search';
 import Talk from '@pages/Talk';
+import Login from '@pages/Login';
+import Kakao from '@pages/Kakao';
 
 type routeElement = {
   path: string;
@@ -25,6 +27,8 @@ const routes: routeElement[] = [
       { path: '', element: <Home />, auth: false },
       { path: 'article', element: <Article />, auth: false },
       { path: 'talk', element: <Talk />, auth: false },
+      { path: 'login', element: <Login />, auth: false },
+      { path: 'auth/kakao', element: <Kakao />, auth: false },
       { path: 'mypage', element: <MyPage />, auth: true },
       { path: 'search/:searchId', element: <Search />, auth: false },
     ],
