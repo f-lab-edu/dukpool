@@ -11,13 +11,10 @@ const Layout = memo(({ children }: LayoutProps) => {
 
 Layout.displayName = 'Layout';
 
-const StyledLayout = styled.div`
+const StyledLayout = styled.main`
   display: flex;
-  flex-direction: column;
-  margin: 0px auto;
-  max-width: 1240px;
+  max-width: 100vw;
   min-height: 100vh;
-  padding-top: 80px;
 `;
 
 export default Layout;
