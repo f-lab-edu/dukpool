@@ -9,7 +9,7 @@ type TokenItem = {
   refreshToken: string | undefined;
 };
 
-const TOKEN_KEY = '@DukpoolToken';
+const TOKEN_KEY = 'token';
 
 export const getToken = (): TokenItem => {
   const token = getLocalStorage(TOKEN_KEY);
