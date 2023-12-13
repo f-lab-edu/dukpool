@@ -10,8 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Setter
+@Getter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +24,7 @@ public class User {
     @Column(length = 50, nullable = false)
     private String username;
 
-    @Column(length = 255, nullable = false)
+    @Column(length = 30, nullable = false)
     private String password;
 
     @Column(length = 100)
@@ -39,7 +43,5 @@ public class User {
     private String address2;
     private LocalDate birthday;
     private Boolean isActive = true;
-
-    // 생성자, 게터, 세터
 }
 
