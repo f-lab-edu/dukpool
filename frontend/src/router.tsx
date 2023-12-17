@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import AuthLayout from '@components/common/Layout/AuthLayout';
 import RootPage from '@pages/RootPage';
 import Article from '@pages/Article';
 import Home from '@pages/Home';
@@ -15,7 +14,7 @@ type routeElement = {
   path: string;
   element: ReactNode;
   errorElement: ReactNode;
-  children: { path: string; element: ReactNode; auth: boolean }[];
+  children: { path: string; element: ReactNode }[];
 };
 
 const routes: routeElement[] = [
@@ -24,13 +23,13 @@ const routes: routeElement[] = [
     element: <RootPage />,
     errorElement: <NotFound />,
     children: [
-      { path: '', element: <Home />, auth: false },
-      { path: 'article', element: <Article />, auth: false },
-      { path: 'talk', element: <Talk />, auth: false },
-      { path: 'login', element: <Login />, auth: false },
-      { path: 'auth/kakao', element: <Kakao />, auth: false },
-      { path: 'mypage', element: <MyPage />, auth: true },
-      { path: 'search/:searchId', element: <Search />, auth: false },
+      { path: '', element: <Home /> },
+      { path: 'article', element: <Article /> },
+      { path: 'talk', element: <Talk /> },
+      { path: 'login', element: <Login /> },
+      { path: 'auth/kakao', element: <Kakao /> },
+      { path: 'mypage', element: <MyPage /> },
+      { path: 'search/:searchId', element: <Search /> },
     ],
   },
 ];
@@ -38,13 +37,6 @@ const routes: routeElement[] = [
 const router = createBrowserRouter(
   routes.map((route) => {
     const childs = route.children?.map((childRoute) => {
-      if (childRoute.auth) {
-        return {
-          path: childRoute.path,
-          element: <AuthLayout>{childRoute.element}</AuthLayout>,
-          errorElement: <NotFound />,
-        };
-      }
       return {
         path: childRoute.path,
         element: childRoute.element,
