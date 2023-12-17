@@ -1,6 +1,8 @@
+import useIsLoggined from '@hooks/useIsLoggined';
 import styled from 'styled-components';
 
 const MyPage = () => {
+  useIsLoggined();
   return <StyledWrapper>mypage</StyledWrapper>;
 };
 
