@@ -13,7 +13,7 @@ import Kakao from '@pages/Kakao';
 type routeElement = {
   path: string;
   element: ReactNode;
-  errorElement: ReactNode;
+  errorElement?: ReactNode;
   children: { path: string; element: ReactNode }[];
 };
 
@@ -40,7 +40,6 @@ const router = createBrowserRouter(
       return {
         path: childRoute.path,
         element: childRoute.element,
-        errorElement: <NotFound />,
       };
     });
     return {
