@@ -14,6 +14,7 @@ const AuthContext = createContext<AuthProps>({ isLoggined: false });
 
 const AuthProvider = ({ children }: Props): JSX.Element => {
   const [isLoggined, setIsLoggined] = useState<boolean>(false);
+  // useQuery를 통해 유저 확인 로직으로 교체
   useEffect(() => {
     const token = getLocalStorage(TOKEN_KEY);
     if (token) setIsLoggined(true);
