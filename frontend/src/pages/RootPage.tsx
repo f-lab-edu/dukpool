@@ -11,15 +11,17 @@ import { AuthProvider } from '@context/AuthContext';
 const RootPage = () => {
   const { isMobile } = useMediaQuery();
   return (
-    <ErrorBoundary fallback={<ErrorFallback />}>
-      <AuthProvider>
-        <Header />
-        <Layout>
-          <Outlet />
-        </Layout>
-        {isMobile ? <MobileNavbar /> : <Footer />}
-      </AuthProvider>
-    </ErrorBoundary>
+    <>
+      <Header />
+      <Layout>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <AuthProvider>
+            <Outlet />
+          </AuthProvider>
+        </ErrorBoundary>
+      </Layout>
+      {isMobile ? <MobileNavbar /> : <Footer />}
+    </>
   );
 };
 
