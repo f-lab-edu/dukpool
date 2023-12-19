@@ -1,11 +1,7 @@
 import styled from 'styled-components';
-import MyComponent from '@components/MyComponent';
+
 const Home = () => {
-  return (
-    <StyledWrapper>
-      <MyComponent />
-    </StyledWrapper>
-  );
+  return <StyledWrapper>Home</StyledWrapper>;
 };
 
 const StyledWrapper = styled.div`
