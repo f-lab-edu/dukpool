@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 @RestController
+@RequestMapping("/user")
 public class UserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
