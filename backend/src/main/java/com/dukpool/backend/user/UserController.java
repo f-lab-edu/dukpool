@@ -49,8 +49,8 @@ public class UserController {
 
     @GetMapping("/loginkakao")
     public String loginForm(Model model){
-        model.addAttribute("kakaoApiKey", kakaoApi.getKakaoApiKey());
-        model.addAttribute("redirectUri", kakaoApi.getKakaoRedirectUri());
+        model.addAttribute("kakaoApiKey", kakaoApi.getREST_API_KEY ());
+        model.addAttribute("redirectUri", kakaoApi.getREDIRECT_URI ());
         return "login";
     }
 
