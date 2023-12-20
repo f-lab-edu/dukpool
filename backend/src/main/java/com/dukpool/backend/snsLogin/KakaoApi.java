@@ -62,13 +62,13 @@ public class KakaoApi {
   public String kakaoCallback(@RequestParam("code") String code) throws Exception {
     // 인가 코드를 사용하여 액세스 토큰 요청
       logger.info("kakaoCallback method");
-      logger.info("kakaoCallback code : ",code);
+      logger.info("kakaoCallback code : ",code.toString ());
 
     return getAccessToken(code);
   }
 
   public String getAccessToken(String code) {
-      logger.info("getAccessToken method & code :", code);
+      logger.info("getAccessToken method & code :", code.toString ());
     String accessToken = "";
     String refreshToken = "";
     String reqUrl = "https://kauth.kakao.com/oauth/token";
