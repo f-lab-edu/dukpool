@@ -32,7 +32,7 @@ public class KakaoApi {
 
   private final String REST_API_KEY = "a8151e5b46735e92c0a052f581c885dc"; // 카카오 앱의 클라이언트 ID
   private final String REDIRECT_URI =
-      "http://test.dukpool.com/auth/kakao/callback"; // 카카오 앱에 설정된 리디렉션 URI
+      "http://test.dukpool.com:8080/auth/kakao/callback"; // 카카오 앱에 설정된 리디렉션 URI
 
   public String getREST_API_KEY() {
     return REST_API_KEY;
@@ -68,7 +68,7 @@ public class KakaoApi {
   }
 
   public String getAccessToken(String code) {
-      logger.info("getAccessToken method");
+      logger.info("getAccessToken method & code :", code);
     String accessToken = "";
     String refreshToken = "";
     String reqUrl = "https://kauth.kakao.com/oauth/token";
