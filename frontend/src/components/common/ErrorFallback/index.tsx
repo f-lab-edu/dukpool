@@ -1,23 +1,26 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { FallbackProps } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
 import Button from '@components/common/Button';
 import styled from 'styled-components';
 import Logo from '@assets/logo/dukpool-logo.svg';
+import { UnAuthorizedError } from '@utils/errors';
 
-const INVALID_TOKEN_ERROR = 'UnAuthorized Error';
-
-const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
+const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
   const navigate = useNavigate();
   const goToLoginPage = () => {
     navigate('/login');
   };
+
   useEffect(() => {
-    if (error.message === INVALID_TOKEN_ERROR) {
+    if (error instanceof UnAuthorizedError) {
       goToLoginPage();
       resetErrorBoundary();
     }
   }, []);
+
+  if (error instanceof UnAuthorizedError) return null;
+
   return (
     <StyledWrapper>
       <StyledInfo>
@@ -33,7 +36,9 @@ const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
       ></Button>
     </StyledWrapper>
   );
-};
+});
+
+ErrorFallback.displayName = 'ErrorFallback';
 
 const StyledWrapper = styled.div`
   width: 1140px;
