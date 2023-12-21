@@ -1,8 +1,15 @@
 import { createContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios, { AxiosInstance } from 'axios';
 import { getLocalStorage } from '@utils/localStorage';
+import { CONFIG } from '@config';
 
 type AuthProps = {
+  token: string | null;
   isLoggined: boolean;
+  client: AxiosInstance | null;
+  login: () => void;
+  logout: () => void;
 };
 
 interface Props {
@@ -10,17 +17,50 @@ interface Props {
 }
 
 const TOKEN_KEY = 'token';
-const AuthContext = createContext<AuthProps>({ isLoggined: false });
+
+const AuthContext = createContext<AuthProps>({
+  token: null,
+  isLoggined: false,
+  client: null,
+  login: () => {},
+  logout: () => {},
+});
 
 const AuthProvider = ({ children }: Props): JSX.Element => {
-  const [isLoggined, setIsLoggined] = useState<boolean>(false);
-  // useQuery를 통해 유저 확인 로직으로 교체
+  const [token, setToken] = useState<string | null>(null);
+  const [client, setClient] = useState<AxiosInstance | null>(null);
+  const isLoggined = !!token;
+
+  const navigate = useNavigate();
+
+  const login = () => {
+    navigate('/login');
+  };
+
+  const logout = () => {
+    setToken(null);
+    navigate('/');
+  };
+
   useEffect(() => {
     const token = getLocalStorage(TOKEN_KEY);
-    if (token) setIsLoggined(true);
+    if (token) setToken(token);
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      const instance = axios.create({
+        baseURL: CONFIG.BASE_URL,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setClient(instance);
+    }
+  }, [token]);
+
   return (
-    <AuthContext.Provider value={{ isLoggined }}>
+    <AuthContext.Provider value={{ token, isLoggined, client, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
