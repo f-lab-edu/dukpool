@@ -1,8 +1,8 @@
-import useIsLoggined from '@hooks/useIsLoggined';
+import useToken from '@hooks/useToken';
 import styled from 'styled-components';
 
 const MyPage = () => {
-  useIsLoggined();
+  useToken();
   return <StyledWrapper>mypage</StyledWrapper>;
 };
 
