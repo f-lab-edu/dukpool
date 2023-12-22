@@ -181,7 +181,8 @@ public class KakaoApi {
 
         user.setSnsId(userInfo.getLong("id"));
         user.setSnsProvider(SnsProvider.KAKAO);
-        JSONObject nickNameObj = userInfo.getJSONObject ("profile");
+        JSONObject kakaoAccountObj = userInfo.getJSONObject ("kakao_account");
+        JSONObject nickNameObj = kakaoAccountObj.getJSONObject ("profile");
         user.setUsername (nickNameObj.getString ("nickname"));
         userRepository.save(user);
 
