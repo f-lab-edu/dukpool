@@ -1,7 +1,12 @@
+import { AuthContext } from '@context/AuthContext';
+import { useContext, useEffect } from 'react';
+
 const Kakao = () => {
-  const code = new URL(window.location.href).searchParams.get('code');
-  console.log(code);
-  return <div></div>;
+  const { login } = useContext(AuthContext);
+  useEffect(() => {
+    login();
+  }, []);
+  return <></>;
 };
 
 export default Kakao;
