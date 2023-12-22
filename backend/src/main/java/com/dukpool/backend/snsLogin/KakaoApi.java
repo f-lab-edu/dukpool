@@ -130,7 +130,7 @@ public class KakaoApi {
     // return accessToken;
     JSONObject userInfo = fetchKakaoUserInfo(accessToken);
     System.out.println(userInfo.toString());
-    // processLoginOrSignup(userInfo);
+    processLoginOrSignup(userInfo);
   }
 
   public JSONObject fetchKakaoUserInfo(String accessToken) {
