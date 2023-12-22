@@ -36,6 +36,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Image> images;
 
+    @Column(length = 20)
+    private String snsProvider;
 
     private Character gender;
     private LocalDateTime createdAt;
