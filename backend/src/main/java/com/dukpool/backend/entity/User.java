@@ -23,10 +23,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String username;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 30)
     private String password;
 
     @Column(length = 100)
