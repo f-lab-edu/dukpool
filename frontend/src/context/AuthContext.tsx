@@ -50,11 +50,10 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
   };
 
   const client = useMemo(() => {
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
     const instance = axios.create({
       baseURL: CONFIG.BASE_URL,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: headers,
     });
     return instance;
   }, [token]);
