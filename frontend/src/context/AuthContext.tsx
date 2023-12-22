@@ -1,14 +1,18 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios, { AxiosInstance } from 'axios';
-import { getLocalStorage } from '@utils/localStorage';
+import {
+  getLocalStorage,
+  setLocalStorage,
+  removeLocalStorage,
+} from '@utils/localStorage';
 import { CONFIG } from '@config';
 
 type AuthProps = {
   token: string | null;
   isLoggined: boolean;
   client: AxiosInstance | null;
-  login: () => void;
+  login: () => Promise<void>;
   logout: () => void;
 };
 
@@ -22,41 +26,37 @@ const AuthContext = createContext<AuthProps>({
   token: null,
   isLoggined: false,
   client: null,
-  login: () => {},
+  login: async () => {},
   logout: () => {},
 });
 
 const AuthProvider = ({ children }: Props): JSX.Element => {
-  const [token, setToken] = useState<string | null>(null);
-  const [client, setClient] = useState<AxiosInstance | null>(null);
+  const [token, setToken] = useState<string | null>(getLocalStorage(TOKEN_KEY));
   const isLoggined = !!token;
 
   const navigate = useNavigate();
 
-  const login = () => {
-    navigate('/login');
+  const login = async () => {
+    const code = new URL(window.location.href).searchParams.get('code');
+    const { data } = await client.get(`/login/kakao?code=${code}`);
+    setToken(data);
+    setLocalStorage(TOKEN_KEY, data);
   };
 
   const logout = () => {
     setToken(null);
+    removeLocalStorage(TOKEN_KEY);
     navigate('/');
   };
 
-  useEffect(() => {
-    const token = getLocalStorage(TOKEN_KEY);
-    if (token) setToken(token);
-  }, []);
-
-  useEffect(() => {
-    if (token) {
-      const instance = axios.create({
-        baseURL: CONFIG.BASE_URL,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setClient(instance);
-    }
+  const client = useMemo(() => {
+    const instance = axios.create({
+      baseURL: CONFIG.BASE_URL,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return instance;
   }, [token]);
 
   return (
