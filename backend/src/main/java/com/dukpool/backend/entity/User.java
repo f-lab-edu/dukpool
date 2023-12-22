@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,8 +38,11 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Image> images;
 
-    @Column(length = 20)
-    private String snsProvider;
+    @Enumerated(EnumType.STRING)
+    private SnsProvider snsProvider; // SNS 공급자
+
+    @Column(unique = true)
+    private Long snsId; // SNS 공급자에서 제공하는 고유 ID
 
     private Character gender;
     private LocalDateTime createdAt;
@@ -46,4 +51,3 @@ public class User {
     private LocalDate birthday;
     private Boolean isActive = true;
 }
-

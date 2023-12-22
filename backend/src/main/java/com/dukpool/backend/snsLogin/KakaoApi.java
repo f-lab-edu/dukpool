@@ -1,5 +1,8 @@
 package com.dukpool.backend.snsLogin;
 
+import com.dukpool.backend.Repository.UserRepository;
+import com.dukpool.backend.entity.SnsProvider;
+import com.dukpool.backend.entity.User;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import java.io.BufferedReader;
@@ -17,6 +20,7 @@ import lombok.Getter;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class KakaoApi {
 
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+  @Autowired UserRepository userRepository;
 
   private final String REST_API_KEY = "a8151e5b46735e92c0a052f581c885dc"; // 카카오 앱의 클라이언트 ID
   private final String REDIRECT_URI =
@@ -123,8 +129,8 @@ public class KakaoApi {
     }
     // return accessToken;
     JSONObject userInfo = fetchKakaoUserInfo(accessToken);
-    System.out.println(userInfo.toString ());
-    //processLoginOrSignup(userInfo);
+    System.out.println(userInfo.toString());
+    // processLoginOrSignup(userInfo);
   }
 
   public JSONObject fetchKakaoUserInfo(String accessToken) {
@@ -161,15 +167,29 @@ public class KakaoApi {
     return userInfo;
   }
 
-  public void processLoginOrSignup(JSONObject userInfo) {
-    //JSONObject userInfo = fetchKakaoUserInfo(accessToken);
-
+  public User processLoginOrSignup(JSONObject userInfo) {
+    // JSONObject userInfo = fetchKakaoUserInfo(accessToken);
+    User user = new User();
     if (userInfo != null) {
 
       System.out.println("User ID: " + userInfo.getLong("id"));
-      // 여기에 로그인/회원가입 로직 구현
+      if (userRepository.existsBySnsIdAndSnsProvider(userInfo.getLong("id"), SnsProvider.KAKAO)) {
+        user = userRepository.findBySnsIdAndSnsProvider(userInfo.getLong("id"), SnsProvider.KAKAO);
+
+        logger.info("kakao user Object found :", user.toString());
+      } else {
+
+        user.setSnsId(userInfo.getLong("id"));
+        user.setSnsProvider(SnsProvider.KAKAO);
+        userRepository.save(user);
+        logger.info("kakao user Object saved :", user.toString());
+      }
+
+      return user;
     } else {
       System.out.println("Kakao user information could not be retrieved.");
+      user = null;
+      return user;
     }
   }
 
