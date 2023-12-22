@@ -6,7 +6,7 @@ type ArticleApis = {
   deleteArticle: (articleId: number) => Promise<void>;
 };
 
-const articleApi = (): ArticleApis => {
+const useArticleApi = (): ArticleApis => {
   const client = useClient();
 
   return {
@@ -34,4 +34,4 @@ const articleApi = (): ArticleApis => {
   };
 };
 
-export default articleApi;
+export default useArticleApi;

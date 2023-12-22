@@ -2,16 +2,21 @@ import useClient from '@hooks/useClient';
 
 type AuthApis = {
   getIsUserValid: () => Promise<boolean>;
+  getUserToken: (code: string) => Promise<string>;
   postLogout: () => Promise<void>;
   deleteUser: () => Promise<void>;
   getCheckNickname: (nickname: string) => Promise<void>;
 };
 
-const authApi = (): AuthApis => {
+const useAuthApi = (): AuthApis => {
   const client = useClient();
   return {
     getIsUserValid: async (): Promise<boolean> => {
       const { data } = await client.get('/users');
+      return data;
+    },
+    getUserToken: async (code: string): Promise<string> => {
+      const { data } = await client.get(`/login/kakao?code=${code}`);
       return data;
     },
     postLogout: async (): Promise<void> => {
@@ -26,4 +31,4 @@ const authApi = (): AuthApis => {
   };
 };
 
-export default authApi;
+export default useAuthApi;

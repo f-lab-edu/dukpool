@@ -6,7 +6,7 @@ type TalkApis = {
   deleteTalk: (talkId: number) => Promise<void>;
 };
 
-const talkApi = (): TalkApis => {
+const useTalkApi = (): TalkApis => {
   const client = useClient();
   return {
     postTalk: async (body: FormData): Promise<any> => {
@@ -31,4 +31,4 @@ const talkApi = (): TalkApis => {
   };
 };
 
-export default talkApi;
+export default useTalkApi;
