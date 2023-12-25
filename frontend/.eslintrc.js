@@ -12,6 +12,7 @@ module.exports = {
   },
   rules: {
     'no-unused-vars': 'off',
+    'prefer-destructuring': ['error', { object: true, array: false }],
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
