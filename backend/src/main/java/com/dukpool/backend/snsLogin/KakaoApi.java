@@ -10,19 +10,16 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import javax.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,7 +61,7 @@ public class KakaoApi {
     }
   }
 
-  @GetMapping("/auth/kakao/callback")
+  @PostMapping("/auth/kakao/callback")
   public void kakaoCallback(@RequestParam("code") String code) throws Exception {
     // 인가 코드를 사용하여 액세스 토큰 요청
     logger.info("kakaoCallback method");
