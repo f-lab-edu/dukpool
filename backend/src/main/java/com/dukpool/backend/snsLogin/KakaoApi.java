@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,7 +62,7 @@ public class KakaoApi {
     }
   }
 
-  @PostMapping("/auth/kakao/callback")
+  @GetMapping("/auth/kakao/callback")
   public void kakaoCallback(@RequestParam("code") String code) throws Exception {
     // 인가 코드를 사용하여 액세스 토큰 요청
     logger.info("kakaoCallback method");
