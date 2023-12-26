@@ -1,7 +1,13 @@
+import { useMockFetchData } from '@hooks/useGetQueries';
 import styled from 'styled-components';
 
 const Home = () => {
-  return <StyledWrapper>Home</StyledWrapper>;
+  const { data } = useMockFetchData(1);
+  return (
+    <StyledWrapper>
+      <div>{data}</div>
+    </StyledWrapper>
+  );
 };
 
 const StyledWrapper = styled.div`
