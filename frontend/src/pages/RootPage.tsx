@@ -7,14 +7,16 @@ import MobileNavbar from '@components/common/Navbar/MobileNavbar';
 import ErrorFallback from '@components/common/ErrorFallback';
 import { ErrorBoundary } from 'react-error-boundary';
 import { AuthProvider } from '@context/AuthContext';
+import { useQueryErrorResetBoundary } from 'react-query';
 
 const RootPage = () => {
   const { isMobile } = useMediaQuery();
+  const { reset } = useQueryErrorResetBoundary();
   return (
     <>
       <Header />
       <Layout>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
           <AuthProvider>
             <Outlet />
           </AuthProvider>
