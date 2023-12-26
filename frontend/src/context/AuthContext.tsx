@@ -5,7 +5,7 @@ import {
   getLocalStorage,
   setLocalStorage,
   removeLocalStorage,
-} from '@utils/localStorage';
+} from '@utils/localstorage';
 import { CONFIG } from '@config';
 
 type AuthProps = {
