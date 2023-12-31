@@ -1,18 +1,15 @@
 import { useRef, useState } from 'react';
 
 type toastState = {
-  message: string;
-  isToast: boolean;
+  message: string | null;
   showToast: (message: string) => void;
 };
 
 const useToast = (): toastState => {
-  const [message, setMessage] = useState<string>('');
-  const [isToast, setIsToast] = useState<boolean>(false);
+  const [message, setMessage] = useState<string | null>(null);
   const toastTimer = useRef<NodeJS.Timeout>();
 
   const showToast = (message: string) => {
-    setIsToast(true);
     setMessage(message);
 
     if (toastTimer.current) {
@@ -20,13 +17,12 @@ const useToast = (): toastState => {
     }
 
     const timer = setTimeout(() => {
-      setIsToast(false);
-      setMessage('');
+      setMessage(null);
     }, 1500);
     toastTimer.current = timer;
   };
 
-  return { message, isToast, showToast };
+  return { message, showToast };
 };
 
 export default useToast;

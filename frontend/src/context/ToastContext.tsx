@@ -15,11 +15,11 @@ const ToastContext = createContext<ToastProps>({
 });
 
 const ToastProvider = ({ children }: Props): JSX.Element => {
-  const { showToast, isToast, message } = useToast();
+  const { showToast, message } = useToast();
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      {isToast && <Toast message={message} />}
+      {message && <Toast message={message} />}
     </ToastContext.Provider>
   );
 };
