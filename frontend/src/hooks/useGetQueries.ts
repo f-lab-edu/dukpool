@@ -5,75 +5,37 @@ import useAuthApi from '@hooks/apis/useAuthApi';
 
 export const useGetAllArticles = () => {
   const { getAllArticles } = useArticleApi();
-  return useQuery<any, Error>(['useGetAllArticles'], () => getAllArticles(), {
-    retry: false,
-    useErrorBoundary: true,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery<any, Error>(['useGetAllArticles'], () => getAllArticles());
 };
 
 export const useGetArticle = (articleId: number) => {
   const { getArticle } = useArticleApi();
-  return useQuery<any, Error>(['useGetArticle'], () => getArticle(articleId), {
-    retry: false,
-    useErrorBoundary: true,
-    refetchOnWindowFocus: false,
-    enabled: !!articleId,
-  });
+  return useQuery<any, Error>(['useGetArticle'], () => getArticle(articleId));
 };
 
 export const useMockFetchData = (index: number) => {
   const { mockFetchData } = useArticleApi();
-  return useQuery<any, Error>(
-    ['useMockFetchData'],
-    () => mockFetchData(index),
-    {
-      retry: false,
-      useErrorBoundary: true,
-      refetchOnWindowFocus: false,
-      enabled: !!index,
-    },
-  );
+  return useQuery<any, Error>(['useMockFetchData'], () => mockFetchData(index));
 };
 
 export const useGetUserProfile = () => {
   const { getUserProfile } = useAuthApi();
-  return useQuery<any, Error>(['useGetUserProfile'], () => getUserProfile(), {
-    retry: false,
-    useErrorBoundary: true,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery<any, Error>(['useGetUserProfile'], () => getUserProfile());
 };
 
 export const useGetCheckNickname = (nickname: string) => {
   const { getCheckNickname } = useAuthApi();
-  return useQuery<any, Error>(
-    ['useGetCheckNickname'],
-    () => getCheckNickname(nickname),
-    {
-      retry: false,
-      useErrorBoundary: true,
-      refetchOnWindowFocus: false,
-      enabled: !!nickname,
-    },
+  return useQuery<any, Error>(['useGetCheckNickname'], () =>
+    getCheckNickname(nickname),
   );
 };
 
 export const useGetAllTalks = () => {
   const { getAllTalks } = useTalkApi();
-  return useQuery<any, Error>(['useGetAllTalks'], () => getAllTalks(), {
-    retry: false,
-    useErrorBoundary: true,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery<any, Error>(['useGetAllTalks'], () => getAllTalks());
 };
 
 export const useGetTalk = (talkId: number) => {
   const { getTalk } = useTalkApi();
-  return useQuery<any, Error>(['useGetTalk'], () => getTalk(talkId), {
-    retry: false,
-    useErrorBoundary: true,
-    refetchOnWindowFocus: false,
-    enabled: !!talkId,
-  });
+  return useQuery<any, Error>(['useGetTalk'], () => getTalk(talkId));
 };

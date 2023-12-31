@@ -4,32 +4,20 @@ import useTalkApi from '@hooks/apis/useTalkApi';
 
 export const usePostArticle = () => {
   const { postArticle } = useArticleApi();
-  return useMutation<void, void, number, unknown>(
-    ['usePostArticle'],
-    (formData: any) => postArticle(formData),
-  );
+  return useMutation(['usePostArticle'], postArticle);
 };
 
 export const usePostTalk = () => {
   const { postTalk } = useTalkApi();
-  return useMutation<void, void, number, unknown>(
-    ['usePostTalk'],
-    (formData: any) => postTalk(formData),
-  );
+  return useMutation(['usePostTalk'], postTalk);
 };
 
 export const usePostArticlePrefer = () => {
   const { postArticlePrefer } = useArticleApi();
-  return useMutation<void, void, number, unknown>(
-    ['usePostArticlePrefer'],
-    (articleId: number) => postArticlePrefer(articleId),
-  );
+  return useMutation(['usePostArticlePrefer'], postArticlePrefer);
 };
 
 export const usePostTalkPrefer = () => {
   const { postTalkPrefer } = useTalkApi();
-  return useMutation<void, void, number, unknown>(
-    ['usePostTalkPrefer'],
-    (talkId: number) => postTalkPrefer(talkId),
-  );
+  return useMutation(['usePostTalkPrefer'], postTalkPrefer);
 };
