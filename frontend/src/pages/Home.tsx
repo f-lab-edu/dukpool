@@ -1,11 +1,12 @@
-import { useMockFetchData } from '@hooks/useGetQueries';
 import styled from 'styled-components';
+import { usePostArticle } from '@hooks/usePostMutations';
 
 const Home = () => {
-  const { data } = useMockFetchData(1);
+  const { mutate: onSubmitArticle } = usePostArticle();
+  const formData = new FormData();
   return (
     <StyledWrapper>
-      <div>{data}</div>
+      <button onClick={() => onSubmitArticle(formData)}>post</button>
     </StyledWrapper>
   );
 };
