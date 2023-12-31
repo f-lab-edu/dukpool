@@ -1,7 +1,7 @@
 import useClient from '@hooks/useClient';
 
 type AuthApis = {
-  getIsUserValid: () => Promise<boolean>;
+  getUserProfile: () => Promise<any>;
   getUserToken: (code: string) => Promise<string>;
   postLogout: () => Promise<void>;
   deleteUser: () => Promise<void>;
@@ -11,7 +11,7 @@ type AuthApis = {
 const useAuthApi = (): AuthApis => {
   const client = useClient();
   return {
-    getIsUserValid: async (): Promise<boolean> => {
+    getUserProfile: async (): Promise<any> => {
       const { data } = await client.get('/users');
       return data;
     },

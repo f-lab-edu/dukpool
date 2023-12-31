@@ -5,7 +5,8 @@ import {
   getLocalStorage,
   setLocalStorage,
   removeLocalStorage,
-} from '@utils/localStorage';
+} from '@utils/localstorage';
+import { ServerError, ExpiredTokenError } from '@utils/errors';
 import { CONFIG } from '@config';
 
 type AuthProps = {
@@ -54,6 +55,22 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
       baseURL: CONFIG.BASE_URL,
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     });
+    instance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      async (error) => {
+        const { config: originalRequest } = error;
+        if (error.code === 'EXPIRED_ACCESS_TOKEN') {
+          const { data } = await client.post(`/auth/token`, { token });
+          setToken(data);
+          return client.request(originalRequest);
+        }
+        if (error.code === 'SERVER_ERROR') throw new ServerError();
+        if (error.code === 'EXPIRED_REFRESH_TOKEN')
+          throw new ExpiredTokenError();
+      },
+    );
     return instance;
   }, [token]);
 

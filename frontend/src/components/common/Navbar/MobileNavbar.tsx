@@ -69,7 +69,7 @@ const StyledItem = styled.li`
   flex-direction: column;
   align-items: center;
   padding: 0.8rem 1.2rem;
-  font-size: 12px;
+  font-size: 10px;
 `;
 
 const StyledLogo = styled.img`

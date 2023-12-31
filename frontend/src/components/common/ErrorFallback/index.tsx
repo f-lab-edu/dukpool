@@ -1,20 +1,22 @@
 import { memo, useEffect } from 'react';
 import { FallbackProps } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
-import Button from '@components/common/Button';
+import useMediaQuery from '@hooks/useMediaQuery';
 import styled from 'styled-components';
+import Button from '@components/common/Button';
+import Header from '@components/common/Header';
+import Layout from '@components/common/Layout';
+import MobileNavbar from '@components/common/Navbar/MobileNavbar';
+import Footer from '@components/common/Footer';
 import Logo from '@assets/logo/dukpool-logo.svg';
 import { UnAuthorizedError } from '@utils/errors';
 
 const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
+  const { isMobile } = useMediaQuery();
   const navigate = useNavigate();
-  const goToLoginPage = () => {
-    navigate('/login');
-  };
-
   useEffect(() => {
     if (error instanceof UnAuthorizedError) {
-      goToLoginPage();
+      navigate('/login');
       resetErrorBoundary();
     }
   }, []);
@@ -22,19 +24,27 @@ const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
   if (error instanceof UnAuthorizedError) return null;
 
   return (
-    <StyledWrapper>
-      <StyledInfo>
-        <StyledLogo src={Logo} alt="Dukpool 로고" />
-        <StyledParagraph>오류가 발생했습니다.</StyledParagraph>
-        <StyledParagraph>재시도 해주세요.</StyledParagraph>
-      </StyledInfo>
-      <Button
-        text="재시도"
-        disabled={false}
-        $colorType="dark"
-        onClick={resetErrorBoundary}
-      ></Button>
-    </StyledWrapper>
+    <>
+      <Header />
+      <Layout>
+        <StyledWrapper>
+          <StyledInfo>
+            <StyledLogo src={Logo} alt="Dukpool 로고" />
+            <StyledParagraph>
+              데이터를 불러오는데 오류가 발생했습니다.
+            </StyledParagraph>
+            <StyledParagraph>재시도 해주세요.</StyledParagraph>
+          </StyledInfo>
+          <Button
+            text="재시도"
+            disabled={false}
+            $colorType="dark"
+            onClick={resetErrorBoundary}
+          ></Button>
+        </StyledWrapper>
+      </Layout>
+      {isMobile ? <MobileNavbar /> : <Footer />}
+    </>
   );
 });
 

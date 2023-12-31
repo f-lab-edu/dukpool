@@ -1,14 +1,28 @@
 import useClient from '@hooks/useClient';
 
 type TalkApis = {
+  getAllTalks: () => Promise<any>;
+  getTalk: (talkId: number) => Promise<any>;
   postTalk: (body: FormData) => Promise<any>;
   patchTalk: (id: number, body: FormData) => Promise<any>;
   deleteTalk: (talkId: number) => Promise<void>;
+  postTalkPrefer: (talkId: number) => Promise<void>;
+  deleteTalkPrefer: (talkId: number) => Promise<void>;
 };
 
 const useTalkApi = (): TalkApis => {
   const client = useClient();
   return {
+    getAllTalks: async (): Promise<any> => {
+      const { data } = await client.get('/talks');
+      return data;
+    },
+
+    getTalk: async (talkId): Promise<any> => {
+      const { data } = await client.get(`/talk/${talkId}`);
+      return data;
+    },
+
     postTalk: async (body: FormData): Promise<any> => {
       const { data } = await client.post('/talk', body, {
         headers: {
@@ -27,6 +41,14 @@ const useTalkApi = (): TalkApis => {
     },
     deleteTalk: async (talkId: number): Promise<void> => {
       await client.delete(`/talk/${talkId}`);
+    },
+
+    postTalkPrefer: async (talkId: number): Promise<void> => {
+      await client.post(`/talk/prefer/${talkId}`);
+    },
+
+    deleteTalkPrefer: async (talkId: number): Promise<void> => {
+      await client.delete(`/talk/prefer/${talkId}`);
     },
   };
 };

@@ -1,7 +1,14 @@
 import styled from 'styled-components';
+import { usePostArticle } from '@hooks/usePostMutations';
 
 const Home = () => {
-  return <StyledWrapper>Home</StyledWrapper>;
+  const { mutate: onSubmitArticle } = usePostArticle();
+  const formData = new FormData();
+  return (
+    <StyledWrapper>
+      <button onClick={() => onSubmitArticle(formData)}>post</button>
+    </StyledWrapper>
+  );
 };
 
 const StyledWrapper = styled.div`
