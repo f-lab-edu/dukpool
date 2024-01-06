@@ -1,14 +1,16 @@
 import { ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import RootPage from '@pages/RootPage';
-import Article from '@pages/Article';
+import ArticlePost from '@pages/ArticlePost';
 import Home from '@pages/Home';
 import MyPage from '@pages/MyPage';
 import NotFound from '@pages/NotFound';
 import Search from '@pages/Search';
-import Talk from '@pages/Talk';
+import TalkPost from '@pages/TalkPost';
 import Login from '@pages/Login';
 import Kakao from '@pages/Kakao';
+import Article from '@pages/Article';
+import Talk from '@pages/Talk';
 
 type routeElement = {
   path: string;
@@ -25,7 +27,9 @@ const routes: routeElement[] = [
     children: [
       { path: '', element: <Home /> },
       { path: 'article', element: <Article /> },
+      { path: 'article/:articleId', element: <ArticlePost /> },
       { path: 'talk', element: <Talk /> },
+      { path: 'talk/:talkId', element: <TalkPost /> },
       { path: 'login', element: <Login /> },
       { path: 'auth/kakao', element: <Kakao /> },
       { path: 'mypage', element: <MyPage /> },
