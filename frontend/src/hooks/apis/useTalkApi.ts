@@ -1,4 +1,5 @@
 import useClient from '@hooks/useClient';
+import { MOCK_TALK_DATA } from '@utils/mockData';
 
 type TalkApis = {
   getAllTalks: () => Promise<any>;
@@ -14,8 +15,10 @@ const useTalkApi = (): TalkApis => {
   const client = useClient();
   return {
     getAllTalks: async (): Promise<any> => {
-      const { data } = await client.get('/talks');
-      return data;
+      // const { data } = await client.get('/talks');
+      // return data;
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return MOCK_TALK_DATA;
     },
 
     getTalk: async (talkId): Promise<any> => {

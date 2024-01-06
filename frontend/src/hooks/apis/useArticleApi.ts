@@ -1,4 +1,5 @@
 import useClient from '@hooks/useClient';
+import { MOCK_ARTICLE_DATA } from '@utils/mockData';
 
 type ArticleApis = {
   mockFetchData: (index: number) => Promise<any>;
@@ -29,8 +30,10 @@ const useArticleApi = (): ArticleApis => {
     },
 
     getAllArticles: async (): Promise<any> => {
-      const { data } = await client.get('/article');
-      return data;
+      // const { data } = await client.get('/article');
+      // return data;
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return MOCK_ARTICLE_DATA;
     },
 
     getArticle: async (articleId): Promise<any> => {
