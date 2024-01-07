@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const NON_DESKTOP_QUERY: string = '(max-width: 768px)';
+const NON_DESKTOP_QUERY: string = '(max-width: 840px)';
 
 const useMediaQuery = (): { isMobile: boolean } => {
   const getMatches = (query: string): boolean => {

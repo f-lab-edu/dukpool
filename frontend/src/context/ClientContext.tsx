@@ -17,6 +17,7 @@ const ClientProvider = ({ children }: Props): JSX.Element => {
         retry: false,
         useErrorBoundary: true,
         refetchOnWindowFocus: false,
+        suspense: true,
       },
       mutations: {
         onError: (err) => {

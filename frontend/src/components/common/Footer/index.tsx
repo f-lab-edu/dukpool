@@ -23,11 +23,13 @@ const Footer = memo(() => (
 Footer.displayName = 'Footer';
 
 const StyledFooter = styled.footer`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
+  transform: translateY(10%);
   font-size: 11px;
-  padding: 1.2rem 2.4rem;
+  padding: 2.4rem;
   background-color: var(--gray-6);
 `;
 

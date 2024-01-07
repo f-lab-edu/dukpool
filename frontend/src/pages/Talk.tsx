@@ -1,16 +1,7 @@
-import styled from 'styled-components';
+import Layout from '@components/common/Layout';
 
 const Talk = () => {
-  return <StyledWrapper>Talk</StyledWrapper>;
+  return <Layout>Talk</Layout>;
 };
-
-const StyledWrapper = styled.div`
-  width: 1140px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  height: inherit;
-  padding: 80px 30px;
-`;
 
 export default Talk;

@@ -57,6 +57,7 @@ const StyledNavbar = styled.nav`
   position: fixed;
   bottom: 0;
   box-shadow: 0px 0px 5px var(--gray-4);
+  background-color: var(--white);
 `;
 
 const StyledUl = styled.ul`

@@ -1,18 +1,9 @@
+import Layout from '@components/common/Layout';
 import useToken from '@hooks/useToken';
-import styled from 'styled-components';
 
 const MyPage = () => {
   useToken();
-  return <StyledWrapper>mypage</StyledWrapper>;
+  return <Layout>mypage</Layout>;
 };
-
-const StyledWrapper = styled.div`
-  width: 1140px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  height: inherit;
-  padding: 80px 30px;
-`;
 
 export default MyPage;

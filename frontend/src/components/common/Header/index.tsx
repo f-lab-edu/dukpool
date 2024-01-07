@@ -17,7 +17,9 @@ const Header = memo(() => (
 Header.displayName = 'Header';
 
 const StyledHeader = styled.header`
+  z-index: 9;
   position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-evenly;
   align-items: center;

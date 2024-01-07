@@ -5,7 +5,7 @@ type DeviceType = 'desktop' | 'tablet' | 'phone';
 
 const sizes: Record<DeviceType, number> = {
   desktop: 1200,
-  tablet: 768,
+  tablet: 840,
   phone: 600,
 };
 const media = mapValues(

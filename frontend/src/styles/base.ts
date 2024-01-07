@@ -12,6 +12,7 @@ const base = css`
     --gray-4: #d1d1d6;
     --gray-5: #e5e5ea;
     --gray-6: #f2f2f7;
+    --skeleton: #e9eef1;
     --orange-1: #ffb26b;
     --orange-2: #eb982d;
     --yellow: #ffd56f;
@@ -25,6 +26,9 @@ const base = css`
   }
   #root {
     font-family: 'GmarketSans';
+  }
+  body {
+    margin: auto;
   }
   h1 {
     font-size: 4rem;

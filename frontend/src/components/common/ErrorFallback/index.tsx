@@ -10,8 +10,10 @@ import MobileNavbar from '@components/common/Navbar/MobileNavbar';
 import Footer from '@components/common/Footer';
 import Logo from '@assets/logo/dukpool-logo.svg';
 import { UnAuthorizedError } from '@utils/errors';
+import useInnerHeight from '@hooks/useInnerHeight';
 
 const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
+  const { height } = useInnerHeight();
   const { isMobile } = useMediaQuery();
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,7 +29,7 @@ const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
     <>
       <Header />
       <Layout>
-        <StyledWrapper>
+        <StyledWrapper $height={height}>
           <StyledInfo>
             <StyledLogo src={Logo} alt="Dukpool 로고" />
             <StyledParagraph>
@@ -50,12 +52,12 @@ const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
 
 ErrorFallback.displayName = 'ErrorFallback';
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ $height: number }>`
   width: 1140px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  height: inherit;
+  height: ${({ $height }) => `${$height}vh`};
   padding: 80px 30px;
   justify-content: space-evenly;
   align-items: center;
