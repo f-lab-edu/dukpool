@@ -3,9 +3,17 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import { MultipleRowSliderOption } from '@constants/sliderOption';
 import TalkCardSkeleton from '@components/common/Skeleton/TalkCardSkeleton';
+import useMediaQuery from '@hooks/useMediaQuery';
 
-const TalkSliderSkeleton = memo(() => {
-  return (
+const TalkSkeleton = memo(() => {
+  const { isMobile } = useMediaQuery();
+  return isMobile ? (
+    <StyledWrapper>
+      {Array.from({ length: 6 }).map((_, idx) => (
+        <TalkCardSkeleton key={idx} />
+      ))}
+    </StyledWrapper>
+  ) : (
     <StyledSlider {...MultipleRowSliderOption}>
       {Array.from({ length: 6 }).map((_, idx) => (
         <TalkCardSkeleton key={idx} />
@@ -14,7 +22,7 @@ const TalkSliderSkeleton = memo(() => {
   );
 });
 
-TalkSliderSkeleton.displayName = 'TalkSliderSkeleton';
+TalkSkeleton.displayName = 'TalkSkeleton';
 
 const StyledSlider = styled(Slider)`
   .slick-slide {
@@ -26,4 +34,16 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-export default TalkSliderSkeleton;
+const StyledWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export default TalkSkeleton;
