@@ -17,17 +17,17 @@ const ArticleCard = memo(
     commentCount,
   }: ArticleProps) => {
     return (
-      <li>
-        <Link to={`article/${id}`}>
+      <StyledList>
+        <Link to={`/article/${id}`}>
           <StyledImgContainer>
-            <StyledImage src={image ? image : placeholderImage} />
+            <StyledImage src={image ?? placeholderImage} />
           </StyledImgContainer>
           <StyledInfoContainer>
             <StyledTitle>{title}</StyledTitle>
             <StyledProfileContainer>
               <StyledProfileImageContainer>
                 <StyledProfileImage
-                  src={userProfile.image ? userProfile.image : placeholderImage}
+                  src={userProfile.image ?? placeholderImage}
                 />
               </StyledProfileImageContainer>
               <StyledProfile>{userProfile.name}</StyledProfile>
@@ -45,15 +45,22 @@ const ArticleCard = memo(
             </StyledCountBox>
           </StyledInfoContainer>
         </Link>
-      </li>
+      </StyledList>
     );
   },
 );
 
 ArticleCard.displayName = 'ArticleCard';
 
+const StyledList = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const StyledImgContainer = styled.div`
   width: 200px;
+  height: 200px;
   min-width: 150px;
   overflow: hidden;
   border-radius: 8px;
@@ -87,6 +94,7 @@ const StyledProfileContainer = styled.div`
 
 const StyledProfileImageContainer = styled.div`
   width: 25px;
+  height: 25px;
   overflow: hidden;
   border-radius: 50%;
 `;

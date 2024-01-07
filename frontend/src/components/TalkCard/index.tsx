@@ -35,7 +35,7 @@ const TalkCard = memo(
         <StyledLink to={`/talk/${id}`}>
           <StyledContainer>
             <StyledImgContainer>
-              <StyledImage src={image ? image : placeholderImage} />
+              <StyledImage src={image ?? placeholderImage} />
             </StyledImgContainer>
             <StyledContentContainer>
               <StyledTitle>{title}</StyledTitle>
@@ -47,9 +47,7 @@ const TalkCard = memo(
               <StyledProfileDiv>
                 <StyledProfileImageContainer>
                   <StyledProfileImage
-                    src={
-                      userProfile.image ? userProfile.image : placeholderImage
-                    }
+                    src={userProfile.image ?? placeholderImage}
                   />
                 </StyledProfileImageContainer>
                 <StyledProfile>{userProfile.name}</StyledProfile>
