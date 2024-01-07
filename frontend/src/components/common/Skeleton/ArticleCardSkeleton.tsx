@@ -3,25 +3,27 @@ import styled, { keyframes } from 'styled-components';
 
 const CardSkeleton = memo(() => {
   return (
-    <SkeletonContainer>
-      <SkeletonImgContainer>
-        <SkeletonImage />
-      </SkeletonImgContainer>
-      <SkeletonInfoContainer>
-        <SkeletonTitle />
-        <SkeletonProfileContainer>
-          <SkeletonProfileImageContainer>
-            <SkeletonProfileImage />
-          </SkeletonProfileImageContainer>
-          <SkeletonProfile />
-        </SkeletonProfileContainer>
-        <SkeletonDate />
-        <SkeletonCountBox>
-          <SkeletonCount />
-          <SkeletonCount />
-        </SkeletonCountBox>
-      </SkeletonInfoContainer>
-    </SkeletonContainer>
+    <StyledList>
+      <SkeletonContainer>
+        <SkeletonImgContainer>
+          <SkeletonImage />
+        </SkeletonImgContainer>
+        <SkeletonInfoContainer>
+          <SkeletonTitle />
+          <SkeletonProfileContainer>
+            <SkeletonProfileImageContainer>
+              <SkeletonProfileImage />
+            </SkeletonProfileImageContainer>
+            <SkeletonProfile />
+          </SkeletonProfileContainer>
+          <SkeletonDate />
+          <SkeletonCountBox>
+            <SkeletonCount />
+            <SkeletonCount />
+          </SkeletonCountBox>
+        </SkeletonInfoContainer>
+      </SkeletonContainer>
+    </StyledList>
   );
 });
 
@@ -34,6 +36,12 @@ const skeletonAnimation = keyframes`
     to {
     opacity: 1;
     }
+`;
+
+const StyledList = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SkeletonContainer = styled.div``;
