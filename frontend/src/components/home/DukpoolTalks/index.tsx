@@ -1,27 +1,16 @@
-import { memo } from 'react';
-import { Suspense } from 'react';
+import { Suspense, memo } from 'react';
 import styled from 'styled-components';
-import useMediaQuery from '@hooks/useMediaQuery';
-import MobileRecentTalkCards from '../RecentTalkCards/mobile';
 import RecentTalkCards from '../RecentTalkCards';
-import TalkSliderSkeleton from '@components/common/Skeleton/TalkSliderSkeleton';
-import MobileTalkCardsSkeleton from '@components/common/Skeleton/MobileTalkCardsSkeleton';
 import { media } from '@styles/media';
+import TalkSkeleton from '@components/common/Skeleton/TalkSkeleton';
 
 const DukpoolTalks = memo(() => {
-  const { isMobile } = useMediaQuery();
   return (
     <StyledSection>
       <StyledSectionTitle>유저들의 최근 토크</StyledSectionTitle>
-      {isMobile ? (
-        <Suspense fallback={<MobileTalkCardsSkeleton />}>
-          <MobileRecentTalkCards />
-        </Suspense>
-      ) : (
-        <Suspense fallback={<TalkSliderSkeleton />}>
-          <RecentTalkCards />
-        </Suspense>
-      )}
+      <Suspense fallback={<TalkSkeleton />}>
+        <RecentTalkCards />
+      </Suspense>
     </StyledSection>
   );
 });

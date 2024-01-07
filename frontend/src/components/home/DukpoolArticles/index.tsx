@@ -1,27 +1,16 @@
-import { memo } from 'react';
-import { Suspense } from 'react';
-import MobileRecentArticleCards from '@components/home/RecentArticleCards/mobile';
-import ArticleSliderSkeleton from '@components/common/Skeleton/ArticleSliderSkeleton';
+import { Suspense, memo } from 'react';
 import styled from 'styled-components';
-import useMediaQuery from '@hooks/useMediaQuery';
-import MobileArticleCardsSkeleton from '@components/common/Skeleton/MobileArticleCardsSkeleton';
 import RecentArticleCards from '@components/home/RecentArticleCards';
 import { media } from '@styles/media';
+import ArticleSkeleton from '@components/common/Skeleton/ArticleSkeleton';
 
 const DukpoolArticles = memo(() => {
-  const { isMobile } = useMediaQuery();
   return (
     <StyledSection>
       <StyledSectionTitle>유저들의 최근 덕질</StyledSectionTitle>
-      {isMobile ? (
-        <Suspense fallback={<MobileArticleCardsSkeleton />}>
-          <MobileRecentArticleCards />
-        </Suspense>
-      ) : (
-        <Suspense fallback={<ArticleSliderSkeleton />}>
-          <RecentArticleCards />
-        </Suspense>
-      )}
+      <Suspense fallback={<ArticleSkeleton />}>
+        <RecentArticleCards />
+      </Suspense>
     </StyledSection>
   );
 });
