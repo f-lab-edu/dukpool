@@ -5,6 +5,7 @@ import placeholderImage from '@assets/images/placeholder-image.png';
 import likeIcon from '@assets/icons/outlined-like.svg';
 import commentIcon from '@assets/icons/comment.svg';
 import { ArticleProps } from '@utils/mockData';
+import { media } from '@styles/media';
 
 const ArticleCard = memo(
   ({
@@ -17,7 +18,7 @@ const ArticleCard = memo(
     commentCount,
   }: ArticleProps) => {
     return (
-      <StyledList>
+      <StyledList key={id}>
         <Link to={`/article/${id}`}>
           <StyledImgContainer>
             <StyledImage src={image ?? placeholderImage} />
@@ -61,14 +62,17 @@ const StyledList = styled.li`
 const StyledImgContainer = styled.div`
   width: 200px;
   height: 200px;
-  min-width: 150px;
   overflow: hidden;
   border-radius: 8px;
+  ${media.phone`
+    width: 150px;
+    height: 150px;
+  `}
 `;
 
 const StyledImage = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 `;
 
@@ -76,6 +80,9 @@ const StyledInfoContainer = styled.div`
   width: 200px;
   font-size: 14px;
   padding: 12px 0;
+  ${media.phone`
+    width: 150px;
+  `}
 `;
 
 const StyledTitle = styled.h2`
