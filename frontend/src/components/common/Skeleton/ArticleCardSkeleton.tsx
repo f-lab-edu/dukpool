@@ -1,7 +1,8 @@
+import { media } from '@styles/media';
 import { memo } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const CardSkeleton = memo(() => {
+const ArticleCardSkeleton = memo(() => {
   return (
     <StyledList>
       <SkeletonContainer>
@@ -27,7 +28,7 @@ const CardSkeleton = memo(() => {
   );
 });
 
-CardSkeleton.displayName = 'CardSkeleton';
+ArticleCardSkeleton.displayName = 'ArticleCardSkeleton';
 
 const skeletonAnimation = keyframes`
     from {
@@ -38,7 +39,7 @@ const skeletonAnimation = keyframes`
     }
 `;
 
-const StyledList = styled.li`
+const StyledList = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,6 +51,10 @@ const SkeletonImgContainer = styled.div`
   width: 200px;
   height: 200px;
   animation: ${skeletonAnimation} 2s infinite;
+  ${media.phone`
+    width: 150px;
+    height: 150px;
+  `}
 `;
 
 const SkeletonImage = styled.div`
@@ -64,6 +69,9 @@ const SkeletonInfoContainer = styled.div`
   width: 200px;
   padding: 12px 0;
   animation: ${skeletonAnimation} 2s infinite;
+  ${media.phone`
+    width: 150px;
+  `}
 `;
 
 const SkeletonTitle = styled.div`
@@ -108,6 +116,9 @@ const SkeletonDate = styled.div`
   background-color: var(--skeleton);
   border-radius: 8px;
   margin-bottom: 4px;
+  ${media.phone`
+    width: 150px;
+  `}
 `;
 
 const SkeletonCountBox = styled.div`
@@ -122,4 +133,4 @@ const SkeletonCount = styled.div`
   background-color: var(--skeleton);
 `;
 
-export default CardSkeleton;
+export default ArticleCardSkeleton;
