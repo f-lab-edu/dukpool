@@ -18,7 +18,7 @@ const ArticleCard = memo(
     commentCount,
   }: ArticleProps) => {
     return (
-      <StyledList key={id}>
+      <StyledList>
         <Link to={`/article/${id}`}>
           <StyledImgContainer>
             <StyledImage src={image ?? placeholderImage} />

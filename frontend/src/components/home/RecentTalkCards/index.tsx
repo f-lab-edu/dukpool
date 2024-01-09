@@ -14,7 +14,7 @@ const RecentTalkCards = memo(() => {
   assert(talks);
 
   const TalkCards = talks.map((talk: TalkProps) => (
-    <TalkCard {...talk}></TalkCard>
+    <TalkCard {...talk} key={talk.id}></TalkCard>
   ));
 
   return isMobile ? (
