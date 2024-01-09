@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import ArticleCardSkeleton from '@components/common/Skeleton/ArticleCardSkeleton';
 import styled from 'styled-components';
 import Slider from 'react-slick';
@@ -7,18 +7,18 @@ import useMediaQuery from '@hooks/useMediaQuery';
 
 const ArticleSkeleton = memo(() => {
   const { isMobile } = useMediaQuery();
+  const SkeletonArray = useMemo(
+    () =>
+      Array.from({ length: 5 }).map((_, idx) => (
+        <ArticleCardSkeleton key={idx} />
+      )),
+    [],
+  );
+
   return isMobile ? (
-    <StyledWrapper>
-      {Array.from({ length: 5 }).map((_, idx) => (
-        <ArticleCardSkeleton key={idx} />
-      ))}
-    </StyledWrapper>
+    <StyledWrapper>{SkeletonArray}</StyledWrapper>
   ) : (
-    <StyledSlider {...SliderOption}>
-      {Array.from({ length: 5 }).map((_, idx) => (
-        <ArticleCardSkeleton key={idx} />
-      ))}
-    </StyledSlider>
+    <StyledSlider {...SliderOption}>{SkeletonArray}</StyledSlider>
   );
 });
 

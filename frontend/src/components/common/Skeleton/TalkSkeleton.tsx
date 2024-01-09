@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import { MultipleRowSliderOption } from '@constants/sliderOption';
@@ -7,18 +7,15 @@ import useMediaQuery from '@hooks/useMediaQuery';
 
 const TalkSkeleton = memo(() => {
   const { isMobile } = useMediaQuery();
+  const SkeletonArray = useMemo(
+    () =>
+      Array.from({ length: 6 }).map((_, idx) => <TalkCardSkeleton key={idx} />),
+    [],
+  );
   return isMobile ? (
-    <StyledWrapper>
-      {Array.from({ length: 6 }).map((_, idx) => (
-        <TalkCardSkeleton key={idx} />
-      ))}
-    </StyledWrapper>
+    <StyledWrapper>{SkeletonArray}</StyledWrapper>
   ) : (
-    <StyledSlider {...MultipleRowSliderOption}>
-      {Array.from({ length: 6 }).map((_, idx) => (
-        <TalkCardSkeleton key={idx} />
-      ))}
-    </StyledSlider>
+    <StyledSlider {...MultipleRowSliderOption}>{SkeletonArray}</StyledSlider>
   );
 });
 

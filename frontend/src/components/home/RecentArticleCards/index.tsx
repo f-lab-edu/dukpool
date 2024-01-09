@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import styled from 'styled-components';
 import { ArticleProps } from '@utils/mockData';
 import ArticleCard from '@components/ArticleCard';
@@ -6,22 +6,23 @@ import Slider from 'react-slick';
 import { SliderOption } from '@constants/sliderOption';
 import useMediaQuery from '@hooks/useMediaQuery';
 import { useGetAllArticles } from '@hooks/useGetQueries';
+import assert from '@utils/assert';
 
 const RecentArticleCards = memo(() => {
   const { isMobile } = useMediaQuery();
   const { data: articles } = useGetAllArticles();
+  assert(articles);
+  const ArticleCards = useMemo(
+    () =>
+      articles.map((article: ArticleProps) => (
+        <ArticleCard {...article} key={article.id}></ArticleCard>
+      )),
+    [],
+  );
   return isMobile ? (
-    <StyledWrapper>
-      {articles?.map((article: ArticleProps) => (
-        <ArticleCard {...article} key={article.id}></ArticleCard>
-      ))}
-    </StyledWrapper>
+    <StyledWrapper>{ArticleCards}</StyledWrapper>
   ) : (
-    <StyledSlider {...SliderOption}>
-      {articles?.map((article: ArticleProps) => (
-        <ArticleCard {...article} key={article.id}></ArticleCard>
-      ))}
-    </StyledSlider>
+    <StyledSlider {...SliderOption}>{ArticleCards}</StyledSlider>
   );
 });
 
