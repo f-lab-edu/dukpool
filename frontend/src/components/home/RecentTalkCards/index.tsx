@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 import { TalkProps } from '@utils/mockData';
 import TalkCard from '@components/TalkCard';
@@ -13,10 +13,10 @@ const RecentTalkCards = memo(() => {
   const { data: talks } = useGetAllTalks();
   assert(talks);
 
-  const TalkCards = useMemo(
-    () => talks.map((talk: TalkProps) => <TalkCard {...talk}></TalkCard>),
-    [talks],
-  );
+  const TalkCards = talks.map((talk: TalkProps) => (
+    <TalkCard {...talk}></TalkCard>
+  ));
+
   return isMobile ? (
     <StyledWrapper>{TalkCards}</StyledWrapper>
   ) : (

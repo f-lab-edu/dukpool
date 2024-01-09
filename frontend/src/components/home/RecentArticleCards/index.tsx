@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 import { ArticleProps } from '@utils/mockData';
 import ArticleCard from '@components/ArticleCard';
@@ -12,13 +12,11 @@ const RecentArticleCards = memo(() => {
   const { isMobile } = useMediaQuery();
   const { data: articles } = useGetAllArticles();
   assert(articles);
-  const ArticleCards = useMemo(
-    () =>
-      articles.map((article: ArticleProps) => (
-        <ArticleCard {...article} key={article.id}></ArticleCard>
-      )),
-    [articles],
-  );
+
+  const ArticleCards = articles.map((article: ArticleProps) => (
+    <ArticleCard {...article} key={article.id}></ArticleCard>
+  ));
+
   return isMobile ? (
     <StyledWrapper>{ArticleCards}</StyledWrapper>
   ) : (
