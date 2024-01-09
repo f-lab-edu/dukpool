@@ -1,10 +1,15 @@
 import useClient from '@hooks/useClient';
-import { MOCK_ARTICLE_DATA, MOCK_ARTICLE_POST_DATA } from '@utils/mockData';
+import {
+  ArticlePostProps,
+  ArticleProps,
+  MOCK_ARTICLE_DATA,
+  MOCK_ARTICLE_POST_DATA,
+} from '@utils/mockData';
 
 type ArticleApis = {
   mockFetchData: (index: number) => Promise<any>;
-  getAllArticles: () => Promise<any>;
-  getArticle: (articleId: number) => Promise<any>;
+  getAllArticles: () => Promise<ArticleProps[]>;
+  getArticle: (articleId: number) => Promise<ArticlePostProps>;
   postArticle: (body: FormData) => Promise<any>;
   patchArticle: (articleId: number, body: FormData) => Promise<any>;
   deleteArticle: (articleId: number) => Promise<void>;
@@ -29,14 +34,14 @@ const useArticleApi = (): ArticleApis => {
       return data.body;
     },
 
-    getAllArticles: async (): Promise<any> => {
+    getAllArticles: async (): Promise<ArticleProps[]> => {
       // const { data } = await client.get('/article');
       // return data;
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return MOCK_ARTICLE_DATA;
     },
 
-    getArticle: async (articleId): Promise<any> => {
+    getArticle: async (articleId): Promise<ArticlePostProps> => {
       // const { data } = await client.get(`/article/${articleId}`);
       // return data;
       await new Promise((resolve) => setTimeout(resolve, 1000));
