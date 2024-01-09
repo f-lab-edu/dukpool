@@ -17,7 +17,7 @@ const RecentArticleCards = memo(() => {
       articles.map((article: ArticleProps) => (
         <ArticleCard {...article} key={article.id}></ArticleCard>
       )),
-    [],
+    [articles],
   );
   return isMobile ? (
     <StyledWrapper>{ArticleCards}</StyledWrapper>
