@@ -26,6 +26,64 @@ export type TalkProps = {
   commentCount: string;
 };
 
+export type ArticlePostProps = {
+  title: string;
+  userProfile: {
+    name: string;
+    image: string | null;
+  };
+  images: string[] | null;
+  content: string;
+  date: string;
+  id: number;
+  likeCount: string;
+  comments: {
+    users: {
+      id: number;
+      name: string;
+      image: string | null;
+      date: string;
+      content: string;
+    }[];
+  };
+};
+
+export const MOCK_ARTICLE_POST_DATA: ArticlePostProps = {
+  title: '마블 피규어 소개드립니다!',
+  userProfile: {
+    name: '마블덕후짱',
+    image:
+      'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+  },
+  images: [
+    'https://visla.kr/wp/wp-content/uploads/2022/07/20220709_00.jpg',
+    'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+  ],
+  content:
+    '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
+  date: '2024-01-01',
+  id: 1,
+  likeCount: '13',
+  comments: {
+    users: [
+      {
+        id: 33,
+        name: '나도마블좋아',
+        image: null,
+        date: '2024-01-03',
+        content: '진짜 멋있네요 저도 갖고싶어요.',
+      },
+      {
+        id: 3,
+        name: '하이하이',
+        image: null,
+        date: '2024-01-04',
+        content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+      },
+    ],
+  },
+};
+
 export const MOCK_ARTICLE_DATA: ArticleProps[] = [
   {
     title: '마블aksksksksksksksksksksksksksksksks',
@@ -36,8 +94,7 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
     },
     content:
       '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    image: 'https://visla.kr/wp/wp-content/uploads/2022/07/20220709_00.jpg',
     date: '2024-01-01',
     id: 1,
     likeCount: '13',

@@ -2,15 +2,24 @@ import { useQuery } from 'react-query';
 import useTalkApi from '@hooks/apis/useTalkApi';
 import useArticleApi from '@hooks/apis/useArticleApi';
 import useAuthApi from '@hooks/apis/useAuthApi';
+import { ArticlePostProps, ArticleProps, TalkProps } from '@utils/mockData';
 
 export const useGetAllArticles = () => {
   const { getAllArticles } = useArticleApi();
-  return useQuery<any, Error>(['useGetAllArticles'], () => getAllArticles());
+  return useQuery<ArticleProps[], Error>(['useGetAllArticles'], () =>
+    getAllArticles(),
+  );
 };
 
 export const useGetArticle = (articleId: number) => {
   const { getArticle } = useArticleApi();
-  return useQuery<any, Error>(['useGetArticle'], () => getArticle(articleId));
+  return useQuery<ArticlePostProps, Error>(
+    ['useGetArticle'],
+    () => getArticle(articleId),
+    {
+      enabled: !!articleId,
+    },
+  );
 };
 
 export const useMockFetchData = (index: number) => {
@@ -32,7 +41,7 @@ export const useGetCheckNickname = (nickname: string) => {
 
 export const useGetAllTalks = () => {
   const { getAllTalks } = useTalkApi();
-  return useQuery<any, Error>(['useGetAllTalks'], () => getAllTalks());
+  return useQuery<TalkProps[], Error>(['useGetAllTalks'], () => getAllTalks());
 };
 
 export const useGetTalk = (talkId: number) => {
