@@ -1,5 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import next from '@assets/icons/right-arrow.svg';
 import prev from '@assets/icons/left-arrow.svg';
+import styled from 'styled-components';
+
+const ArrowLeft = ({ currentSlide, slideCount, ...props }: any) => (
+  <StyledLeftArrowImgContainer {...props}>
+    <StyledImg src={prev} />
+  </StyledLeftArrowImgContainer>
+);
+
+const ArrowRight = ({ currentSlide, slideCount, ...props }: any) => (
+  <StyledRightArrowImgContainer {...props}>
+    <StyledImg src={next} />
+  </StyledRightArrowImgContainer>
+);
 
 export const SliderOption = {
   arrows: true,
@@ -8,8 +22,8 @@ export const SliderOption = {
   speed: 500,
   slidesToShow: 5,
   slidesToScroll: 5,
-  nextArrow: <img src={next} />,
-  prevArrow: <img src={prev} />,
+  nextArrow: <ArrowRight />,
+  prevArrow: <ArrowLeft />,
   responsive: [
     {
       breakpoint: 1180,
@@ -44,8 +58,8 @@ export const MultipleRowSliderOption = {
   slidesToScroll: 3,
   rows: 2,
   slidesPerRow: 1,
-  nextArrow: <img src={next} />,
-  prevArrow: <img src={prev} />,
+  nextArrow: <ArrowRight />,
+  prevArrow: <ArrowLeft />,
   centerPadding: '60px',
   responsive: [
     {
@@ -64,3 +78,37 @@ export const MultipleRowSliderOption = {
     },
   ],
 };
+
+export const ArticleImageSliderOption = {
+  arrows: true,
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  slidesPerRow: 1,
+  nextArrow: <ArrowRight />,
+  prevArrow: <ArrowLeft />,
+};
+
+const StyledRightArrowImgContainer = styled.div`
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: -30px;
+  bottom: 50%;
+`;
+
+const StyledLeftArrowImgContainer = styled.div`
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: -30px;
+  bottom: 50%;
+`;
+
+const StyledImg = styled.img`
+  width: 100%;
+  position: absolute;
+  left: 0px;
+`;
