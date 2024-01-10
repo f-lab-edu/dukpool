@@ -13,14 +13,14 @@ const RecentArticleCards = memo(() => {
   const { data: articles } = useGetAllArticles();
   assert(articles);
 
-  const ArticleCards = articles.map((article: ArticleProps) => (
+  const articleCards = articles.map((article: ArticleProps) => (
     <ArticleCard {...article} key={article.id}></ArticleCard>
   ));
 
   return isMobile ? (
-    <StyledWrapper>{ArticleCards}</StyledWrapper>
+    <StyledWrapper>{articleCards}</StyledWrapper>
   ) : (
-    <StyledSlider {...SliderOption}>{ArticleCards}</StyledSlider>
+    <StyledSlider {...SliderOption}>{articleCards}</StyledSlider>
   );
 });
 

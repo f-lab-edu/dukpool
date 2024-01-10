@@ -13,14 +13,14 @@ const RecentTalkCards = memo(() => {
   const { data: talks } = useGetAllTalks();
   assert(talks);
 
-  const TalkCards = talks.map((talk: TalkProps) => (
+  const talkCards = talks.map((talk: TalkProps) => (
     <TalkCard {...talk} key={talk.id}></TalkCard>
   ));
 
   return isMobile ? (
-    <StyledWrapper>{TalkCards}</StyledWrapper>
+    <StyledWrapper>{talkCards}</StyledWrapper>
   ) : (
-    <StyledSlider {...MultipleRowSliderOption}>{TalkCards}</StyledSlider>
+    <StyledSlider {...MultipleRowSliderOption}>{talkCards}</StyledSlider>
   );
 });
 
