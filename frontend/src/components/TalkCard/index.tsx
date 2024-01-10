@@ -31,7 +31,7 @@ const TalkCard = memo(
     commentCount,
   }: TalkProps) => {
     return (
-      <li>
+      <StyledList>
         <StyledLink to={`/talk/${id}`}>
           <StyledContainer>
             <StyledImgContainer>
@@ -66,12 +66,14 @@ const TalkCard = memo(
             <StyledDate>{date}</StyledDate>
           </StyledInfoContainer>
         </StyledLink>
-      </li>
+      </StyledList>
     );
   },
 );
 
 TalkCard.displayName = 'TalkCard';
+
+const StyledList = styled.li``;
 
 const StyledLink = styled(Link)`
   width: 300px;
