@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import Logo from '@assets/logo/dukpool-logo.svg';
 import KakaoLogo from '@assets/icons/kakao.svg';
 import { CONFIG } from '@config';
+import Layout from '@components/common/Layout';
+import useInnerHeight from '@hooks/useInnerHeight';
 
 const MyPage = () => {
+  const { height } = useInnerHeight();
   return (
-    <StyledWrapper>
-      <StyledContainer>
+    <Layout>
+      <StyledContainer $height={height}>
         <StyledInfo>
           <StyledLogo src={Logo} alt="Dukpool 로고" />
           <StyledInfoText>나만의 덕질 취향을 공유해보세요.</StyledInfoText>
@@ -19,33 +22,24 @@ const MyPage = () => {
           <StyledInfoText>카카오 로그인</StyledInfoText>
         </StyledLink>
       </StyledContainer>
-    </StyledWrapper>
+    </Layout>
   );
 };
 
-const StyledWrapper = styled.div`
-  width: 1140px;
-  margin: 0 auto;
-  height: inherit;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 30px;
-`;
-
-const StyledContainer = styled.div`
+const StyledContainer = styled.div<{ $height: number }>`
   width: 100%;
-  height: 50%;
+  height: ${({ $height }) => `${$height}vh`};
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 const StyledInfo = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledInfoText = styled.p`

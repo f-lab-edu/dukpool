@@ -13,8 +13,11 @@ Layout.displayName = 'Layout';
 
 const StyledLayout = styled.main`
   display: flex;
-  max-width: 100vw;
-  min-height: 100vh;
+  flex-direction: column;
+  max-width: 1240px;
+  margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: 80px;
 `;
 
 export default Layout;

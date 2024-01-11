@@ -1,7 +1,8 @@
 import useClient from '@hooks/useClient';
+import { MOCK_TALK_DATA, TalkProps } from '@utils/mockData';
 
 type TalkApis = {
-  getAllTalks: () => Promise<any>;
+  getAllTalks: () => Promise<TalkProps[]>;
   getTalk: (talkId: number) => Promise<any>;
   postTalk: (body: FormData) => Promise<any>;
   patchTalk: (id: number, body: FormData) => Promise<any>;
@@ -13,9 +14,11 @@ type TalkApis = {
 const useTalkApi = (): TalkApis => {
   const client = useClient();
   return {
-    getAllTalks: async (): Promise<any> => {
-      const { data } = await client.get('/talks');
-      return data;
+    getAllTalks: async (): Promise<TalkProps[]> => {
+      // const { data } = await client.get('/talks');
+      // return data;
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return MOCK_TALK_DATA;
     },
 
     getTalk: async (talkId): Promise<any> => {

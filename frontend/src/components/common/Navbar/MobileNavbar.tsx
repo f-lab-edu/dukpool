@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HomeIcon from '@assets/icons/outlined-home.svg';
@@ -9,8 +9,10 @@ import FocusedHomeIcon from '@assets/icons/filled-home.svg';
 import FocusedEmojiIcon from '@assets/icons/filled-emoji.svg';
 import FocusedCoffeeIcon from '@assets/icons/filled-coffee.svg';
 import FocusedUserIcon from '@assets/icons/filled-user.svg';
+import { AuthContext } from '@context/AuthContext';
 
 const MobileNavbar = memo(() => {
+  const { isLoggined } = useContext(AuthContext);
   const { pathname } = useLocation();
   return (
     <StyledNavbar>
@@ -42,7 +44,7 @@ const MobileNavbar = memo(() => {
             <StyledLogo
               src={pathname.includes('/mypage') ? FocusedUserIcon : UserIcon}
             />
-            <p>내정보</p>
+            <p>{isLoggined ? '내정보' : '로그인'}</p>
           </StyledItem>
         </Link>
       </StyledUl>
@@ -57,6 +59,7 @@ const StyledNavbar = styled.nav`
   position: fixed;
   bottom: 0;
   box-shadow: 0px 0px 5px var(--gray-4);
+  background-color: var(--white);
 `;
 
 const StyledUl = styled.ul`

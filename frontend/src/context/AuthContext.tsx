@@ -54,6 +54,7 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
     const instance = axios.create({
       baseURL: CONFIG.BASE_URL,
       headers: token ? { Authorization: `Bearer ${token}` } : {},
+      withCredentials: true,
     });
     instance.interceptors.response.use(
       (response) => {
@@ -62,7 +63,8 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
       async (error) => {
         const { config: originalRequest } = error;
         if (error.code === 'EXPIRED_ACCESS_TOKEN') {
-          const { data } = await client.post(`/auth/token`, { token });
+          removeLocalStorage(TOKEN_KEY);
+          const { data } = await client.get(`/auth/token`);
           setToken(data);
           return client.request(originalRequest);
         }
