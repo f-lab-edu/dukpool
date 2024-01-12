@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ServerError, ExpiredTokenError } from '@utils/errors';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { ToastContext } from '@context/ToastContext';
 
@@ -15,9 +15,8 @@ const ClientProvider = ({ children }: Props): JSX.Element => {
     defaultOptions: {
       queries: {
         retry: false,
-        useErrorBoundary: true,
+        throwOnError: true,
         refetchOnWindowFocus: false,
-        suspense: true,
       },
       mutations: {
         onError: (err) => {
