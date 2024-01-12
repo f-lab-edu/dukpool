@@ -1,23 +1,41 @@
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import useArticleApi from '@hooks/apis/useArticleApi';
 import useTalkApi from '@hooks/apis/useTalkApi';
 
 export const usePostArticle = () => {
   const { postArticle } = useArticleApi();
-  return useMutation(['usePostArticle'], postArticle);
+  return useMutation({
+    mutationKey: ['usePostArticle'],
+    mutationFn: postArticle,
+  });
 };
 
 export const usePostTalk = () => {
   const { postTalk } = useTalkApi();
-  return useMutation(['usePostTalk'], postTalk);
+  return useMutation({ mutationKey: ['usePostTalk'], mutationFn: postTalk });
 };
 
 export const usePostArticlePrefer = () => {
   const { postArticlePrefer } = useArticleApi();
-  return useMutation(['usePostArticlePrefer'], postArticlePrefer);
+  return useMutation({
+    mutationKey: ['usePostArticlePrefer'],
+    mutationFn: postArticlePrefer,
+  });
 };
 
 export const usePostTalkPrefer = () => {
   const { postTalkPrefer } = useTalkApi();
-  return useMutation(['usePostTalkPrefer'], postTalkPrefer);
+  return useMutation({
+    mutationKey: ['usePostTalkPrefer'],
+    mutationFn: postTalkPrefer,
+  });
+};
+
+export const usePostArticleComment = () => {
+  const { postArticleComment } = useArticleApi();
+  return useMutation({
+    mutationKey: ['usePostArticleComment'],
+    mutationFn: ({ id, comment }: { id: number; comment: string }) =>
+      postArticleComment(id, comment),
+  });
 };
