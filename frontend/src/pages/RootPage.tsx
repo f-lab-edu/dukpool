@@ -5,7 +5,7 @@ import MobileNavbar from '@components/common/Navbar/MobileNavbar';
 import ErrorFallback from '@components/common/ErrorFallback';
 import { Outlet } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
-import { useQueryErrorResetBoundary } from 'react-query';
+import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { AuthProvider } from '@context/AuthContext';
 import { ToastProvider } from '@context/ToastContext';
 import ClientProvider from '@context/ClientContext';
