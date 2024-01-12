@@ -17,7 +17,7 @@ const fadeOut = keyframes`
 `;
 
 const StyledContainer = styled.header`
-  position: absolute;
+  position: fixed;
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
