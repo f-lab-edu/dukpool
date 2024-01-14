@@ -27,7 +27,7 @@ const ArticleComment = memo(
           <TextArea buttonText="등록" id={id} buttonHandler={postComment} />
           <StyledUl>
             {comments.users.map((user) => (
-              <CommentListItem commentId={id} key={user.id} user={user} />
+              <CommentListItem key={user.id} {...user} />
             ))}
           </StyledUl>
         </StyledCommentContainer>
