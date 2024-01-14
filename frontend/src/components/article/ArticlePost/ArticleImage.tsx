@@ -5,16 +5,22 @@ import { ArticleImageSliderOption } from '@constants/sliderOption';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import { media } from '@styles/media';
 
-const ArticleImage = memo(({ images }: { images: string[] | null }) => {
+const ArticleImage = memo(({ images }: { images: string[] }) => {
   return (
     <StyledWrapper>
       <StyledContainer>
         <StyledSlider {...ArticleImageSliderOption}>
-          {images?.map((image) => (
-            <StyledImgContainer key={image}>
-              <StyledImg src={image ?? placeholderImage} />
+          {images.length ? (
+            images.map((image) => (
+              <StyledImgContainer>
+                <StyledImg src={image} />
+              </StyledImgContainer>
+            ))
+          ) : (
+            <StyledImgContainer>
+              <StyledImg src={placeholderImage} />
             </StyledImgContainer>
-          ))}
+          )}
         </StyledSlider>
       </StyledContainer>
     </StyledWrapper>
