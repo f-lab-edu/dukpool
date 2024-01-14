@@ -13,7 +13,7 @@ type CommentItemProps = {
 };
 
 const CommentListItem = memo(
-  ({ commentId, user }: { commentId: number; user: CommentItemProps }) => {
+  ({ id, name, image, date, content }: CommentItemProps) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const { mutate: patchComment } = usePatchArticleComment();
     return (
@@ -21,12 +21,12 @@ const CommentListItem = memo(
         <StyledCommentUserProfile>
           <StyledCommentUserProfileContainer>
             <StyledCommentProfileImgContainer>
-              <StyledCommentProfileImg src={user.image ?? placeholderImage} />
+              <StyledCommentProfileImg src={image ?? placeholderImage} />
             </StyledCommentProfileImgContainer>
-            <StyledCommentProfileName>{user.name}</StyledCommentProfileName>
+            <StyledCommentProfileName>{name}</StyledCommentProfileName>
           </StyledCommentUserProfileContainer>
           <StyledWrapper>
-            <StyledCommentDate>{user.date}</StyledCommentDate>
+            <StyledCommentDate>{date}</StyledCommentDate>
             <StyledEditContainer>
               <StyledEditButton onClick={() => setIsEdit((prev) => !prev)}>
                 {isEdit ? '수정취소' : '수정'}
@@ -35,12 +35,12 @@ const CommentListItem = memo(
             </StyledEditContainer>
           </StyledWrapper>
         </StyledCommentUserProfile>
-        {!isEdit && <StyledCommentContent>{user.content}</StyledCommentContent>}
+        {!isEdit && <StyledCommentContent>{content}</StyledCommentContent>}
         {isEdit && (
           <TextArea
-            previousValue={user.content}
+            previousValue={content}
             buttonText="수정"
-            id={commentId}
+            id={id}
             buttonHandler={patchComment}
           />
         )}
