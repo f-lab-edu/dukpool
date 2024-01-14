@@ -1,23 +1,35 @@
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import useArticleApi from '@hooks/apis/useArticleApi';
 import useTalkApi from '@hooks/apis/useTalkApi';
 
 export const useDeleteArticle = () => {
   const { deleteArticle } = useArticleApi();
-  return useMutation(['deleteArticlePost'], deleteArticle);
+  return useMutation({
+    mutationKey: ['deleteArticlePost'],
+    mutationFn: deleteArticle,
+  });
 };
 
 export const useDeleteTalk = () => {
   const { deleteTalk } = useTalkApi();
-  return useMutation(['deleteTalkPost'], deleteTalk);
+  return useMutation({
+    mutationKey: ['deleteTalkPost'],
+    mutationFn: deleteTalk,
+  });
 };
 
 export const useDeleteArticlePrefer = () => {
   const { deleteArticle } = useArticleApi();
-  return useMutation(['deleteArticlePrefer'], deleteArticle);
+  return useMutation({
+    mutationKey: ['deleteArticlePrefer'],
+    mutationFn: deleteArticle,
+  });
 };
 
 export const useDeleteTalkPrefer = () => {
   const { deleteTalkPrefer } = useTalkApi();
-  return useMutation(['deleteTalkPrefer'], deleteTalkPrefer);
+  return useMutation({
+    mutationKey: ['deleteTalkPrefer'],
+    mutationFn: deleteTalkPrefer,
+  });
 };

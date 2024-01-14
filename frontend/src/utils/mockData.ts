@@ -32,7 +32,7 @@ export type ArticlePostProps = {
     name: string;
     image: string | null;
   };
-  images: string[] | null;
+  images: string[];
   content: string;
   date: string;
   id: number;
@@ -55,11 +55,7 @@ export const MOCK_ARTICLE_POST_DATA: ArticlePostProps = {
     image:
       'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
   },
-  images: [
-    'https://visla.kr/wp/wp-content/uploads/2022/07/20220709_00.jpg',
-    'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    'https://img.sbs.co.kr/newimg/news/20221208/201728959.jpg',
-  ],
+  images: [],
   content:
     '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
   date: '2024-01-01',

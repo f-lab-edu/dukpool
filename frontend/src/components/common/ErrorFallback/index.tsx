@@ -53,7 +53,6 @@ const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
 ErrorFallback.displayName = 'ErrorFallback';
 
 const StyledWrapper = styled.div<{ $height: number }>`
-  width: 1140px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

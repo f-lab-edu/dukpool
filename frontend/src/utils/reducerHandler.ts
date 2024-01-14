@@ -13,3 +13,15 @@ export const inputHandler = (
   }
   return action.event.target.value;
 };
+
+export const textAreaHandler = (
+  oldValue: string,
+  action:
+    | { type: 'set'; value: string }
+    | { type: 'input'; event: React.ChangeEvent<HTMLTextAreaElement> },
+) => {
+  if (action.type === 'set') {
+    return action.value;
+  }
+  return action.event.target.value;
+};

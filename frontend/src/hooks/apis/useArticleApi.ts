@@ -15,6 +15,8 @@ type ArticleApis = {
   deleteArticle: (articleId: number) => Promise<void>;
   postArticlePrefer: (articleId: number) => Promise<void>;
   deleteArticlePrefer: (articleId: number) => Promise<void>;
+  postArticleComment: (articleId: number, comment: string) => Promise<void>;
+  patchArticleComment: (articleId: number, comment: string) => Promise<void>;
 };
 
 const getRandomNumber = (min: number, max: number) => {
@@ -77,6 +79,14 @@ const useArticleApi = (): ArticleApis => {
 
     deleteArticlePrefer: async (articleId: number): Promise<void> => {
       await client.delete(`/article/prefer/${articleId}`);
+    },
+
+    postArticleComment: async (id: number, comment: string): Promise<void> => {
+      await client.post(`/article/comment/${id}`, { comment });
+    },
+
+    patchArticleComment: async (id: number, comment: string): Promise<void> => {
+      await client.patch(`/article/comment/${id}`, { comment });
     },
   };
 };

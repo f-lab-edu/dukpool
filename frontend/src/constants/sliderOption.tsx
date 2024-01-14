@@ -2,6 +2,7 @@
 import next from '@assets/icons/right-arrow.svg';
 import prev from '@assets/icons/left-arrow.svg';
 import styled from 'styled-components';
+import { media } from '@styles/media';
 
 const ArrowLeft = ({ currentSlide, slideCount, ...props }: any) => (
   <StyledLeftArrowImgContainer {...props}>
@@ -97,6 +98,9 @@ const StyledRightArrowImgContainer = styled.div`
   position: absolute;
   right: -30px;
   bottom: 50%;
+  ${media.phone`
+  display: none !important;
+`}
 `;
 
 const StyledLeftArrowImgContainer = styled.div`
@@ -105,6 +109,9 @@ const StyledLeftArrowImgContainer = styled.div`
   position: absolute;
   left: -30px;
   bottom: 50%;
+  ${media.phone`
+  display: none !important;
+`}
 `;
 
 const StyledImg = styled.img`
