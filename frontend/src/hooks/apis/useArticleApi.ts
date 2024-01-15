@@ -10,7 +10,7 @@ type ArticleApis = {
   mockFetchData: (index: number) => Promise<any>;
   getAllArticles: () => Promise<ArticleProps[]>;
   getArticle: (articleId: number) => Promise<ArticlePostProps>;
-  postArticle: (body: FormData) => Promise<any>;
+  postArticle: (body: any) => Promise<any>;
   patchArticle: (articleId: number, body: FormData) => Promise<any>;
   deleteArticle: (articleId: number) => Promise<void>;
   postArticlePrefer: (articleId: number) => Promise<void>;
@@ -51,12 +51,8 @@ const useArticleApi = (): ArticleApis => {
       return MOCK_ARTICLE_POST_DATA;
     },
 
-    postArticle: async (body: FormData): Promise<any> => {
-      const { data } = await client.post('/article', body, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+    postArticle: async (body: any): Promise<any> => {
+      const { data } = await client.post('/article', body);
       return data;
     },
 
