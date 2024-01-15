@@ -5,7 +5,7 @@ type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
   text: string;
   disabled: boolean;
   $colorType: 'dark' | 'light';
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button = memo(({ text, disabled, onClick, $colorType }: ButtonProps) => {
