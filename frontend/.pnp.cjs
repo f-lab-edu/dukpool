@@ -54,6 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:9.0.0"],\
             ["eslint-plugin-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.0.1"],\
             ["html-webpack-plugin", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.5.3"],\
+            ["jotai", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:2.6.1"],\
             ["lodash", "npm:4.17.21"],\
             ["make-error", "npm:1.3.6"],\
             ["prettier", "npm:3.1.0"],\
@@ -7193,6 +7194,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:9.0.0"],\
             ["eslint-plugin-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.0.1"],\
             ["html-webpack-plugin", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.5.3"],\
+            ["jotai", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:2.6.1"],\
             ["lodash", "npm:4.17.21"],\
             ["make-error", "npm:1.3.6"],\
             ["prettier", "npm:3.1.0"],\
@@ -8793,6 +8795,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.9.0"],\
             ["merge-stream", "npm:2.0.0"],\
             ["supports-color", "npm:8.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["jotai", [\
+        ["npm:2.6.1", {\
+          "packageLocation": "./.yarn/cache/jotai-npm-2.6.1-7a23d7154e-26ddf72430.zip/node_modules/jotai/",\
+          "packageDependencies": [\
+            ["jotai", "npm:2.6.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:2.6.1", {\
+          "packageLocation": "./.yarn/__virtual__/jotai-virtual-7a051f74f4/0/cache/jotai-npm-2.6.1-7a23d7154e-26ddf72430.zip/node_modules/jotai/",\
+          "packageDependencies": [\
+            ["jotai", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:2.6.1"],\
+            ["@types/react", "npm:18.2.37"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
