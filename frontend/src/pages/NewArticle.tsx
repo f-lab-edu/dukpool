@@ -1,6 +1,5 @@
 import Layout from '@components/common/Layout';
 import styled from 'styled-components';
-import useInnerHeight from '@hooks/useInnerHeight';
 import { media } from '@styles/media';
 import { FormEvent } from 'react';
 import { usePostArticle } from '@hooks/usePostMutations';
@@ -14,7 +13,6 @@ import Button from '@components/common/Button';
 
 const NewArticle = () => {
   const articleContent = useAtomValue(postStateAtom);
-  const { height } = useInnerHeight();
   const { mutate: postNewArticle } = usePostArticle();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -25,7 +23,7 @@ const NewArticle = () => {
   return (
     <Layout>
       <StyledSection>
-        <StyledForm $height={height} onSubmit={handleSubmit}>
+        <StyledForm onSubmit={handleSubmit}>
           <Title />
           <Tags />
           <Content />
@@ -52,7 +50,7 @@ const StyledSection = styled.section`
   `}
 `;
 
-const StyledForm = styled.form<{ $height: number }>`
+const StyledForm = styled.form`
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
