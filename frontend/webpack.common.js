@@ -34,6 +34,7 @@ module.exports = {
       '@context': path.resolve(__dirname, 'src/context'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@atoms': path.resolve(__dirname, 'src/atoms'),
       '@public': path.resolve(__dirname, 'public'),
       '@config': path.resolve(__dirname, 'config.ts'),
     },
