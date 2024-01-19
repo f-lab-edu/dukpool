@@ -33,6 +33,7 @@ export type ArticlePostProps = {
     image: string | null;
   };
   images: string[];
+  tags: string[];
   content: string;
   date: string;
   id: number;
@@ -55,7 +56,10 @@ export const MOCK_ARTICLE_POST_DATA: ArticlePostProps = {
     image:
       'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
   },
-  images: [],
+  images: [
+    'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+  ],
+  tags: ['마블', '아이언맨'],
   content:
     '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
   date: '2024-01-01',
@@ -94,8 +98,8 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
     image: 'https://visla.kr/wp/wp-content/uploads/2022/07/20220709_00.jpg',
     date: '2024-01-01',
     id: 1,
-    likeCount: '13',
-    commentCount: '4',
+    likeCount: '11',
+    commentCount: '45',
   },
   {
     title: '마블aksksksksksksksksksksksksksksksks',
@@ -126,8 +130,8 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
     date: '2024-01-01',
     id: 3,
-    likeCount: '13',
-    commentCount: '4',
+    likeCount: '15',
+    commentCount: '1',
   },
   {
     title: '마블aksksksksksksksksksksksksksksksks',
@@ -143,7 +147,7 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
     date: '2024-01-01',
     id: 4,
     likeCount: '13',
-    commentCount: '4',
+    commentCount: '64',
   },
   {
     title: '마블aksksksksksksksksksksksksksksksks',
@@ -158,7 +162,7 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
     date: '2024-01-01',
     id: 5,
-    likeCount: '13',
+    likeCount: '23',
     commentCount: '4',
   },
   {
@@ -191,7 +195,7 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
     date: '2024-01-01',
     id: 7,
     likeCount: '13',
-    commentCount: '4',
+    commentCount: '14',
   },
   {
     title: '마블aksksksksksksksksksksksksksksksks',
@@ -206,7 +210,7 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
     date: '2024-01-01',
     id: 8,
-    likeCount: '13',
+    likeCount: '1',
     commentCount: '4',
   },
   {
@@ -223,7 +227,7 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
     date: '2024-01-01',
     id: 9,
     likeCount: '13',
-    commentCount: '4',
+    commentCount: '24',
   },
   {
     title: '마블aksksksksksksksksksksksksksksksks',
@@ -239,7 +243,7 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
     date: '2024-01-01',
     id: 10,
     likeCount: '13',
-    commentCount: '4',
+    commentCount: '44',
   },
   {
     title: '마블aksksksksksksksksksksksksksksksks',
@@ -270,8 +274,8 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
     date: '2024-01-01',
     id: 12,
-    likeCount: '13',
-    commentCount: '4',
+    likeCount: '0',
+    commentCount: '42',
   },
   {
     title: '마블aksksksksksksksksksksksksksksksks',
@@ -287,7 +291,7 @@ export const MOCK_ARTICLE_DATA: ArticleProps[] = [
     date: '2024-01-01',
     id: 13,
     likeCount: '13',
-    commentCount: '4',
+    commentCount: '43',
   },
   {
     title: '마블aksksksksksksksksksksksksksksksks',
