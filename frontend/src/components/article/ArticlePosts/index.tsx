@@ -3,8 +3,8 @@ import { useGetAllArticles } from '@hooks/useGetQueries';
 import { ArticleProps } from '@utils/mockData';
 import { memo } from 'react';
 
-const ArticlePosts = memo(() => {
-  const { data: articles } = useGetAllArticles();
+const ArticlePosts = memo(({ sortType }: { sortType: string }) => {
+  const { data: articles } = useGetAllArticles(sortType);
   return (
     <>
       {articles.map((article: ArticleProps) => (

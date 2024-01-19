@@ -8,9 +8,9 @@ import {
 
 type ArticleApis = {
   mockFetchData: (index: number) => Promise<any>;
-  getAllArticles: () => Promise<ArticleProps[]>;
+  getAllArticles: (sortType: string) => Promise<ArticleProps[]>;
   getArticle: (articleId: number) => Promise<ArticlePostProps>;
-  postArticle: (body: any) => Promise<any>;
+  postArticle: (body: FormData) => Promise<any>;
   patchArticle: (articleId: number, body: FormData) => Promise<any>;
   deleteArticle: (articleId: number) => Promise<void>;
   postArticlePrefer: (articleId: number) => Promise<void>;
@@ -36,9 +36,10 @@ const useArticleApi = (): ArticleApis => {
       return data.body;
     },
 
-    getAllArticles: async (): Promise<ArticleProps[]> => {
-      // const { data } = await client.get('/article');
+    getAllArticles: async (sortType: string): Promise<ArticleProps[]> => {
+      // const { data } = await client.get(`/article/${sortType}`);
       // return data;
+      console.log(sortType);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return MOCK_ARTICLE_DATA;
     },
@@ -51,7 +52,7 @@ const useArticleApi = (): ArticleApis => {
       return MOCK_ARTICLE_POST_DATA;
     },
 
-    postArticle: async (body: any): Promise<any> => {
+    postArticle: async (body: FormData): Promise<any> => {
       const { data } = await client.post('/article', body);
       return data;
     },

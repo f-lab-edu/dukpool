@@ -6,12 +6,10 @@ import Slider from 'react-slick';
 import { SliderOption } from '@constants/sliderOption';
 import useMediaQuery from '@hooks/useMediaQuery';
 import { useGetAllArticles } from '@hooks/useGetQueries';
-import assert from '@utils/assert';
 
 const RecentArticleCards = memo(() => {
   const { isMobile } = useMediaQuery();
-  const { data: articles } = useGetAllArticles();
-  assert(articles);
+  const { data: articles } = useGetAllArticles('newest');
 
   const articleCards = articles.map((article: ArticleProps) => (
     <ArticleCard {...article} key={article.id}></ArticleCard>
