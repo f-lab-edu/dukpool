@@ -1,21 +1,20 @@
-import { contentAtom } from '@atoms/postStateAtom';
 import useInnerHeight from '@hooks/useInnerHeight';
-import { useAtom } from 'jotai';
-import { ChangeEvent, memo } from 'react';
+import { memo } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import styled from 'styled-components';
 
-const Content = memo(() => {
+type ContentProps = {
+  register: UseFormRegisterReturn;
+};
+
+const Content = memo(({ register }: ContentProps) => {
   const { height } = useInnerHeight();
-  const [content, setContent] = useAtom(contentAtom);
   return (
     <StyledLabelContainer>
       <StyledLabel>
         <StyledFormTitle>내용</StyledFormTitle>
         <StyledTextArea
-          onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
-            setContent(event.target.value)
-          }
-          value={content}
+          {...register}
           $height={height}
           placeholder="최소 10자의 내용을 입력해주세요."
           required
@@ -35,7 +34,8 @@ const StyledLabel = styled.label`
 
 const StyledLabelContainer = styled.div`
   width: 100%;
-  margin-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 8px;
 `;
 
 const StyledFormTitle = styled.p`

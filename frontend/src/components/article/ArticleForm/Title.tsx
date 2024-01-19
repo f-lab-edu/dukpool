@@ -1,21 +1,19 @@
-import { ChangeEvent, memo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
-import { useAtom } from 'jotai';
-import { titleAtom } from '@atoms/postStateAtom';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
-const Title = memo(() => {
-  const [title, setTitle] = useAtom(titleAtom);
+type TitleProps = {
+  register: UseFormRegisterReturn;
+};
+
+const Title = memo(({ register }: TitleProps) => {
   return (
     <StyledLabelContainer>
       <StyledLabel>
         <StyledFormTitle>제목</StyledFormTitle>
         <StyledInput
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setTitle(event.target.value)
-          }
-          value={title}
+          {...register}
           type="text"
-          required
           placeholder="제목을 입력해주세요."
         />
       </StyledLabel>
@@ -27,7 +25,7 @@ Title.displayName = 'Title';
 
 const StyledLabelContainer = styled.div`
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 8px;
 `;
 
 const StyledLabel = styled.label`

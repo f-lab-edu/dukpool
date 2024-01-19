@@ -1,25 +1,37 @@
-import { ChangeEvent, memo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
-import { imagesAtom } from '@atoms/postStateAtom';
-import { useAtom } from 'jotai';
 import closeIcon from '@assets/icons/close.svg';
 import cameraIcon from '@assets/icons/camera.svg';
 import plusIcon from '@assets/icons/plus.svg';
 import { makeBlob } from '@utils/makeBlob';
+import { UseFormSetValue } from 'react-hook-form';
 
-const Images = memo(() => {
-  const [images, setImages] = useAtom(imagesAtom);
+type FormValues = {
+  title: string;
+  tags: string[];
+  content: string;
+  images: string[] | File[];
+};
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+type ImagesProps = {
+  imageList: any[];
+  setValue: UseFormSetValue<FormValues>;
+};
+
+const Images = memo(({ imageList, setValue }: ImagesProps) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    if (files && images.length + files.length <= 5) {
+    if (files && imageList.length + files.length <= 5) {
       const fileArray: File[] = Array.from(files);
-      setImages([...images, ...fileArray]);
+      setValue('images', [...imageList, ...fileArray]);
     }
   };
 
   const handleDeleteFile = (imageToDelete: File) => {
-    setImages(images.filter((image) => image.name !== imageToDelete.name));
+    setValue(
+      'images',
+      imageList.filter((image) => image.name !== imageToDelete.name),
+    );
   };
 
   return (
@@ -38,9 +50,11 @@ const Images = memo(() => {
         id="fileImage"
         onChange={handleFileChange}
       />
-      {images.map((image) => (
+      {imageList.map((image) => (
         <StyledImgWrapper key={image.name}>
-          <StyledImg src={makeBlob(image)} />
+          <StyledImg
+            src={typeof image === 'string' ? image : makeBlob(image)}
+          />
           <StyledTopContainer onClick={() => handleDeleteFile(image)}>
             <StyledTopImg src={closeIcon} />
           </StyledTopContainer>
@@ -53,6 +67,8 @@ const Images = memo(() => {
 Images.displayName = 'Images';
 
 const StyledContainer = styled.div`
+  margin-top: 30px;
+  margin-bottom: 8px;
   display: flex;
   gap: 12px;
 `;

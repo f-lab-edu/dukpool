@@ -1,16 +1,26 @@
 import { memo, useState } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
-import { readOnlyTagsAtom, writeOnlyTagsAtom } from '@atoms/postStateAtom';
 import styled from 'styled-components';
 import Tag from '@components/common/Tag';
+import { UseFormSetValue } from 'react-hook-form';
 
-const Tags = memo(() => {
+type FormValues = {
+  title: string;
+  tags: string[];
+  content: string;
+  images: string[] | File[];
+};
+
+type TagsProps = {
+  tagList: string[];
+  setValue: UseFormSetValue<FormValues>;
+};
+
+const Tags = memo(({ tagList, setValue }: TagsProps) => {
   const [tagItem, setTagItem] = useState<string>('');
-  const tagList = useAtomValue(readOnlyTagsAtom);
-  const [, setTags] = useAtom(writeOnlyTagsAtom);
 
   const handleDeleteTag = (tagToDelete: string) => {
-    setTags({ action: 'delete', tag: tagToDelete });
+    const updatedTags = tagList.filter((tag: any) => tag !== tagToDelete);
+    setValue('tags', updatedTags);
   };
 
   const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -22,7 +32,7 @@ const Tags = memo(() => {
       !event.nativeEvent.isComposing
     ) {
       event.preventDefault();
-      setTags({ action: 'add', tag: tagItem });
+      setValue('tags', [...tagList, target.value]);
       setTagItem('');
     }
   };
@@ -58,7 +68,7 @@ Tags.displayName = 'Tags';
 
 const StyledLabelContainer = styled.div`
   width: 100%;
-  margin-bottom: 30px;
+  margin-top: 30px;
 `;
 
 const StyledLabel = styled.label`
