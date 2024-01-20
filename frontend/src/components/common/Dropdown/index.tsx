@@ -5,9 +5,9 @@ import upArrow from '@assets/icons/arrow-up.svg';
 import downArrow from '@assets/icons/arrow-down.svg';
 
 const DROPDOWN_OPTIONS = [
-  { id: 1, type: 'newest', name: '최신순' },
-  { id: 2, type: 'mostLiked', name: '좋아요 많은 순' },
-  { id: 3, type: 'mostComment', name: '댓글 많은 순' },
+  { type: 'newest', name: '최신순' },
+  { type: 'mostLiked', name: '좋아요 많은 순' },
+  { type: 'mostComment', name: '댓글 많은 순' },
 ];
 
 const Dropdown = memo(
@@ -37,8 +37,8 @@ const Dropdown = memo(
         </StyledDropdownBtn>
         {isOpen && (
           <DropdownMenu>
-            {DROPDOWN_OPTIONS.map(({ id, type, name }) => (
-              <DropdownOption key={id} onClick={() => handleSortType(type)}>
+            {DROPDOWN_OPTIONS.map(({ type, name }) => (
+              <DropdownOption key={type} onClick={() => handleSortType(type)}>
                 {name}
               </DropdownOption>
             ))}
