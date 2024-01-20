@@ -55,6 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.0.1"],\
             ["html-webpack-plugin", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.5.3"],\
             ["jotai", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:2.6.1"],\
+            ["jwt-decode", "npm:4.0.0"],\
             ["lodash", "npm:4.17.21"],\
             ["make-error", "npm:1.3.6"],\
             ["prettier", "npm:3.1.0"],\
@@ -7196,6 +7197,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.0.1"],\
             ["html-webpack-plugin", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.5.3"],\
             ["jotai", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:2.6.1"],\
+            ["jwt-decode", "npm:4.0.0"],\
             ["lodash", "npm:4.17.21"],\
             ["make-error", "npm:1.3.6"],\
             ["prettier", "npm:3.1.0"],\
@@ -8916,6 +8918,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/json5-npm-2.2.3-9962c55073-2a7436a933.zip/node_modules/json5/",\
           "packageDependencies": [\
             ["json5", "npm:2.2.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["jwt-decode", [\
+        ["npm:4.0.0", {\
+          "packageLocation": "./.yarn/cache/jwt-decode-npm-4.0.0-4cd8e89909-390e2edcb3.zip/node_modules/jwt-decode/",\
+          "packageDependencies": [\
+            ["jwt-decode", "npm:4.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
