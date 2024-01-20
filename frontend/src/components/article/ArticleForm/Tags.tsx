@@ -7,19 +7,19 @@ type FormValues = {
   title: string;
   tags: string[];
   content: string;
-  images: string[] | File[];
+  images: (string | File)[];
 };
 
 type TagsProps = {
-  tagList: string[];
+  currentTags: string[];
   setValue: UseFormSetValue<FormValues>;
 };
 
-const Tags = memo(({ tagList, setValue }: TagsProps) => {
+const Tags = memo(({ currentTags, setValue }: TagsProps) => {
   const [tagItem, setTagItem] = useState<string>('');
 
   const handleDeleteTag = (tagToDelete: string) => {
-    const updatedTags = tagList.filter((tag: any) => tag !== tagToDelete);
+    const updatedTags = currentTags.filter((tag) => tag !== tagToDelete);
     setValue('tags', updatedTags);
   };
 
@@ -28,11 +28,11 @@ const Tags = memo(({ tagList, setValue }: TagsProps) => {
     if (
       target.value.length &&
       event.key === 'Enter' &&
-      !tagList.includes(target.value) &&
+      !currentTags.includes(target.value) &&
       !event.nativeEvent.isComposing
     ) {
       event.preventDefault();
-      setValue('tags', [...tagList, target.value]);
+      setValue('tags', [...currentTags, target.value]);
       setTagItem('');
     }
   };
@@ -51,7 +51,7 @@ const Tags = memo(({ tagList, setValue }: TagsProps) => {
           placeholder="Enter를 눌러 관련있는 태그를 추가해보세요."
         />
         <StyledTagsContainer>
-          {tagList.map((tag: string) => (
+          {currentTags.map((tag) => (
             <Tag
               buttonHandler={() => handleDeleteTag(tag)}
               key={tag}

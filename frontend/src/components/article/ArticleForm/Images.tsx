@@ -10,57 +10,61 @@ type FormValues = {
   title: string;
   tags: string[];
   content: string;
-  images: string[] | File[];
+  images: (string | File)[];
 };
 
 type ImagesProps = {
-  imageList: any[];
+  currentImages: (string | File)[];
   setValue: UseFormSetValue<FormValues>;
 };
 
-const Images = memo(({ imageList, setValue }: ImagesProps) => {
+const Images = memo(({ currentImages, setValue }: ImagesProps) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    if (files && imageList.length + files.length <= 5) {
-      const fileArray: File[] = Array.from(files);
-      setValue('images', [...imageList, ...fileArray]);
+    if (files && currentImages.length + files.length <= 5) {
+      setValue('images', [...currentImages, ...files]);
     }
   };
 
-  const handleDeleteFile = (imageToDelete: File) => {
+  const handleDeleteFile = (imageToDelete: string | File) => {
     setValue(
       'images',
-      imageList.filter((image) => image.name !== imageToDelete.name),
+      currentImages.filter((image) => image !== imageToDelete),
     );
   };
 
   return (
-    <StyledContainer>
-      <label htmlFor="fileImage">
-        <StyledCustomInput>
-          <StyledCameraImg src={cameraIcon} />
-          <StyledTopContainer>
-            <StyledTopImg src={plusIcon} />
-          </StyledTopContainer>
-        </StyledCustomInput>
-      </label>
-      <StyledInput
-        multiple
-        type="file"
-        id="fileImage"
-        onChange={handleFileChange}
-      />
-      {imageList.map((image) => (
-        <StyledImgWrapper key={image.name}>
-          <StyledImg
-            src={typeof image === 'string' ? image : makeBlob(image)}
-          />
-          <StyledTopContainer onClick={() => handleDeleteFile(image)}>
-            <StyledTopImg src={closeIcon} />
-          </StyledTopContainer>
-        </StyledImgWrapper>
-      ))}
-    </StyledContainer>
+    <>
+      <StyledContainer>
+        <label htmlFor="fileImage">
+          <StyledCustomInput>
+            <StyledCameraImg src={cameraIcon} />
+            <StyledTopContainer>
+              <StyledTopImg src={plusIcon} />
+            </StyledTopContainer>
+          </StyledCustomInput>
+        </label>
+        <StyledInput
+          multiple
+          type="file"
+          id="fileImage"
+          onChange={handleFileChange}
+        />
+        {currentImages.map((image) => (
+          <StyledImgWrapper
+            key={typeof image === 'string' ? image : image.name}
+          >
+            <StyledImg
+              src={typeof image === 'string' ? image : makeBlob(image)}
+            />
+            <StyledTopContainer onClick={() => handleDeleteFile(image)}>
+              <StyledTopImg src={closeIcon} />
+            </StyledTopContainer>
+          </StyledImgWrapper>
+        ))}
+      </StyledContainer>
+      <StyledParagraph>최대 5개의 파일을 첨부할 수 있습니다.</StyledParagraph>
+    </>
   );
 });
 
@@ -126,6 +130,11 @@ const StyledImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+
+const StyledParagraph = styled.p`
+  font-size: 12px;
+  color: var(--gray-3);
 `;
 
 export default Images;
