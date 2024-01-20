@@ -16,7 +16,7 @@ type FormValues = {
   title: string;
   tags: string[];
   content: string;
-  images: string[] | File[];
+  images: (string | File)[];
 };
 
 const DukpoolEditArticle = memo(() => {
@@ -59,21 +59,30 @@ const DukpoolEditArticle = memo(() => {
     patchArticle({ articleId, formData });
   };
 
+  console.log(errors.title?.type);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Title register={register('title', { value: '', minLength: 5 })} />
-      {errors.title && (
-        <ErrorMessage message="제목을 최소 5자 이상 입력해주세요." />
-      )}
-      <Tags setValue={setValue} tagList={watch('tags')} />
-      <Content register={register('content', { value: '', minLength: 10 })} />
+      <Title
+        register={register('title', {
+          value: '',
+          minLength: 5,
+          required: true,
+        })}
+      />
+      {errors.title && <ErrorMessage type={errors.title?.type} field="제목" />}
+      <Tags setValue={setValue} currentTags={watch('tags')} />
+      <Content
+        register={register('content', {
+          value: '',
+          minLength: 10,
+          required: true,
+        })}
+      />
       {errors.content && (
-        <ErrorMessage message="내용을 최소 10자 이상 입력해주세요." />
+        <ErrorMessage type={errors.content?.type} field="내용" />
       )}
-      <Images setValue={setValue} imageList={watch('images')} />
-      {errors.content && (
-        <ErrorMessage message="파일은 최대 5개까지 첨부할 수 있습니다." />
-      )}
+      <Images setValue={setValue} currentImages={watch('images')} />
       <StyledButtonContainer>
         <StyledButtonWrapper>
           <Button text="등록" disabled={false} $colorType="dark" />
