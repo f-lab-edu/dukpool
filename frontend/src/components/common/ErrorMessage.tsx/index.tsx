@@ -2,11 +2,19 @@ import { memo } from 'react';
 import styled from 'styled-components';
 
 type ErrorMessageProps = {
-  message: string;
+  field: string;
+  type: string;
 };
 
-const ErrorMessage = memo(({ message }: ErrorMessageProps) => {
-  return <StyledContainer>{message}</StyledContainer>;
+const ErrorMessage = memo(({ type, field }: ErrorMessageProps) => {
+  if (type === 'minLength') {
+    return (
+      <StyledContainer>{field}을 최소 5자 이상 입력해주세요.</StyledContainer>
+    );
+  }
+  if (type === 'required') {
+    return <StyledContainer>{field}을 입력해주세요.</StyledContainer>;
+  }
 });
 
 ErrorMessage.displayName = 'ErrorMessage';
