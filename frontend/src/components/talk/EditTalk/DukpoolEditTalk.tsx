@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useGetArticle } from '@hooks/useGetQueries';
-import { usePatchArticle } from '@hooks/usePatchMutations';
+import { useTalk } from '@hooks/useGetQueries';
+import { usePatchTalk } from '@hooks/usePatchMutations';
 import getIdFromUrl from '@utils/getIdFromUrl';
 import Title from '@components/common/Form/Title';
 import Tags from '@components/common/Form/Tags';
@@ -18,10 +18,10 @@ type FormValues = {
   images: (string | File)[];
 };
 
-const DukpoolEditArticle = memo(() => {
-  const articleId = getIdFromUrl();
-  const { data: article } = useGetArticle(articleId);
-  const { mutate: patchArticle } = usePatchArticle();
+const DukpoolEditTalk = memo(() => {
+  const talkId = getIdFromUrl();
+  const { data: article } = useTalk(talkId);
+  const { mutate: patchTalk } = usePatchTalk();
 
   const methods = useForm<FormValues>({
     defaultValues: {
@@ -50,7 +50,7 @@ const DukpoolEditArticle = memo(() => {
         }
       }),
     );
-    patchArticle({ articleId, formData });
+    patchTalk({ talkId, formData });
   };
 
   return (
@@ -70,7 +70,7 @@ const DukpoolEditArticle = memo(() => {
   );
 });
 
-DukpoolEditArticle.displayName = 'DukpoolEditArticle';
+DukpoolEditTalk.displayName = 'DukpoolEditTalk';
 
 const StyledButtonContainer = styled.div`
   margin-top: 12px;
@@ -83,4 +83,4 @@ const StyledButtonWrapper = styled.div`
   width: 100px;
 `;
 
-export default DukpoolEditArticle;
+export default DukpoolEditTalk;
