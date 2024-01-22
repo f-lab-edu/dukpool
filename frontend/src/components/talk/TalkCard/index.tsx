@@ -73,11 +73,12 @@ const TalkCard = memo(
 
 TalkCard.displayName = 'TalkCard';
 
-const StyledList = styled.li``;
+const StyledList = styled.li`
+  padding: 0 12px;
+`;
 
 const StyledLink = styled(Link)`
-  width: 300px;
-  height: 150px;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -85,13 +86,13 @@ const StyledLink = styled(Link)`
 
 const StyledContainer = styled.div`
   width: 100%;
-  height: 50%;
+  height: 100%;
   justify-content: space-between;
   display: flex;
 `;
 
 const StyledImgContainer = styled.div`
-  width: 25%;
+  width: 30%;
   min-width: 80px;
   overflow: hidden;
   border-radius: 8px;
@@ -104,8 +105,7 @@ const StyledImage = styled.img`
 `;
 
 const StyledContentContainer = styled.div`
-  width: 70%;
-  height: 80px;
+  width: 65%;
 `;
 
 const StyledContent = styled.div`
@@ -149,6 +149,7 @@ const StyledProfileDiv = styled.div`
 
 const StyledProfileImageContainer = styled.div`
   width: 25px;
+  height: 25px;
   overflow: hidden;
   border-radius: 50%;
 `;
