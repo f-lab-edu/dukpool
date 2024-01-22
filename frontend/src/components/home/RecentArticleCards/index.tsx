@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 import { ArticleProps } from '@utils/mockData';
-import ArticleCard from '@components/ArticleCard';
+import ArticleCard from '@components/article/ArticleCard';
 import Slider from 'react-slick';
 import { SliderOption } from '@constants/sliderOption';
 import useMediaQuery from '@hooks/useMediaQuery';
