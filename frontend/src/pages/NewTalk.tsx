@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { media } from '@styles/media';
-import { usePostArticle } from '@hooks/usePostMutations';
+import { usePostTalk } from '@hooks/usePostMutations';
 import styled from 'styled-components';
 import Layout from '@components/common/Layout';
 import Title from '@components/common/Form/Title';
@@ -16,7 +16,7 @@ type FormValues = {
   images: (string | File)[];
 };
 
-const NewArticle = () => {
+const NewTalk = () => {
   const methods = useForm<FormValues>({
     defaultValues: {
       title: '',
@@ -25,7 +25,7 @@ const NewArticle = () => {
       images: [],
     },
   });
-  const { mutate: postNewArticle } = usePostArticle();
+  const { mutate: postNewTalk } = usePostTalk();
 
   const onSubmit = ({ title, tags, content, images }: FormValues) => {
     console.log(title, tags, content, images);
@@ -34,7 +34,7 @@ const NewArticle = () => {
     formData.append('content', content);
     tags.forEach((tag) => formData.append('tags', tag));
     images.forEach((image) => formData.append('images', image));
-    postNewArticle(formData);
+    postNewTalk(formData);
   };
 
   return (
@@ -42,7 +42,7 @@ const NewArticle = () => {
       <Layout>
         <StyledSection>
           <StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
-            <StyledTitle>덕질 자랑하기</StyledTitle>
+            <StyledTitle>덕질 토크하기</StyledTitle>
             <Title />
             <Tags />
             <Content />
@@ -93,4 +93,4 @@ const StyledButtonWrapper = styled.div`
   width: 100px;
 `;
 
-export default NewArticle;
+export default NewTalk;
