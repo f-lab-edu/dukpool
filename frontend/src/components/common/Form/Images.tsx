@@ -41,7 +41,7 @@ const Images = memo(() => {
           id="fileImage"
           onChange={handleFileChange}
         />
-        {currentImages?.map((image) => (
+        {currentImages.map((image) => (
           <StyledImgWrapper
             key={typeof image === 'string' ? image : image.name}
           >

@@ -41,7 +41,7 @@ const Tags = memo(() => {
           placeholder="Enter를 눌러 관련있는 태그를 추가해보세요."
         />
         <StyledTagsContainer>
-          {currentTags?.map((tag) => (
+          {currentTags.map((tag) => (
             <Tag
               buttonHandler={() => handleDeleteTag(tag)}
               key={tag}
