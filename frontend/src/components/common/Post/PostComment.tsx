@@ -15,7 +15,7 @@ type CommentProps = {
   }[];
 };
 
-const ArticleComment = memo(
+const PostComment = memo(
   ({ id, comments }: { id: number; comments: CommentProps }) => {
     const { mutate: postComment } = usePostArticleComment();
     return (
@@ -36,7 +36,7 @@ const ArticleComment = memo(
   },
 );
 
-ArticleComment.displayName = 'ArticleComment';
+PostComment.displayName = 'PostComment';
 
 const StyledWrapper = styled.section`
   margin: 0 100px 30px 100px;
@@ -68,4 +68,4 @@ const StyledUl = styled.ul`
   margin-top: 8px;
 `;
 
-export default ArticleComment;
+export default PostComment;
