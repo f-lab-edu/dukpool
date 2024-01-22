@@ -1,13 +1,14 @@
 import { memo } from 'react';
 import styled, { keyframes } from 'styled-components';
+import placeholderImage from '@assets/images/placeholder-image.png';
 
 const TalkCardSkeleton = memo(() => {
   return (
-    <li>
+    <StyledList>
       <SkeletonWrapper>
         <SkeletonContainer>
           <SkeletonImgContainer>
-            <SkeletonImage />
+            <SkeletonImage src={placeholderImage} />
           </SkeletonImgContainer>
           <SkeletonContentContainer>
             <SkeletonTitle />
@@ -30,7 +31,7 @@ const TalkCardSkeleton = memo(() => {
           <SkeletonDate />
         </SkeletonInfoContainer>
       </SkeletonWrapper>
-    </li>
+    </StyledList>
   );
 });
 
@@ -45,9 +46,12 @@ const skeletonAnimation = keyframes`
     }
 `;
 
+const StyledList = styled.div`
+  padding: 0 12px;
+`;
+
 const SkeletonWrapper = styled.div`
-  width: 300px;
-  height: 150px;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -56,19 +60,19 @@ const SkeletonWrapper = styled.div`
 
 const SkeletonContainer = styled.div`
   width: 100%;
-  height: 50%;
+  height: 100%;
   justify-content: space-between;
   display: flex;
 `;
 
 const SkeletonImgContainer = styled.div`
-  width: 25%;
+  width: 30%;
   min-width: 80px;
   overflow: hidden;
   border-radius: 8px;
 `;
 
-const SkeletonImage = styled.div`
+const SkeletonImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -76,8 +80,7 @@ const SkeletonImage = styled.div`
 `;
 
 const SkeletonContentContainer = styled.div`
-  width: 70%;
-  height: 80px;
+  width: 65%;
 `;
 
 const SkeletonContent = styled.div`
@@ -97,7 +100,6 @@ const SkeletonTitle = styled.div`
 
 const SkeletonInfoContainer = styled.div`
   width: 100%;
-  height: 14px;
   padding: 12px 0;
 `;
 
