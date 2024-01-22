@@ -64,7 +64,7 @@ const StyledImgContainer = styled.div`
   height: 200px;
   overflow: hidden;
   border-radius: 8px;
-  ${media.phone`
+  ${media.tablet`
     width: 150px;
     height: 150px;
   `}
@@ -80,7 +80,7 @@ const StyledInfoContainer = styled.div`
   width: 200px;
   font-size: 14px;
   padding: 12px 0;
-  ${media.phone`
+  ${media.tablet`
     width: 150px;
   `}
 `;

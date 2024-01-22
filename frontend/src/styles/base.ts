@@ -4,7 +4,7 @@ const base = css`
   :root {
     --primary: #515ce6;
     --success: #3159b3;
-    --error: #ba1e45;
+    --error: #ff4242;
     --disabled: #828bed;
     --gray-1: #8e8e93;
     --gray-2: #aeaeb2;

@@ -12,6 +12,9 @@ import Kakao from '@pages/Kakao';
 import Article from '@pages/Article';
 import Talk from '@pages/Talk';
 import NewArticle from '@pages/NewArticle';
+import EditArticle from '@pages/EditArticle';
+import NewTalk from '@pages/NewTalk';
+import EditTalk from '@pages/EditTalk';
 
 type routeElement = {
   path: string;
@@ -30,10 +33,13 @@ const routes: routeElement[] = [
       { path: 'article', element: <Article /> },
       { path: 'article/:articleId', element: <ArticlePost /> },
       { path: 'article/new', element: <NewArticle /> },
+      { path: 'article/edit/:articleId', element: <EditArticle /> },
       { path: 'talk', element: <Talk /> },
       { path: 'talk/:talkId', element: <TalkPost /> },
+      { path: 'talk/new', element: <NewTalk /> },
+      { path: 'talk/edit/:talkId', element: <EditTalk /> },
       { path: 'login', element: <Login /> },
-      { path: 'auth/kakao', element: <Kakao /> },
+      { path: 'api/auth/kakao/callback', element: <Kakao /> },
       { path: 'mypage', element: <MyPage /> },
       { path: 'search/:searchId', element: <Search /> },
     ],

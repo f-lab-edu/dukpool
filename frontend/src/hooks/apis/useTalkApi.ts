@@ -1,8 +1,12 @@
 import useClient from '@hooks/useClient';
-import { MOCK_TALK_DATA, TalkProps } from '@utils/mockData';
+import {
+  MOCK_TALK_DATA,
+  MOCK_TALK_POST_DATA,
+  TalkProps,
+} from '@utils/mockData';
 
 type TalkApis = {
-  getAllTalks: () => Promise<TalkProps[]>;
+  getAllTalks: (sortType: string) => Promise<TalkProps[]>;
   getTalk: (talkId: number) => Promise<any>;
   postTalk: (body: FormData) => Promise<any>;
   patchTalk: (id: number, body: FormData) => Promise<any>;
@@ -14,16 +18,20 @@ type TalkApis = {
 const useTalkApi = (): TalkApis => {
   const client = useClient();
   return {
-    getAllTalks: async (): Promise<TalkProps[]> => {
+    getAllTalks: async (sortType: string): Promise<TalkProps[]> => {
       // const { data } = await client.get('/talks');
       // return data;
+      console.log(sortType);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return MOCK_TALK_DATA;
     },
 
     getTalk: async (talkId): Promise<any> => {
-      const { data } = await client.get(`/talk/${talkId}`);
-      return data;
+      // const { data } = await client.get(`/talk/${talkId}`);
+      // return data;
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log(talkId);
+      return MOCK_TALK_POST_DATA;
     },
 
     postTalk: async (body: FormData): Promise<any> => {

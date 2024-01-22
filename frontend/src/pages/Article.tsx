@@ -1,7 +1,7 @@
 import ArticlePosts from '@components/article/ArticlePosts';
 import Layout from '@components/common/Layout';
 import { media } from '@styles/media';
-import { Suspense, useContext } from 'react';
+import { Suspense, useContext, useState } from 'react';
 import styled from 'styled-components';
 import ArticleCardSkeleton from '@components/common/Skeleton/ArticleCardSkeleton';
 import { AuthContext } from '@context/AuthContext';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import Dropdown from '@components/common/Dropdown';
 
 const Article = () => {
+  const [sortType, setSortType] = useState<string>('newest');
   const { isLoggined } = useContext(AuthContext);
   const navigate = useNavigate();
   const handlePostButton = () => {
@@ -21,7 +22,7 @@ const Article = () => {
       <StyledSection>
         <StyledSectionTitle>📸 덕질 자랑</StyledSectionTitle>
         <StyledContainer>
-          <Dropdown />
+          <Dropdown sortType={sortType} setSortType={setSortType} />
           <StyledButton onClick={handlePostButton}>덕질 자랑하기</StyledButton>
         </StyledContainer>
         <StyledUl>
@@ -32,7 +33,7 @@ const Article = () => {
               </li>
             ))}
           >
-            <ArticlePosts />
+            <ArticlePosts sortType={sortType} />
           </Suspense>
         </StyledUl>
       </StyledSection>
@@ -75,7 +76,7 @@ const StyledUl = styled.ul`
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   justify-content: center;
   align-items: center;
-  ${media.phone`
+  ${media.tablet`
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   `}
 `;

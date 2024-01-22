@@ -10,7 +10,7 @@ type DescriptionProps = {
   content: string;
 };
 
-const ArticleDescription = memo(
+const PostDescription = memo(
   ({ userProfile, title, date, content }: DescriptionProps) => {
     return (
       <StyledWrapper>
@@ -38,7 +38,7 @@ const ArticleDescription = memo(
   },
 );
 
-ArticleDescription.displayName = 'ArticleDescription';
+PostDescription.displayName = 'PostDescription';
 
 const StyledWrapper = styled.section`
   margin: 30px 100px;
@@ -123,4 +123,4 @@ const StyledContent = styled.div`
   padding: 10px 0;
 `;
 
-export default ArticleDescription;
+export default PostDescription;

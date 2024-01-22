@@ -8,23 +8,26 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { AuthProvider } from '@context/AuthContext';
 import { ToastProvider } from '@context/ToastContext';
+import { Provider } from 'jotai';
 import ClientProvider from '@context/ClientContext';
 
 const RootPage = () => {
   const { isMobile } = useMediaQuery();
   const { reset } = useQueryErrorResetBoundary();
   return (
-    <ToastProvider>
-      <ClientProvider>
-        <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
-          <AuthProvider>
-            <Header />
-            <Outlet />
-            {isMobile ? <MobileNavbar /> : <Footer />}
-          </AuthProvider>
-        </ErrorBoundary>
-      </ClientProvider>
-    </ToastProvider>
+    <Provider>
+      <ToastProvider>
+        <ClientProvider>
+          <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
+            <AuthProvider>
+              <Header />
+              <Outlet />
+              {isMobile ? <MobileNavbar /> : <Footer />}
+            </AuthProvider>
+          </ErrorBoundary>
+        </ClientProvider>
+      </ToastProvider>
+    </Provider>
   );
 };
 

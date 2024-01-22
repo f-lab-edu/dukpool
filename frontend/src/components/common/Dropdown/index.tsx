@@ -1,41 +1,53 @@
 import useDropdown from '@hooks/useDropdown';
-import { memo, useState } from 'react';
+import { Dispatch, memo } from 'react';
 import styled from 'styled-components';
 import upArrow from '@assets/icons/arrow-up.svg';
 import downArrow from '@assets/icons/arrow-down.svg';
 
 const DROPDOWN_OPTIONS = [
-  { id: 1, option: '최신순' },
-  { id: 2, option: '좋아요 많은순' },
-  { id: 3, option: '댓글 많은순' },
+  { type: 'newest', name: '최신순' },
+  { type: 'mostLiked', name: '좋아요 많은 순' },
+  { type: 'mostComment', name: '댓글 많은 순' },
 ];
 
-const Dropdown = memo(() => {
-  const [sortType, setSortType] = useState<string>('최신순');
-  const { isOpen, dropdownRef, toggleDropdown } = useDropdown();
-  const handleSortType = (selectedSort: string) => {
-    setSortType(selectedSort);
-    toggleDropdown();
-  };
+const Dropdown = memo(
+  ({
+    sortType,
+    setSortType,
+  }: {
+    sortType: string;
+    setSortType: Dispatch<React.SetStateAction<string>>;
+  }) => {
+    const { isOpen, dropdownRef, toggleDropdown } = useDropdown();
 
-  return (
-    <StyledWrapper ref={dropdownRef}>
-      <StyledDropdownBtn onClick={toggleDropdown}>
-        <StyledSortOption>{sortType}</StyledSortOption>
-        <StyledArrow src={isOpen ? upArrow : downArrow} />
-      </StyledDropdownBtn>
-      {isOpen && (
-        <DropdownMenu>
-          {DROPDOWN_OPTIONS.map(({ id, option }) => (
-            <DropdownOption key={id} onClick={() => handleSortType(option)}>
-              {option}
-            </DropdownOption>
-          ))}
-        </DropdownMenu>
-      )}
-    </StyledWrapper>
-  );
-});
+    const currentSortType = (sortType: string) => {
+      return DROPDOWN_OPTIONS.find((option) => option.type === sortType)?.name;
+    };
+
+    const handleSortType = (selectedType: string) => {
+      setSortType(selectedType);
+      toggleDropdown();
+    };
+
+    return (
+      <StyledWrapper ref={dropdownRef}>
+        <StyledDropdownBtn onClick={toggleDropdown}>
+          <StyledSortOption>{currentSortType(sortType)}</StyledSortOption>
+          <StyledArrow src={isOpen ? upArrow : downArrow} />
+        </StyledDropdownBtn>
+        {isOpen && (
+          <DropdownMenu>
+            {DROPDOWN_OPTIONS.map(({ type, name }) => (
+              <DropdownOption key={type} onClick={() => handleSortType(type)}>
+                {name}
+              </DropdownOption>
+            ))}
+          </DropdownMenu>
+        )}
+      </StyledWrapper>
+    );
+  },
+);
 
 Dropdown.displayName = 'Dropdown';
 

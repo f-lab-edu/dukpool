@@ -1,21 +1,21 @@
 import { useGetArticle } from '@hooks/useGetQueries';
 import getIdFromUrl from '@utils/getIdFromUrl';
-import ArticleImage from '@components/article/ArticlePost/ArticleImage';
-import ArticleDescription from '@components/article/ArticlePost/ArticleDescription';
-import ArticleComment from '@components/article/ArticlePost/ArticleComment';
+import PostImage from '@components/common/Post/PostImage';
+import PostDescription from '@components/common/Post/PostDescription';
+import PostComment from '@components/common/Post/PostComment';
 
 const DukpoolArticlePost = () => {
   const { data } = useGetArticle(getIdFromUrl());
   return (
     <>
-      <ArticleImage images={data.images} />
-      <ArticleDescription
+      <PostImage images={data.images} />
+      <PostDescription
         userProfile={data.userProfile}
         title={data.title}
         date={data.date}
         content={data.content}
       />
-      <ArticleComment id={data.id} comments={data.comments} />
+      <PostComment id={data.id} comments={data.comments} />
     </>
   );
 };

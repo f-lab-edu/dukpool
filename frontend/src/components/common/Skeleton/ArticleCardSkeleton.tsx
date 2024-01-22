@@ -51,7 +51,7 @@ const SkeletonImgContainer = styled.div`
   width: 200px;
   height: 200px;
   animation: ${skeletonAnimation} 2s infinite;
-  ${media.phone`
+  ${media.tablet`
     width: 150px;
     height: 150px;
   `}
@@ -69,7 +69,7 @@ const SkeletonInfoContainer = styled.div`
   width: 200px;
   padding: 12px 0;
   animation: ${skeletonAnimation} 2s infinite;
-  ${media.phone`
+  ${media.tablet`
     width: 150px;
   `}
 `;
@@ -111,7 +111,7 @@ const SkeletonProfile = styled.div`
 `;
 
 const SkeletonDate = styled.div`
-  width: 200px;
+  width: 100%;
   height: 11px;
   background-color: var(--skeleton);
   border-radius: 8px;

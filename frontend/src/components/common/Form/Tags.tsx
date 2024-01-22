@@ -1,16 +1,16 @@
 import { memo, useState } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
-import { readOnlyTagsAtom, writeOnlyTagsAtom } from '@atoms/postStateAtom';
 import styled from 'styled-components';
 import Tag from '@components/common/Tag';
+import { useFormContext } from 'react-hook-form';
 
 const Tags = memo(() => {
   const [tagItem, setTagItem] = useState<string>('');
-  const tagList = useAtomValue(readOnlyTagsAtom);
-  const [, setTags] = useAtom(writeOnlyTagsAtom);
+  const { setValue, watch } = useFormContext();
+  const currentTags: string[] = watch('tags');
 
   const handleDeleteTag = (tagToDelete: string) => {
-    setTags({ action: 'delete', tag: tagToDelete });
+    const updatedTags = currentTags.filter((tag) => tag !== tagToDelete);
+    setValue('tags', updatedTags);
   };
 
   const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -18,11 +18,11 @@ const Tags = memo(() => {
     if (
       target.value.length &&
       event.key === 'Enter' &&
-      !tagList.includes(target.value) &&
+      !currentTags.includes(target.value) &&
       !event.nativeEvent.isComposing
     ) {
       event.preventDefault();
-      setTags({ action: 'add', tag: tagItem });
+      setValue('tags', [...currentTags, target.value]);
       setTagItem('');
     }
   };
@@ -41,7 +41,7 @@ const Tags = memo(() => {
           placeholder="Enter를 눌러 관련있는 태그를 추가해보세요."
         />
         <StyledTagsContainer>
-          {tagList.map((tag: string) => (
+          {currentTags.map((tag) => (
             <Tag
               buttonHandler={() => handleDeleteTag(tag)}
               key={tag}
@@ -58,7 +58,7 @@ Tags.displayName = 'Tags';
 
 const StyledLabelContainer = styled.div`
   width: 100%;
-  margin-bottom: 30px;
+  margin-top: 30px;
 `;
 
 const StyledLabel = styled.label`

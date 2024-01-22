@@ -5,7 +5,7 @@ import { ArticleImageSliderOption } from '@constants/sliderOption';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import { media } from '@styles/media';
 
-const ArticleImage = memo(({ images }: { images: string[] }) => {
+const PostImage = memo(({ images }: { images: string[] }) => {
   return (
     <StyledWrapper>
       <StyledContainer>
@@ -27,7 +27,7 @@ const ArticleImage = memo(({ images }: { images: string[] }) => {
   );
 });
 
-ArticleImage.displayName = 'ArticleImage';
+PostImage.displayName = 'PostImage';
 
 const StyledWrapper = styled.section`
   margin: 30px 100px 0 100px;
@@ -72,4 +72,4 @@ const StyledImg = styled.img`
   border-radius: 8px;
 `;
 
-export default ArticleImage;
+export default PostImage;

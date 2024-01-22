@@ -3851,6 +3851,7 @@ __metadata:
     eslint-plugin-prettier: ^5.0.1
     html-webpack-plugin: ^5.5.3
     jotai: ^2.6.1
+    jwt-decode: ^4.0.0
     lodash: ^4.17.21
     make-error: ^1.3.6
     prettier: ^3.1.0
@@ -3858,6 +3859,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-error-boundary: ^4.0.12
+    react-hook-form: ^7.49.3
     react-router-dom: ^6.18.0
     react-slick: ^0.29.0
     slick-carousel: ^1.8.1
@@ -5345,6 +5347,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jwt-decode@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "jwt-decode@npm:4.0.0"
+  checksum: 390e2edcb31a92e86c8cbdd1edeea4c0d62acd371f8a8f0a8878e499390c0ecf4c658b365c4e941e4ef37d0170e4ca650aaa49f99a45c0b9695a235b210154b0
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.3":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -6450,6 +6459,15 @@ __metadata:
   peerDependencies:
     react: ">=16.13.1"
   checksum: c4a14c2b609037baba394d8871fb021a7c16fb1abfd8d23b2d2aa331bdcc420e5cff4b3d48f2f2ac7fa64ac90c322d0bcf358d706995b30df5a8d5fcb0c27b1e
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.49.3":
+  version: 7.49.3
+  resolution: "react-hook-form@npm:7.49.3"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 9769845e2749f5c9d1d033be3819bc572ffa67f19ec2e567c61a58d0d060107facdf8425aab253c2e667c00853b7706a50bd6739fca6228c284c9313420ca26f
   languageName: node
   linkType: hard
 

@@ -3,26 +3,26 @@ import useTalkApi from '@hooks/apis/useTalkApi';
 import useArticleApi from '@hooks/apis/useArticleApi';
 import useAuthApi from '@hooks/apis/useAuthApi';
 
-export const useGetAllArticles = () => {
+export const useGetAllArticles = (sortType: string = 'newest') => {
   const { getAllArticles } = useArticleApi();
   return useSuspenseQuery({
-    queryKey: ['useGetAllArticles'],
-    queryFn: getAllArticles,
+    queryKey: ['allArticles', sortType],
+    queryFn: () => getAllArticles(sortType),
   });
 };
 
-export const useGetArticle = (articleId: number) => {
+export const useGetArticle = (id: number) => {
   const { getArticle } = useArticleApi();
   return useSuspenseQuery({
-    queryKey: ['useGetArticle'],
-    queryFn: () => getArticle(articleId),
+    queryKey: ['article'],
+    queryFn: () => getArticle(id),
   });
 };
 
 export const useGetUserProfile = () => {
   const { getUserProfile } = useAuthApi();
   return useSuspenseQuery({
-    queryKey: ['useGetUserProfile'],
+    queryKey: ['userProfile'],
     queryFn: getUserProfile,
   });
 };
@@ -30,23 +30,23 @@ export const useGetUserProfile = () => {
 export const useGetCheckNickname = (nickname: string) => {
   const { getCheckNickname } = useAuthApi();
   return useSuspenseQuery({
-    queryKey: ['useGetCheckNickname'],
+    queryKey: ['nicknameCheck'],
     queryFn: () => getCheckNickname(nickname),
   });
 };
 
-export const useGetAllTalks = () => {
+export const useGetAllTalks = (sortType: string = 'newest') => {
   const { getAllTalks } = useTalkApi();
   return useSuspenseQuery({
-    queryKey: ['useGetAllTalks'],
-    queryFn: getAllTalks,
+    queryKey: ['allTalks', sortType],
+    queryFn: () => getAllTalks(sortType),
   });
 };
 
-export const useGetTalk = (talkId: number) => {
+export const useTalk = (id: number) => {
   const { getTalk } = useTalkApi();
   return useSuspenseQuery({
-    queryKey: ['useGetTalk'],
-    queryFn: () => getTalk(talkId),
+    queryKey: ['talk', id],
+    queryFn: () => getTalk(id),
   });
 };
