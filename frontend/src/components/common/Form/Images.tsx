@@ -4,21 +4,12 @@ import closeIcon from '@assets/icons/close.svg';
 import cameraIcon from '@assets/icons/camera.svg';
 import plusIcon from '@assets/icons/plus.svg';
 import { makeBlob } from '@utils/makeBlob';
-import { UseFormSetValue } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
-type FormValues = {
-  title: string;
-  tags: string[];
-  content: string;
-  images: (string | File)[];
-};
+const Images = memo(() => {
+  const { setValue, watch } = useFormContext();
+  const currentImages: (string | File)[] = watch('images');
 
-type ImagesProps = {
-  currentImages: (string | File)[];
-  setValue: UseFormSetValue<FormValues>;
-};
-
-const Images = memo(({ currentImages, setValue }: ImagesProps) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && currentImages.length + files.length <= 5) {
@@ -50,7 +41,7 @@ const Images = memo(({ currentImages, setValue }: ImagesProps) => {
           id="fileImage"
           onChange={handleFileChange}
         />
-        {currentImages.map((image) => (
+        {currentImages?.map((image) => (
           <StyledImgWrapper
             key={typeof image === 'string' ? image : image.name}
           >

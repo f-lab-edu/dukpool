@@ -1,22 +1,12 @@
 import { memo, useState } from 'react';
 import styled from 'styled-components';
 import Tag from '@components/common/Tag';
-import { UseFormSetValue } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
-type FormValues = {
-  title: string;
-  tags: string[];
-  content: string;
-  images: (string | File)[];
-};
-
-type TagsProps = {
-  currentTags: string[];
-  setValue: UseFormSetValue<FormValues>;
-};
-
-const Tags = memo(({ currentTags, setValue }: TagsProps) => {
+const Tags = memo(() => {
   const [tagItem, setTagItem] = useState<string>('');
+  const { setValue, watch } = useFormContext();
+  const currentTags: string[] = watch('tags');
 
   const handleDeleteTag = (tagToDelete: string) => {
     const updatedTags = currentTags.filter((tag) => tag !== tagToDelete);
@@ -51,7 +41,7 @@ const Tags = memo(({ currentTags, setValue }: TagsProps) => {
           placeholder="Enter를 눌러 관련있는 태그를 추가해보세요."
         />
         <StyledTagsContainer>
-          {currentTags.map((tag) => (
+          {currentTags?.map((tag) => (
             <Tag
               buttonHandler={() => handleDeleteTag(tag)}
               key={tag}

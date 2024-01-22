@@ -1,18 +1,15 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
-type TitleProps = {
-  register: UseFormRegisterReturn;
-};
-
-const Title = memo(({ register }: TitleProps) => {
+const Title = memo(() => {
+  const { register } = useFormContext();
   return (
     <StyledLabelContainer>
       <StyledLabel>
         <StyledFormTitle>제목</StyledFormTitle>
         <StyledInput
-          {...register}
+          {...register('title', { minLength: 5 })}
           type="text"
           placeholder="제목을 입력해주세요."
         />

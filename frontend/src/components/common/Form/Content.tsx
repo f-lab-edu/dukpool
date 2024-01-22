@@ -1,20 +1,17 @@
-import useInnerHeight from '@hooks/useInnerHeight';
 import { memo } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
+import useInnerHeight from '@hooks/useInnerHeight';
 import styled from 'styled-components';
 
-type ContentProps = {
-  register: UseFormRegisterReturn;
-};
-
-const Content = memo(({ register }: ContentProps) => {
+const Content = memo(() => {
   const { height } = useInnerHeight();
+  const { register } = useFormContext();
   return (
     <StyledLabelContainer>
       <StyledLabel>
         <StyledFormTitle>내용</StyledFormTitle>
         <StyledTextArea
-          {...register}
+          {...register('content', { minLength: 10, required: true })}
           $height={height}
           placeholder="최소 10자의 내용을 입력해주세요."
           required
