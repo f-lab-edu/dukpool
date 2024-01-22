@@ -35,11 +35,11 @@ export const useGetCheckNickname = (nickname: string) => {
   });
 };
 
-export const useGetAllTalks = () => {
+export const useGetAllTalks = (sortType: string = 'newest') => {
   const { getAllTalks } = useTalkApi();
   return useSuspenseQuery({
-    queryKey: ['allTalks'],
-    queryFn: getAllTalks,
+    queryKey: ['allTalks', sortType],
+    queryFn: () => getAllTalks(sortType),
   });
 };
 
