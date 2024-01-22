@@ -76,7 +76,7 @@ const StyledUl = styled.ul`
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   justify-content: center;
   align-items: center;
-  ${media.phone`
+  ${media.tablet`
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   `}
 `;

@@ -39,6 +39,7 @@ const StyledSection = styled.section`
   width: 100%;
   padding: 0 50px;
   margin: 40px auto;
+  margin-bottom: 0;
   ${media.phone`
     padding: 0 20px;
   `}
