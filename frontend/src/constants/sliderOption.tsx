@@ -40,13 +40,6 @@ export const SliderOption = {
         slidesToScroll: 3,
       },
     },
-    {
-      breakpoint: 780,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
   ],
 };
 
@@ -55,23 +48,22 @@ export const MultipleRowSliderOption = {
   dots: true,
   infinite: false,
   speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 3,
+  slidesToShow: 2,
+  slidesToScroll: 2,
   rows: 2,
   slidesPerRow: 1,
   nextArrow: <ArrowRight />,
   prevArrow: <ArrowLeft />,
-  centerPadding: '60px',
   responsive: [
     {
-      breakpoint: 1180,
+      breakpoint: 780,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
       },
     },
     {
-      breakpoint: 780,
+      breakpoint: 600,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -98,7 +90,7 @@ const StyledRightArrowImgContainer = styled.div`
   position: absolute;
   right: -30px;
   bottom: 50%;
-  ${media.phone`
+  ${media.tablet`
   display: none !important;
 `}
 `;
@@ -109,7 +101,7 @@ const StyledLeftArrowImgContainer = styled.div`
   position: absolute;
   left: -30px;
   bottom: 50%;
-  ${media.phone`
+  ${media.tablet`
   display: none !important;
 `}
 `;
