@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { TalkProps } from '@utils/mockData';
+import { TalkPostProps } from '@utils/mockData';
 import TalkCard from '@components/talk/TalkCard';
 import Slider from 'react-slick';
 import { MultipleRowSliderOption } from '@constants/sliderOption';
@@ -10,7 +10,7 @@ const RecentTalkCards = memo(() => {
   const { data: talks } = useGetAllTalks();
   return (
     <StyledSlider {...MultipleRowSliderOption}>
-      {talks.map((talk: TalkProps) => (
+      {talks.map((talk: TalkPostProps) => (
         <TalkCard {...talk} key={talk.id}></TalkCard>
       ))}
     </StyledSlider>
