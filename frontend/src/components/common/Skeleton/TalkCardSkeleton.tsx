@@ -48,6 +48,7 @@ const skeletonAnimation = keyframes`
 
 const StyledList = styled.div`
   padding: 0 12px;
+  max-width: 550px;
 `;
 
 const SkeletonWrapper = styled.div`
@@ -70,6 +71,7 @@ const SkeletonImgContainer = styled.div`
   min-width: 80px;
   overflow: hidden;
   border-radius: 8px;
+  aspect-ratio: 1;
 `;
 
 const SkeletonImage = styled.img`

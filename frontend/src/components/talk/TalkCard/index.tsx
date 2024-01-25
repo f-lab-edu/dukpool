@@ -4,38 +4,25 @@ import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import likeIcon from '@assets/icons/outlined-like.svg';
 import commentIcon from '@assets/icons/comment.svg';
-
-type TalkProps = {
-  title: string;
-  userProfile: {
-    name: string;
-    image: string | null;
-  };
-  image: string | null;
-  content: string;
-  date: string;
-  id: number;
-  likeCount: string;
-  commentCount: string;
-};
+import { TalkPostProps } from '@utils/mockData';
 
 const TalkCard = memo(
   ({
     title,
     userProfile,
-    image,
+    images,
     content,
     date,
     id,
     likeCount,
-    commentCount,
-  }: TalkProps) => {
+    comments,
+  }: TalkPostProps) => {
     return (
       <StyledList>
         <StyledLink to={`/talk/${id}`}>
           <StyledContainer>
             <StyledImgContainer>
-              <StyledImage src={image ?? placeholderImage} />
+              <StyledImage src={images[0] ?? placeholderImage} />
             </StyledImgContainer>
             <StyledContentContainer>
               <StyledTitle>{title}</StyledTitle>
@@ -59,7 +46,7 @@ const TalkCard = memo(
                 </StyledCount>
                 <StyledCount>
                   <StyledIcon src={commentIcon} />
-                  <span>{commentCount}</span>
+                  <span>{comments.users.length}</span>
                 </StyledCount>
               </StyledCountBox>
             </StyledProfileContainer>
@@ -75,6 +62,7 @@ TalkCard.displayName = 'TalkCard';
 
 const StyledList = styled.li`
   padding: 0 12px;
+  max-width: 550px;
 `;
 
 const StyledLink = styled(Link)`
@@ -96,6 +84,7 @@ const StyledImgContainer = styled.div`
   min-width: 80px;
   overflow: hidden;
   border-radius: 8px;
+  aspect-ratio: 1;
 `;
 
 const StyledImage = styled.img`

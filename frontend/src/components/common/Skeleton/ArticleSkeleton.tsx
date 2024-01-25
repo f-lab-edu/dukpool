@@ -25,6 +25,7 @@ const StyledSlider = styled(Slider)`
   .slick-slide {
     display: flex;
     justify-content: center;
+    gap: 15px;
   }
 `;
 
