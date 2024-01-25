@@ -3,47 +3,34 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import closeIcon from '@assets/icons/close.svg';
 import { inputHandler } from '@utils/reducerHandler';
-import { media } from '@styles/media';
 
 const Input = memo(() => {
   const [searchText, dispatch] = useReducer(inputHandler, '');
-
   const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/search/${searchText}`);
+    dispatch({ type: 'clear' });
   };
 
   return (
-    <StyledSection>
-      <StyledForm onSubmit={handleSubmit}>
-        <StyledInput
-          type="text"
-          value={searchText}
-          placeholder="검색어를 입력해주세요."
-          onChange={(event) => dispatch({ type: 'input', event })}
-        />
-        {searchText && (
-          <StyledBtn type="button" onClick={() => dispatch({ type: 'clear' })}>
-            <img src={closeIcon} />
-          </StyledBtn>
-        )}
-      </StyledForm>
-    </StyledSection>
+    <StyledForm onSubmit={handleSubmit}>
+      <StyledInput
+        type="text"
+        value={searchText}
+        placeholder="검색어를 입력해주세요."
+        onChange={(event) => dispatch({ type: 'input', event })}
+        required
+      />
+      {searchText && (
+        <StyledBtn type="button" onClick={() => dispatch({ type: 'clear' })}>
+          <img src={closeIcon} />
+        </StyledBtn>
+      )}
+    </StyledForm>
   );
 });
-
-const StyledSection = styled.section`
-  max-width: 1140px;
-  width: 100%;
-  padding: 0 50px;
-  margin: 40px auto;
-  margin-bottom: 0;
-  ${media.phone`
-    padding: 0 20px;
-  `}
-`;
 
 const StyledForm = styled.form`
   position: relative;
