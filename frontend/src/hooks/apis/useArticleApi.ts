@@ -1,15 +1,17 @@
 import useClient from '@hooks/useClient';
 import {
   ArticlePostProps,
-  ArticleProps,
   MOCK_ARTICLE_DATA,
   MOCK_ARTICLE_POST_DATA,
+  MOCK_SEARCH_DATA,
+  SearchDataProps,
 } from '@utils/mockData';
 
 type ArticleApis = {
   mockFetchData: (index: number) => Promise<any>;
-  getAllArticles: (sortType: string) => Promise<ArticleProps[]>;
+  getAllArticles: (sortType: string) => Promise<ArticlePostProps[]>;
   getArticle: (articleId: number) => Promise<ArticlePostProps>;
+  getSearchData: (text: string) => Promise<SearchDataProps>;
   postArticle: (body: FormData) => Promise<any>;
   patchArticle: (articleId: number, body: FormData) => Promise<any>;
   deleteArticle: (articleId: number) => Promise<void>;
@@ -36,7 +38,7 @@ const useArticleApi = (): ArticleApis => {
       return data.body;
     },
 
-    getAllArticles: async (sortType: string): Promise<ArticleProps[]> => {
+    getAllArticles: async (sortType: string): Promise<ArticlePostProps[]> => {
       // const { data } = await client.get(`/article/${sortType}`);
       // return data;
       console.log(sortType);
@@ -50,6 +52,14 @@ const useArticleApi = (): ArticleApis => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(articleId);
       return MOCK_ARTICLE_POST_DATA;
+    },
+
+    getSearchData: async (text): Promise<SearchDataProps> => {
+      // const { data } = await client.get(`/article/${articleId}`);
+      // return data;
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log(text);
+      return MOCK_SEARCH_DATA;
     },
 
     postArticle: async (body: FormData): Promise<any> => {
