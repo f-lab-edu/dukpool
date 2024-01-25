@@ -6,7 +6,7 @@ import { CONFIG } from '@config';
 import Layout from '@components/common/Layout';
 import useInnerHeight from '@hooks/useInnerHeight';
 
-const MyPage = () => {
+const Login = () => {
   const { height } = useInnerHeight();
   return (
     <Layout>
@@ -16,7 +16,7 @@ const MyPage = () => {
           <StyledInfoText>나만의 덕질 취향을 공유해보세요.</StyledInfoText>
         </StyledInfo>
         <StyledLink
-          to={`https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.LOGIN}&redirect_uri=${CONFIG.LOCAL}/auth/kakao&response_type=code`}
+          to={`https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.LOGIN}&redirect_uri=${CONFIG.LOCAL}/api/auth/kakao/callback&response_type=code`}
         >
           <StyledKakaoLogo src={KakaoLogo} />
           <StyledInfoText>카카오 로그인</StyledInfoText>
@@ -64,4 +64,4 @@ const StyledKakaoLogo = styled.img`
   margin-right: 8px;
 `;
 
-export default MyPage;
+export default Login;
