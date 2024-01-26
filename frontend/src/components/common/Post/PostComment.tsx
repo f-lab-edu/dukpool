@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import CommentListItem from './CommentListItem';
 import TextArea from '@components/common/TextArea';
 import { usePostArticleComment } from '@hooks/usePostMutations';
+import Button from '@components/common/Button';
+import { FormProvider, useForm } from 'react-hook-form';
 
 type CommentProps = {
   users: {
@@ -15,23 +17,56 @@ type CommentProps = {
   }[];
 };
 
+type FormValue = {
+  comment: string;
+};
+
 const PostComment = memo(
   ({ id, comments }: { id: number; comments: CommentProps }) => {
+    const methods = useForm<FormValue>({
+      defaultValues: {
+        comment: '',
+      },
+      mode: 'onTouched',
+    });
     const { mutate: postComment } = usePostArticleComment();
+    const onSubmit = ({ comment }: FormValue) => {
+      postComment({ id, comment });
+    };
     return (
-      <StyledWrapper>
-        <StyledCommentContainer>
-          <StyledCommentCount>
-            댓글 {comments.users.length}개
-          </StyledCommentCount>
-          <TextArea buttonText="등록" id={id} buttonHandler={postComment} />
-          <StyledUl>
-            {comments.users.map((user) => (
-              <CommentListItem key={user.id} {...user} />
-            ))}
-          </StyledUl>
-        </StyledCommentContainer>
-      </StyledWrapper>
+      <FormProvider {...methods}>
+        <StyledWrapper>
+          <StyledCommentContainer>
+            <StyledCommentCount>
+              댓글 {comments.users.length}개
+            </StyledCommentCount>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <TextArea
+                placeholder="댓글을 입력해주세요"
+                registerType="comment"
+                required={true}
+                minLength={5}
+                isComment={true}
+              />
+              <StyledButtonContainer>
+                <StyledButtonWrapper>
+                  <Button
+                    type="submit"
+                    text="댓글등록"
+                    disabled={false}
+                    $colorType="dark"
+                  />
+                </StyledButtonWrapper>
+              </StyledButtonContainer>
+            </form>
+            <StyledUl>
+              {comments.users.map((user) => (
+                <CommentListItem key={user.id} {...user} />
+              ))}
+            </StyledUl>
+          </StyledCommentContainer>
+        </StyledWrapper>
+      </FormProvider>
     );
   },
 );
@@ -62,6 +97,16 @@ const StyledCommentCount = styled.div`
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
+`;
+
+const StyledButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const StyledButtonWrapper = styled.div`
+  width: 100px;
 `;
 
 const StyledUl = styled.ul`

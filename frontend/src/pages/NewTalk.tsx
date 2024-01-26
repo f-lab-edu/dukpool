@@ -3,11 +3,12 @@ import { media } from '@styles/media';
 import { usePostTalk } from '@hooks/usePostMutations';
 import styled from 'styled-components';
 import Layout from '@components/common/Layout';
-import Title from '@components/common/Form/Title';
 import Tags from '@components/common/Form/Tags';
-import Content from '@components/common/Form/Content';
 import Images from '@components/common/Form/Images';
 import Button from '@components/common/Button';
+import Input from '@components/common/Input';
+import ErrorMessage from '@components/common/ErrorMessage.tsx';
+import TextArea from '@components/common/TextArea';
 
 type FormValues = {
   title: string;
@@ -25,6 +26,7 @@ const NewTalk = () => {
       images: [],
     },
   });
+  const { title, content } = methods.formState.errors;
   const { mutate: postNewTalk } = usePostTalk();
 
   const onSubmit = ({ title, tags, content, images }: FormValues) => {
@@ -43,9 +45,23 @@ const NewTalk = () => {
         <StyledSection>
           <StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
             <StyledTitle>덕질 토크하기</StyledTitle>
-            <Title />
+            <Input
+              label="제목"
+              placeholder="제목을 입력해주세요."
+              registerType="title"
+              required={true}
+              minLength={5}
+            />
+            {<ErrorMessage field="제목" type={title?.type!} length={5} />}
             <Tags />
-            <Content />
+            <TextArea
+              label="내용"
+              placeholder="최소 10자의 내용을 입력해주세요"
+              registerType="content"
+              required={true}
+              minLength={10}
+            />
+            {<ErrorMessage field="내용" type={content?.type!} length={10} />}
             <Images />
             <StyledButtonContainer>
               <StyledButtonWrapper>
