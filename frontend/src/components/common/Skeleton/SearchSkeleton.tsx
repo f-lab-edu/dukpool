@@ -4,16 +4,17 @@ import styled from 'styled-components';
 import ArticleCardSkeleton from '@components/common/Skeleton/ArticleCardSkeleton';
 import TalkCardSkeleton from '@components/common/Skeleton/TalkCardSkeleton';
 import TagCardSkeleton from './TagCardSkeleton';
+import { range } from 'lodash';
 
-const ArticleSkeletonArray = Array.from({ length: 8 }).map((_, idx) => (
+const ArticleSkeletonArray = range(8).map((_, idx) => (
   <ArticleCardSkeleton key={idx} />
 ));
 
-const TalkSkeletonArray = Array.from({ length: 6 }).map((_, idx) => (
+const TalkSkeletonArray = range(6).map((_, idx) => (
   <TalkCardSkeleton key={idx} />
 ));
 
-const TagSkeletonArray = Array.from({ length: 6 }).map((_, idx) => (
+const TagSkeletonArray = range(6).map((_, idx) => (
   <TagCardSkeleton key={idx} />
 ));
 

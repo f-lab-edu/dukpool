@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import { SliderOption } from '@constants/sliderOption';
 import useMediaQuery from '@hooks/useMediaQuery';
+import { range } from 'lodash';
 
-const SkeletonArray = Array.from({ length: 5 }).map((_, idx) => (
+const SkeletonArray = range(5).map((_, idx) => (
   <ArticleCardSkeleton key={idx} />
 ));
 
