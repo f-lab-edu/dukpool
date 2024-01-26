@@ -1,77 +1,77 @@
-import { memo, useReducer } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
-import Button from '@components/common/Button';
-import { textAreaHandler } from '@utils/reducerHandler';
-import { UseMutateFunction } from '@tanstack/react-query';
+import { useFormContext } from 'react-hook-form';
+import useInnerHeight from '@hooks/useInnerHeight';
 
 type TextAreaProps = {
-  previousValue?: string;
-  buttonText: string;
-  buttonHandler: UseMutateFunction<
-    void,
-    Error,
-    {
-      id: number;
-      comment: string;
-    },
-    unknown
-  >;
-  id: number;
+  label?: string;
+  placeholder: string;
+  registerType: string;
+  required: boolean;
+  disabled?: boolean;
+  isComment?: boolean;
+  [key: string]: unknown;
 };
 
 const TextArea = memo(
-  ({ previousValue, buttonText, buttonHandler, id }: TextAreaProps) => {
-    const [textValue, dispatch] = useReducer(
-      textAreaHandler,
-      previousValue ?? '',
-    );
-    const handleButton = () => {
-      buttonHandler({ id, comment: textValue });
-    };
+  ({
+    label,
+    placeholder,
+    registerType,
+    required,
+    disabled = false,
+    isComment = false,
+    ...options
+  }: TextAreaProps) => {
+    const { height } = useInnerHeight();
+    const { register } = useFormContext();
     return (
-      <StyledContainer>
-        <StyledTextArea
-          value={textValue}
-          disabled={false}
-          placeholder="asd"
-          onChange={(event) => dispatch({ type: 'input', event })}
-        />
-        <StyledButtonContainer>
-          <StyledButtonWrapper>
-            <Button
-              text={buttonText}
-              onClick={handleButton}
-              disabled={false}
-              $colorType="dark"
-            />
-          </StyledButtonWrapper>
-        </StyledButtonContainer>
-      </StyledContainer>
+      <StyledLabelContainer $isComment={isComment}>
+        <StyledLabel>
+          {label && <StyledFormTitle>{label}</StyledFormTitle>}
+          <StyledTextArea
+            {...register(registerType, { required, ...options })}
+            $height={height}
+            $isComment={isComment}
+            placeholder={placeholder}
+            disabled={disabled}
+            required
+          />
+        </StyledLabel>
+      </StyledLabelContainer>
     );
   },
 );
 
 TextArea.displayName = 'TextArea';
 
-const StyledContainer = styled.div``;
-
-const StyledTextArea = styled.textarea`
-  width: 100%;
-  min-height: 80px;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 15px;
-  box-sizing: border-box;
-`;
-
-const StyledButtonContainer = styled.div`
-  width: 100%;
+const StyledLabel = styled.label`
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  width: 100%;
 `;
 
-const StyledButtonWrapper = styled.div`
-  width: 100px;
+const StyledLabelContainer = styled.div<{ $isComment: boolean }>`
+  width: 100%;
+  margin-top: ${({ $isComment }) => ($isComment ? `0px` : `30px`)};
+  margin-bottom: 8px;
+`;
+
+const StyledFormTitle = styled.p`
+  font-size: 14px;
+  margin-bottom: 4px;
+`;
+
+const StyledTextArea = styled.textarea<{
+  $height: number;
+  $isComment: boolean;
+}>`
+  height: ${({ $height, $isComment }) =>
+    $isComment ? `${$height - 85}vh` : `${$height - 50}vh`};
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-4);
+  resize: none;
 `;
 
 export default TextArea;
