@@ -1,5 +1,5 @@
-import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
+import SearchBar from '@components/common/SearchBar';
 import SearchSkeleton from '@components/common/Skeleton/SearchSkeleton';
 import SearchResult from '@components/search/SearchResult';
 import { media } from '@styles/media';
@@ -10,7 +10,7 @@ const Search = () => {
   return (
     <Layout>
       <StyledSection>
-        <Input />
+        <SearchBar />
         <Suspense fallback={<SearchSkeleton />}>
           <SearchResult />
         </Suspense>

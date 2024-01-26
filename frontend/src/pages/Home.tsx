@@ -1,5 +1,5 @@
-import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
+import SearchBar from '@components/common/SearchBar';
 import DukpoolArticles from '@components/home/DukpoolArticles';
 import DukpoolTalks from '@components/home/DukpoolTalks';
 import { media } from '@styles/media';
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <Layout>
       <StyledSection>
-        <Input />
+        <SearchBar />
       </StyledSection>
       <DukpoolArticles />
       <DukpoolTalks />
