@@ -5,16 +5,24 @@ type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
   text: string;
   disabled: boolean;
   $colorType: 'dark' | 'light';
+  type?: 'button' | 'submit';
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Button = memo(({ text, disabled, onClick, $colorType }: ButtonProps) => {
-  return (
-    <StyledButton onClick={onClick} disabled={disabled} $colorType={$colorType}>
-      {text}
-    </StyledButton>
-  );
-});
+const Button = memo(
+  ({ text, disabled, onClick, $colorType, type = 'button' }: ButtonProps) => {
+    return (
+      <StyledButton
+        type={type}
+        onClick={onClick}
+        disabled={disabled}
+        $colorType={$colorType}
+      >
+        {text}
+      </StyledButton>
+    );
+  },
+);
 
 Button.displayName = 'Button';
 
