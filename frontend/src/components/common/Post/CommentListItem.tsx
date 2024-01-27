@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import TextArea from '@components/common/TextArea';
 import { usePatchArticleComment } from '@hooks/usePatchMutations';
+import { FormProvider, useForm } from 'react-hook-form';
+import Button from '@components/common/Button';
 
 type CommentItemProps = {
   id: number;
@@ -12,39 +14,67 @@ type CommentItemProps = {
   content: string;
 };
 
+type FormValue = {
+  comment: string;
+};
+
 const CommentListItem = memo(
   ({ id, name, image, date, content }: CommentItemProps) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const methods = useForm<FormValue>({
+      defaultValues: {
+        comment: content,
+      },
+      mode: 'onTouched',
+    });
     const { mutate: patchComment } = usePatchArticleComment();
+    const onSubmit = ({ comment }: FormValue) => {
+      patchComment({ id, comment });
+    };
     return (
-      <StyledUserCommentList>
-        <StyledCommentUserProfile>
-          <StyledCommentUserProfileContainer>
-            <StyledCommentProfileImgContainer>
-              <StyledCommentProfileImg src={image ?? placeholderImage} />
-            </StyledCommentProfileImgContainer>
-            <StyledCommentProfileName>{name}</StyledCommentProfileName>
-          </StyledCommentUserProfileContainer>
-          <StyledWrapper>
-            <StyledCommentDate>{date}</StyledCommentDate>
-            <StyledEditContainer>
-              <StyledEditButton onClick={() => setIsEdit((prev) => !prev)}>
-                {isEdit ? '수정취소' : '수정'}
-              </StyledEditButton>
-              <StyledEditButton>삭제</StyledEditButton>
-            </StyledEditContainer>
-          </StyledWrapper>
-        </StyledCommentUserProfile>
-        {!isEdit && <StyledCommentContent>{content}</StyledCommentContent>}
-        {isEdit && (
-          <TextArea
-            previousValue={content}
-            buttonText="수정"
-            id={id}
-            buttonHandler={patchComment}
-          />
-        )}
-      </StyledUserCommentList>
+      <FormProvider {...methods}>
+        <StyledUserCommentList>
+          <StyledCommentUserProfile>
+            <StyledCommentUserProfileContainer>
+              <StyledCommentProfileImgContainer>
+                <StyledCommentProfileImg src={image ?? placeholderImage} />
+              </StyledCommentProfileImgContainer>
+              <StyledCommentProfileName>{name}</StyledCommentProfileName>
+            </StyledCommentUserProfileContainer>
+            <StyledWrapper>
+              <StyledCommentDate>{date}</StyledCommentDate>
+              <StyledEditContainer>
+                <StyledEditButton onClick={() => setIsEdit((prev) => !prev)}>
+                  {isEdit ? '수정취소' : '수정'}
+                </StyledEditButton>
+                <StyledEditButton>삭제</StyledEditButton>
+              </StyledEditContainer>
+            </StyledWrapper>
+          </StyledCommentUserProfile>
+          {!isEdit && <StyledCommentContent>{content}</StyledCommentContent>}
+          {isEdit && (
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <TextArea
+                placeholder="댓글을 입력해주세요"
+                registerType="comment"
+                required={true}
+                minLength={5}
+                isComment={true}
+              />
+              <StyledButtonContainer>
+                <StyledButtonWrapper>
+                  <Button
+                    type="submit"
+                    text="수정"
+                    disabled={false}
+                    $colorType="dark"
+                  />
+                </StyledButtonWrapper>
+              </StyledButtonContainer>
+            </form>
+          )}
+        </StyledUserCommentList>
+      </FormProvider>
     );
   },
 );
@@ -112,6 +142,16 @@ const StyledCommentDate = styled.p`
 
 const StyledCommentContent = styled.div`
   font-size: 14px;
+`;
+
+const StyledButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const StyledButtonWrapper = styled.div`
+  width: 100px;
 `;
 
 export default CommentListItem;

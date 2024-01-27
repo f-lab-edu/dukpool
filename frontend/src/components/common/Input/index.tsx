@@ -1,78 +1,53 @@
-import { FormEvent, memo, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { memo } from 'react';
 import styled from 'styled-components';
-import closeIcon from '@assets/icons/close.svg';
-import { inputHandler } from '@utils/reducerHandler';
-import { media } from '@styles/media';
+import { useFormContext } from 'react-hook-form';
 
-const Input = memo(() => {
-  const [searchText, dispatch] = useReducer(inputHandler, '');
+type InputProps = {
+  label: string;
+  placeholder: string;
+  registerType: string;
+  required: boolean;
+  [key: string]: unknown;
+};
 
-  const navigate = useNavigate();
+const Input = memo(
+  ({ label, placeholder, registerType, required, ...options }: InputProps) => {
+    const { register } = useFormContext();
+    return (
+      <StyledLabelContainer>
+        <StyledLabel>
+          <StyledFormTitle>{label}</StyledFormTitle>
+          <StyledInput
+            {...register(registerType, { required, ...options })}
+            type="text"
+            placeholder={placeholder}
+          />
+        </StyledLabel>
+      </StyledLabelContainer>
+    );
+  },
+);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    navigate(`/search/${searchText}`);
-  };
-
-  return (
-    <StyledSection>
-      <StyledForm onSubmit={handleSubmit}>
-        <StyledInput
-          type="text"
-          value={searchText}
-          placeholder="검색어를 입력해주세요."
-          onChange={(event) => dispatch({ type: 'input', event })}
-        />
-        {searchText && (
-          <StyledBtn type="button" onClick={() => dispatch({ type: 'clear' })}>
-            <img src={closeIcon} />
-          </StyledBtn>
-        )}
-      </StyledForm>
-    </StyledSection>
-  );
-});
-
-const StyledSection = styled.section`
-  max-width: 1140px;
+const StyledLabelContainer = styled.div`
   width: 100%;
-  padding: 0 50px;
-  margin: 40px auto;
-  margin-bottom: 0;
-  ${media.phone`
-    padding: 0 20px;
-  `}
+  margin-bottom: 8px;
 `;
 
-const StyledForm = styled.form`
-  position: relative;
+const StyledLabel = styled.label`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 50px;
-  align-items: center;
+`;
+
+const StyledFormTitle = styled.p`
+  font-size: 14px;
+  margin-bottom: 4px;
 `;
 
 const StyledInput = styled.input`
-  padding: 0 30px;
+  padding: 12px;
+  border-radius: 8px;
   border: 1px solid var(--gray-4);
-  border-radius: 12px;
-  font-size: 14px;
-  width: 100%;
-  height: 100%;
-  overflox: hidden;
-  &:focus {
-    outline: 1px solid var(--primary);
-  }
-`;
-
-const StyledBtn = styled.button`
-  position: absolute;
-  right: 0;
-  transform: translateY(5%);
-  border: none;
-  background-color: transparent;
-  outline: none;
 `;
 
 Input.displayName = 'Input';

@@ -72,6 +72,12 @@ export type TalkPostProps = {
   };
 };
 
+export type SearchDataProps = {
+  tags: string[];
+  articles: ArticlePostProps[];
+  talks: TalkPostProps[];
+};
+
 export const MOCK_ARTICLE_POST_DATA: ArticlePostProps = {
   title: '마블 피규어 소개드립니다!',
   userProfile: {
@@ -143,550 +149,922 @@ export const MOCK_TALK_POST_DATA: TalkPostProps = {
   },
 };
 
-export const MOCK_ARTICLE_DATA: ArticleProps[] = [
+export const MOCK_ARTICLE_DATA: ArticlePostProps[] = [
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!asdasdasdasdasdasdasd',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
+    images: [
+      'https://as2.ftcdn.net/v2/jpg/01/59/55/57/1000_F_159555795_xlMGpGlglQeqTCsdRgciIRVXHZNI4ahr.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
     content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image: 'https://visla.kr/wp/wp-content/uploads/2022/07/20220709_00.jpg',
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
     id: 1,
-    likeCount: '11',
-    commentCount: '45',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 2,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title:
+      '마블 피규어 소개드립니다!asdasdasdasdasdasdasd 마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 3,
-    likeCount: '15',
-    commentCount: '1',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
+    ],
+    tags: ['마블', '아이언맨'],
     content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 4,
+    id: 1,
     likeCount: '13',
-    commentCount: '64',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 5,
-    likeCount: '23',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
+    ],
+    tags: ['마블', '아이언맨'],
     content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 6,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 7,
+    id: 1,
     likeCount: '13',
-    commentCount: '14',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 8,
-    likeCount: '1',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
+    ],
+    tags: ['마블', '아이언맨'],
     content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 9,
+    id: 1,
     likeCount: '13',
-    commentCount: '24',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 10,
+    id: 1,
     likeCount: '13',
-    commentCount: '44',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 11,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 12,
-    likeCount: '0',
-    commentCount: '42',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
+    ],
+    tags: ['마블', '아이언맨'],
     content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 13,
+    id: 1,
     likeCount: '13',
-    commentCount: '43',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 14,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 15,
-    likeCount: '13',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 16,
-    likeCount: '13',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 17,
-    likeCount: '13',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 18,
-    likeCount: '13',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 19,
-    likeCount: '13',
-    commentCount: '4',
   },
 ];
 
-export const MOCK_TALK_DATA: TalkProps[] = [
+export const MOCK_TALK_DATA: TalkPostProps[] = [
   {
-    title: '마블피규어',
+    title: '마블 피규어 소개드립니aasdasdasdasdasdasdasdadasdas다!',
     userProfile: {
-      name: '아이언맨최고',
+      name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content: '백화점에서 샀어요',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    images: [
+      'https://as2.ftcdn.net/v2/jpg/01/59/55/57/1000_F_159555795_xlMGpGlglQeqTCsdRgciIRVXHZNI4ahr.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
     id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: 'asdqw',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
+    images: [
+      'https://png.pngtree.com/thumb_back/fh260/background/20210703/pngtree-long-striped-blue-flower-wedding-watercolor-rose-background-image_735788.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
     content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 2,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 3,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블akskskskskskskskskskskskskafdfasdfsfssksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 4,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 5,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 6,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 7,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 8,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
+    images: [
       'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
+    content:
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 9,
+    id: 1,
     likeCount: '13',
-    commentCount: '4',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
+    },
   },
   {
-    title: '마블aksksksksksksksksksksksksksksksks',
+    title: '마블 피규어 소개드립니다!',
     userProfile: {
       name: '마블덕후짱',
       image:
         'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
     },
+    images: [
+      'https://as2.ftcdn.net/v2/jpg/01/59/55/57/1000_F_159555795_xlMGpGlglQeqTCsdRgciIRVXHZNI4ahr.jpg',
+    ],
+    tags: ['마블', '아이언맨'],
     content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
     date: '2024-01-01',
-    id: 10,
+    id: 1,
     likeCount: '13',
-    commentCount: '44',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+    comments: {
+      users: [
+        {
+          id: 33,
+          name: '나도마블좋아',
+          image: null,
+          date: '2024-01-03',
+          content: '진짜 멋있네요 저도 갖고싶어요.',
+        },
+        {
+          id: 3,
+          name: '하이하이',
+          image: null,
+          date: '2024-01-04',
+          content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+        },
+      ],
     },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 11,
-    likeCount: '13',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 12,
-    likeCount: '13',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 13,
-    likeCount: '13',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 14,
-    likeCount: '13',
-    commentCount: '4',
-  },
-  {
-    title: '마블aksksksksksksksksksksksksksksksks',
-    userProfile: {
-      name: '마블덕후짱',
-      image:
-        'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
-    },
-    content:
-      '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
-    image:
-      'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
-    date: '2024-01-01',
-    id: 15,
-    likeCount: '13',
-    commentCount: '4',
   },
 ];
+
+export const MOCK_SEARCH_DATA: SearchDataProps = {
+  tags: ['마블'],
+  articles: [
+    {
+      title: '마블 피규어 소개드립니다!',
+      userProfile: {
+        name: '마블덕후짱',
+        image:
+          'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+      },
+      images: [
+        'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      ],
+      tags: ['마블', '아이언맨'],
+      content:
+        '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
+      date: '2024-01-01',
+      id: 1,
+      likeCount: '13',
+      comments: {
+        users: [
+          {
+            id: 33,
+            name: '나도마블좋아',
+            image: null,
+            date: '2024-01-03',
+            content: '진짜 멋있네요 저도 갖고싶어요.',
+          },
+          {
+            id: 3,
+            name: '하이하이',
+            image: null,
+            date: '2024-01-04',
+            content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+          },
+        ],
+      },
+    },
+    {
+      title: '올라프 인형 모음입니다 ㅎㅎ',
+      userProfile: {
+        name: '마블덕후짱',
+        image:
+          'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+      },
+      images: [
+        'https://moomootr4389.cdn-nhncommerce.com/data/goods/21/05/11/31420/31420_Main.jpg',
+      ],
+      tags: ['마블', '아이언맨'],
+      content:
+        '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
+      date: '2024-01-01',
+      id: 1,
+      likeCount: '13',
+      comments: {
+        users: [
+          {
+            id: 33,
+            name: '나도마블좋아',
+            image: null,
+            date: '2024-01-03',
+            content: '진짜 멋있네요 저도 갖고싶어요.',
+          },
+          {
+            id: 3,
+            name: '하이하이',
+            image: null,
+            date: '2024-01-04',
+            content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+          },
+        ],
+      },
+    },
+    {
+      title: '진격의 거인 피규어 삼',
+      userProfile: {
+        name: '마블덕후짱',
+        image:
+          'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+      },
+      images: [
+        'https://qi-o.qoo10cdn.com/goods_image_big/3/9/8/3/8937073983_l.jpg',
+      ],
+      tags: ['마블', '아이언맨'],
+      content:
+        '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
+      date: '2024-01-01',
+      id: 1,
+      likeCount: '13',
+      comments: {
+        users: [
+          {
+            id: 33,
+            name: '나도마블좋아',
+            image: null,
+            date: '2024-01-03',
+            content: '진짜 멋있네요 저도 갖고싶어요.',
+          },
+          {
+            id: 3,
+            name: '하이하이',
+            image: null,
+            date: '2024-01-04',
+            content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+          },
+        ],
+      },
+    },
+    {
+      title: '토르망치 보실분',
+      userProfile: {
+        name: '마블덕후짱',
+        image:
+          'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+      },
+      images: ['https://newsimg.sedaily.com/2016/07/11/1KYTPU7P6Y_2.jpg'],
+      tags: ['마블', '아이언맨'],
+      content:
+        '얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요. 얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.얼마전에 백화점에서 구매한 마블 피규어들입니다. 100만원 정도 쓴것같아요.',
+      date: '2024-01-01',
+      id: 1,
+      likeCount: '13',
+      comments: {
+        users: [
+          {
+            id: 33,
+            name: '나도마블좋아',
+            image: null,
+            date: '2024-01-03',
+            content: '진짜 멋있네요 저도 갖고싶어요.',
+          },
+          {
+            id: 3,
+            name: '하이하이',
+            image: null,
+            date: '2024-01-04',
+            content: '어디서 사셨어요?? 정보 좀 공유해주세요~!',
+          },
+        ],
+      },
+    },
+  ],
+  talks: [
+    {
+      title: '마블 피규어 소개드립니다!',
+      userProfile: {
+        name: '마블덕후짱',
+        image:
+          'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+      },
+      images: [
+        'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      ],
+      tags: ['마블', '아이언맨', '피규어'],
+      content: '요즘 피규어 하나에 얼마정도 하나요?',
+      date: '2024-01-01',
+      id: 1,
+      likeCount: '13',
+      comments: {
+        users: [
+          {
+            id: 33,
+            name: '나도마블좋아',
+            image: null,
+            date: '2024-01-03',
+            content: '요즘 비싼건 100만원 훌쩍 넘어요!',
+          },
+          {
+            id: 3,
+            name: '하이하이',
+            image: null,
+            date: '2024-01-04',
+            content: '마블 피규어는 좀 더 비싸요 ㅠㅠ',
+          },
+        ],
+      },
+    },
+    {
+      title: '마블 피규어 소개드립니다!',
+      userProfile: {
+        name: '마블덕후짱',
+        image:
+          'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+      },
+      images: [
+        'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      ],
+      tags: ['마블', '아이언맨', '피규어'],
+      content: '요즘 피규어 하나에 얼마정도 하나요?',
+      date: '2024-01-01',
+      id: 1,
+      likeCount: '13',
+      comments: {
+        users: [
+          {
+            id: 33,
+            name: '나도마블좋아',
+            image: null,
+            date: '2024-01-03',
+            content: '요즘 비싼건 100만원 훌쩍 넘어요!',
+          },
+          {
+            id: 3,
+            name: '하이하이',
+            image: null,
+            date: '2024-01-04',
+            content: '마블 피규어는 좀 더 비싸요 ㅠㅠ',
+          },
+        ],
+      },
+    },
+    {
+      title: '마블 피규어 소개드립니다!',
+      userProfile: {
+        name: '마블덕후짱',
+        image:
+          'https://www.shutterstock.com/image-vector/young-man-anime-style-character-600nw-2313503433.jpg',
+      },
+      images: [
+        'https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3ODU4NTU2NTY4Nzc1/marveldisney.jpg',
+      ],
+      tags: ['마블', '아이언맨', '피규어'],
+      content: '요즘 피규어 하나에 얼마정도 하나요?',
+      date: '2024-01-01',
+      id: 1,
+      likeCount: '13',
+      comments: {
+        users: [
+          {
+            id: 33,
+            name: '나도마블좋아',
+            image: null,
+            date: '2024-01-03',
+            content: '요즘 비싼건 100만원 훌쩍 넘어요!',
+          },
+          {
+            id: 3,
+            name: '하이하이',
+            image: null,
+            date: '2024-01-04',
+            content: '마블 피규어는 좀 더 비싸요 ㅠㅠ',
+          },
+        ],
+      },
+    },
+  ],
+};

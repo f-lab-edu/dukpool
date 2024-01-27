@@ -1,13 +1,14 @@
 import { media } from '@styles/media';
 import { memo } from 'react';
 import styled, { keyframes } from 'styled-components';
+import placeholderImage from '@assets/images/placeholder-image.png';
 
 const ArticleCardSkeleton = memo(() => {
   return (
-    <StyledList>
+    <SkeletonList>
       <SkeletonContainer>
         <SkeletonImgContainer>
-          <SkeletonImage />
+          <SkeletonImage src={placeholderImage} />
         </SkeletonImgContainer>
         <SkeletonInfoContainer>
           <SkeletonTitle />
@@ -24,7 +25,7 @@ const ArticleCardSkeleton = memo(() => {
           </SkeletonCountBox>
         </SkeletonInfoContainer>
       </SkeletonContainer>
-    </StyledList>
+    </SkeletonList>
   );
 });
 
@@ -39,44 +40,42 @@ const skeletonAnimation = keyframes`
     }
 `;
 
-const StyledList = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const SkeletonList = styled.div`
+  padding: 0 8px;
+  max-width: 250px;
+  min-width: 150px;
 `;
 
-const SkeletonContainer = styled.div``;
+const SkeletonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+`;
 
 const SkeletonImgContainer = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  aspect-ratio: 1;
   animation: ${skeletonAnimation} 2s infinite;
-  ${media.tablet`
-    width: 150px;
-    height: 150px;
-  `}
 `;
 
-const SkeletonImage = styled.div`
+const SkeletonImage = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 8px;
   object-fit: cover;
   background-color: var(--skeleton);
 `;
 
 const SkeletonInfoContainer = styled.div`
-  width: 200px;
+  width: 100%;
   padding: 12px 0;
   animation: ${skeletonAnimation} 2s infinite;
-  ${media.tablet`
-    width: 150px;
-  `}
 `;
 
 const SkeletonTitle = styled.div`
   width: 100%;
-  height: 18px;
+  height: 14px;
   background-color: var(--skeleton);
   border-radius: 8px;
   margin-bottom: 8px;
@@ -105,7 +104,7 @@ const SkeletonProfileImage = styled.div`
 
 const SkeletonProfile = styled.div`
   width: 85%;
-  height: 14px;
+  height: 12px;
   background-color: var(--skeleton);
   border-radius: 8px;
 `;

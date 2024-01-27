@@ -50,3 +50,11 @@ export const useTalk = (id: number) => {
     queryFn: () => getTalk(id),
   });
 };
+
+export const useSearchData = (text: string = '') => {
+  const { getSearchData } = useArticleApi();
+  return useSuspenseQuery({
+    queryKey: ['search', text],
+    queryFn: () => getSearchData(text),
+  });
+};

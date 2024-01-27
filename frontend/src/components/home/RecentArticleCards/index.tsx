@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { ArticleProps } from '@utils/mockData';
+import { ArticlePostProps } from '@utils/mockData';
 import ArticleCard from '@components/article/ArticleCard';
 import Slider from 'react-slick';
 import { SliderOption } from '@constants/sliderOption';
@@ -11,7 +11,7 @@ const RecentArticleCards = memo(() => {
   const { isMobile } = useMediaQuery();
   const { data: articles } = useGetAllArticles('newest');
 
-  const articleCards = articles.map((article: ArticleProps) => (
+  const articleCards = articles.map((article: ArticlePostProps) => (
     <ArticleCard {...article} key={article.id}></ArticleCard>
   ));
 
@@ -28,6 +28,7 @@ const StyledSlider = styled(Slider)`
   .slick-slide {
     display: flex;
     justify-content: center;
+    gap: 15px;
   }
 `;
 

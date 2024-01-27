@@ -72,7 +72,6 @@ const StyledUl = styled.ul`
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  justify-content: center;
   align-items: center;
 `;
 

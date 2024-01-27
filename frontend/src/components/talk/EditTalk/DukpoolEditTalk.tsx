@@ -3,13 +3,14 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTalk } from '@hooks/useGetQueries';
 import { usePatchTalk } from '@hooks/usePatchMutations';
 import getIdFromUrl from '@utils/getIdFromUrl';
-import Title from '@components/common/Form/Title';
 import Tags from '@components/common/Form/Tags';
-import Content from '@components/common/Form/Content';
 import Images from '@components/common/Form/Images';
 import Button from '@components/common/Button';
 import styled from 'styled-components';
 import { convertURLtoFile } from '@utils/convertURLtoFile';
+import Input from '@components/common/Input';
+import TextArea from '@components/common/TextArea';
+import ErrorMessage from '@components/common/ErrorMessage.tsx';
 
 type FormValues = {
   title: string;
@@ -32,6 +33,7 @@ const DukpoolEditTalk = memo(() => {
     },
     mode: 'onTouched',
   });
+  const { title, content } = methods.formState.errors;
 
   const onSubmit = async ({ title, tags, content, images }: FormValues) => {
     console.log(title, tags, content, images);
@@ -56,9 +58,23 @@ const DukpoolEditTalk = memo(() => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <Title />
+        <Input
+          label="제목"
+          placeholder="제목을 입력해주세요."
+          registerType="title"
+          required={true}
+          minLength={5}
+        />
+        {<ErrorMessage field="제목" type={title?.type!} length={5} />}
         <Tags />
-        <Content />
+        <TextArea
+          label="내용"
+          placeholder="최소 10자의 내용을 입력해주세요"
+          registerType="content"
+          required={true}
+          minLength={10}
+        />
+        {<ErrorMessage field="내용" type={content?.type!} length={10} />}
         <Images />
         <StyledButtonContainer>
           <StyledButtonWrapper>

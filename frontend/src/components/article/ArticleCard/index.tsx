@@ -4,24 +4,23 @@ import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import likeIcon from '@assets/icons/outlined-like.svg';
 import commentIcon from '@assets/icons/comment.svg';
-import { ArticleProps } from '@utils/mockData';
-import { media } from '@styles/media';
+import { ArticlePostProps } from '@utils/mockData';
 
 const ArticleCard = memo(
   ({
     title,
     userProfile,
-    image,
+    images,
     date,
     id,
     likeCount,
-    commentCount,
-  }: ArticleProps) => {
+    comments,
+  }: ArticlePostProps) => {
     return (
       <StyledList>
-        <Link to={`/article/${id}`}>
+        <StyledLink to={`/article/${id}`}>
           <StyledImgContainer>
-            <StyledImage src={image ?? placeholderImage} />
+            <StyledImage src={images[0] ?? placeholderImage} />
           </StyledImgContainer>
           <StyledInfoContainer>
             <StyledTitle>{title}</StyledTitle>
@@ -41,11 +40,11 @@ const ArticleCard = memo(
               </StyledCount>
               <StyledCount>
                 <StyledIcon src={commentIcon} />
-                <span>{commentCount}</span>
+                <span>{comments.users.length}</span>
               </StyledCount>
             </StyledCountBox>
           </StyledInfoContainer>
-        </Link>
+        </StyledLink>
       </StyledList>
     );
   },
@@ -54,20 +53,22 @@ const ArticleCard = memo(
 ArticleCard.displayName = 'ArticleCard';
 
 const StyledList = styled.li`
+  padding: 0 8px;
+  max-width: 250px;
+  min-width: 150px;
+`;
+
+const StyledLink = styled(Link)`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  border-radius: 8px;
 `;
 
 const StyledImgContainer = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 100%;
   overflow: hidden;
   border-radius: 8px;
-  ${media.tablet`
-    width: 150px;
-    height: 150px;
-  `}
+  aspect-ratio: 1;
 `;
 
 const StyledImage = styled.img`
@@ -77,20 +78,20 @@ const StyledImage = styled.img`
 `;
 
 const StyledInfoContainer = styled.div`
-  width: 200px;
-  font-size: 14px;
+  width: 100%;
+  font-size: 12px;
   padding: 12px 0;
-  ${media.tablet`
-    width: 150px;
-  `}
 `;
 
 const StyledTitle = styled.h2`
-  font-size: 18px;
+  font-size: 14px;
   margin-bottom: 8px;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;
 
 const StyledProfileContainer = styled.div`

@@ -40,6 +40,13 @@ export const SliderOption = {
         slidesToScroll: 3,
       },
     },
+    {
+      breakpoint: 700,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+      },
+    },
   ],
 };
 
@@ -56,14 +63,7 @@ export const MultipleRowSliderOption = {
   prevArrow: <ArrowLeft />,
   responsive: [
     {
-      breakpoint: 780,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 600,
+      breakpoint: 620,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
