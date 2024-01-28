@@ -40,8 +40,9 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
   const login = async () => {
     const code = new URL(window.location.href).searchParams.get('code');
     const { data } = await client.get(`/auth/kakao/callback?code=${code}`);
-    setToken(data);
-    setLocalStorage(TOKEN_KEY, data);
+    const token = data.data.accessToken;
+    setToken(token);
+    setLocalStorage(TOKEN_KEY, token);
   };
 
   const logout = () => {
