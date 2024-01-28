@@ -1,18 +1,10 @@
 import { media } from '@styles/media';
 import { memo } from 'react';
 import styled from 'styled-components';
-import ArticleCardSkeleton from '@components/common/Skeleton/ArticleCardSkeleton';
-import TalkCardSkeleton from '@components/common/Skeleton/TalkCardSkeleton';
 import TagCardSkeleton from './TagCardSkeleton';
 import { range } from 'lodash';
-
-const ArticleSkeletonArray = range(8).map((_, idx) => (
-  <ArticleCardSkeleton key={idx} />
-));
-
-const TalkSkeletonArray = range(6).map((_, idx) => (
-  <TalkCardSkeleton key={idx} />
-));
+import ArticleGridSkeleton from './ArticleGridSkeleton';
+import TalkGridSkeleton from './TalkGridSkeleton';
 
 const TagSkeletonArray = range(6).map((_, idx) => (
   <TagCardSkeleton key={idx} />
@@ -28,11 +20,11 @@ const SearchSkeleton = memo(() => {
       </StyledContainer>
       <StyledContainer>
         <StyledSectionTitle>덕질 자랑</StyledSectionTitle>
-        <StyledArticleUl>{ArticleSkeletonArray}</StyledArticleUl>
+        <ArticleGridSkeleton />
       </StyledContainer>
       <StyledContainer>
         <StyledSectionTitle>덕질 토크</StyledSectionTitle>
-        <StyledTalkUl>{TalkSkeletonArray}</StyledTalkUl>
+        <TalkGridSkeleton />
       </StyledContainer>
     </div>
   );
@@ -55,26 +47,6 @@ const StyledSearchResultText = styled.div`
   width: 100%;
   height: 14px;
   color: var(--skeleton);
-`;
-
-const StyledArticleUl = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, minmax(150px, 1fr));
-  align-items: center;
-  gap: 10px;
-  ${media.tablet`
-  grid-template-columns: repeat(3, minmax(150px, 1fr));
-  `}
-  ${media.phone`
-  grid-template-columns: repeat(2, minmax(150px, 1fr));
-  `}
-`;
-
-const StyledTalkUl = styled.ul`
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  align-items: center;
 `;
 
 const StyledTagUl = styled.ul`
