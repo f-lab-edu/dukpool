@@ -9,7 +9,7 @@ const SearchTalk = memo(({ talks }: { talks: TalkPostProps[] }) => {
       <StyledSectionTitle>덕질 토크</StyledSectionTitle>
       {talks.length ? (
         <StyledUl>
-          {talks.map((talk: TalkPostProps) => (
+          {talks.map((talk) => (
             <TalkCard key={talk.id} {...talk}></TalkCard>
           ))}
         </StyledUl>
