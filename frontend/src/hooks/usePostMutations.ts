@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import useArticleApi from '@hooks/apis/useArticleApi';
 import useTalkApi from '@hooks/apis/useTalkApi';
+import useAuthApi from './apis/useAuthApi';
 
 export const usePostArticle = () => {
   const { postArticle } = useArticleApi();
@@ -37,5 +38,13 @@ export const usePostArticleComment = () => {
     mutationKey: ['usePostArticleComment'],
     mutationFn: ({ id, comment }: { id: number; comment: string }) =>
       postArticleComment(id, comment),
+  });
+};
+
+export const usePostNickname = () => {
+  const { postNickname } = useAuthApi();
+  return useMutation({
+    mutationKey: ['usePostNickname'],
+    mutationFn: (nickname: string) => postNickname(nickname),
   });
 };

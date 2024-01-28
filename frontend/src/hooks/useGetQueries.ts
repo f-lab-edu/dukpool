@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import useTalkApi from '@hooks/apis/useTalkApi';
 import useArticleApi from '@hooks/apis/useArticleApi';
 import useAuthApi from '@hooks/apis/useAuthApi';
@@ -27,11 +27,20 @@ export const useGetUserProfile = () => {
   });
 };
 
+export const useGetUserPosts = () => {
+  const { getUserPosts } = useAuthApi();
+  return useSuspenseQuery({
+    queryKey: ['userPosts'],
+    queryFn: getUserPosts,
+  });
+};
+
 export const useGetCheckNickname = (nickname: string) => {
   const { getCheckNickname } = useAuthApi();
-  return useSuspenseQuery({
-    queryKey: ['nicknameCheck'],
+  return useQuery({
+    queryKey: ['nicknameCheck', nickname],
     queryFn: () => getCheckNickname(nickname),
+    enabled: nickname.length > 2,
   });
 };
 
