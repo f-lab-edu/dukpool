@@ -21,10 +21,10 @@ const MyInfo = memo(() => {
     },
     mode: 'onTouched',
   });
-  const nicknameValue = methods.watch('nickname');
-  const debouncedValue = useDebounce(nicknameValue, 200);
-  // const { data: validate } = useGetCheckNickname(debouncedValue);
-  console.log(debouncedValue);
+  const nickname = methods.watch('nickname');
+  const debouncedNickname = useDebounce(nickname, 200);
+  // const { data: validate } = useGetCheckNickname(debouncedNickname);
+  console.log(debouncedNickname);
   const { mutate: updateNickname } = usePostNickname();
   const onSubmit = ({ nickname }: FormValue) => {
     updateNickname(nickname);
