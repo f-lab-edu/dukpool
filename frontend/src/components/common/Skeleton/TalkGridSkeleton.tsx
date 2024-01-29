@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { range } from 'lodash';
 import TalkCardSkeleton from '@components/common/Skeleton/TalkCardSkeleton';
 
-const TalkSkeletonArray = range(6).map((_, idx) => (
+const talkSkeletonArray = range(6).map((_, idx) => (
   <TalkCardSkeleton key={idx} />
 ));
 
 const TalkGridSkeleton = memo(() => (
-  <SkeletonUl>{TalkSkeletonArray}</SkeletonUl>
+  <SkeletonUl>{talkSkeletonArray}</SkeletonUl>
 ));
 
 TalkGridSkeleton.displayName = 'TalkGridSkeleton';

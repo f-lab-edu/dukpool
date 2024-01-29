@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import ArticleCardSkeleton from '@components/common/Skeleton/ArticleCardSkeleton';
 import { range } from 'lodash';
 
-const ArticleSkeletonArray = range(8).map((_, idx) => (
+const articleSkeletonArray = range(8).map((_, idx) => (
   <ArticleCardSkeleton key={idx} />
 ));
 
 const ArticleGridSkeleton = memo(() => (
-  <SkeletonUl>{ArticleSkeletonArray}</SkeletonUl>
+  <SkeletonUl>{articleSkeletonArray}</SkeletonUl>
 ));
 
 ArticleGridSkeleton.displayName = 'ArticleGridSkeleton';
