@@ -45,6 +45,6 @@ export const usePostNickname = () => {
   const { postNickname } = useAuthApi();
   return useMutation({
     mutationKey: ['usePostNickname'],
-    mutationFn: (nickname: string) => postNickname(nickname),
+    mutationFn: postNickname,
   });
 };
