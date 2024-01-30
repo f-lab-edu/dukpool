@@ -1,10 +1,9 @@
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
-import useTalkApi from '@hooks/apis/useTalkApi';
-import useArticleApi from '@hooks/apis/useArticleApi';
-import useAuthApi from '@hooks/apis/useAuthApi';
+import usePublicApi from '@hooks/apis/usePublicApi';
+import useTokenApi from '@hooks/apis/useTokenApi';
 
 export const useGetAllArticles = (sortType: string = 'newest') => {
-  const { getAllArticles } = useArticleApi();
+  const { getAllArticles } = usePublicApi();
   return useSuspenseQuery({
     queryKey: ['allArticles', sortType],
     queryFn: () => getAllArticles(sortType),
@@ -12,40 +11,15 @@ export const useGetAllArticles = (sortType: string = 'newest') => {
 };
 
 export const useGetArticle = (id: number) => {
-  const { getArticle } = useArticleApi();
+  const { getArticle } = usePublicApi();
   return useSuspenseQuery({
     queryKey: ['article'],
     queryFn: () => getArticle(id),
   });
 };
 
-export const useGetUserProfile = () => {
-  const { getUserProfile } = useAuthApi();
-  return useSuspenseQuery({
-    queryKey: ['userProfile'],
-    queryFn: getUserProfile,
-  });
-};
-
-export const useGetUserPosts = () => {
-  const { getUserPosts } = useAuthApi();
-  return useSuspenseQuery({
-    queryKey: ['userPosts'],
-    queryFn: getUserPosts,
-  });
-};
-
-export const useGetCheckNickname = (nickname: string) => {
-  const { getCheckNickname } = useAuthApi();
-  return useQuery({
-    queryKey: ['nicknameCheck', nickname],
-    queryFn: () => getCheckNickname(nickname),
-    enabled: nickname.length > 2,
-  });
-};
-
 export const useGetAllTalks = (sortType: string = 'newest') => {
-  const { getAllTalks } = useTalkApi();
+  const { getAllTalks } = usePublicApi();
   return useSuspenseQuery({
     queryKey: ['allTalks', sortType],
     queryFn: () => getAllTalks(sortType),
@@ -53,7 +27,7 @@ export const useGetAllTalks = (sortType: string = 'newest') => {
 };
 
 export const useTalk = (id: number) => {
-  const { getTalk } = useTalkApi();
+  const { getTalk } = usePublicApi();
   return useSuspenseQuery({
     queryKey: ['talk', id],
     queryFn: () => getTalk(id),
@@ -61,9 +35,34 @@ export const useTalk = (id: number) => {
 };
 
 export const useSearchData = (text: string = '') => {
-  const { getSearchData } = useArticleApi();
+  const { getSearchData } = usePublicApi();
   return useSuspenseQuery({
     queryKey: ['search', text],
     queryFn: () => getSearchData(text),
+  });
+};
+
+export const useGetUserProfile = () => {
+  const { getUserProfile } = useTokenApi();
+  return useSuspenseQuery({
+    queryKey: ['userProfile'],
+    queryFn: getUserProfile,
+  });
+};
+
+export const useGetUserPosts = () => {
+  const { getUserPosts } = useTokenApi();
+  return useSuspenseQuery({
+    queryKey: ['userPosts'],
+    queryFn: getUserPosts,
+  });
+};
+
+export const useGetCheckNickname = (nickname: string) => {
+  const { getCheckNickname } = useTokenApi();
+  return useQuery({
+    queryKey: ['nicknameCheck', nickname],
+    queryFn: () => getCheckNickname(nickname),
+    enabled: nickname.length > 2,
   });
 };

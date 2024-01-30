@@ -1,9 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import useArticleApi from '@hooks/apis/useArticleApi';
-import useTalkApi from '@hooks/apis/useTalkApi';
+import useTokenApi from '@hooks/apis/useTokenApi';
 
 export const usePatchArticle = () => {
-  const { patchArticle } = useArticleApi();
+  const { patchArticle } = useTokenApi();
   return useMutation({
     mutationKey: ['usePatchArticle'],
     mutationFn: ({
@@ -17,7 +16,7 @@ export const usePatchArticle = () => {
 };
 
 export const usePatchArticleComment = () => {
-  const { patchArticleComment } = useArticleApi();
+  const { patchArticleComment } = useTokenApi();
   return useMutation({
     mutationKey: ['usePatchArticle'],
     mutationFn: ({ id, comment }: { id: number; comment: string }) =>
@@ -26,7 +25,7 @@ export const usePatchArticleComment = () => {
 };
 
 export const usePatchTalk = () => {
-  const { patchTalk } = useTalkApi();
+  const { patchTalk } = useTokenApi();
   return useMutation({
     mutationKey: ['usePatchArticle'],
     mutationFn: ({
