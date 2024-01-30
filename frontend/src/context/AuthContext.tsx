@@ -6,7 +6,7 @@ import {
   setLocalStorage,
   removeLocalStorage,
 } from '@utils/localstorage';
-import { ServerError, ExpiredTokenError } from '@utils/errors';
+import { ServerError, ExpiredRefreshTokenError } from '@utils/errors';
 import { CONFIG } from '@config';
 
 type AuthProps = {
@@ -71,7 +71,7 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
         }
         if (error.code === 'SERVER_ERROR') throw new ServerError();
         if (error.code === 'EXPIRED_REFRESH_TOKEN')
-          throw new ExpiredTokenError();
+          throw new ExpiredRefreshTokenError();
       },
     );
     return instance;
