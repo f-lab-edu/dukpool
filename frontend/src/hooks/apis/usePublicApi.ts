@@ -1,64 +1,77 @@
-import { noneAuthClientAtom } from '@atoms/authAtom';
+import { useAtomValue } from 'jotai';
+import { defaultClientAtom } from '@atoms/authAtom';
 import {
-  ArticlePostProps,
+  PublicApis,
+  ArticleResponse,
+  SearchResponse,
+  TaggedPostResponse,
+  TalkResponse,
+  ValidationResponse,
+} from '@hooks/apis/type';
+import {
   MOCK_ARTICLE_DATA,
   MOCK_ARTICLE_POST_DATA,
   MOCK_SEARCH_DATA,
+  MOCK_TAGGED_DATA,
   MOCK_TALK_DATA,
   MOCK_TALK_POST_DATA,
-  SearchDataProps,
-  TalkPostProps,
 } from '@utils/mockData';
-import { useAtomValue } from 'jotai';
 
-type ArticleApis = {
-  getAllArticles: (sortType: string) => Promise<ArticlePostProps[]>;
-  getArticle: (articleId: number) => Promise<ArticlePostProps>;
-  getAllTalks: (sortType: string) => Promise<TalkPostProps[]>;
-  getTalk: (talkId: number) => Promise<any>;
-  getSearchData: (text: string) => Promise<SearchDataProps>;
-};
-
-const usePublicApi = (): ArticleApis => {
-  const defaultClient = useAtomValue(noneAuthClientAtom);
-  console.log(defaultClient);
+const usePublicApi = (): PublicApis => {
+  const client = useAtomValue(defaultClientAtom);
+  console.log(client);
   return {
-    getAllArticles: async (sortType: string): Promise<ArticlePostProps[]> => {
-      // const { data } = await defaultClient.get(`/article/${sortType}`);
+    getAllArticles: async (sortType): Promise<ArticleResponse[]> => {
+      // const { data } = await client.get(`/article/${sortType}`);
       // return data;
       console.log(sortType);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return MOCK_ARTICLE_DATA;
     },
 
-    getArticle: async (articleId): Promise<ArticlePostProps> => {
-      // const { data } = await defaultClient.get(`/article/${articleId}`);
+    getArticle: async (id): Promise<ArticleResponse> => {
+      // const { data } = await client.get(`/article/${id}`);
       // return data;
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(articleId);
+      console.log(id);
       return MOCK_ARTICLE_POST_DATA;
     },
-    getAllTalks: async (sortType: string): Promise<TalkPostProps[]> => {
-      // const { data } = await defaultClient.get('/talks');
+
+    getAllTalks: async (sortType): Promise<TalkResponse[]> => {
+      // const { data } = await client.get('/talks');
       // return data;
       console.log(sortType);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return MOCK_TALK_DATA;
     },
 
-    getTalk: async (talkId): Promise<any> => {
-      // const { data } = await defaultClient.get(`/talk/${talkId}`);
+    getTalk: async (id): Promise<TalkResponse> => {
+      // const { data } = await client.get(`/talk/${id}`);
       // return data;
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(talkId);
+      console.log(id);
       return MOCK_TALK_POST_DATA;
     },
-    getSearchData: async (text): Promise<SearchDataProps> => {
-      // const { data } = await defaultClient.get(`/article/${articleId}`);
+
+    getSearchPost: async (text): Promise<SearchResponse> => {
+      // const { data } = await client.get(`/search/${text}`);
       // return data;
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(text);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       return MOCK_SEARCH_DATA;
+    },
+
+    getTaggedPost: async (tagName): Promise<TaggedPostResponse> => {
+      // const { data } = await client.get(`/tagged/${tagName}`);
+      // return data;
+      console.log(tagName);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return MOCK_TAGGED_DATA;
+    },
+
+    getCheckNickname: async (nickname: string): Promise<ValidationResponse> => {
+      const { data } = await client.get(`/users/check?nickname=${nickname}`);
+      return data;
     },
   };
 };
