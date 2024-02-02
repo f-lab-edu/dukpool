@@ -1,6 +1,8 @@
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import usePublicApi from '@hooks/apis/usePublicApi';
-import useTokenApi from '@hooks/apis/useTokenApi';
+import { useAtomCallback } from 'jotai/utils';
+import { authClientThrowAtom } from '@atoms/authAtom';
+import privateAuthApis from '@apis/private/auth';
 
 export const useGetAllArticles = (sortType: string = 'newest') => {
   const { getAllArticles } = usePublicApi();
@@ -35,31 +37,45 @@ export const useTalk = (id: number) => {
 };
 
 export const useSearchData = (text: string = '') => {
-  const { getSearchData } = usePublicApi();
+  const { getSearchPost } = usePublicApi();
   return useSuspenseQuery({
     queryKey: ['search', text],
-    queryFn: () => getSearchData(text),
+    queryFn: () => getSearchPost(text),
+  });
+};
+
+export const useGetTaggedData = (tagName: string) => {
+  const { getTaggedPost } = usePublicApi();
+  return useSuspenseQuery({
+    queryKey: ['nicknameCheck', tagName],
+    queryFn: () => getTaggedPost(tagName),
   });
 };
 
 export const useGetUserProfile = () => {
-  const { getUserProfile } = useTokenApi();
   return useSuspenseQuery({
     queryKey: ['userProfile'],
-    queryFn: getUserProfile,
+    queryFn: useAtomCallback((get) => {
+      const client = get(authClientThrowAtom);
+      const { getUserProfile } = privateAuthApis(client);
+      return getUserProfile();
+    }),
   });
 };
 
 export const useGetUserPosts = () => {
-  const { getUserPosts } = useTokenApi();
   return useSuspenseQuery({
     queryKey: ['userPosts'],
-    queryFn: getUserPosts,
+    queryFn: useAtomCallback((get) => {
+      const client = get(authClientThrowAtom);
+      const { getUserPosts } = privateAuthApis(client);
+      return getUserPosts();
+    }),
   });
 };
 
 export const useGetCheckNickname = (nickname: string) => {
-  const { getCheckNickname } = useTokenApi();
+  const { getCheckNickname } = usePublicApi();
   return useQuery({
     queryKey: ['nicknameCheck', nickname],
     queryFn: () => getCheckNickname(nickname),

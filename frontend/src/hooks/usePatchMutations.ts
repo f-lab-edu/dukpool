@@ -1,39 +1,69 @@
 import { useMutation } from '@tanstack/react-query';
-import useTokenApi from '@hooks/apis/useTokenApi';
+import { useAtomCallback } from 'jotai/utils';
+import { authClientThrowAtom } from '@atoms/authAtom';
+import privateArticleApis from '@apis/private/article';
+import privateTalkApis from '@apis/private/talk';
+import privateAuthApis from '@apis/private/auth';
 
 export const usePatchArticle = () => {
-  const { patchArticle } = useTokenApi();
   return useMutation({
-    mutationKey: ['usePatchArticle'],
-    mutationFn: ({
-      articleId,
-      formData,
-    }: {
-      articleId: number;
-      formData: FormData;
-    }) => patchArticle(articleId, formData),
+    mutationKey: ['patchArticle'],
+    mutationFn: useAtomCallback(
+      (get, set, { id, body }: { id: number; body: FormData }) => {
+        const client = get(authClientThrowAtom);
+        const { patchArticle } = privateArticleApis(client);
+        return patchArticle(id, body);
+      },
+    ),
   });
 };
 
 export const usePatchArticleComment = () => {
-  const { patchArticleComment } = useTokenApi();
   return useMutation({
-    mutationKey: ['usePatchArticle'],
-    mutationFn: ({ id, comment }: { id: number; comment: string }) =>
-      patchArticleComment(id, comment),
+    mutationKey: ['patchArticleComment'],
+    mutationFn: useAtomCallback(
+      (get, set, { id, comment }: { id: number; comment: string }) => {
+        const client = get(authClientThrowAtom);
+        const { patchArticleComment } = privateArticleApis(client);
+        return patchArticleComment(id, comment);
+      },
+    ),
   });
 };
 
 export const usePatchTalk = () => {
-  const { patchTalk } = useTokenApi();
   return useMutation({
-    mutationKey: ['usePatchArticle'],
-    mutationFn: ({
-      talkId,
-      formData,
-    }: {
-      talkId: number;
-      formData: FormData;
-    }) => patchTalk(talkId, formData),
+    mutationKey: ['patchTalk'],
+    mutationFn: useAtomCallback(
+      (get, set, { id, body }: { id: number; body: FormData }) => {
+        const client = get(authClientThrowAtom);
+        const { patchTalk } = privateTalkApis(client);
+        return patchTalk(id, body);
+      },
+    ),
+  });
+};
+
+export const usePatchTalkComment = () => {
+  return useMutation({
+    mutationKey: ['patchArticleComment'],
+    mutationFn: useAtomCallback(
+      (get, set, { id, comment }: { id: number; comment: string }) => {
+        const client = get(authClientThrowAtom);
+        const { patchTalkComment } = privateTalkApis(client);
+        return patchTalkComment(id, comment);
+      },
+    ),
+  });
+};
+
+export const usePatchNickname = () => {
+  return useMutation({
+    mutationKey: ['patchNickname'],
+    mutationFn: useAtomCallback((get, set, nickname: string) => {
+      const client = get(authClientThrowAtom);
+      const { patchNickname } = privateAuthApis(client);
+      return patchNickname(nickname);
+    }),
   });
 };
