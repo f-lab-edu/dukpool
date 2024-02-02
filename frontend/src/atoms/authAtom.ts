@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios';
 import { CONFIG } from '@config';
-import { atom } from 'jotai';
+import { atom, WritableAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { jwtDecode } from 'jwt-decode';
 import {
-  ExpiredAccessTokenError,
   ExpiredRefreshTokenError,
   ServerError,
+  UnAuthorizedError,
 } from '@utils/errors';
 
 type JwtPayload = {
@@ -14,6 +15,15 @@ type JwtPayload = {
 };
 
 const TOKEN_KEY = 'token';
+
+export const atomWithUpdater = <Value, Args extends unknown[], Result>(
+  baseAtom: WritableAtom<Value, Args, Result>,
+) =>
+  atom<readonly [Value, (...args: Args) => Result], Args, Result>(
+    (get, { setSelf }) => [get(baseAtom), setSelf],
+    (_get, set, ...args) => set(baseAtom, ...args),
+  );
+
 // primitive atoms
 const tokenBaseAtom = atomWithStorage<string | null>(
   TOKEN_KEY,
@@ -21,35 +31,35 @@ const tokenBaseAtom = atomWithStorage<string | null>(
 );
 
 // derived atoms
+export const updateTokenAtom = atomWithUpdater(tokenBaseAtom);
 
-export const tokenAtom = atom<
-  [string | null, (newValue: string | null) => void],
-  [string | null],
-  void
->(
-  (get, { setSelf }) => {
-    return [get(tokenBaseAtom), setSelf];
-  },
-  (get, set, value) => {
-    set(tokenBaseAtom, value);
-  },
-);
-
-// axios instance (readOnly)
+// atomEffect
 export const authClientAtom = atom((get) => {
-  const token = get(tokenBaseAtom);
+  get(userUniqIdAtom);
   const instance = axios.create({
     baseURL: CONFIG.BASE_URL,
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
-    withCredentials: true,
   });
+
+  instance.interceptors.request.use((config) => {
+    const [token, _] = get(updateTokenAtom);
+    console.log(token);
+    config.headers.Authorization = `Bearer ${token}`;
+    config.withCredentials = true;
+    return config;
+  });
+
   instance.interceptors.response.use(
     (response) => {
       return response;
     },
     async (error) => {
-      if (error.code === 'EXPIRED_ACCESS_TOKEN')
-        throw new ExpiredAccessTokenError();
+      const { config: originalRequest } = error;
+      if (error.code === 'EXPIRED_ACCESS_TOKEN') {
+        const [_, updateToken] = get(updateTokenAtom);
+        const { data } = await instance.get(`/auth/accessToken`);
+        updateToken(data);
+        return instance.request(originalRequest);
+      }
       if (error.code === 'SERVER_ERROR') throw new ServerError();
       if (error.code === 'EXPIRED_REFRESH_TOKEN')
         throw new ExpiredRefreshTokenError();
@@ -58,7 +68,7 @@ export const authClientAtom = atom((get) => {
   return instance;
 });
 
-export const noneAuthClientAtom = atom(() => {
+export const defaultClientAtom = atom(() => {
   const instance = axios.create({
     baseURL: CONFIG.BASE_URL,
     withCredentials: true,
@@ -76,26 +86,35 @@ export const noneAuthClientAtom = atom(() => {
   return instance;
 });
 
-// 유저 로그인 유무 (readOnly)
-export const loginStatusAtom = atom<boolean>((get) => !!get(tokenBaseAtom));
+export const authClientThrowAtom = atom((get) => {
+  const client = get(authClientAtom);
+  const isLoggedin = get(loginStatusAtom);
+  if (!isLoggedin) {
+    throw new UnAuthorizedError('UnAuthorized');
+  }
+  return client;
+});
 
-// 로그인 (writeOnly)
+export const loginStatusAtom = atom<boolean>((get) => {
+  const [token, _] = get(updateTokenAtom);
+  return !!token;
+});
+
 export const loginAtom = atom(null, async (get, set) => {
-  const client = get(noneAuthClientAtom);
+  const client = get(defaultClientAtom);
+  const [_, updateToken] = get(updateTokenAtom);
   const code = new URL(window.location.href).searchParams.get('code');
   const { data } = await client.get(`/auth/kakao/callback?code=${code}`);
   const token = data.data.accessToken;
-  set(tokenBaseAtom, token);
+  updateToken(token);
 });
 
-// 로그 아웃 (writeOnly)
 export const logoutAtom = atom(null, (get, set) => {
   set(tokenBaseAtom, null);
 });
 
-// 유저 고유 아이디 (from JWT) (readOnly)
 export const userUniqIdAtom = atom((get) => {
-  const token = get(tokenBaseAtom);
+  const [token, _] = get(updateTokenAtom);
   if (token) {
     const decodeToken = jwtDecode<JwtPayload>(token);
     return decodeToken.userId;
