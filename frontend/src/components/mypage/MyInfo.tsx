@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useGetUserProfile } from '@hooks/useGetQueries';
-import { usePostNickname } from '@hooks/usePostMutations';
+import { usePatchNickname } from '@hooks/usePatchMutations';
 import { media } from '@styles/media';
 import styled from 'styled-components';
 import useDebounce from '@hooks/useDebounce';
@@ -25,7 +25,7 @@ const MyInfo = memo(() => {
   const debouncedNickname = useDebounce(nickname, 200);
   // const { data: validate } = useGetCheckNickname(debouncedNickname);
   console.log(debouncedNickname);
-  const { mutate: updateNickname } = usePostNickname();
+  const { mutate: updateNickname } = usePatchNickname();
   const onSubmit = ({ nickname }: FormValue) => {
     updateNickname(nickname);
   };
