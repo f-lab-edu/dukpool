@@ -1,3 +1,3 @@
 import { atom } from 'jotai';
 
-export const modalStateAtom = atom<boolean>(false);
+export const isModalOpenAtom = atom<boolean>(false);

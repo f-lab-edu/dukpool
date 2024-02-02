@@ -1,8 +1,8 @@
-import { modalStateAtom } from '@atoms/modalAtom';
+import { isModalOpenAtom } from '@atoms/modalAtom';
 import { useAtom } from 'jotai';
 
 function useModal() {
-  const [isModal, setModal] = useAtom(modalStateAtom);
+  const [isModal, setModal] = useAtom(isModalOpenAtom);
   // useLayoutEffect
 
   const openModal = () => {
