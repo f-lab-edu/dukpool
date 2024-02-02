@@ -14,6 +14,7 @@ const DukpoolArticlePost = () => {
         title={data.title}
         date={data.date}
         content={data.content}
+        tags={data.tags}
       />
       <PostComment id={data.id} comments={data.comments} />
     </>
