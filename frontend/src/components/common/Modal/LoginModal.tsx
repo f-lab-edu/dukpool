@@ -6,10 +6,16 @@ import KakaoLoginButton from '@components/common/Button/KakaoLoginButton';
 import useModal from '@hooks/useModal';
 
 const LoginModal = memo(() => {
-  const { modalRef, closeModal } = useModal();
+  const { closeModal } = useModal();
   return (
-    <StyledWrapper>
-      <StyledContainer ref={modalRef}>
+    <StyledWrapper
+      onClick={(e) => {
+        if (e.target !== e.currentTarget) return;
+        e.stopPropagation();
+        closeModal();
+      }}
+    >
+      <StyledContainer>
         <StyledCloseBtnContainer>
           <StyledCloseIcon src={closeIcon} onClick={closeModal} />
         </StyledCloseBtnContainer>
