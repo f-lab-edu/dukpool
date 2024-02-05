@@ -1,11 +1,14 @@
 import { useArticle } from '@hooks/useGetQueries';
-import getIdFromUrl from '@utils/getIdFromUrl';
 import PostImage from '@components/common/Post/PostImage';
 import PostDescription from '@components/common/Post/PostDescription';
 import PostComment from '@components/common/Post/PostComment';
+import { useParams } from 'react-router-dom';
+import assert from '@utils/assert';
 
 const DukpoolArticlePost = () => {
-  const { data } = useArticle(getIdFromUrl());
+  const { articleId } = useParams();
+  assert(articleId);
+  const { data } = useArticle(Number(articleId));
   return (
     <>
       <PostImage images={data.images} />

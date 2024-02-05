@@ -2,7 +2,6 @@ import { memo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTalk } from '@hooks/useGetQueries';
 import { usePatchTalk } from '@hooks/usePatchMutations';
-import getIdFromUrl from '@utils/getIdFromUrl';
 import Tags from '@components/common/Form/Tags';
 import Images from '@components/common/Form/Images';
 import Button from '@components/common/Button';
@@ -11,6 +10,8 @@ import { convertURLtoFile } from '@utils/convertURLtoFile';
 import Input from '@components/common/Input';
 import TextArea from '@components/common/TextArea';
 import ErrorMessage from '@components/common/ErrorMessage.tsx';
+import { useParams } from 'react-router-dom';
+import assert from '@utils/assert';
 
 type FormValues = {
   title: string;
@@ -20,8 +21,9 @@ type FormValues = {
 };
 
 const DukpoolEditTalk = memo(() => {
-  const talkId = getIdFromUrl();
-  const { data: article } = useTalk(talkId);
+  const { talkId } = useParams();
+  assert(talkId);
+  const { data: article } = useTalk(Number(talkId));
   const { mutate: patchTalk } = usePatchTalk();
 
   const methods = useForm<FormValues>({
@@ -52,7 +54,7 @@ const DukpoolEditTalk = memo(() => {
         }
       }),
     );
-    patchTalk({ talkId, formData });
+    patchTalk({ id: Number(talkId), body: formData });
   };
 
   return (
