@@ -1,11 +1,11 @@
-import { useGetArticle } from '@hooks/useGetQueries';
+import { useArticle } from '@hooks/useGetQueries';
 import getIdFromUrl from '@utils/getIdFromUrl';
 import PostImage from '@components/common/Post/PostImage';
 import PostDescription from '@components/common/Post/PostDescription';
 import PostComment from '@components/common/Post/PostComment';
 
 const DukpoolArticlePost = () => {
-  const { data } = useGetArticle(getIdFromUrl());
+  const { data } = useArticle(getIdFromUrl());
   return (
     <>
       <PostImage images={data.images} />

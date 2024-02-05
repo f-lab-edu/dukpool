@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useSearchData } from '@hooks/useGetQueries';
+import { useSearch } from '@hooks/useGetQueries';
 import SearchTag from '@components/search/SearchTag';
 import SearchArticle from '@components/search/SearchArticle';
 import SearchTalk from '@components/search/SearchTalk';
@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const SearchResult = memo(() => {
   const { searchId } = useParams();
-  const { data: searchData } = useSearchData(searchId);
+  const { data: searchData } = useSearch(searchId);
   return (
     <>
       <StyledResultText>"{searchId}"에 대한 검색 결과에요!</StyledResultText>

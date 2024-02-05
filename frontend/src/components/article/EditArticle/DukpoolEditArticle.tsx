@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useGetArticle } from '@hooks/useGetQueries';
+import { useArticle } from '@hooks/useGetQueries';
 import { usePatchArticle } from '@hooks/usePatchMutations';
 import getIdFromUrl from '@utils/getIdFromUrl';
 import Tags from '@components/common/Form/Tags';
@@ -21,7 +21,7 @@ type FormValues = {
 
 const DukpoolEditArticle = memo(() => {
   const articleId = getIdFromUrl();
-  const { data: article } = useGetArticle(articleId);
+  const { data: article } = useArticle(articleId);
   const { mutate: patchArticle } = usePatchArticle();
 
   const methods = useForm<FormValues>({
@@ -52,7 +52,7 @@ const DukpoolEditArticle = memo(() => {
         }
       }),
     );
-    patchArticle({ articleId, formData });
+    patchArticle({ id: articleId, body: formData });
   };
 
   return (

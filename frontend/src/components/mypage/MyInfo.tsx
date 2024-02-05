@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useGetUserProfile } from '@hooks/useGetQueries';
+import { useProfile } from '@hooks/useGetQueries';
 import { usePatchNickname } from '@hooks/usePatchMutations';
 import { media } from '@styles/media';
 import styled from 'styled-components';
@@ -14,7 +14,7 @@ type FormValue = {
 };
 
 const MyInfo = memo(() => {
-  const { data: profile } = useGetUserProfile();
+  const { data: profile } = useProfile();
   const methods = useForm<FormValue>({
     defaultValues: {
       nickname: profile.userName,

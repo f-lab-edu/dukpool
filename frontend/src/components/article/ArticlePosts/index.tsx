@@ -1,9 +1,9 @@
 import ArticleCard from '@components/article/ArticleCard';
-import { useGetAllArticles } from '@hooks/useGetQueries';
+import { useAllArticles } from '@hooks/useGetQueries';
 import { memo } from 'react';
 
 const ArticlePosts = memo(({ sortType }: { sortType: string }) => {
-  const { data: articles } = useGetAllArticles(sortType);
+  const { data: articles } = useAllArticles(sortType);
   return (
     <>
       {articles.map((article) => (

@@ -1,12 +1,12 @@
 import { memo } from 'react';
-import { useGetUserPosts } from '@hooks/useGetQueries';
+import { useUserPosts } from '@hooks/useGetQueries';
 import { media } from '@styles/media';
 import styled from 'styled-components';
 import ArticleCard from '@components/article/ArticleCard';
 import TalkCard from '@components/talk/TalkCard';
 
 const MyPosts = memo(() => {
-  const { data: posts } = useGetUserPosts();
+  const { data: posts } = useUserPosts();
   return (
     <StyledSection>
       <StyledSectionTitle>나의 덕질 활동</StyledSectionTitle>
