@@ -1,8 +1,6 @@
-import { InvalidUrlError } from '@utils/errors';
-
-function assert(value: unknown): asserts value {
+function assert(value: unknown, error: Error): asserts value {
   if (value) return;
-  throw new InvalidUrlError('InvalidUrl');
+  throw error;
 }
 
 export default assert;
