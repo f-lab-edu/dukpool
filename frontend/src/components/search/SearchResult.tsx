@@ -1,15 +1,16 @@
 import { memo } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSearch } from '@hooks/useGetQueries';
+import { InvalidUrlError } from '@utils/errors';
+import assert from '@utils/assert';
+import styled from 'styled-components';
 import SearchTag from '@components/search/SearchTag';
 import SearchArticle from '@components/search/SearchArticle';
 import SearchTalk from '@components/search/SearchTalk';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import assert from '@utils/assert';
 
 const SearchResult = memo(() => {
   const { searchId } = useParams();
-  assert(searchId);
+  assert(searchId, new InvalidUrlError('InvalidUrlError'));
   const { data: searchData } = useSearch(searchId);
   return (
     <>

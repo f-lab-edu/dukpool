@@ -1,13 +1,14 @@
+import { useParams } from 'react-router-dom';
 import { useTalk } from '@hooks/useGetQueries';
+import { InvalidUrlError } from '@utils/errors';
+import assert from '@utils/assert';
 import PostImage from '@components/common/Post/PostImage';
 import PostDescription from '@components/common/Post/PostDescription';
 import PostComment from '@components/common/Post/PostComment';
-import { useParams } from 'react-router-dom';
-import assert from '@utils/assert';
 
 const DukpoolTalkPost = () => {
   const { talkId } = useParams();
-  assert(talkId);
+  assert(talkId, new InvalidUrlError('InvalidUrlError'));
   const { data } = useTalk(Number(talkId));
   return (
     <>
