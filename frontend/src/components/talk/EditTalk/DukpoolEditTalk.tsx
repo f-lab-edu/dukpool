@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTalk } from '@hooks/useGetQueries';
 import { usePatchTalk } from '@hooks/usePatchMutations';
-import { InvalidUrlError } from '@utils/errors';
 import { convertURLtoFile } from '@utils/convertURLtoFile';
-import assert from '@utils/assert';
+import assert from 'assert';
 import Tags from '@components/common/Form/Tags';
 import Images from '@components/common/Form/Images';
 import Button from '@components/common/Button';
@@ -23,7 +22,7 @@ type FormValues = {
 
 const DukpoolEditTalk = memo(() => {
   const { talkId } = useParams();
-  assert(talkId, new InvalidUrlError('InvalidUrlError'));
+  assert(talkId);
   const { data: article } = useTalk(Number(talkId));
   const { mutate: patchTalk } = usePatchTalk();
 

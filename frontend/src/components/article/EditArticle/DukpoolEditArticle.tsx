@@ -4,8 +4,6 @@ import { useArticle } from '@hooks/useGetQueries';
 import { usePatchArticle } from '@hooks/usePatchMutations';
 import { useParams } from 'react-router-dom';
 import { convertURLtoFile } from '@utils/convertURLtoFile';
-import { InvalidUrlError } from '@utils/errors';
-import assert from '@utils/assert';
 import Tags from '@components/common/Form/Tags';
 import Images from '@components/common/Form/Images';
 import Button from '@components/common/Button';
@@ -13,6 +11,8 @@ import styled from 'styled-components';
 import Input from '@components/common/Input';
 import ErrorMessage from '@components/common/ErrorMessage.tsx';
 import TextArea from '@components/common/TextArea';
+import assert from 'assert';
+
 type FormValues = {
   title: string;
   tags: string[];
@@ -22,7 +22,7 @@ type FormValues = {
 
 const DukpoolEditArticle = memo(() => {
   const { articleId } = useParams();
-  assert(articleId, new InvalidUrlError('InvalidUrlError'));
+  assert(articleId);
   const { data: article } = useArticle(Number(articleId));
   const { mutate: patchArticle } = usePatchArticle();
 

@@ -1,14 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useArticle } from '@hooks/useGetQueries';
-import { InvalidUrlError } from '@utils/errors';
-import assert from '@utils/assert';
+import assert from 'assert';
 import PostImage from '@components/common/Post/PostImage';
 import PostDescription from '@components/common/Post/PostDescription';
 import PostComment from '@components/common/Post/PostComment';
 
 const DukpoolArticlePost = () => {
   const { articleId } = useParams();
-  assert(articleId, new InvalidUrlError('InvalidUrlError'));
+  assert(articleId);
   const { data } = useArticle(Number(articleId));
   return (
     <>
