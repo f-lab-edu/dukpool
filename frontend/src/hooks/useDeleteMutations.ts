@@ -1,13 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import { authClientThrowAtom } from '@atoms/authAtom';
+import { ensuredClientAtom } from '@atoms/authAtom';
 import { useAtomCallback } from 'jotai/utils';
 
 export const useDeleteArticle = () => {
   return useMutation({
     mutationKey: ['deleteArticle'],
-    mutationFn: useAtomCallback(async (get, set, id: number) => {
-      const client = get(authClientThrowAtom);
-      return await client.delete(`/article/${id}`);
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredClientAtom);
+      return client.delete(`/article/${id}`);
     }),
   });
 };
@@ -15,9 +15,9 @@ export const useDeleteArticle = () => {
 export const useDeleteArticlePrefer = () => {
   return useMutation({
     mutationKey: ['deleteArticlePrefer'],
-    mutationFn: useAtomCallback(async (get, set, id: number) => {
-      const client = get(authClientThrowAtom);
-      return await client.delete(`/article/prefer/${id}`);
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredClientAtom);
+      return client.delete(`/article/prefer/${id}`);
     }),
   });
 };
@@ -25,9 +25,9 @@ export const useDeleteArticlePrefer = () => {
 export const useDeleteArticleComment = () => {
   return useMutation({
     mutationKey: ['deleteArticleComment'],
-    mutationFn: useAtomCallback(async (get, set, id: number) => {
-      const client = get(authClientThrowAtom);
-      return await client.delete(`/article/comment/${id}`);
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredClientAtom);
+      return client.delete(`/article/comment/${id}`);
     }),
   });
 };
@@ -35,9 +35,9 @@ export const useDeleteArticleComment = () => {
 export const useDeleteTalk = () => {
   return useMutation({
     mutationKey: ['deleteArticle'],
-    mutationFn: useAtomCallback(async (get, set, id: number) => {
-      const client = get(authClientThrowAtom);
-      return await client.delete(`/talk/${id}`);
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredClientAtom);
+      return client.delete(`/talk/${id}`);
     }),
   });
 };
@@ -45,9 +45,9 @@ export const useDeleteTalk = () => {
 export const useDeleteTalkPrefer = () => {
   return useMutation({
     mutationKey: ['deleteArticlePrefer'],
-    mutationFn: useAtomCallback(async (get, set, id: number) => {
-      const client = get(authClientThrowAtom);
-      return await client.delete(`/talk/prefer/${id}`);
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredClientAtom);
+      return client.delete(`/talk/prefer/${id}`);
     }),
   });
 };
@@ -55,9 +55,9 @@ export const useDeleteTalkPrefer = () => {
 export const useDeleteTalkComment = () => {
   return useMutation({
     mutationKey: ['deleteArticleComment'],
-    mutationFn: useAtomCallback(async (get, set, id: number) => {
-      const client = get(authClientThrowAtom);
-      return await client.delete(`/talk/comment/${id}`);
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredClientAtom);
+      return client.delete(`/talk/comment/${id}`);
     }),
   });
 };
@@ -65,9 +65,9 @@ export const useDeleteTalkComment = () => {
 export const useDeleteUser = () => {
   return useMutation({
     mutationKey: ['deleteUser'],
-    mutationFn: useAtomCallback(async (get) => {
-      const client = get(authClientThrowAtom);
-      return await client.delete('/users');
+    mutationFn: useAtomCallback((get) => {
+      const client = get(ensuredClientAtom);
+      return client.delete('/users');
     }),
   });
 };

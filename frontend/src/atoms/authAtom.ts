@@ -86,11 +86,11 @@ export const defaultClientAtom = atom(() => {
   return instance;
 });
 
-export const authClientThrowAtom = atom((get) => {
+export const ensuredClientAtom = atom((get) => {
   const client = get(authClientAtom);
   const isLoggedin = get(loginStatusAtom);
   if (!isLoggedin) {
-    throw new UnAuthorizedError('UnAuthorized');
+    throw new UnAuthorizedError();
   }
   return client;
 });
