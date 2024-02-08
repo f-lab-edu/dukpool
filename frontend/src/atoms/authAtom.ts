@@ -86,7 +86,7 @@ export const defaultClientAtom = atom(() => {
   return instance;
 });
 
-export const ensuredClientAtom = atom((get) => {
+export const ensuredAuthClientAtom = atom((get) => {
   const client = get(authClientAtom);
   const isLoggedin = get(loginStatusAtom);
   if (!isLoggedin) {

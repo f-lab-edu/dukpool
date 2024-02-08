@@ -1,6 +1,6 @@
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useAtomCallback } from 'jotai/utils';
-import { ensuredClientAtom, defaultClientAtom } from '@atoms/authAtom';
+import { ensuredAuthClientAtom, defaultClientAtom } from '@atoms/authAtom';
 import {
   MOCK_ARTICLE_DATA,
   MOCK_ARTICLE_POST_DATA,
@@ -104,7 +104,7 @@ export const useProfile = () => {
   return useSuspenseQuery({
     queryKey: ['userProfile'],
     queryFn: useAtomCallback(async (get): Promise<ProfileResponse> => {
-      const client = get(ensuredClientAtom);
+      const client = get(ensuredAuthClientAtom);
       // const { data } = await client.get('/users');
       // return data;
       console.log(client);
@@ -118,7 +118,7 @@ export const useUserPosts = () => {
   return useSuspenseQuery({
     queryKey: ['userPosts'],
     queryFn: useAtomCallback(async (get): Promise<UserPostsResponse> => {
-      const client = get(ensuredClientAtom);
+      const client = get(ensuredAuthClientAtom);
       // const { data } = await client.get('/user-posts');
       // return data;
       console.log(client);
@@ -132,7 +132,7 @@ export const useCheckNickname = (nickname: string) => {
   return useQuery({
     queryKey: ['nicknameCheck', nickname],
     queryFn: useAtomCallback(async (get): Promise<boolean> => {
-      const client = get(ensuredClientAtom);
+      const client = get(ensuredAuthClientAtom);
       const { data } = await client.get(`/users/check?nickname=${nickname}`);
       return data;
     }),
