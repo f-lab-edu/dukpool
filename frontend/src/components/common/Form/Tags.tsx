@@ -79,7 +79,7 @@ const StyledInput = styled.input`
   margin-bottom: 4px;
 `;
 
-const StyledTagsContainer = styled.div`
+const StyledTagsContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;

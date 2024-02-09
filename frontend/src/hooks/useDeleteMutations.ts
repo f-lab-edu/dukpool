@@ -1,35 +1,73 @@
 import { useMutation } from '@tanstack/react-query';
-import useArticleApi from '@hooks/apis/useArticleApi';
-import useTalkApi from '@hooks/apis/useTalkApi';
+import { ensuredAuthClientAtom } from '@atoms/authAtom';
+import { useAtomCallback } from 'jotai/utils';
 
 export const useDeleteArticle = () => {
-  const { deleteArticle } = useArticleApi();
   return useMutation({
-    mutationKey: ['deleteArticlePost'],
-    mutationFn: deleteArticle,
-  });
-};
-
-export const useDeleteTalk = () => {
-  const { deleteTalk } = useTalkApi();
-  return useMutation({
-    mutationKey: ['deleteTalkPost'],
-    mutationFn: deleteTalk,
+    mutationKey: ['deleteArticle'],
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredAuthClientAtom);
+      return client.delete(`/article/${id}`);
+    }),
   });
 };
 
 export const useDeleteArticlePrefer = () => {
-  const { deleteArticle } = useArticleApi();
   return useMutation({
     mutationKey: ['deleteArticlePrefer'],
-    mutationFn: deleteArticle,
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredAuthClientAtom);
+      return client.delete(`/article/prefer/${id}`);
+    }),
+  });
+};
+
+export const useDeleteArticleComment = () => {
+  return useMutation({
+    mutationKey: ['deleteArticleComment'],
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredAuthClientAtom);
+      return client.delete(`/article/comment/${id}`);
+    }),
+  });
+};
+
+export const useDeleteTalk = () => {
+  return useMutation({
+    mutationKey: ['deleteArticle'],
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredAuthClientAtom);
+      return client.delete(`/talk/${id}`);
+    }),
   });
 };
 
 export const useDeleteTalkPrefer = () => {
-  const { deleteTalkPrefer } = useTalkApi();
   return useMutation({
-    mutationKey: ['deleteTalkPrefer'],
-    mutationFn: deleteTalkPrefer,
+    mutationKey: ['deleteArticlePrefer'],
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredAuthClientAtom);
+      return client.delete(`/talk/prefer/${id}`);
+    }),
+  });
+};
+
+export const useDeleteTalkComment = () => {
+  return useMutation({
+    mutationKey: ['deleteArticleComment'],
+    mutationFn: useAtomCallback((get, set, id: number) => {
+      const client = get(ensuredAuthClientAtom);
+      return client.delete(`/talk/comment/${id}`);
+    }),
+  });
+};
+
+export const useDeleteUser = () => {
+  return useMutation({
+    mutationKey: ['deleteUser'],
+    mutationFn: useAtomCallback((get) => {
+      const client = get(ensuredAuthClientAtom);
+      return client.delete('/users');
+    }),
   });
 };

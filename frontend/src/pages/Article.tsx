@@ -1,20 +1,23 @@
 import ArticlePosts from '@components/article/ArticlePosts';
 import Layout from '@components/common/Layout';
 import { media } from '@styles/media';
-import { Suspense, useContext, useState } from 'react';
+import { Suspense, useState } from 'react';
 import styled from 'styled-components';
 import ArticleCardSkeleton from '@components/common/Skeleton/ArticleCardSkeleton';
-import { AuthContext } from '@context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from '@components/common/Dropdown';
+import { useAtomValue } from 'jotai';
+import { loginStatusAtom } from '@atoms/authAtom';
+import useModal from '@hooks/useModal';
 
 const Article = () => {
   const [sortType, setSortType] = useState<string>('newest');
-  const { isLoggined } = useContext(AuthContext);
+  const isLoggined = useAtomValue(loginStatusAtom);
+  const { openModal } = useModal();
   const navigate = useNavigate();
   const handlePostButton = () => {
-    if (!isLoggined) navigate('/login');
-    else navigate('/article/write');
+    if (!isLoggined) openModal();
+    else navigate('/article/new');
   };
 
   return (

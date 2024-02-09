@@ -2,16 +2,18 @@ import { memo } from 'react';
 import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import { media } from '@styles/media';
+import Tag from '@components/common/Tag';
 
 type DescriptionProps = {
   userProfile: { image: string | null; name: string };
   title: string;
   date: string;
   content: string;
+  tags: string[];
 };
 
 const PostDescription = memo(
-  ({ userProfile, title, date, content }: DescriptionProps) => {
+  ({ userProfile, title, date, content, tags }: DescriptionProps) => {
     return (
       <StyledWrapper>
         <StyledInfoContainer>
@@ -31,6 +33,11 @@ const PostDescription = memo(
             <StyledTitle>{title}</StyledTitle>
             <StyledDate>{date}</StyledDate>
             <StyledContent>{content}</StyledContent>
+            <StyledTagList>
+              {tags.map((tag) => (
+                <Tag key={tag} tagName={tag} />
+              ))}
+            </StyledTagList>
           </StyledDesciption>
         </StyledInfoContainer>
       </StyledWrapper>
@@ -121,6 +128,13 @@ const StyledDate = styled.p`
 
 const StyledContent = styled.div`
   padding: 10px 0;
+`;
+
+const StyledTagList = styled.ul`
+  display: flex;
+  height: 20px;
+  gap: 4px;
+  flex-wrap: wrap;
 `;
 
 export default PostDescription;

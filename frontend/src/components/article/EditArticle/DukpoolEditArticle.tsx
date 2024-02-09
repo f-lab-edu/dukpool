@@ -1,16 +1,17 @@
 import { memo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useGetArticle } from '@hooks/useGetQueries';
+import { useArticle } from '@hooks/useGetQueries';
 import { usePatchArticle } from '@hooks/usePatchMutations';
-import getIdFromUrl from '@utils/getIdFromUrl';
+import { useParams } from 'react-router-dom';
+import { convertURLtoFile } from '@utils/convertURLtoFile';
 import Tags from '@components/common/Form/Tags';
 import Images from '@components/common/Form/Images';
 import Button from '@components/common/Button';
 import styled from 'styled-components';
-import { convertURLtoFile } from '@utils/convertURLtoFile';
 import Input from '@components/common/Input';
 import ErrorMessage from '@components/common/ErrorMessage.tsx';
 import TextArea from '@components/common/TextArea';
+import assert from 'assert';
 
 type FormValues = {
   title: string;
@@ -20,8 +21,9 @@ type FormValues = {
 };
 
 const DukpoolEditArticle = memo(() => {
-  const articleId = getIdFromUrl();
-  const { data: article } = useGetArticle(articleId);
+  const { articleId } = useParams();
+  assert(articleId);
+  const { data: article } = useArticle(Number(articleId));
   const { mutate: patchArticle } = usePatchArticle();
 
   const methods = useForm<FormValues>({
@@ -52,7 +54,7 @@ const DukpoolEditArticle = memo(() => {
         }
       }),
     );
-    patchArticle({ articleId, formData });
+    patchArticle({ id: Number(articleId), body: formData });
   };
 
   return (

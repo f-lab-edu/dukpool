@@ -5,11 +5,11 @@ import ArticleCard from '@components/article/ArticleCard';
 import Slider from 'react-slick';
 import { SliderOption } from '@constants/sliderOption';
 import useMediaQuery from '@hooks/useMediaQuery';
-import { useGetAllArticles } from '@hooks/useGetQueries';
+import { useAllArticles } from '@hooks/useGetQueries';
 
 const RecentArticleCards = memo(() => {
   const { isMobile } = useMediaQuery();
-  const { data: articles } = useGetAllArticles('newest');
+  const { data: articles } = useAllArticles('newest');
 
   const articleCards = articles.map((article: ArticlePostProps) => (
     <ArticleCard {...article} key={article.id}></ArticleCard>

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import TalkCard from '@components/talk/TalkCard';
 import Slider from 'react-slick';
 import { MultipleRowSliderOption } from '@constants/sliderOption';
-import { useGetAllTalks } from '@hooks/useGetQueries';
+import { useAllTalks } from '@hooks/useGetQueries';
 
 const RecentTalkCards = memo(() => {
-  const { data: talks } = useGetAllTalks();
+  const { data: talks } = useAllTalks();
   return (
     <StyledSlider {...MultipleRowSliderOption}>
       {talks.map((talk) => (

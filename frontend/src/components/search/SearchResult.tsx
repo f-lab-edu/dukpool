@@ -1,14 +1,16 @@
 import { memo } from 'react';
-import { useSearchData } from '@hooks/useGetQueries';
+import { useParams } from 'react-router-dom';
+import { useSearch } from '@hooks/useGetQueries';
+import assert from 'assert';
+import styled from 'styled-components';
 import SearchTag from '@components/search/SearchTag';
 import SearchArticle from '@components/search/SearchArticle';
 import SearchTalk from '@components/search/SearchTalk';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 
 const SearchResult = memo(() => {
   const { searchId } = useParams();
-  const { data: searchData } = useSearchData(searchId);
+  assert(searchId);
+  const { data: searchData } = useSearch(searchId);
   return (
     <>
       <StyledResultText>"{searchId}"에 대한 검색 결과에요!</StyledResultText>

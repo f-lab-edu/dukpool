@@ -1,10 +1,10 @@
 import TalkCard from '@components/talk/TalkCard';
-import { useGetAllTalks } from '@hooks/useGetQueries';
+import { useAllTalks } from '@hooks/useGetQueries';
 import { TalkPostProps } from '@utils/mockData';
 import { memo } from 'react';
 
 const TalkPosts = memo(({ sortType }: { sortType: string }) => {
-  const { data: talks } = useGetAllTalks(sortType);
+  const { data: talks } = useAllTalks(sortType);
   return (
     <>
       {talks.map((talk: TalkPostProps) => (
