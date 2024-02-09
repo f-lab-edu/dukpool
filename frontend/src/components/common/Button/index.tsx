@@ -30,7 +30,8 @@ const StyledButton = styled.button<{ $colorType: 'dark' | 'light' }>`
   width: 100%;
   max-width: 400px;
   padding: 0.8rem 1.2rem;
-  background-color: var(--primary);
+  background-color: ${({ $colorType }) =>
+    $colorType === 'dark' ? 'var(--primary)' : 'var(--gray-5)'};
   color: ${({ $colorType }) =>
     $colorType === 'dark' ? 'var(--white)' : 'var(--black)'};
   font-size: 14px;
