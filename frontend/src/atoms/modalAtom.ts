@@ -6,10 +6,12 @@ export const isConfirmModalAtom = atom<{
   comment: boolean;
   post: boolean;
   resign: boolean;
+  login: boolean;
 }>({
   comment: false,
   post: false,
   resign: false,
+  login: false,
 });
 
 export const writeConfirmModalAtom = atom(
@@ -17,29 +19,19 @@ export const writeConfirmModalAtom = atom(
   (
     get,
     set,
-    payload: { action: 'comment' | 'post' | 'resign'; value: boolean },
+    payload: {
+      action: 'comment' | 'post' | 'resign' | 'login';
+      value: boolean;
+    },
   ) => {
     const confirmModalState = get(isConfirmModalAtom);
-    if (payload.action === 'comment') {
-      set(isConfirmModalAtom, {
-        comment: payload.value,
-        post: confirmModalState.post,
-        resign: confirmModalState.resign,
-      });
-    }
-    if (payload.action === 'post') {
-      set(isConfirmModalAtom, {
-        comment: confirmModalState.comment,
-        post: payload.value,
-        resign: confirmModalState.resign,
-      });
-    }
-    if (payload.action === 'resign') {
-      set(isConfirmModalAtom, {
-        comment: confirmModalState.comment,
-        post: confirmModalState.post,
-        resign: payload.value,
-      });
-    }
+    set(isConfirmModalAtom, {
+      ...confirmModalState,
+      [payload.action]: payload.value,
+    });
   },
 );
+
+export const modalPromiseAtom = atom<{
+  resolve: (value?: boolean) => void;
+} | null>(null);
