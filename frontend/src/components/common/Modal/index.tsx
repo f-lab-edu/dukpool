@@ -1,19 +1,22 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 import closeIcon from '@assets/icons/close-noneborder.svg';
+import logo from '@assets/logo/dukpool-logo.svg';
 import alert from '@assets/icons/alert.svg';
-import useConfirmModal from '@hooks/useConfirmModal';
+import useModal from '@hooks/useModal';
+import KakaoLoginButton from '@components/common/Button/KakaoLoginButton';
 import Button from '@components/common/Button';
 
 const MESSAGE_TYPE = {
   comment: '작성하신 댓글을 삭제하시겠어요?',
   post: '작성하신 게시물을 삭제하시겠어요?',
   resign: '정말 덕풀 계정을 삭제하시겠어요?',
+  login: '로그인후에 이용해보세요!',
 };
 
-const ConfirmModal = memo(
-  ({ type }: { type: 'comment' | 'post' | 'resign' }) => {
-    const { hideModal, confirmModal } = useConfirmModal();
+const Modal = memo(
+  ({ type }: { type: 'comment' | 'post' | 'resign' | 'login' }) => {
+    const { hideModal, confirmModal } = useModal();
     return (
       <StyledWrapper
         onClick={(e) => {
@@ -28,23 +31,27 @@ const ConfirmModal = memo(
           </StyledCloseBtnContainer>
           <StyledFlexContainer>
             <StyledLogoContainer>
-              <StyledLogo src={alert} />
+              <StyledLogo $type={type} src={type === 'login' ? logo : alert} />
             </StyledLogoContainer>
             <StyledSpan>{MESSAGE_TYPE[type]}</StyledSpan>
-            <StyledButtonContainer>
-              <Button
-                text="취소"
-                disabled={false}
-                onClick={() => hideModal(type)}
-                $colorType="light"
-              />
-              <Button
-                text="삭제"
-                disabled={false}
-                onClick={() => confirmModal(type)}
-                $colorType="dark"
-              />
-            </StyledButtonContainer>
+            {type === 'login' ? (
+              <KakaoLoginButton />
+            ) : (
+              <StyledButtonContainer>
+                <Button
+                  text="취소"
+                  disabled={false}
+                  onClick={() => hideModal(type)}
+                  $colorType="light"
+                />
+                <Button
+                  text="삭제"
+                  disabled={false}
+                  onClick={() => confirmModal(type)}
+                  $colorType="dark"
+                />
+              </StyledButtonContainer>
+            )}
           </StyledFlexContainer>
         </StyledContainer>
       </StyledWrapper>
@@ -52,7 +59,7 @@ const ConfirmModal = memo(
   },
 );
 
-ConfirmModal.displayName = 'ConfirmModal';
+Modal.displayName = 'Modal';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -68,7 +75,7 @@ const StyledWrapper = styled.div`
 
 const StyledContainer = styled.article`
   width: 360px;
-  height: 282px;
+  height: 332px;
   margin: auto;
   padding: 24px;
   background-color: var(--white);
@@ -104,8 +111,8 @@ const StyledSpan = styled.span`
   font-size: 14px;
 `;
 
-const StyledLogo = styled.img`
-  width: 60px;
+const StyledLogo = styled.img<{ $type: string }>`
+  width: ${({ $type }) => ($type === 'login' ? '210px' : '60px')};
 `;
 
 const StyledButtonContainer = styled.div`
@@ -115,4 +122,4 @@ const StyledButtonContainer = styled.div`
   gap: 10px;
 `;
 
-export default ConfirmModal;
+export default Modal;
