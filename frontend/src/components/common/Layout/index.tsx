@@ -1,24 +1,33 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import styled from 'styled-components';
-import LoginModal from '@components/common/Modal/LoginModal';
 import useModal from '@hooks/useModal';
-import useConfirmModal from '@hooks/useConfirmModal';
-import ConfirmModal from '../Modal/ConfirmModal';
+import Modal from '@components/common/Modal';
+import { useLocation } from 'react-router-dom';
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 const Layout = memo(({ children }: LayoutProps) => {
-  const { isModal: isLoginModal } = useModal();
-  const { isCommentConfirm, isPostConfirm, isResignConfirm } =
-    useConfirmModal();
+  const {
+    isCommentModal,
+    isPostModal,
+    isResignModal,
+    isLoginModal,
+    hideAllModals,
+  } = useModal();
+  const location = useLocation();
+
+  useEffect(() => {
+    hideAllModals();
+  }, [location]);
+
   return (
     <StyledLayout>
-      {isLoginModal ? <LoginModal /> : <></>}
-      {isCommentConfirm ? <ConfirmModal type="comment" /> : <></>}
-      {isPostConfirm ? <ConfirmModal type="post" /> : <></>}
-      {isResignConfirm ? <ConfirmModal type="resign" /> : <></>}
+      {isCommentModal ? <Modal type="comment" /> : <></>}
+      {isPostModal ? <Modal type="post" /> : <></>}
+      {isResignModal ? <Modal type="resign" /> : <></>}
+      {isLoginModal ? <Modal type="login" /> : <></>}
       {children}
     </StyledLayout>
   );
