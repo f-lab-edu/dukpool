@@ -16,7 +16,7 @@ const Article = () => {
   const { openModal } = useModal();
   const navigate = useNavigate();
   const handlePostButton = () => {
-    if (!isLoggined) openModal();
+    if (!isLoggined) openModal('login');
     else navigate('/article/new');
   };
 

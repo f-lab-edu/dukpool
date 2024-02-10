@@ -6,7 +6,7 @@ import { usePatchArticleComment } from '@hooks/usePatchMutations';
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '@components/common/Button';
 import { useDeleteArticleComment } from '@hooks/useDeleteMutations';
-import useConfirmModal from '@hooks/useConfirmModal';
+import useModal from '@hooks/useModal';
 
 type CommentItemProps = {
   id: number;
@@ -31,15 +31,13 @@ const CommentListItem = memo(
     });
     const { mutate: patchComment } = usePatchArticleComment();
     const { mutate: deleteComment } = useDeleteArticleComment();
-    const { openModal } = useConfirmModal();
+    const { openModal } = useModal();
     const onSubmit = ({ comment }: FormValue) => {
       patchComment({ id, comment });
     };
-    const handleDelete = () => {
-      openModal('comment').then(() => {
-        console.log('resolved!!');
-        deleteComment(1);
-      });
+    const handleDelete = async () => {
+      const flag = await openModal('comment');
+      if (flag) deleteComment(1);
     };
     return (
       <FormProvider {...methods}>
