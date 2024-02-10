@@ -36,7 +36,7 @@ const ClientProvider = ({ children }: Props): JSX.Element => {
             );
           }
           if (err instanceof UnAuthorizedError) {
-            openModal();
+            openModal('login');
           }
         },
       },
