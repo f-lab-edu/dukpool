@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useContext, useState } from 'react';
 import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import TextArea from '@components/common/TextArea';
@@ -6,7 +6,7 @@ import { usePatchArticleComment } from '@hooks/usePatchMutations';
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '@components/common/Button';
 import { useDeleteArticleComment } from '@hooks/useDeleteMutations';
-import useModal from '@hooks/useModal';
+import { ModalContext } from '@context/ModalContext';
 
 type CommentItemProps = {
   id: number;
@@ -31,7 +31,7 @@ const CommentListItem = memo(
     });
     const { mutate: patchComment } = usePatchArticleComment();
     const { mutate: deleteComment } = useDeleteArticleComment();
-    const { openModal } = useModal();
+    const { openModal } = useContext(ModalContext);
     const onSubmit = ({ comment }: FormValue) => {
       patchComment({ id, comment });
     };

@@ -7,7 +7,7 @@ import {
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { ToastContext } from '@context/ToastContext';
-import useModal from '@hooks/useModal';
+import { ModalContext } from './ModalContext';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -15,7 +15,7 @@ interface Props {
 
 const ClientProvider = ({ children }: Props): JSX.Element => {
   const { showToast } = useContext(ToastContext);
-  const { openModal } = useModal();
+  const { openModal } = useContext(ModalContext);
   const navigate = useNavigate();
   const queryClient = new QueryClient({
     defaultOptions: {

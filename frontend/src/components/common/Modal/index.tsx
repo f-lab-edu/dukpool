@@ -1,11 +1,11 @@
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import styled from 'styled-components';
 import closeIcon from '@assets/icons/close-noneborder.svg';
 import logo from '@assets/logo/dukpool-logo.svg';
 import alert from '@assets/icons/alert.svg';
-import useModal from '@hooks/useModal';
 import KakaoLoginButton from '@components/common/Button/KakaoLoginButton';
 import Button from '@components/common/Button';
+import { ModalContext } from '@context/ModalContext';
 
 const MESSAGE_TYPE = {
   comment: '작성하신 댓글을 삭제하시겠어요?',
@@ -16,7 +16,7 @@ const MESSAGE_TYPE = {
 
 const Modal = memo(
   ({ type }: { type: 'comment' | 'post' | 'resign' | 'login' }) => {
-    const { hideModal, confirmModal } = useModal();
+    const { hideModal, confirmModal } = useContext(ModalContext);
     return (
       <StyledWrapper
         onClick={(e) => {
