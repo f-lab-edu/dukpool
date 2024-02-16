@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react';
+import { memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HomeIcon from '@assets/icons/outlined-home.svg';
@@ -9,10 +9,11 @@ import FocusedHomeIcon from '@assets/icons/filled-home.svg';
 import FocusedEmojiIcon from '@assets/icons/filled-emoji.svg';
 import FocusedCoffeeIcon from '@assets/icons/filled-coffee.svg';
 import FocusedUserIcon from '@assets/icons/filled-user.svg';
-import { AuthContext } from '@context/AuthContext';
+import { useAtomValue } from 'jotai';
+import { loginStatusAtom } from '@atoms/authAtom';
 
 const MobileNavbar = memo(() => {
-  const { isLoggined } = useContext(AuthContext);
+  const isLoggined = useAtomValue(loginStatusAtom);
   const { pathname } = useLocation();
   return (
     <StyledNavbar>
