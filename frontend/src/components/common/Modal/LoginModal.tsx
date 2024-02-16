@@ -1,39 +1,32 @@
-import { memo, useContext } from 'react';
-import { ModalContext } from '@context/ModalContext';
+import { memo } from 'react';
 import KakaoLoginButton from '@components/common/Button/KakaoLoginButton';
 import closeIcon from '@assets/icons/close-noneborder.svg';
 import logo from '@assets/logo/dukpool-logo.svg';
 import styled from 'styled-components';
 
 const LoginModal = memo(
-  ({ resolveFn }: { resolveFn?: (type: boolean) => Promise<boolean> }) => {
-    const { hideModal } = useContext(ModalContext);
-    const rejectAction = () => {
-      resolveFn!(false);
-      hideModal();
-    };
-    const confirmAction = () => {
-      resolveFn!(true);
-      hideModal();
-    };
+  ({ onSubmit }: { onSubmit?: (type: boolean) => void }) => {
     return (
       <StyledWrapper
         onClick={(e) => {
           if (e.target !== e.currentTarget) return;
           e.stopPropagation();
-          rejectAction();
+          onSubmit?.(false);
         }}
       >
         <StyledContainer>
           <StyledCloseBtnContainer>
-            <StyledCloseIcon src={closeIcon} onClick={rejectAction} />
+            <StyledCloseIcon
+              src={closeIcon}
+              onClick={() => onSubmit?.(false)}
+            />
           </StyledCloseBtnContainer>
           <StyledFlexContainer>
             <StyledLogoContainer>
               <StyledLogo src={logo} />
             </StyledLogoContainer>
             <StyledSpan>로그인 후에 이용해보세요!</StyledSpan>
-            <StyledButtonContainer onClick={confirmAction}>
+            <StyledButtonContainer onClick={() => onSubmit?.(true)}>
               <KakaoLoginButton />
             </StyledButtonContainer>
           </StyledFlexContainer>

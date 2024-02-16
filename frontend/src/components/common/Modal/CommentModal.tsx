@@ -1,32 +1,22 @@
-import { memo, useContext } from 'react';
-import { ModalContext } from '@context/ModalContext';
+import { memo } from 'react';
 import Button from '@components/common/Button';
 import closeIcon from '@assets/icons/close-noneborder.svg';
 import alert from '@assets/icons/alert.svg';
 import styled from 'styled-components';
 
 const CommentModal = memo(
-  ({ resolveFn }: { resolveFn?: (type: boolean) => Promise<boolean> }) => {
-    const { hideModal } = useContext(ModalContext);
-    const rejectAction = () => {
-      resolveFn!(false);
-      hideModal();
-    };
-    const confirmAction = () => {
-      resolveFn!(true);
-      hideModal();
-    };
+  ({ onSubmit }: { onSubmit?: (type: boolean) => void }) => {
     return (
       <StyledWrapper
         onClick={(e) => {
           if (e.target !== e.currentTarget) return;
           e.stopPropagation();
-          rejectAction();
+          onSubmit?.(true);
         }}
       >
         <StyledContainer>
           <StyledCloseBtnContainer>
-            <StyledCloseIcon src={closeIcon} onClick={rejectAction} />
+            <StyledCloseIcon src={closeIcon} onClick={() => onSubmit?.(true)} />
           </StyledCloseBtnContainer>
           <StyledFlexContainer>
             <StyledLogoContainer>
@@ -37,13 +27,13 @@ const CommentModal = memo(
               <Button
                 text="취소"
                 disabled={false}
-                onClick={rejectAction}
+                onClick={() => onSubmit?.(true)}
                 $colorType="light"
               />
               <Button
                 text="삭제"
                 disabled={false}
-                onClick={confirmAction}
+                onClick={() => onSubmit?.(true)}
                 $colorType="dark"
                 error={true}
               />
