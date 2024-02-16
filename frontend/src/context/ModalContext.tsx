@@ -1,30 +1,15 @@
-import { createContext, useEffect, useState } from 'react';
-import Modal from '@components/common/Modal';
+import {
+  createContext,
+  useState,
+  Fragment,
+  useEffect,
+  cloneElement,
+} from 'react';
 import { useLocation } from 'react-router-dom';
 
-type ModalType = 'post' | 'comment' | 'resign' | 'login';
-
-type ModalState = {
-  isOpen: boolean;
-  resolveFn: ((value?: boolean) => void) | null;
-};
-
-type InitialModalStateType = {
-  [key in ModalType]: ModalState;
-};
-
-const initialModalState: InitialModalStateType = {
-  post: { isOpen: false, resolveFn: null },
-  comment: { isOpen: false, resolveFn: null },
-  resign: { isOpen: false, resolveFn: null },
-  login: { isOpen: false, resolveFn: null },
-};
-
 type ModalProps = {
-  openModal: (type: ModalType) => Promise<unknown>;
-  hideModal: (type: ModalType) => void;
-  confirmModal: (type: ModalType) => void;
-  hideAllModals: () => void;
+  openModal: (element: React.ReactElement) => Promise<unknown>;
+  hideModal: () => void;
 };
 
 interface Props {
@@ -34,66 +19,43 @@ interface Props {
 const ModalContext = createContext<ModalProps>({
   openModal: async () => {},
   hideModal: () => {},
-  confirmModal: () => {},
-  hideAllModals: () => {},
 });
 
 const ModalProvider = ({ children }: Props): JSX.Element => {
-  const [isModal, setIsModal] = useState(initialModalState);
+  const [modals, setModals] = useState<React.ReactElement[]>([]);
   const location = useLocation();
 
   useEffect(() => {
-    hideAllModals();
+    setModals([]);
   }, [location]);
 
-  const openModal = (type: ModalType) => {
-    return new Promise((resolve) => {
-      setIsModal((prevModal) => ({
-        ...prevModal,
-        [type]: { isOpen: true, resolveFn: resolve },
-      }));
+  const openModal = (element: React.ReactElement): Promise<unknown> => {
+    const promiseResolver = () => {
+      let resolveFn;
+      const promise = new Promise((resolve) => {
+        resolveFn = resolve;
+      });
+      return { promise, resolveFn };
+    };
+    const { promise, resolveFn } = promiseResolver();
+
+    const modal: React.ReactElement = cloneElement(element, {
+      resolveFn,
     });
+    setModals((prev) => [...prev, modal]);
+    return promise;
   };
 
-  const hideModal = (type: ModalType) => {
-    if (isModal[type].isOpen && isModal[type].resolveFn) {
-      console.log('rejected!');
-      isModal[type].resolveFn!(false);
-      setIsModal((prevModal) => ({
-        ...prevModal,
-        [type]: { isOpen: false, resolveFn: null },
-      }));
-    }
-  };
-
-  const confirmModal = (type: ModalType) => {
-    if (isModal[type].isOpen && isModal[type].resolveFn) {
-      console.log(isModal[type]);
-      isModal[type].resolveFn!(true);
-      setIsModal((prevModal) => ({
-        ...prevModal,
-        [type]: { isOpen: false, resolveFn: null },
-      }));
-    }
-  };
-
-  const hideAllModals = () => {
-    hideModal('post');
-    hideModal('comment');
-    hideModal('resign');
-    hideModal('login');
+  const hideModal = () => {
+    setModals((prev) => prev.slice(0, -1));
   };
 
   return (
-    <ModalContext.Provider
-      value={{ openModal, hideModal, hideAllModals, confirmModal }}
-    >
+    <ModalContext.Provider value={{ openModal, hideModal }}>
       {children}
-      {Object.entries(isModal).map(([type, modalState]) => {
-        if (modalState.isOpen) {
-          return <Modal type={type as ModalType} key={type} />;
-        }
-      })}
+      {modals.map((modal, idx) => (
+        <Fragment key={idx}>{modal}</Fragment>
+      ))}
     </ModalContext.Provider>
   );
 };
