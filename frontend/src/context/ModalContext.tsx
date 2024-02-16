@@ -31,7 +31,7 @@ const ModalProvider = ({ children }: Props): JSX.Element => {
 
   const openModal = (element: React.ReactElement): Promise<unknown> => {
     const promiseResolver = () => {
-      let resolveFn;
+      let resolveFn: (value: boolean) => void = () => {};
       const promise = new Promise((resolve) => {
         resolveFn = resolve;
       });
@@ -40,7 +40,10 @@ const ModalProvider = ({ children }: Props): JSX.Element => {
     const { promise, resolveFn } = promiseResolver();
 
     const modal: React.ReactElement = cloneElement(element, {
-      resolveFn,
+      onSubmit: (flag: boolean) => {
+        resolveFn(flag);
+        hideModal();
+      },
     });
     setModals((prev) => [...prev, modal]);
     return promise;
