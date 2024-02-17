@@ -8,7 +8,7 @@ import {
 import { useLocation } from 'react-router-dom';
 
 type ModalProps = {
-  openModal: (element: React.ReactElement) => Promise<unknown>;
+  openModal: <T extends {}>(element: React.ReactElement) => Promise<T>;
   hideModal: () => void;
 };
 
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const ModalContext = createContext<ModalProps>({
-  openModal: async () => {},
+  openModal: async () => Promise.resolve({} as any),
   hideModal: () => {},
 });
 
@@ -29,20 +29,26 @@ const ModalProvider = ({ children }: Props): JSX.Element => {
     setModals([]);
   }, [location]);
 
-  const openModal = (element: React.ReactElement): Promise<unknown> => {
+  const openModal = <T extends {}>(element: React.ReactElement): Promise<T> => {
     const promiseResolver = () => {
-      let resolveFn: (value: boolean) => void = () => {};
-      const promise = new Promise((resolve) => {
+      let resolveFn: (value: T) => void = () => {};
+      let rejectFn: (value: T) => void = () => {};
+      const promise: Promise<T> = new Promise((resolve, reject) => {
         resolveFn = resolve;
+        rejectFn = reject;
       });
-      return { promise, resolveFn };
+      return { promise, resolveFn, rejectFn };
     };
-    const { promise, resolveFn } = promiseResolver();
+    const { promise, resolveFn, rejectFn } = promiseResolver();
 
     const modal: React.ReactElement = cloneElement(element, {
-      onSubmit: (flag: boolean) => {
-        resolveFn(flag);
-        hideModal();
+      onSubmit: (value: T) => {
+        resolveFn(value);
+        setModals((prev) => prev.slice(0, -1));
+      },
+      onAbort(ex: T) {
+        rejectFn(ex);
+        setModals((prev) => prev.slice(0, -1));
       },
     });
     setModals((prev) => [...prev, modal]);
@@ -50,6 +56,7 @@ const ModalProvider = ({ children }: Props): JSX.Element => {
   };
 
   const hideModal = () => {
+    modals.at(-1)?.props.onSubmit(false);
     setModals((prev) => prev.slice(0, -1));
   };
 
