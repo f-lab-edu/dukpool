@@ -3,47 +3,45 @@ import Button from '@components/common/Button';
 import closeIcon from '@assets/icons/close-noneborder.svg';
 import alert from '@assets/icons/alert.svg';
 import styled from 'styled-components';
+import { ModalProps } from 'src/@types/modal';
 
-const CommentModal = memo(
-  ({ onSubmit }: { onSubmit?: (type: boolean) => void }) => {
-    return (
-      <StyledWrapper
-        onClick={(e) => {
-          if (e.target !== e.currentTarget) return;
-          e.stopPropagation();
-          onSubmit?.(true);
-        }}
-      >
-        <StyledContainer>
-          <StyledCloseBtnContainer>
-            <StyledCloseIcon src={closeIcon} onClick={() => onSubmit?.(true)} />
-          </StyledCloseBtnContainer>
-          <StyledFlexContainer>
-            <StyledLogoContainer>
-              <StyledLogo src={alert} />
-            </StyledLogoContainer>
-            <StyledSpan>작성하신 댓글을 삭제하시겠어요?</StyledSpan>
-            <StyledButtonContainer>
-              <Button
-                text="취소"
-                disabled={false}
-                onClick={() => onSubmit?.(true)}
-                $colorType="light"
-              />
-              <Button
-                text="삭제"
-                disabled={false}
-                onClick={() => onSubmit?.(true)}
-                $colorType="dark"
-                error={true}
-              />
-            </StyledButtonContainer>
-          </StyledFlexContainer>
-        </StyledContainer>
-      </StyledWrapper>
-    );
-  },
-);
+const CommentModal = memo(({ onSubmit, onAbort }: ModalProps) => {
+  const handleOutside = (e: React.MouseEvent) => {
+    if (e.target !== e.currentTarget) return;
+    e.stopPropagation();
+    onAbort?.(false);
+  };
+  return (
+    <StyledWrapper onClick={handleOutside}>
+      <StyledContainer>
+        <StyledCloseBtnContainer>
+          <StyledCloseIcon src={closeIcon} onClick={() => onAbort?.(false)} />
+        </StyledCloseBtnContainer>
+        <StyledFlexContainer>
+          <StyledLogoContainer>
+            <StyledLogo src={alert} />
+          </StyledLogoContainer>
+          <StyledSpan>작성하신 댓글을 삭제하시겠어요?</StyledSpan>
+          <StyledButtonContainer>
+            <Button
+              text="취소"
+              disabled={false}
+              onClick={() => onAbort?.(false)}
+              $colorType="light"
+            />
+            <Button
+              text="삭제"
+              disabled={false}
+              onClick={() => onSubmit?.(true)}
+              $colorType="dark"
+              error={true}
+            />
+          </StyledButtonContainer>
+        </StyledFlexContainer>
+      </StyledContainer>
+    </StyledWrapper>
+  );
+});
 
 CommentModal.displayName = 'CommentModal';
 

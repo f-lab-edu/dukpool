@@ -3,38 +3,33 @@ import KakaoLoginButton from '@components/common/Button/KakaoLoginButton';
 import closeIcon from '@assets/icons/close-noneborder.svg';
 import logo from '@assets/logo/dukpool-logo.svg';
 import styled from 'styled-components';
+import { ModalProps } from 'src/@types/modal';
 
-const LoginModal = memo(
-  ({ onSubmit }: { onSubmit?: (type: boolean) => void }) => {
-    return (
-      <StyledWrapper
-        onClick={(e) => {
-          if (e.target !== e.currentTarget) return;
-          e.stopPropagation();
-          onSubmit?.(false);
-        }}
-      >
-        <StyledContainer>
-          <StyledCloseBtnContainer>
-            <StyledCloseIcon
-              src={closeIcon}
-              onClick={() => onSubmit?.(false)}
-            />
-          </StyledCloseBtnContainer>
-          <StyledFlexContainer>
-            <StyledLogoContainer>
-              <StyledLogo src={logo} />
-            </StyledLogoContainer>
-            <StyledSpan>로그인 후에 이용해보세요!</StyledSpan>
-            <StyledButtonContainer onClick={() => onSubmit?.(true)}>
-              <KakaoLoginButton />
-            </StyledButtonContainer>
-          </StyledFlexContainer>
-        </StyledContainer>
-      </StyledWrapper>
-    );
-  },
-);
+const LoginModal = memo(({ onSubmit, onAbort }: ModalProps) => {
+  const handleOutside = (e: React.MouseEvent) => {
+    if (e.target !== e.currentTarget) return;
+    e.stopPropagation();
+    onAbort?.(false);
+  };
+  return (
+    <StyledWrapper onClick={handleOutside}>
+      <StyledContainer>
+        <StyledCloseBtnContainer>
+          <StyledCloseIcon src={closeIcon} onClick={() => onAbort?.(false)} />
+        </StyledCloseBtnContainer>
+        <StyledFlexContainer>
+          <StyledLogoContainer>
+            <StyledLogo src={logo} />
+          </StyledLogoContainer>
+          <StyledSpan>로그인 후에 이용해보세요!</StyledSpan>
+          <StyledButtonContainer onClick={() => onSubmit?.(true)}>
+            <KakaoLoginButton />
+          </StyledButtonContainer>
+        </StyledFlexContainer>
+      </StyledContainer>
+    </StyledWrapper>
+  );
+});
 
 LoginModal.displayName = 'LoginModal';
 
