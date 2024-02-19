@@ -7,7 +7,7 @@ export const usePostArticle = () => {
     mutationKey: ['postArticle'],
     mutationFn: useAtomCallback((get, _, body: FormData): Promise<void> => {
       const client = get(ensuredAuthClientAtom);
-      return client.post('/article', body, {
+      return client.post('/content/create', body, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -18,10 +18,10 @@ export const usePostArticle = () => {
 
 export const usePostArticlePrefer = () => {
   return useMutation({
-    mutationKey: ['postTalkPrefer'],
-    mutationFn: useAtomCallback((get, _, id: number): Promise<void> => {
+    mutationKey: ['postArticlePrefer'],
+    mutationFn: useAtomCallback((get, _, content: string): Promise<void> => {
       const client = get(ensuredAuthClientAtom);
-      return client.post(`/article/prefer/${id}`);
+      return client.post(`/like/create`, { content });
     }),
   });
 };
@@ -33,10 +33,10 @@ export const usePostArticleComment = () => {
       (
         get,
         _,
-        { id, comment }: { id: number; comment: string },
+        { desc, content }: { desc: string; content: string },
       ): Promise<void> => {
         const client = get(ensuredAuthClientAtom);
-        return client.post(`/article/comment/${id}`, { comment });
+        return client.post(`/commentContent/create`, { desc, content });
       },
     ),
   });
@@ -47,7 +47,7 @@ export const usePostTalk = () => {
     mutationKey: ['postTalk'],
     mutationFn: useAtomCallback((get, _, body: FormData): Promise<void> => {
       const client = get(ensuredAuthClientAtom);
-      return client.post('/talk', body, {
+      return client.post('/talkcontents/create', body, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -59,24 +59,24 @@ export const usePostTalk = () => {
 export const usePostTalkPrefer = () => {
   return useMutation({
     mutationKey: ['postTalkPrefer'],
-    mutationFn: useAtomCallback((get, _, id: number): Promise<void> => {
+    mutationFn: useAtomCallback((get, _, content: string): Promise<void> => {
       const client = get(ensuredAuthClientAtom);
-      return client.post(`/talk/prefer/${id}`);
+      return client.post(`/liketalkcontent/create`, { content });
     }),
   });
 };
 
 export const usePostTalkComment = () => {
   return useMutation({
-    mutationKey: ['postArticleComment'],
+    mutationKey: ['postTalkComment'],
     mutationFn: useAtomCallback(
       (
         get,
         _,
-        { id, comment }: { id: number; comment: string },
+        { desc, content }: { desc: string; content: string },
       ): Promise<void> => {
         const client = get(ensuredAuthClientAtom);
-        return client.post(`/talk/comment/${id}`, { comment });
+        return client.post(`/commentTalkContent/create`, { desc, content });
       },
     ),
   });

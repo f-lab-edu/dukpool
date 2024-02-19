@@ -6,9 +6,9 @@ export const usePatchArticle = () => {
   return useMutation({
     mutationKey: ['patchArticle'],
     mutationFn: useAtomCallback(
-      (get, set, { id, body }: { id: number; body: FormData }) => {
+      (get, set, { id, body }: { id: string; body: FormData }) => {
         const client = get(ensuredAuthClientAtom);
-        return client.patch(`/article/edit/${id}`, body, {
+        return client.patch(`/content/${id}`, body, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -22,9 +22,13 @@ export const usePatchArticleComment = () => {
   return useMutation({
     mutationKey: ['patchArticleComment'],
     mutationFn: useAtomCallback(
-      (get, set, { id, comment }: { id: number; comment: string }) => {
+      (
+        get,
+        set,
+        { id, desc, content }: { id: string; desc: string; content: string },
+      ) => {
         const client = get(ensuredAuthClientAtom);
-        return client.patch(`/article/comment/${id}`, { comment });
+        return client.patch(`/commentContent/${id}`, { desc, content });
       },
     ),
   });
@@ -34,9 +38,9 @@ export const usePatchTalk = () => {
   return useMutation({
     mutationKey: ['patchTalk'],
     mutationFn: useAtomCallback(
-      (get, set, { id, body }: { id: number; body: FormData }) => {
+      (get, set, { id, body }: { id: string; body: FormData }) => {
         const client = get(ensuredAuthClientAtom);
-        return client.patch(`/talk/edit/${id}`, body, {
+        return client.patch(`/talkcontents/${id}`, body, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -50,9 +54,13 @@ export const usePatchTalkComment = () => {
   return useMutation({
     mutationKey: ['patchArticleComment'],
     mutationFn: useAtomCallback(
-      (get, set, { id, comment }: { id: number; comment: string }) => {
+      (
+        get,
+        set,
+        { id, desc, content }: { id: string; desc: string; content: string },
+      ) => {
         const client = get(ensuredAuthClientAtom);
-        return client.patch(`/talk/comment/${id}`, { comment });
+        return client.patch(`/commentTalkContent/${id}`, { desc, content });
       },
     ),
   });
@@ -63,7 +71,7 @@ export const usePatchNickname = () => {
     mutationKey: ['patchNickname'],
     mutationFn: useAtomCallback((get, set, nickname: string) => {
       const client = get(ensuredAuthClientAtom);
-      return client.patch(`/users/nickname`, { nickname });
+      return client.patch(`/auth`, { nickname });
     }),
   });
 };
