@@ -9,13 +9,16 @@ const PostModal = memo(({ onSubmit, onAbort }: ModalProps) => {
   const handleOutside = (e: React.MouseEvent) => {
     if (e.target !== e.currentTarget) return;
     e.stopPropagation();
-    onAbort?.(false);
+    onAbort?.(new Error());
   };
   return (
     <StyledWrapper onClick={handleOutside}>
       <StyledContainer>
         <StyledCloseBtnContainer>
-          <StyledCloseIcon src={closeIcon} onClick={() => onAbort?.(false)} />
+          <StyledCloseIcon
+            src={closeIcon}
+            onClick={() => onAbort?.(new Error())}
+          />
         </StyledCloseBtnContainer>
         <StyledFlexContainer>
           <StyledLogoContainer>
@@ -26,7 +29,7 @@ const PostModal = memo(({ onSubmit, onAbort }: ModalProps) => {
             <Button
               text="취소"
               disabled={false}
-              onClick={() => onAbort?.(false)}
+              onClick={() => onAbort?.(new Error())}
               $colorType="light"
             />
             <Button
