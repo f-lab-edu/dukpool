@@ -1,8 +1,7 @@
-import { ArticleResponse } from './article';
-import { TalkResponse } from './talk';
+import { ContentResponse } from './content';
 
 export type SearchResponse = {
   tags: string[];
-  articles: ArticleResponse[];
-  talks: TalkResponse[];
+  contents: ContentResponse[];
+  talkContents: ContentResponse[];
 };
