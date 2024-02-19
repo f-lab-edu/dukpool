@@ -1,129 +1,140 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import {
+  useQuery,
+  useSuspenseInfiniteQuery,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import { useAtomCallback } from 'jotai/utils';
 import { ensuredAuthClientAtom, defaultClientAtom } from '@atoms/authAtom';
 import {
-  MOCK_ARTICLE_DATA,
-  MOCK_ARTICLE_POST_DATA,
-  MOCK_SEARCH_DATA,
-  MOCK_TAGGED_DATA,
-  MOCK_TALK_POST_DATA,
-  MOCK_USER_ARTICLES_DATA,
-  MOCK_USER_DATA,
-} from '@utils/mockData';
-import { ArticleResponse } from 'src/@types/article';
-import { TalkResponse } from 'src/@types/talk';
-import { SearchResponse } from 'src/@types/search';
-import { TaggedPostResponse } from 'src/@types/tagged';
-import { ProfileResponse, UserPostsResponse } from 'src/@types/user';
+  AllContentResponse,
+  ContentResponse,
+  SearchResponse,
+  InfiniteQueryProps,
+} from 'src/@types/content';
+import { UserDataResponse } from 'src/@types/user';
 
-export const useAllArticles = (sortType: string) => {
-  return useSuspenseQuery({
-    queryKey: ['allArticles', sortType],
-    queryFn: useAtomCallback(async (get): Promise<ArticleResponse[]> => {
+export const useAllArticles = (sortType: string = '') => {
+  const getArticle = useAtomCallback(
+    async (get, set, sortType, pageParam): Promise<InfiniteQueryProps> => {
       const client = get(defaultClientAtom);
-      // const { data } = await client.get(`/article/${sortType}`);
-      // return data;
-      console.log(client, sortType);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return MOCK_ARTICLE_DATA;
+      const { data: resp } = await client.get(
+        `/content?sortType=${sortType}&page=${pageParam}&take=${20}`,
+      );
+      const { data, meta } = resp;
+      return { data, meta };
+    },
+  );
+  return useSuspenseInfiniteQuery({
+    queryKey: ['allArticles', sortType],
+    queryFn: ({ pageParam }) => getArticle(sortType, pageParam),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.meta.hasNextPage) return lastPage.meta.page + 1;
+      return undefined;
+    },
+  });
+};
+
+export const useMainArticles = () => {
+  return useSuspenseQuery({
+    queryKey: ['mainArticles'],
+    queryFn: useAtomCallback(async (get): Promise<AllContentResponse[]> => {
+      const client = get(defaultClientAtom);
+      const { data } = await client.get(`/content?page=1&take=10`);
+      console.log(data.data);
+      return data.data;
     }),
   });
 };
 
-export const useArticle = (id: number) => {
+export const useArticle = (id: string) => {
   return useSuspenseQuery({
     queryKey: ['article', id],
-    queryFn: useAtomCallback(async (get): Promise<ArticleResponse> => {
+    queryFn: useAtomCallback(async (get): Promise<ContentResponse> => {
       const client = get(defaultClientAtom);
-      // const { data } = await client.get(`/article/${id}`);
-      // return data;
-      console.log(client, id);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return MOCK_ARTICLE_POST_DATA;
+      const { data } = await client.get(`/content/${id}`);
+      console.log(data.data);
+      return data.data.content;
     }),
   });
 };
 
-export const useAllTalks = (sortType: string = 'newest') => {
-  return useSuspenseQuery({
+export const useAllTalks = (sortType: string = '') => {
+  const getArticle = useAtomCallback(
+    async (get, set, sortType, pageParam): Promise<InfiniteQueryProps> => {
+      const client = get(defaultClientAtom);
+      const { data: resp } = await client.get(
+        `/talkcontents?sortType=${sortType}&page=${pageParam}&take=${20}`,
+      );
+      const { data, meta } = resp;
+      return { data, meta };
+    },
+  );
+  return useSuspenseInfiniteQuery({
     queryKey: ['allTalks', sortType],
-    queryFn: useAtomCallback(async (get): Promise<TalkResponse[]> => {
+    queryFn: ({ pageParam }) => getArticle(sortType, pageParam),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.meta.hasNextPage) return lastPage.meta.page + 1;
+      return undefined;
+    },
+  });
+};
+
+export const useMainTalks = () => {
+  return useSuspenseQuery({
+    queryKey: ['mainTalks'],
+    queryFn: useAtomCallback(async (get): Promise<AllContentResponse[]> => {
       const client = get(defaultClientAtom);
-      // const { data } = await client.get(`/talk/${sortType}`);
-      // return data;
-      console.log(client, sortType);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return MOCK_ARTICLE_DATA;
+      const { data } = await client.get(`/talkcontents?page=1&take=10`);
+      console.log(data.data);
+      return data.data;
     }),
   });
 };
 
-export const useTalk = (id: number) => {
+export const useTalk = (id: string) => {
   return useSuspenseQuery({
     queryKey: ['talk', id],
-    queryFn: useAtomCallback(async (get): Promise<TalkResponse> => {
+    queryFn: useAtomCallback(async (get): Promise<ContentResponse> => {
       const client = get(defaultClientAtom);
-      // const { data } = await client.get(`/talk/${id}`);
-      // return data;
-      console.log(client, id);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return MOCK_TALK_POST_DATA;
+      const { data } = await client.get(`/talkcontents/${id}`);
+      console.log(data.data);
+      return data.data.talkContent;
     }),
   });
 };
 
-export const useSearch = (text: string = '') => {
+export const useSearch = (searchText: string = '') => {
   return useSuspenseQuery({
-    queryKey: ['search', text],
+    queryKey: ['search', searchText],
     queryFn: useAtomCallback(async (get): Promise<SearchResponse> => {
       const client = get(defaultClientAtom);
-      // const { data } = await client.get(`/search/${text}`);
-      // return data;
-      console.log(client, text);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return MOCK_SEARCH_DATA;
+      const { data } = await client.get(`/search?searchQuery=${searchText}`);
+      return data.data;
     }),
   });
 };
 
 export const useTagged = (tagName: string) => {
   return useSuspenseQuery({
-    queryKey: ['search', tagName],
-    queryFn: useAtomCallback(async (get): Promise<TaggedPostResponse> => {
+    queryKey: ['tagged', tagName],
+    queryFn: useAtomCallback(async (get): Promise<SearchResponse> => {
       const client = get(defaultClientAtom);
-      // const { data } = await client.get(`/tagged/${tagName}`);
-      // return data;
-      console.log(client, tagName);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return MOCK_TAGGED_DATA;
+      const { data } = await client.get(`/search?tag=${tagName}`);
+      return data;
     }),
   });
 };
 
-export const useProfile = () => {
+export const useUserData = () => {
   return useSuspenseQuery({
-    queryKey: ['userProfile'],
-    queryFn: useAtomCallback(async (get): Promise<ProfileResponse> => {
+    queryKey: ['userData'],
+    queryFn: useAtomCallback(async (get): Promise<UserDataResponse> => {
       const client = get(ensuredAuthClientAtom);
-      // const { data } = await client.get('/users');
-      // return data;
-      console.log(client);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return MOCK_USER_DATA;
-    }),
-  });
-};
-
-export const useUserPosts = () => {
-  return useSuspenseQuery({
-    queryKey: ['userPosts'],
-    queryFn: useAtomCallback(async (get): Promise<UserPostsResponse> => {
-      const client = get(ensuredAuthClientAtom);
-      // const { data } = await client.get('/user-posts');
-      // return data;
-      console.log(client);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return MOCK_USER_ARTICLES_DATA;
+      const { data } = await client.get('/auth/profile');
+      console.log(data.data.profileImg);
+      return data.data;
     }),
   });
 };
@@ -133,9 +144,9 @@ export const useCheckNickname = (nickname: string) => {
     queryKey: ['nicknameCheck', nickname],
     queryFn: useAtomCallback(async (get): Promise<boolean> => {
       const client = get(ensuredAuthClientAtom);
-      const { data } = await client.get(`/users/check?nickname=${nickname}`);
+      const { data } = await client.get(`/auth/check?nickname=${nickname}`);
       return data;
     }),
-    enabled: nickname.length > 2,
+    // enabled: nickname.length > 2,
   });
 };
