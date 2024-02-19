@@ -32,7 +32,7 @@ const ModalProvider = ({ children }: Props): JSX.Element => {
   const openModal = <T extends {}>(element: React.ReactElement): Promise<T> => {
     const promiseResolver = () => {
       let resolveFn: (value: T) => void = () => {};
-      let rejectFn: (value: T) => void = () => {};
+      let rejectFn: (ex: Error) => void = () => {};
       const promise: Promise<T> = new Promise((resolve, reject) => {
         resolveFn = resolve;
         rejectFn = reject;
@@ -46,7 +46,7 @@ const ModalProvider = ({ children }: Props): JSX.Element => {
         resolveFn(value);
         setModals((prev) => prev.slice(0, -1));
       },
-      onAbort(ex: T) {
+      onAbort: (ex: Error) => {
         rejectFn(ex);
         setModals((prev) => prev.slice(0, -1));
       },
