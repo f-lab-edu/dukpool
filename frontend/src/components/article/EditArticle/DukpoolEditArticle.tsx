@@ -35,7 +35,8 @@ const DukpoolEditArticle = memo(() => {
     },
     mode: 'onTouched',
   });
-  const { title, desc } = methods.formState.errors;
+  const { title: titleErrorState, desc: descErrorState } =
+    methods.formState.errors;
 
   const onSubmit = async ({ title, tags, desc, files }: FormValues) => {
     console.log(title, tags, desc, files);
@@ -68,7 +69,9 @@ const DukpoolEditArticle = memo(() => {
           required={true}
           minLength={5}
         />
-        {<ErrorMessage field="제목" type={title?.type!} length={5} />}
+        {titleErrorState && (
+          <ErrorMessage field="제목" type={titleErrorState.type} length={5} />
+        )}
         <Tags />
         <TextArea
           label="내용"
@@ -77,7 +80,9 @@ const DukpoolEditArticle = memo(() => {
           required={true}
           minLength={10}
         />
-        {<ErrorMessage field="내용" type={desc?.type!} length={10} />}
+        {descErrorState && (
+          <ErrorMessage field="내용" type={descErrorState.type} length={10} />
+        )}
         <Images />
         <StyledButtonContainer>
           <StyledButtonWrapper>
