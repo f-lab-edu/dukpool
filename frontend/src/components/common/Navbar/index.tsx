@@ -1,11 +1,12 @@
-import { memo, useContext } from 'react';
+import { memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { media } from '@styles/media';
-import { AuthContext } from '@context/AuthContext';
+import { useAtomValue } from 'jotai';
+import { loginStatusAtom } from '@atoms/authAtom';
 
 const Navbar = memo(() => {
-  const { isLoggined } = useContext(AuthContext);
+  const isLoggined = useAtomValue(loginStatusAtom);
   const { pathname } = useLocation();
   return (
     <StyledNavbar>

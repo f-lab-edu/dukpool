@@ -1,10 +1,12 @@
-import { memo, useState } from 'react';
+import { memo, useContext, useState } from 'react';
 import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import TextArea from '@components/common/TextArea';
 import { usePatchArticleComment } from '@hooks/usePatchMutations';
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '@components/common/Button';
+import { useDeleteArticleComment } from '@hooks/useDeleteMutations';
+import { ModalContext } from '@context/ModalContext';
 
 type CommentItemProps = {
   id: number;
@@ -28,8 +30,14 @@ const CommentListItem = memo(
       mode: 'onTouched',
     });
     const { mutate: patchComment } = usePatchArticleComment();
+    const { mutate: deleteComment } = useDeleteArticleComment();
+    const { openModal } = useContext(ModalContext);
     const onSubmit = ({ comment }: FormValue) => {
       patchComment({ id, comment });
+    };
+    const handleDelete = async () => {
+      const flag = await openModal('comment');
+      if (flag) deleteComment(1);
     };
     return (
       <FormProvider {...methods}>
@@ -47,7 +55,7 @@ const CommentListItem = memo(
                 <StyledEditButton onClick={() => setIsEdit((prev) => !prev)}>
                   {isEdit ? '수정취소' : '수정'}
                 </StyledEditButton>
-                <StyledEditButton>삭제</StyledEditButton>
+                <StyledEditButton onClick={handleDelete}>삭제</StyledEditButton>
               </StyledEditContainer>
             </StyledWrapper>
           </StyledCommentUserProfile>
@@ -155,3 +163,8 @@ const StyledButtonWrapper = styled.div`
 `;
 
 export default CommentListItem;
+
+// 1. 삭제 버튼 클릭
+// 2. 모달 창 띄움 (Promise 생성)
+// 3. 취소 시 reject, 모달 창 사라짐
+// 4. 확인 시 resolve, api 요청, 모달 창 사라짐

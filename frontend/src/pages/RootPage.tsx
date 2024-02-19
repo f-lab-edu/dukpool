@@ -10,23 +10,26 @@ import { AuthProvider } from '@context/AuthContext';
 import { ToastProvider } from '@context/ToastContext';
 import { Provider } from 'jotai';
 import ClientProvider from '@context/ClientContext';
+import { ModalProvider } from '@context/ModalContext';
 
 const RootPage = () => {
   const { isMobile } = useMediaQuery();
   const { reset } = useQueryErrorResetBoundary();
   return (
     <Provider>
-      <ToastProvider>
-        <ClientProvider>
-          <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
-            <AuthProvider>
-              <Header />
-              <Outlet />
-              {isMobile ? <MobileNavbar /> : <Footer />}
-            </AuthProvider>
-          </ErrorBoundary>
-        </ClientProvider>
-      </ToastProvider>
+      <ModalProvider>
+        <ToastProvider>
+          <ClientProvider>
+            <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
+              <AuthProvider>
+                <Header />
+                <Outlet />
+                {isMobile ? <MobileNavbar /> : <Footer />}
+              </AuthProvider>
+            </ErrorBoundary>
+          </ClientProvider>
+        </ToastProvider>
+      </ModalProvider>
     </Provider>
   );
 };

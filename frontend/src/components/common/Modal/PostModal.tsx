@@ -1,11 +1,11 @@
 import { memo } from 'react';
-import KakaoLoginButton from '@components/common/Button/KakaoLoginButton';
+import Button from '@components/common/Button';
 import closeIcon from '@assets/icons/close-noneborder.svg';
-import logo from '@assets/logo/dukpool-logo.svg';
+import alert from '@assets/icons/alert.svg';
 import styled from 'styled-components';
 import { ModalProps } from 'src/@types/modal';
 
-const LoginModal = memo(({ onSubmit, onAbort }: ModalProps) => {
+const PostModal = memo(({ onSubmit, onAbort }: ModalProps) => {
   const handleOutside = (e: React.MouseEvent) => {
     if (e.target !== e.currentTarget) return;
     e.stopPropagation();
@@ -22,11 +22,23 @@ const LoginModal = memo(({ onSubmit, onAbort }: ModalProps) => {
         </StyledCloseBtnContainer>
         <StyledFlexContainer>
           <StyledLogoContainer>
-            <StyledLogo src={logo} />
+            <StyledLogo src={alert} />
           </StyledLogoContainer>
-          <StyledSpan>로그인 후에 이용해보세요!</StyledSpan>
-          <StyledButtonContainer onClick={() => onSubmit?.(true)}>
-            <KakaoLoginButton />
+          <StyledSpan>작성하신 게시물을 삭제하시겠어요?</StyledSpan>
+          <StyledButtonContainer>
+            <Button
+              text="취소"
+              disabled={false}
+              onClick={() => onAbort?.(new Error())}
+              $colorType="light"
+            />
+            <Button
+              text="삭제"
+              disabled={false}
+              onClick={() => onSubmit?.(true)}
+              $colorType="dark"
+              error={true}
+            />
           </StyledButtonContainer>
         </StyledFlexContainer>
       </StyledContainer>
@@ -34,7 +46,7 @@ const LoginModal = memo(({ onSubmit, onAbort }: ModalProps) => {
   );
 });
 
-LoginModal.displayName = 'LoginModal';
+PostModal.displayName = 'PostModal';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -88,11 +100,14 @@ const StyledSpan = styled.span`
 `;
 
 const StyledLogo = styled.img`
-  width: 210px;
+  width: 60px;
 `;
 
 const StyledButtonContainer = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 `;
 
-export default LoginModal;
+export default PostModal;
