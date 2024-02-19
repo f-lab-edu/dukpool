@@ -24,7 +24,6 @@ const MyInfo = memo(() => {
   const nickname = methods.watch('nickname');
   const debouncedNickname = useDebounce(nickname, 200);
   // const { data: validate } = useGetCheckNickname(debouncedNickname);
-  console.log(debouncedNickname);
   const { mutate: updateNickname } = usePatchNickname();
   const onSubmit = ({ nickname }: FormValue) => {
     updateNickname(nickname);

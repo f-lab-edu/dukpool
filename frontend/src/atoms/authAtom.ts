@@ -27,7 +27,9 @@ export const atomWithUpdater = <Value, Args extends unknown[], Result>(
 // primitive atoms
 const tokenBaseAtom = atomWithStorage<string | null>(
   TOKEN_KEY,
-  localStorage.getItem(TOKEN_KEY) ?? null,
+  localStorage.getItem(TOKEN_KEY)
+    ? JSON.parse(localStorage.getItem(TOKEN_KEY) as string)
+    : null,
 );
 
 // derived atoms
@@ -42,7 +44,6 @@ export const authClientAtom = atom((get) => {
 
   instance.interceptors.request.use((config) => {
     const [token, _] = get(updateTokenAtom);
-    console.log(token);
     config.headers.Authorization = `Bearer ${token}`;
     config.withCredentials = true;
     return config;
@@ -53,8 +54,9 @@ export const authClientAtom = atom((get) => {
       return response;
     },
     async (error) => {
-      const { config: originalRequest } = error;
-      if (error.code === 'EXPIRED_ACCESS_TOKEN') {
+      const { config: originalRequest, response } = error;
+      const { data } = response;
+      if (data.message === 'Unauthorized') {
         const [_, updateToken] = get(updateTokenAtom);
         const { data } = await instance.get(`/auth/accessToken`);
         updateToken(data);
@@ -68,10 +70,18 @@ export const authClientAtom = atom((get) => {
   return instance;
 });
 
-export const defaultClientAtom = atom(() => {
+export const defaultClientAtom = atom((get) => {
   const instance = axios.create({
     baseURL: CONFIG.BASE_URL,
     withCredentials: true,
+  });
+  instance.interceptors.request.use((config) => {
+    const [token, _] = get(updateTokenAtom);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      config.withCredentials = true;
+    }
+    return config;
   });
   instance.interceptors.response.use(
     (response) => {

@@ -16,45 +16,44 @@ import ErrorMessage from '@components/common/ErrorMessage.tsx';
 type FormValues = {
   title: string;
   tags: string[];
-  content: string;
-  images: (string | File)[];
+  desc: string;
+  files: (string | File)[];
 };
 
 const DukpoolEditTalk = memo(() => {
   const { talkId } = useParams();
   assert(talkId);
-  const { data: article } = useTalk(Number(talkId));
+  const { data: talk } = useTalk(talkId);
   const { mutate: patchTalk } = usePatchTalk();
-
   const methods = useForm<FormValues>({
     defaultValues: {
-      title: article.title,
-      tags: article.tags,
-      content: article.content,
-      images: article.images,
+      title: talk.title,
+      tags: talk.tag,
+      desc: talk.desc,
+      files: talk.img,
     },
     mode: 'onTouched',
   });
-  const { title, content } = methods.formState.errors;
+  const { title: titleErrorState, desc: descErrorState } =
+    methods.formState.errors;
 
-  const onSubmit = async ({ title, tags, content, images }: FormValues) => {
-    console.log(title, tags, content, images);
+  const onSubmit = async ({ title, tags, desc, files }: FormValues) => {
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('content', content);
-    tags.forEach((tag) => formData.append('tags', tag));
+    formData.append('desc', desc);
+    tags.forEach((tag) => formData.append('tag[]', tag));
     await Promise.all(
-      images.map(async (image) => {
+      files.map(async (image) => {
         if (typeof image === 'string') {
           const file = await convertURLtoFile(image);
-          formData.append('images', file);
+          formData.append('files', file);
           return file;
         } else {
-          formData.append('images', image);
+          formData.append('files', image);
         }
       }),
     );
-    patchTalk({ id: Number(talkId), body: formData });
+    patchTalk({ id: talkId, body: formData });
   };
 
   return (
@@ -67,20 +66,29 @@ const DukpoolEditTalk = memo(() => {
           required={true}
           minLength={5}
         />
-        {<ErrorMessage field="제목" type={title?.type!} length={5} />}
+        {titleErrorState && (
+          <ErrorMessage field="제목" type={titleErrorState.type} length={5} />
+        )}
         <Tags />
         <TextArea
           label="내용"
           placeholder="최소 10자의 내용을 입력해주세요"
-          registerType="content"
+          registerType="desc"
           required={true}
           minLength={10}
         />
-        {<ErrorMessage field="내용" type={content?.type!} length={10} />}
+        {descErrorState && (
+          <ErrorMessage field="내용" type={descErrorState?.type} length={10} />
+        )}
         <Images />
         <StyledButtonContainer>
           <StyledButtonWrapper>
-            <Button text="등록" disabled={false} $colorType="dark" />
+            <Button
+              type="submit"
+              text="등록"
+              disabled={false}
+              $colorType="dark"
+            />
           </StyledButtonWrapper>
         </StyledButtonContainer>
       </form>

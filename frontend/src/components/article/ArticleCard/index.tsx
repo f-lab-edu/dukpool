@@ -2,37 +2,37 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
-import likeIcon from '@assets/icons/outlined-like.svg';
+import likeIcon from '@assets/icons/like.svg';
 import commentIcon from '@assets/icons/comment.svg';
-import { ArticlePostProps } from '@utils/mockData';
+import { AllContentResponse } from 'src/@types/content';
 
 const ArticleCard = memo(
   ({
-    title,
-    userProfile,
-    images,
-    date,
     id,
+    createdAt,
+    title,
+    img,
+    commentCount,
     likeCount,
-    comments,
-  }: ArticlePostProps) => {
+    writer,
+  }: AllContentResponse) => {
     return (
       <StyledList>
         <StyledLink to={`/article/${id}`}>
           <StyledImgContainer>
-            <StyledImage src={images[0] ?? placeholderImage} />
+            <StyledImage src={img[0] ?? placeholderImage} />
           </StyledImgContainer>
           <StyledInfoContainer>
             <StyledTitle>{title}</StyledTitle>
             <StyledProfileContainer>
               <StyledProfileImageContainer>
                 <StyledProfileImage
-                  src={userProfile.image ?? placeholderImage}
+                  src={writer.profileImg ?? placeholderImage}
                 />
               </StyledProfileImageContainer>
-              <StyledProfile>{userProfile.name}</StyledProfile>
+              <StyledProfile>{writer.nickname}</StyledProfile>
             </StyledProfileContainer>
-            <StyledDate>{date}</StyledDate>
+            <StyledDate>{createdAt}</StyledDate>
             <StyledCountBox>
               <StyledCount>
                 <StyledIcon src={likeIcon} />
@@ -40,7 +40,7 @@ const ArticleCard = memo(
               </StyledCount>
               <StyledCount>
                 <StyledIcon src={commentIcon} />
-                <span>{comments.users.length}</span>
+                <span>{commentCount}</span>
               </StyledCount>
             </StyledCountBox>
           </StyledInfoContainer>

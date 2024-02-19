@@ -5,9 +5,9 @@ import { useAtomCallback } from 'jotai/utils';
 export const useDeleteArticle = () => {
   return useMutation({
     mutationKey: ['deleteArticle'],
-    mutationFn: useAtomCallback((get, set, id: number) => {
+    mutationFn: useAtomCallback((get, set, id: string) => {
       const client = get(ensuredAuthClientAtom);
-      return client.delete(`/article/${id}`);
+      return client.delete(`/content/${id}`);
     }),
   });
 };
@@ -15,9 +15,9 @@ export const useDeleteArticle = () => {
 export const useDeleteArticlePrefer = () => {
   return useMutation({
     mutationKey: ['deleteArticlePrefer'],
-    mutationFn: useAtomCallback((get, set, id: number) => {
+    mutationFn: useAtomCallback((get, set, id: string) => {
       const client = get(ensuredAuthClientAtom);
-      return client.delete(`/article/prefer/${id}`);
+      return client.delete(`/like/${id}`);
     }),
   });
 };
@@ -25,39 +25,39 @@ export const useDeleteArticlePrefer = () => {
 export const useDeleteArticleComment = () => {
   return useMutation({
     mutationKey: ['deleteArticleComment'],
-    mutationFn: useAtomCallback((get, set, id: number) => {
+    mutationFn: useAtomCallback((get, set, id: string) => {
       const client = get(ensuredAuthClientAtom);
-      return client.delete(`/article/comment/${id}`);
+      return client.delete(`/commentContent/${id}`);
     }),
   });
 };
 
 export const useDeleteTalk = () => {
   return useMutation({
-    mutationKey: ['deleteArticle'],
-    mutationFn: useAtomCallback((get, set, id: number) => {
+    mutationKey: ['deleteTalk'],
+    mutationFn: useAtomCallback((get, set, id: string) => {
       const client = get(ensuredAuthClientAtom);
-      return client.delete(`/talk/${id}`);
+      return client.delete(`/talkcontents/${id}`);
     }),
   });
 };
 
 export const useDeleteTalkPrefer = () => {
   return useMutation({
-    mutationKey: ['deleteArticlePrefer'],
-    mutationFn: useAtomCallback((get, set, id: number) => {
+    mutationKey: ['deleteTalkPrefer'],
+    mutationFn: useAtomCallback((get, set, id: string) => {
       const client = get(ensuredAuthClientAtom);
-      return client.delete(`/talk/prefer/${id}`);
+      return client.delete(`/liketalkcontent/${id}`);
     }),
   });
 };
 
 export const useDeleteTalkComment = () => {
   return useMutation({
-    mutationKey: ['deleteArticleComment'],
-    mutationFn: useAtomCallback((get, set, id: number) => {
+    mutationKey: ['deleteTalkComment'],
+    mutationFn: useAtomCallback((get, set, id: string) => {
       const client = get(ensuredAuthClientAtom);
-      return client.delete(`/talk/comment/${id}`);
+      return client.delete(`/commentTalkContent/${id}`);
     }),
   });
 };
@@ -67,7 +67,7 @@ export const useDeleteUser = () => {
     mutationKey: ['deleteUser'],
     mutationFn: useAtomCallback((get) => {
       const client = get(ensuredAuthClientAtom);
-      return client.delete('/users');
+      return client.delete('/auth');
     }),
   });
 };

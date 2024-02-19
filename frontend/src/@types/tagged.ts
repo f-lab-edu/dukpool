@@ -1,7 +1,6 @@
-import { ArticleResponse } from './article';
-import { TalkResponse } from './talk';
+import { ContentResponse } from './content';
 
 export type TaggedPostResponse = {
-  articles: ArticleResponse[];
-  talks: TalkResponse[];
+  articles: ContentResponse[];
+  talks: ContentResponse[];
 };
