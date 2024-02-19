@@ -2,31 +2,31 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
-import likeIcon from '@assets/icons/outlined-like.svg';
+import likeIcon from '@assets/icons/like.svg';
 import commentIcon from '@assets/icons/comment.svg';
-import { TalkPostProps } from '@utils/mockData';
+import { AllContentResponse } from 'src/@types/content';
 
 const TalkCard = memo(
   ({
-    title,
-    userProfile,
-    images,
-    content,
-    date,
     id,
+    createdAt,
+    title,
+    desc,
+    img,
+    commentCount,
     likeCount,
-    comments,
-  }: TalkPostProps) => {
+    writer,
+  }: AllContentResponse) => {
     return (
       <StyledList>
         <StyledLink to={`/talk/${id}`}>
           <StyledContainer>
             <StyledImgContainer>
-              <StyledImage src={images[0] ?? placeholderImage} />
+              <StyledImage src={img[0] ?? placeholderImage} />
             </StyledImgContainer>
             <StyledContentContainer>
               <StyledTitle>{title}</StyledTitle>
-              <StyledContent>{content}</StyledContent>
+              <StyledContent>{desc}</StyledContent>
             </StyledContentContainer>
           </StyledContainer>
           <StyledInfoContainer>
@@ -34,10 +34,10 @@ const TalkCard = memo(
               <StyledProfileDiv>
                 <StyledProfileImageContainer>
                   <StyledProfileImage
-                    src={userProfile.image ?? placeholderImage}
+                    src={writer.profileImg ?? placeholderImage}
                   />
                 </StyledProfileImageContainer>
-                <StyledProfile>{userProfile.name}</StyledProfile>
+                <StyledProfile>{writer.nickname}</StyledProfile>
               </StyledProfileDiv>
               <StyledCountBox>
                 <StyledCount>
@@ -46,11 +46,11 @@ const TalkCard = memo(
                 </StyledCount>
                 <StyledCount>
                   <StyledIcon src={commentIcon} />
-                  <span>{comments.users.length}</span>
+                  <span>{commentCount}</span>
                 </StyledCount>
               </StyledCountBox>
             </StyledProfileContainer>
-            <StyledDate>{date}</StyledDate>
+            <StyledDate>{createdAt}</StyledDate>
           </StyledInfoContainer>
         </StyledLink>
       </StyledList>

@@ -1,17 +1,16 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { ArticlePostProps } from '@utils/mockData';
 import ArticleCard from '@components/article/ArticleCard';
 import Slider from 'react-slick';
 import { SliderOption } from '@constants/sliderOption';
 import useMediaQuery from '@hooks/useMediaQuery';
-import { useAllArticles } from '@hooks/useGetQueries';
+import { useMainArticles } from '@hooks/useGetQueries';
 
 const RecentArticleCards = memo(() => {
   const { isMobile } = useMediaQuery();
-  const { data: articles } = useAllArticles('newest');
+  const { data: articles } = useMainArticles();
 
-  const articleCards = articles.map((article: ArticlePostProps) => (
+  const articleCards = articles.map((article) => (
     <ArticleCard {...article} key={article.id}></ArticleCard>
   ));
 

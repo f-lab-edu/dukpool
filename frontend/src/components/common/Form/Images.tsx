@@ -8,18 +8,18 @@ import { useFormContext } from 'react-hook-form';
 
 const Images = memo(() => {
   const { setValue, watch } = useFormContext();
-  const currentImages: (string | File)[] = watch('images');
+  const currentImages: (string | File)[] = watch('files');
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && currentImages.length + files.length <= 5) {
-      setValue('images', [...currentImages, ...files]);
+      setValue('files', [...currentImages, ...files]);
     }
   };
 
   const handleDeleteFile = (imageToDelete: string | File) => {
     setValue(
-      'images',
+      'files',
       currentImages.filter((image) => image !== imageToDelete),
     );
   };

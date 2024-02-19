@@ -5,9 +5,9 @@ import upArrow from '@assets/icons/arrow-up.svg';
 import downArrow from '@assets/icons/arrow-down.svg';
 
 const DROPDOWN_OPTIONS = [
-  { type: 'newest', name: '최신순' },
-  { type: 'mostLiked', name: '좋아요 많은 순' },
-  { type: 'mostComment', name: '댓글 많은 순' },
+  { type: '', name: '최신순' },
+  { type: 'like', name: '좋아요 많은 순' },
+  { type: 'commentcount', name: '댓글 많은 순' },
 ];
 
 const Dropdown = memo(

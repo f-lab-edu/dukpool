@@ -16,45 +16,46 @@ import assert from 'assert';
 type FormValues = {
   title: string;
   tags: string[];
-  content: string;
-  images: (string | File)[];
+  desc: string;
+  files: (string | File)[];
 };
 
 const DukpoolEditArticle = memo(() => {
   const { articleId } = useParams();
   assert(articleId);
-  const { data: article } = useArticle(Number(articleId));
+  const { data: article } = useArticle(articleId);
   const { mutate: patchArticle } = usePatchArticle();
 
   const methods = useForm<FormValues>({
     defaultValues: {
       title: article.title,
-      tags: article.tags,
-      content: article.content,
-      images: article.images,
+      tags: article.tag,
+      desc: article.desc,
+      files: article.img,
     },
     mode: 'onTouched',
   });
-  const { title, content } = methods.formState.errors;
+  const { title, desc } = methods.formState.errors;
 
-  const onSubmit = async ({ title, tags, content, images }: FormValues) => {
-    console.log(title, tags, content, images);
+  const onSubmit = async ({ title, tags, desc, files }: FormValues) => {
+    console.log(title, tags, desc, files);
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('content', content);
-    tags.forEach((tag) => formData.append('tags', tag));
+    formData.append('desc', desc);
+    tags.forEach((tag) => formData.append('tag[]', tag));
     await Promise.all(
-      images.map(async (image) => {
+      files.map(async (image) => {
         if (typeof image === 'string') {
           const file = await convertURLtoFile(image);
-          formData.append('images', file);
+          formData.append('files', file);
           return file;
         } else {
-          formData.append('images', image);
+          console.log(image);
+          formData.append('files', image);
         }
       }),
     );
-    patchArticle({ id: Number(articleId), body: formData });
+    patchArticle({ id: articleId, body: formData });
   };
 
   return (
@@ -72,15 +73,20 @@ const DukpoolEditArticle = memo(() => {
         <TextArea
           label="내용"
           placeholder="최소 10자의 내용을 입력해주세요"
-          registerType="content"
+          registerType="desc"
           required={true}
           minLength={10}
         />
-        {<ErrorMessage field="내용" type={content?.type!} length={10} />}
+        {<ErrorMessage field="내용" type={desc?.type!} length={10} />}
         <Images />
         <StyledButtonContainer>
           <StyledButtonWrapper>
-            <Button text="등록" disabled={false} $colorType="dark" />
+            <Button
+              type="submit"
+              text="등록"
+              disabled={false}
+              $colorType="dark"
+            />
           </StyledButtonWrapper>
         </StyledButtonContainer>
       </form>
