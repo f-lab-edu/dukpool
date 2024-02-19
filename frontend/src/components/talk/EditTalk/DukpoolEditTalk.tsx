@@ -25,7 +25,6 @@ const DukpoolEditTalk = memo(() => {
   assert(talkId);
   const { data: talk } = useTalk(talkId);
   const { mutate: patchTalk } = usePatchTalk();
-  console.log(talk);
   const methods = useForm<FormValues>({
     defaultValues: {
       title: talk.title,
@@ -39,7 +38,6 @@ const DukpoolEditTalk = memo(() => {
     methods.formState.errors;
 
   const onSubmit = async ({ title, tags, desc, files }: FormValues) => {
-    console.log(title, tags, desc, files);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('desc', desc);
@@ -51,7 +49,6 @@ const DukpoolEditTalk = memo(() => {
           formData.append('files', file);
           return file;
         } else {
-          console.log(image);
           formData.append('files', image);
         }
       }),

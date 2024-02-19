@@ -44,7 +44,6 @@ export const authClientAtom = atom((get) => {
 
   instance.interceptors.request.use((config) => {
     const [token, _] = get(updateTokenAtom);
-    console.log(token);
     config.headers.Authorization = `Bearer ${token}`;
     config.withCredentials = true;
     return config;
@@ -57,7 +56,6 @@ export const authClientAtom = atom((get) => {
     async (error) => {
       const { config: originalRequest, response } = error;
       const { data } = response;
-      console.log(data);
       if (data.message === 'Unauthorized') {
         const [_, updateToken] = get(updateTokenAtom);
         const { data } = await instance.get(`/auth/accessToken`);
@@ -80,7 +78,6 @@ export const defaultClientAtom = atom((get) => {
   instance.interceptors.request.use((config) => {
     const [token, _] = get(updateTokenAtom);
     if (token) {
-      console.log(token);
       config.headers.Authorization = `Bearer ${token}`;
       config.withCredentials = true;
     }

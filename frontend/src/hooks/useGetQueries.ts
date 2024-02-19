@@ -41,7 +41,6 @@ export const useMainArticles = () => {
     queryFn: useAtomCallback(async (get): Promise<AllContentResponse[]> => {
       const client = get(defaultClientAtom);
       const { data } = await client.get(`/content?page=1&take=10`);
-      console.log(data.data);
       return data.data;
     }),
   });
@@ -53,7 +52,6 @@ export const useArticle = (id: string) => {
     queryFn: useAtomCallback(async (get): Promise<ContentResponse> => {
       const client = get(defaultClientAtom);
       const { data } = await client.get(`/content/${id}`);
-      console.log(data.data);
       return data.data.content;
     }),
   });
@@ -87,7 +85,6 @@ export const useMainTalks = () => {
     queryFn: useAtomCallback(async (get): Promise<AllContentResponse[]> => {
       const client = get(defaultClientAtom);
       const { data } = await client.get(`/talkcontents?page=1&take=10`);
-      console.log(data.data);
       return data.data;
     }),
   });
@@ -99,7 +96,6 @@ export const useTalk = (id: string) => {
     queryFn: useAtomCallback(async (get): Promise<ContentResponse> => {
       const client = get(defaultClientAtom);
       const { data } = await client.get(`/talkcontents/${id}`);
-      console.log(data.data);
       return data.data.talkContent;
     }),
   });
@@ -133,7 +129,6 @@ export const useUserData = () => {
     queryFn: useAtomCallback(async (get): Promise<UserDataResponse> => {
       const client = get(ensuredAuthClientAtom);
       const { data } = await client.get('/auth/profile');
-      console.log(data.data.profileImg);
       return data.data;
     }),
   });
