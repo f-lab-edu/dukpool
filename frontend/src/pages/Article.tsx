@@ -9,14 +9,15 @@ import Dropdown from '@components/common/Dropdown';
 import { useAtomValue } from 'jotai';
 import { loginStatusAtom } from '@atoms/authAtom';
 import { ModalContext } from '@context/ModalContext';
+import LoginModal from '@components/common/Modal/LoginModal';
 
 const Article = () => {
-  const [sortType, setSortType] = useState<string>('newest');
+  const [sortType, setSortType] = useState<string>('');
   const isLoggined = useAtomValue(loginStatusAtom);
   const { openModal } = useContext(ModalContext);
   const navigate = useNavigate();
   const handlePostButton = () => {
-    if (!isLoggined) openModal('login');
+    if (!isLoggined) openModal(<LoginModal />).catch(() => false);
     else navigate('/article/new');
   };
 
