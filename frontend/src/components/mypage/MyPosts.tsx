@@ -1,30 +1,48 @@
 import { memo } from 'react';
-import { useUserPosts } from '@hooks/useGetQueries';
 import { media } from '@styles/media';
 import styled from 'styled-components';
-import ArticleCard from '@components/article/ArticleCard';
-import TalkCard from '@components/talk/TalkCard';
+import { ContentResponse } from 'src/@types/content';
+import MyArticleCard from '@components/article/ArticleCard/MyArticleCard';
+import MyTalkCard from '@components/talk/TalkCard/MyTalkCard';
 
-const MyPosts = memo(() => {
-  const { data: posts } = useUserPosts();
-  return (
-    <StyledSection>
-      <StyledSectionTitle>나의 덕질 활동</StyledSectionTitle>
-      <StyledContainer>
-        <StyledArticleUl>
-          {posts.articles.map((article) => (
-            <ArticleCard key={article.id} {...article}></ArticleCard>
-          ))}
-        </StyledArticleUl>
-        <StyledTalkUl>
-          {posts.talks.map((talk) => (
-            <TalkCard key={talk.id} {...talk}></TalkCard>
-          ))}
-        </StyledTalkUl>
-      </StyledContainer>
-    </StyledSection>
-  );
-});
+type UserPostsType = {
+  userNickname: string;
+  userProfile: string;
+  articles: Omit<Omit<ContentResponse, 'comment'>, 'writer'>[];
+  talks: Omit<Omit<ContentResponse, 'comment'>, 'writer'>[];
+};
+
+const MyPosts = memo(
+  ({ userNickname, userProfile, articles, talks }: UserPostsType) => {
+    return (
+      <StyledSection>
+        <StyledSectionTitle>나의 덕질 활동</StyledSectionTitle>
+        <StyledContainer>
+          <StyledArticleUl>
+            {articles.map((article) => (
+              <MyArticleCard
+                key={article.id}
+                nickname={userNickname}
+                profileImg={userProfile}
+                data={article}
+              />
+            ))}
+          </StyledArticleUl>
+          <StyledTalkUl>
+            {talks.map((talk) => (
+              <MyTalkCard
+                key={talk.id}
+                nickname={userNickname}
+                profileImg={userProfile}
+                data={talk}
+              />
+            ))}
+          </StyledTalkUl>
+        </StyledContainer>
+      </StyledSection>
+    );
+  },
+);
 
 MyPosts.displayName = 'MyPosts';
 
@@ -47,7 +65,7 @@ const StyledSectionTitle = styled.h2`
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 50px;
 `;
 
 const StyledArticleUl = styled.ul`
