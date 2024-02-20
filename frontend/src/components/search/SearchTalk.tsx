@@ -1,9 +1,14 @@
 import TalkCard from '@components/talk/TalkCard';
-import { TalkPostProps } from '@utils/mockData';
 import { memo } from 'react';
+import { ContentResponse } from 'src/@types/content';
 import styled from 'styled-components';
 
-const SearchTalk = memo(({ talks }: { talks: TalkPostProps[] }) => {
+type SearchTalkProps = {
+  talks: Omit<ContentResponse, 'comment'>[];
+  isTagged?: boolean;
+};
+
+const SearchTalk = memo(({ talks, isTagged = false }: SearchTalkProps) => {
   return (
     <StyledContainer>
       <StyledSectionTitle>덕질 토크</StyledSectionTitle>
@@ -15,7 +20,9 @@ const SearchTalk = memo(({ talks }: { talks: TalkPostProps[] }) => {
         </StyledUl>
       ) : (
         <StyledNoneResultBox>
-          검색어에 해당하는 덕질 토크가 없어요🥲
+          {isTagged
+            ? '해당 태그가 포함된 덕질 토크가 없어요🥲'
+            : '검색어에 해당하는 덕질 토크가 없어요🥲'}
         </StyledNoneResultBox>
       )}
     </StyledContainer>
