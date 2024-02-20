@@ -118,7 +118,7 @@ export const useTagged = (tagName: string) => {
     queryFn: useAtomCallback(async (get): Promise<SearchResponse> => {
       const client = get(defaultClientAtom);
       const { data } = await client.get(`/search?tag=${tagName}`);
-      return data;
+      return data.data;
     }),
   });
 };
@@ -134,14 +134,14 @@ export const useUserData = () => {
   });
 };
 
-export const useCheckNickname = (nickname: string) => {
+export const useCheckNickname = (nickname: string, currentNickname: string) => {
   return useQuery({
     queryKey: ['nicknameCheck', nickname],
     queryFn: useAtomCallback(async (get): Promise<boolean> => {
       const client = get(ensuredAuthClientAtom);
       const { data } = await client.get(`/auth/check?nickname=${nickname}`);
-      return data;
+      return data.data.isDuplicate;
     }),
-    // enabled: nickname.length > 2,
+    enabled: nickname.length >= 2 && currentNickname !== nickname,
   });
 };
