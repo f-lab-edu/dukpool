@@ -50,7 +50,7 @@ const TalkCard = memo(
                 </StyledCount>
               </StyledCountBox>
             </StyledProfileContainer>
-            <StyledDate>{createdAt}</StyledDate>
+            <StyledDate>{createdAt.slice(0, 10)}</StyledDate>
           </StyledInfoContainer>
         </StyledLink>
       </StyledList>

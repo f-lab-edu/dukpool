@@ -32,7 +32,7 @@ const ArticleCard = memo(
               </StyledProfileImageContainer>
               <StyledProfile>{writer.nickname}</StyledProfile>
             </StyledProfileContainer>
-            <StyledDate>{createdAt}</StyledDate>
+            <StyledDate>{createdAt.slice(0, 10)}</StyledDate>
             <StyledCountBox>
               <StyledCount>
                 <StyledIcon src={likeIcon} />
