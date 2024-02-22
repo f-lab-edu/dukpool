@@ -13,8 +13,8 @@ import TextArea from '@components/common/TextArea';
 type FormValues = {
   title: string;
   tags: string[];
-  content: string;
-  images: (string | File)[];
+  desc: string;
+  files: (string | File)[];
 };
 
 const NewTalk = () => {
@@ -22,19 +22,20 @@ const NewTalk = () => {
     defaultValues: {
       title: '',
       tags: [],
-      content: '',
-      images: [],
+      desc: '',
+      files: [],
     },
   });
-  const { title, content } = methods.formState.errors;
+  const { title, desc } = methods.formState.errors;
   const { mutate: postNewTalk } = usePostTalk();
 
-  const onSubmit = ({ title, tags, content, images }: FormValues) => {
+  const onSubmit = ({ title, tags, desc, files }: FormValues) => {
+    console.log(title, tags, desc, files);
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('content', content);
-    tags.forEach((tag) => formData.append('tags', tag));
-    images.forEach((image) => formData.append('images', image));
+    formData.append('desc', desc);
+    tags.forEach((tag) => formData.append('tag[]', tag));
+    files.forEach((image) => formData.append('files', image));
     postNewTalk(formData);
   };
 
@@ -56,15 +57,20 @@ const NewTalk = () => {
             <TextArea
               label="내용"
               placeholder="최소 10자의 내용을 입력해주세요"
-              registerType="content"
+              registerType="desc"
               required={true}
               minLength={10}
             />
-            {<ErrorMessage field="내용" type={content?.type!} length={10} />}
+            {<ErrorMessage field="내용" type={desc?.type!} length={10} />}
             <Images />
             <StyledButtonContainer>
               <StyledButtonWrapper>
-                <Button text="등록" disabled={false} $colorType="dark" />
+                <Button
+                  type="submit"
+                  text="등록"
+                  disabled={false}
+                  $colorType="dark"
+                />
               </StyledButtonWrapper>
             </StyledButtonContainer>
           </StyledForm>

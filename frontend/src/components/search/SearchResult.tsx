@@ -11,12 +11,13 @@ const SearchResult = memo(() => {
   const { searchId } = useParams();
   assert(searchId);
   const { data: searchData } = useSearch(searchId);
+  console.log(searchData);
   return (
     <>
       <StyledResultText>"{searchId}"에 대한 검색 결과에요!</StyledResultText>
-      <SearchTag tags={searchData.tags} />
-      <SearchArticle articles={searchData.articles} />
-      <SearchTalk talks={searchData.talks} />
+      <SearchTag tag={searchId} />
+      <SearchArticle articles={searchData.contents.data} />
+      <SearchTalk talks={searchData.talkContents.data} />
     </>
   );
 });

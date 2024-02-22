@@ -4,61 +4,54 @@ import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import likeIcon from '@assets/icons/like.svg';
 import commentIcon from '@assets/icons/comment.svg';
-import { AllContentResponse } from 'src/@types/content';
+import { ContentResponse } from 'src/@types/content';
 
-const TalkCard = memo(
-  ({
-    id,
-    createdAt,
-    title,
-    desc,
-    img,
-    commentCount,
-    likeCount,
-    writer,
-  }: AllContentResponse) => {
-    return (
-      <StyledList>
-        <StyledLink to={`/talk/${id}`}>
-          <StyledContainer>
-            <StyledImgContainer>
-              <StyledImage src={img[0] ?? placeholderImage} />
-            </StyledImgContainer>
-            <StyledContentContainer>
-              <StyledTitle>{title}</StyledTitle>
-              <StyledContent>{desc}</StyledContent>
-            </StyledContentContainer>
-          </StyledContainer>
-          <StyledInfoContainer>
-            <StyledProfileContainer>
-              <StyledProfileDiv>
-                <StyledProfileImageContainer>
-                  <StyledProfileImage
-                    src={writer.profileImg ?? placeholderImage}
-                  />
-                </StyledProfileImageContainer>
-                <StyledProfile>{writer.nickname}</StyledProfile>
-              </StyledProfileDiv>
-              <StyledCountBox>
-                <StyledCount>
-                  <StyledIcon src={likeIcon} />
-                  <span>{likeCount}</span>
-                </StyledCount>
-                <StyledCount>
-                  <StyledIcon src={commentIcon} />
-                  <span>{commentCount}</span>
-                </StyledCount>
-              </StyledCountBox>
-            </StyledProfileContainer>
-            <StyledDate>{createdAt.slice(0, 10)}</StyledDate>
-          </StyledInfoContainer>
-        </StyledLink>
-      </StyledList>
-    );
-  },
-);
+type MyTalkCardProps = {
+  nickname: string;
+  profileImg: string;
+  data: Omit<Omit<ContentResponse, 'comment'>, 'writer'>;
+};
 
-TalkCard.displayName = 'TalkCard';
+const MyTalkCard = memo(({ nickname, profileImg, data }: MyTalkCardProps) => {
+  return (
+    <StyledList>
+      <StyledLink to={`/talk/${data.id}`}>
+        <StyledContainer>
+          <StyledImgContainer>
+            <StyledImage src={data.img[0] ?? placeholderImage} />
+          </StyledImgContainer>
+          <StyledContentContainer>
+            <StyledTitle>{data.title}</StyledTitle>
+            <StyledContent>{data.desc}</StyledContent>
+          </StyledContentContainer>
+        </StyledContainer>
+        <StyledInfoContainer>
+          <StyledProfileContainer>
+            <StyledProfileDiv>
+              <StyledProfileImageContainer>
+                <StyledProfileImage src={profileImg ?? placeholderImage} />
+              </StyledProfileImageContainer>
+              <StyledProfile>{nickname}</StyledProfile>
+            </StyledProfileDiv>
+            <StyledCountBox>
+              <StyledCount>
+                <StyledIcon src={likeIcon} />
+                <span>{data.likeCount}</span>
+              </StyledCount>
+              <StyledCount>
+                <StyledIcon src={commentIcon} />
+                <span>{data.commentCount}</span>
+              </StyledCount>
+            </StyledCountBox>
+          </StyledProfileContainer>
+          <StyledDate>{data.createdAt}</StyledDate>
+        </StyledInfoContainer>
+      </StyledLink>
+    </StyledList>
+  );
+});
+
+MyTalkCard.displayName = 'MyTalkCard';
 
 const StyledList = styled.li`
   padding: 0 12px;
@@ -176,4 +169,4 @@ const StyledIcon = styled.img`
   width: 16px;
 `;
 
-export default TalkCard;
+export default MyTalkCard;

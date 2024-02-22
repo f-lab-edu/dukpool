@@ -15,6 +15,7 @@ import NewArticle from '@pages/NewArticle';
 import EditArticle from '@pages/EditArticle';
 import NewTalk from '@pages/NewTalk';
 import EditTalk from '@pages/EditTalk';
+import Tagged from '@pages/Tagged';
 
 type routeElement = {
   path: string;
@@ -42,6 +43,7 @@ const routes: routeElement[] = [
       { path: 'api/auth/kakao/callback', element: <Kakao /> },
       { path: 'mypage', element: <MyPage /> },
       { path: 'search/:searchId', element: <Search /> },
+      { path: 'tagged/:tagName', element: <Tagged /> },
     ],
   },
 ];

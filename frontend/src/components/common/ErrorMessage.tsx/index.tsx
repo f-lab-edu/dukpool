@@ -3,9 +3,12 @@ import { LiteralUnion } from 'react-hook-form';
 import styled from 'styled-components';
 
 type ErrorMessageProps = {
-  type: LiteralUnion<'required' | 'maxLength' | 'minLength', string>;
-  field: string;
-  length: number;
+  type: LiteralUnion<
+    'required' | 'maxLength' | 'minLength' | 'duplicate',
+    string
+  >;
+  field?: string;
+  length?: number;
 };
 
 const ErrorMessage = memo(({ type, field, length }: ErrorMessageProps) => {
@@ -25,6 +28,9 @@ const ErrorMessage = memo(({ type, field, length }: ErrorMessageProps) => {
   }
   if (type === 'required') {
     return <StyledContainer>{field}을 입력해주세요.</StyledContainer>;
+  }
+  if (type === 'duplicate') {
+    return <StyledContainer>이미 사용중인 닉네임입니다.</StyledContainer>;
   }
 });
 

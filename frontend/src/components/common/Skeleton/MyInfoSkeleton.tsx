@@ -2,16 +2,27 @@ import { media } from '@styles/media';
 import { memo } from 'react';
 import styled, { keyframes } from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
+import ArticleGridSkeleton from '@components/common/Skeleton/ArticleGridSkeleton';
+import TalkGridSkeleton from '@components/common/Skeleton/TalkGridSkeleton';
 
 const MyInfoSkeleton = memo(() => {
   return (
-    <SkeletonSection>
-      <SkeletonTitle />
-      <SkeletonContainer>
-        <StyledImg src={placeholderImage} />
-        <SkeletonInputContainer />
-      </SkeletonContainer>
-    </SkeletonSection>
+    <>
+      <SkeletonSection>
+        <SkeletonTitle />
+        <SkeletonContainer>
+          <StyledImg src={placeholderImage} />
+          <SkeletonInputContainer />
+        </SkeletonContainer>
+      </SkeletonSection>
+      <SkeletonSection>
+        <SkeletonTitle />
+        <SkeletonPostContainer>
+          <ArticleGridSkeleton />
+          <TalkGridSkeleton />
+        </SkeletonPostContainer>
+      </SkeletonSection>
+    </>
   );
 });
 
@@ -49,6 +60,12 @@ const SkeletonContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 15px;
+`;
+
+const SkeletonPostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 `;
 
 const StyledImg = styled.img`

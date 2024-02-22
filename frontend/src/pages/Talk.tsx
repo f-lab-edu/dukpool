@@ -1,5 +1,4 @@
 import { Suspense, useContext, useState } from 'react';
-import { AuthContext } from '@context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { media } from '@styles/media';
 import styled from 'styled-components';
@@ -7,14 +6,19 @@ import Layout from '@components/common/Layout';
 import TalkPosts from '@components/talk/TalkPosts';
 import TalkCardSkeleton from '@components/common/Skeleton/TalkCardSkeleton';
 import Dropdown from '@components/common/Dropdown';
+import { useAtomValue } from 'jotai';
+import { loginStatusAtom } from '@atoms/authAtom';
+import { ModalContext } from '@context/ModalContext';
+import LoginModal from '@components/common/Modal/LoginModal';
 
 const Talk = () => {
-  const [sortType, setSortType] = useState<string>('newest');
-  const { isLoggined } = useContext(AuthContext);
+  const [sortType, setSortType] = useState<string>('');
+  const isLoggined = useAtomValue(loginStatusAtom);
+  const { openModal } = useContext(ModalContext);
   const navigate = useNavigate();
   const handlePostButton = () => {
-    if (!isLoggined) navigate('/login');
-    else navigate('/article/write');
+    if (!isLoggined) openModal(<LoginModal />).catch(() => false);
+    else navigate('/talk/new');
   };
 
   return (

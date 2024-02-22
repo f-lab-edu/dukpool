@@ -4,43 +4,39 @@ import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import likeIcon from '@assets/icons/like.svg';
 import commentIcon from '@assets/icons/comment.svg';
-import { AllContentResponse } from 'src/@types/content';
+import { ContentResponse } from 'src/@types/content';
 
-const ArticleCard = memo(
-  ({
-    id,
-    createdAt,
-    title,
-    img,
-    commentCount,
-    likeCount,
-    writer,
-  }: AllContentResponse) => {
+type MyArticleCardProps = {
+  nickname: string;
+  profileImg: string;
+  data: Omit<Omit<ContentResponse, 'comment'>, 'writer'>;
+};
+
+const MyArticleCard = memo(
+  ({ nickname, profileImg, data }: MyArticleCardProps) => {
     return (
       <StyledList>
-        <StyledLink to={`/article/${id}`}>
+        <StyledLink to={`/article/${data.id}`}>
           <StyledImgContainer>
-            <StyledImage src={img[0] ?? placeholderImage} />
+            <StyledImage src={data.img[0] ?? placeholderImage} />
           </StyledImgContainer>
           <StyledInfoContainer>
-            <StyledTitle>{title}</StyledTitle>
+            <StyledTitle>{data.title}</StyledTitle>
             <StyledProfileContainer>
               <StyledProfileImageContainer>
-                <StyledProfileImage
-                  src={writer.profileImg ?? placeholderImage}
-                />
+                <StyledProfileImage src={profileImg ?? placeholderImage} />
               </StyledProfileImageContainer>
-              <StyledProfile>{writer.nickname}</StyledProfile>
+              <StyledProfile>{nickname}</StyledProfile>
             </StyledProfileContainer>
-            <StyledDate>{createdAt.slice(0, 10)}</StyledDate>
+            <StyledDate>{data.createdAt.slice(0, 10)}</StyledDate>
             <StyledCountBox>
               <StyledCount>
                 <StyledIcon src={likeIcon} />
-                <span>{likeCount}</span>
+                <span>{data.likeCount}</span>
               </StyledCount>
               <StyledCount>
                 <StyledIcon src={commentIcon} />
-                <span>{commentCount}</span>
+                <span>{data.commentCount}</span>
               </StyledCount>
             </StyledCountBox>
           </StyledInfoContainer>
@@ -50,7 +46,7 @@ const ArticleCard = memo(
   },
 );
 
-ArticleCard.displayName = 'ArticleCard';
+MyArticleCard.displayName = 'MyArticleCard';
 
 const StyledList = styled.li`
   padding: 0 8px;
@@ -138,4 +134,4 @@ const StyledIcon = styled.img`
   width: 16px;
 `;
 
-export default ArticleCard;
+export default MyArticleCard;

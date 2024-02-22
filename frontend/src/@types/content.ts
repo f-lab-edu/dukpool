@@ -28,8 +28,12 @@ export type ContentResponse = {
 };
 
 export type SearchResponse = {
-  contents: Omit<ContentResponse, 'comment'>[];
-  talkContents: Omit<ContentResponse, 'comment'>[];
+  contents: {
+    data: Omit<ContentResponse, 'comment'>[];
+  };
+  talkContents: {
+    data: Omit<ContentResponse, 'comment'>[];
+  };
 };
 
 export type InfiniteQueryProps = {

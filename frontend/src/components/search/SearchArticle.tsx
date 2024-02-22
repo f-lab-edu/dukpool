@@ -1,27 +1,36 @@
 import ArticleCard from '@components/article/ArticleCard';
 import { media } from '@styles/media';
-import { ArticlePostProps } from '@utils/mockData';
 import { memo } from 'react';
+import { ContentResponse } from 'src/@types/content';
 import styled from 'styled-components';
 
-const SearchArticle = memo(({ articles }: { articles: ArticlePostProps[] }) => {
-  return (
-    <StyledContainer>
-      <StyledSectionTitle>덕질 자랑</StyledSectionTitle>
-      {articles.length ? (
-        <StyledUl>
-          {articles.map((article: ArticlePostProps) => (
-            <ArticleCard key={article.id} {...article}></ArticleCard>
-          ))}
-        </StyledUl>
-      ) : (
-        <StyledNoneResultBox>
-          검색어에 해당하는 덕질 자랑이 없어요🥲
-        </StyledNoneResultBox>
-      )}
-    </StyledContainer>
-  );
-});
+type SearchArticleProps = {
+  articles: Omit<ContentResponse, 'comment'>[];
+  isTagged?: boolean;
+};
+
+const SearchArticle = memo(
+  ({ articles, isTagged = false }: SearchArticleProps) => {
+    return (
+      <StyledContainer>
+        <StyledSectionTitle>덕질 자랑</StyledSectionTitle>
+        {articles.length ? (
+          <StyledUl>
+            {articles.map((article) => (
+              <ArticleCard key={article.id} {...article}></ArticleCard>
+            ))}
+          </StyledUl>
+        ) : (
+          <StyledNoneResultBox>
+            {isTagged
+              ? '해당 태그가 포함된 덕질 자랑이 없어요🥲'
+              : '검색어에 해당하는 덕질 자랑이 없어요🥲'}
+          </StyledNoneResultBox>
+        )}
+      </StyledContainer>
+    );
+  },
+);
 
 SearchArticle.displayName = 'SearchArticle';
 

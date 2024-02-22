@@ -58,7 +58,7 @@ export const authClientAtom = atom((get) => {
       const { data } = response;
       if (data.message === 'Unauthorized') {
         const [_, updateToken] = get(updateTokenAtom);
-        const { data } = await instance.get(`/auth/accessToken`);
+        const { data } = await instance.get(`/auth/refresh`);
         updateToken(data);
         return instance.request(originalRequest);
       }
@@ -88,6 +88,14 @@ export const defaultClientAtom = atom((get) => {
       return response;
     },
     async (error) => {
+      const { config: originalRequest, response } = error;
+      const { data } = response;
+      if (data.message === 'Unauthorized') {
+        const [_, updateToken] = get(updateTokenAtom);
+        const { data } = await instance.get(`/auth/accessToken`);
+        updateToken(data);
+        return instance.request(originalRequest);
+      }
       if (error.code === 'SERVER_ERROR') throw new ServerError();
       if (error.code === 'EXPIRED_REFRESH_TOKEN')
         throw new ExpiredRefreshTokenError();
