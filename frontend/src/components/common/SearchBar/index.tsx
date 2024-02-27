@@ -1,13 +1,22 @@
-import { FormEvent, memo, useReducer } from 'react';
+import { FormEvent, memo, useReducer, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import closeIcon from '@assets/icons/close.svg';
 import { inputHandler } from '@utils/reducerHandler';
+import useDebounce from '@hooks/useDebounce';
+import { useSearchPreview } from '@hooks/useGetQueries';
+import PreviewList from '@components/search/PreviewList';
+import useClickOutside from '@hooks/useClickOutside';
 
 const SearchBar = memo(() => {
-  const [searchText, dispatch] = useReducer(inputHandler, '');
-
   const navigate = useNavigate();
+  const [searchText, dispatch] = useReducer(inputHandler, '');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const debouncedSearchText = useDebounce(searchText, 300);
+  const { data: searchData } = useSearchPreview(debouncedSearchText);
+  const searchBarRef = useRef(null);
+
+  useClickOutside(searchBarRef, () => setIsFocused(false));
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,18 +25,25 @@ const SearchBar = memo(() => {
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit} ref={searchBarRef}>
       <StyledSearchBar
         type="text"
         value={searchText}
         placeholder="검색어를 입력해주세요."
         onChange={(event) => dispatch({ type: 'input', event })}
         required
+        onFocus={() => setIsFocused(true)}
       />
       {searchText && (
         <StyledBtn type="button" onClick={() => dispatch({ type: 'clear' })}>
           <img src={closeIcon} />
         </StyledBtn>
+      )}
+      {searchData && isFocused && (
+        <PreviewList
+          contents={searchData.contents.data}
+          talkContents={searchData.talkContents.data}
+        />
       )}
     </StyledForm>
   );
@@ -40,6 +56,7 @@ const StyledForm = styled.form`
   height: 50px;
   align-items: center;
 `;
+
 const StyledSearchBar = styled.input`
   padding: 0 30px;
   border: 1px solid var(--gray-4);
@@ -52,6 +69,7 @@ const StyledSearchBar = styled.input`
     outline: 1px solid var(--primary);
   }
 `;
+
 const StyledBtn = styled.button`
   position: absolute;
   right: 0;
