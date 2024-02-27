@@ -10,7 +10,6 @@ const ArticleDetail = () => {
   const { articleId } = useParams();
   assert(articleId);
   const { data } = useArticle(articleId);
-  console.log(data);
   return (
     <StyledArticle>
       <PostImage images={data.img} />
