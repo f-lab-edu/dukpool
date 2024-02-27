@@ -92,7 +92,7 @@ export const defaultClientAtom = atom((get) => {
       const { data } = response;
       if (data.message === 'Unauthorized') {
         const [_, updateToken] = get(updateTokenAtom);
-        const { data } = await instance.get(`/auth/accessToken`);
+        const { data } = await instance.get(`/auth/refresh`);
         updateToken(data);
         return instance.request(originalRequest);
       }
