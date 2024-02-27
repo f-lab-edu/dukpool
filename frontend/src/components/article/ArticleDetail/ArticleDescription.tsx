@@ -1,6 +1,5 @@
 import { memo, useContext } from 'react';
 import { ModalContext } from '@context/ModalContext';
-import { ToastContext } from '@context/ToastContext';
 import { useAtomValue } from 'jotai';
 import { userUniqIdAtom } from '@atoms/authAtom';
 import { useNavigate } from 'react-router-dom';
@@ -31,7 +30,6 @@ const ArticleDescription = memo(
   }: ContentResponse) => {
     const userUniqId = useAtomValue(userUniqIdAtom);
     const { openModal } = useContext(ModalContext);
-    const { showToast } = useContext(ToastContext);
     const navigate = useNavigate();
     const { mutate: deleteContent } = useDeleteArticle();
     const { mutate: postLike } = usePostArticlePrefer();
@@ -40,7 +38,6 @@ const ArticleDescription = memo(
       const isDeleted = await openModal(<PostModal />).catch(() => false);
       if (isDeleted) {
         deleteContent(id);
-        showToast('게시물이 삭제되었습니다!');
       }
     };
     const handlePrefer = () => {

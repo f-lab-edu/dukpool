@@ -1,6 +1,5 @@
 import { memo, useContext } from 'react';
 import { ModalContext } from '@context/ModalContext';
-import { ToastContext } from '@context/ToastContext';
 import { useAtomValue } from 'jotai';
 import { userUniqIdAtom } from '@atoms/authAtom';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +12,7 @@ import placeholderImage from '@assets/images/placeholder-image.png';
 import Tag from '@components/common/Tag';
 import LikeButton from '@components/common/Button/LikeButton';
 import PostModal from '@components/common/Modal/PostModal';
+import LoginModal from '@components/common/Modal/LoginModal';
 
 const TalkDescription = memo(
   ({
@@ -28,7 +28,6 @@ const TalkDescription = memo(
     const navigate = useNavigate();
     const userUniqId = useAtomValue(userUniqIdAtom);
     const { openModal } = useContext(ModalContext);
-    const { showToast } = useContext(ToastContext);
     const { mutate: deleteContent } = useDeleteTalk();
     const { mutate: postLike } = usePostTalkPrefer();
     const { mutate: deleteLike } = useDeleteTalkPrefer();
@@ -36,7 +35,13 @@ const TalkDescription = memo(
       const isDeleted = await openModal(<PostModal />).catch(() => false);
       if (isDeleted) {
         deleteContent(id);
-        showToast('게시물이 삭제되었습니다!');
+      }
+    };
+    const handlePrefer = () => {
+      if (!userUniqId) openModal(<LoginModal />).catch(() => false);
+      else {
+        if (isLiked) deleteLike(id);
+        else postLike(id);
       }
     };
     return (
@@ -68,10 +73,7 @@ const TalkDescription = memo(
               ))}
             </StyledTagList>
             <LikeButton
-              onClick={() => {
-                if (isLiked) deleteLike(id);
-                else postLike(id);
-              }}
+              onClick={handlePrefer}
               isLiked={isLiked}
               likeCount={likeCount}
             />
