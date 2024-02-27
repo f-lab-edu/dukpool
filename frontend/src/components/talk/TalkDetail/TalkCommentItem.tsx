@@ -41,11 +41,12 @@ const TalkCommentItem = memo(
     const { mutate: deleteComment } = useDeleteTalkComment();
     const onSubmit = ({ desc }: FormValue) => {
       patchComment({ id, desc, content: contentId });
+      setIsEdit(false);
     };
     const handleDelete = async () => {
       const isDeleted = await openModal(<CommentModal />).catch(() => false);
       if (isDeleted) {
-        deleteComment(id);
+        deleteComment({ id, contentId });
         showToast('댓글이 삭제되었습니다!');
       }
     };
@@ -65,7 +66,7 @@ const TalkCommentItem = memo(
             </StyledCommentUserProfileContainer>
             <StyledWrapper>
               <StyledCommentDate>{createdAt.slice(0, 10)}</StyledCommentDate>
-              {userUniqId && (
+              {userUniqId === writer.id && (
                 <StyledEditContainer>
                   <StyledEditButton onClick={() => setIsEdit((prev) => !prev)}>
                     {isEdit ? '수정취소' : '수정'}
