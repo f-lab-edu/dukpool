@@ -29,8 +29,8 @@ const TalkDescription = memo(
     const userUniqId = useAtomValue(userUniqIdAtom);
     const { openModal } = useContext(ModalContext);
     const { mutate: deleteContent } = useDeleteTalk();
-    const { mutate: postLike } = usePostTalkPrefer();
-    const { mutate: deleteLike } = useDeleteTalkPrefer();
+    const { mutate: like } = usePostTalkPrefer();
+    const { mutate: unlike } = useDeleteTalkPrefer();
     const handleDelete = async () => {
       const isDeleted = await openModal(<PostModal />).catch(() => false);
       if (isDeleted) {
@@ -40,8 +40,8 @@ const TalkDescription = memo(
     const handlePrefer = () => {
       if (!userUniqId) openModal(<LoginModal />).catch(() => false);
       else {
-        if (isLiked) deleteLike(id);
-        else postLike(id);
+        if (isLiked) like(id);
+        else unlike(id);
       }
     };
     return (

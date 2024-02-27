@@ -32,8 +32,8 @@ const ArticleDescription = memo(
     const { openModal } = useContext(ModalContext);
     const navigate = useNavigate();
     const { mutate: deleteContent } = useDeleteArticle();
-    const { mutate: postLike } = usePostArticlePrefer();
-    const { mutate: deleteLike } = useDeleteArticlePrefer();
+    const { mutate: like } = usePostArticlePrefer();
+    const { mutate: unlike } = useDeleteArticlePrefer();
     const handleDelete = async () => {
       const isDeleted = await openModal(<PostModal />).catch(() => false);
       if (isDeleted) {
@@ -43,8 +43,8 @@ const ArticleDescription = memo(
     const handlePrefer = () => {
       if (!userUniqId) openModal(<LoginModal />).catch(() => false);
       else {
-        if (isLiked) deleteLike(id);
-        else postLike(id);
+        if (isLiked) like(id);
+        else unlike(id);
       }
     };
     return (
