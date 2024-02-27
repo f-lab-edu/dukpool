@@ -12,7 +12,7 @@ const PostImage = memo(({ images }: { images: string[] }) => {
         <StyledSlider {...ArticleImageSliderOption}>
           {images.length ? (
             images.map((image) => (
-              <StyledImgContainer>
+              <StyledImgContainer key={image}>
                 <StyledImg src={image} />
               </StyledImgContainer>
             ))
