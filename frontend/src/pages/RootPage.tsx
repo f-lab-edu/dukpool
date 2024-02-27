@@ -16,17 +16,17 @@ const RootPage = () => {
   const { reset } = useQueryErrorResetBoundary();
   return (
     <Provider>
-      <ModalProvider>
-        <ToastProvider>
-          <ClientProvider>
+      <ClientProvider>
+        <ModalProvider>
+          <ToastProvider>
             <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
               <Header />
               <Outlet />
               {isMobile ? <MobileNavbar /> : <Footer />}
             </ErrorBoundary>
-          </ClientProvider>
-        </ToastProvider>
-      </ModalProvider>
+          </ToastProvider>
+        </ModalProvider>
+      </ClientProvider>
     </Provider>
   );
 };
