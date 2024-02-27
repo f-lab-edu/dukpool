@@ -54,6 +54,7 @@ export const useDeleteArticlePrefer = () => {
 
 export const useDeleteArticleComment = () => {
   const queryClient = useQueryClient();
+  const { showToast } = useContext(ToastContext);
   return useMutation({
     mutationKey: ['deleteArticleComment'],
     mutationFn: useAtomCallback(
@@ -73,6 +74,7 @@ export const useDeleteArticleComment = () => {
         (old: ContentResponse) => ({
           ...old,
           comment: old.comment.filter((t) => t.id !== params.id),
+          commentCount: old.commentCount - 1,
         }),
       );
       return { prevContent };
@@ -85,6 +87,9 @@ export const useDeleteArticleComment = () => {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['article'] });
+    },
+    onSuccess: () => {
+      showToast('댓글이 삭제되었습니다!');
     },
   });
 };
@@ -134,6 +139,7 @@ export const useDeleteTalkPrefer = () => {
 
 export const useDeleteTalkComment = () => {
   const queryClient = useQueryClient();
+  const { showToast } = useContext(ToastContext);
   return useMutation({
     mutationKey: ['deleteTalkComment'],
     mutationFn: useAtomCallback(
@@ -150,6 +156,7 @@ export const useDeleteTalkComment = () => {
         (old: ContentResponse) => ({
           ...old,
           comment: old.comment.filter((t) => t.id !== params.id),
+          commentCount: old.commentCount - 1,
         }),
       );
       return { prevContent };
@@ -162,6 +169,9 @@ export const useDeleteTalkComment = () => {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['talk'] });
+    },
+    onSuccess: () => {
+      showToast('댓글이 삭제되었습니다!');
     },
   });
 };

@@ -6,7 +6,6 @@ import { ModalContext } from '@context/ModalContext';
 import { CommentProps } from 'src/@types/comment';
 import CommentInput from '@components/common/PostDetail/CommentInput';
 import CommentModal from '@components/common/Modal/CommentModal';
-import { ToastContext } from '@context/ToastContext';
 import { usePatchTalkComment } from '@hooks/usePatchMutations';
 import { useDeleteTalkComment } from '@hooks/useDeleteMutations';
 
@@ -36,7 +35,6 @@ const TalkCommentItem = memo(
       mode: 'onTouched',
     });
     const { openModal } = useContext(ModalContext);
-    const { showToast } = useContext(ToastContext);
     const { mutate: patchComment } = usePatchTalkComment();
     const { mutate: deleteComment } = useDeleteTalkComment();
     const onSubmit = ({ desc }: FormValue) => {
@@ -45,10 +43,7 @@ const TalkCommentItem = memo(
     };
     const handleDelete = async () => {
       const isDeleted = await openModal(<CommentModal />).catch(() => false);
-      if (isDeleted) {
-        deleteComment({ id, contentId });
-        showToast('댓글이 삭제되었습니다!');
-      }
+      if (isDeleted) deleteComment({ id, contentId });
     };
     return (
       <FormProvider {...methods}>
