@@ -43,8 +43,8 @@ const ArticleDescription = memo(
     const handlePrefer = () => {
       if (!userUniqId) openModal(<LoginModal />).catch(() => false);
       else {
-        if (isLiked) like(id);
-        else unlike(id);
+        if (isLiked) unlike(id);
+        else like(id);
       }
     };
     return (
