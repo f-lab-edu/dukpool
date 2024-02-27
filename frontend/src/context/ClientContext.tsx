@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { ToastContext } from '@context/ToastContext';
 import { ModalContext } from './ModalContext';
+import LoginModal from '@components/common/Modal/LoginModal';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -36,7 +37,7 @@ const ClientProvider = ({ children }: Props): JSX.Element => {
             );
           }
           if (err instanceof UnAuthorizedError) {
-            openModal('login');
+            openModal(<LoginModal />).catch(() => false);
           }
         },
       },
