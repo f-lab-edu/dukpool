@@ -7,7 +7,11 @@ import KakaoLogo from '@assets/icons/kakao.svg';
 const KakaoLoginButton = memo(() => {
   return (
     <StyledLink
-      to={`https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.LOGIN}&redirect_uri=${CONFIG.LOCAL}/api/auth/kakao/callback&response_type=code`}
+      to={
+        CONFIG.ENV === 'development'
+          ? `https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.LOGIN}&redirect_uri=${CONFIG.LOCAL}/api/auth/kakao/callback&response_type=code`
+          : `https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.LOGIN}&redirect_uri=${CONFIG.DOMAIN}/api/auth/kakao/callback&response_type=code`
+      }
     >
       <StyledKakaoLogo src={KakaoLogo} />
       <StyledInfoText>카카오 로그인</StyledInfoText>
