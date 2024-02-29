@@ -70,6 +70,9 @@ const StyledImg = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
+  ${media.phone`
+  border-radius: 0px;
+  `}
 `;
 
 export default PostImage;

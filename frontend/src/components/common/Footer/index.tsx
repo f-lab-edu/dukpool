@@ -27,7 +27,7 @@ const StyledFooter = styled.footer`
   display: flex;
   flex-direction: column;
   width: 100%;
-  transform: translateY(10%);
+  height: 100%;
   font-size: 11px;
   padding: 2.4rem;
   background-color: var(--gray-6);

@@ -18,7 +18,7 @@ Header.displayName = 'Header';
 
 const StyledHeader = styled.header`
   z-index: 9;
-  position: fixed;
+  position: sticky;
   top: 0;
   display: flex;
   justify-content: space-evenly;
