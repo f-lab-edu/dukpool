@@ -17,28 +17,34 @@ const MyPosts = memo(
     return (
       <StyledSection>
         <StyledSectionTitle>나의 덕질 활동</StyledSectionTitle>
-        <StyledContainer>
-          <StyledArticleUl>
-            {articles.map((article) => (
-              <MyArticleCard
-                key={article.id}
-                nickname={userNickname}
-                profileImg={userProfile}
-                data={article}
-              />
-            ))}
-          </StyledArticleUl>
-          <StyledTalkUl>
-            {talks.map((talk) => (
-              <MyTalkCard
-                key={talk.id}
-                nickname={userNickname}
-                profileImg={userProfile}
-                data={talk}
-              />
-            ))}
-          </StyledTalkUl>
-        </StyledContainer>
+        {articles.length && talks.length ? (
+          <StyledContainer>
+            <StyledArticleUl>
+              {articles.map((article) => (
+                <MyArticleCard
+                  key={article.id}
+                  nickname={userNickname}
+                  profileImg={userProfile}
+                  data={article}
+                />
+              ))}
+            </StyledArticleUl>
+            <StyledTalkUl>
+              {talks.map((talk) => (
+                <MyTalkCard
+                  key={talk.id}
+                  nickname={userNickname}
+                  profileImg={userProfile}
+                  data={talk}
+                />
+              ))}
+            </StyledTalkUl>
+          </StyledContainer>
+        ) : (
+          <StyledNoneResultBox>
+            아직 작성한 게시물이 없어요🥲
+          </StyledNoneResultBox>
+        )}
       </StyledSection>
     );
   },
@@ -66,6 +72,16 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 50px;
+`;
+
+const StyledNoneResultBox = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: var(--gray-1);
 `;
 
 const StyledArticleUl = styled.ul`
