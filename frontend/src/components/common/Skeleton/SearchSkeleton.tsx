@@ -2,7 +2,7 @@ import { media } from '@styles/media';
 import { memo } from 'react';
 import styled from 'styled-components';
 import TagCardSkeleton from './TagCardSkeleton';
-import { range } from 'lodash';
+import range from 'lodash/range';
 import ArticleGridSkeleton from './ArticleGridSkeleton';
 import TalkGridSkeleton from './TalkGridSkeleton';
 
