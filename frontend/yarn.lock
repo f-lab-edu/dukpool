@@ -1911,6 +1911,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-devtools@npm:5.24.0":
+  version: 5.24.0
+  resolution: "@tanstack/query-devtools@npm:5.24.0"
+  checksum: c557eb09316a95405a459638a00c43de3537c76bcf4c4045e71acf31c8449f8856138712304e9cfce8b54141e5f81b8657bd54d2a768baf26a67e84eea787df9
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-devtools@npm:^5.24.1":
+  version: 5.24.1
+  resolution: "@tanstack/react-query-devtools@npm:5.24.1"
+  dependencies:
+    "@tanstack/query-devtools": 5.24.0
+  peerDependencies:
+    "@tanstack/react-query": ^5.24.1
+    react: ^18.0.0
+  checksum: 81535bc9f67637f8c6fe766e7bf49420989677337b133a845d7d38a72eb10b5193dba9d953905568ae14a296e827bfa4910fd0ea46dcfff96e1fa04bf8813740
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-query@npm:^5.17.9":
   version: 5.17.9
   resolution: "@tanstack/react-query@npm:5.17.9"
@@ -3885,6 +3904,7 @@ __metadata:
     "@babel/preset-typescript": ^7.23.3
     "@svgr/webpack": ^8.1.0
     "@tanstack/react-query": ^5.17.9
+    "@tanstack/react-query-devtools": ^5.24.1
     "@types/babel__core": ^7
     "@types/babel__preset-env": ^7
     "@types/eslint": ^8

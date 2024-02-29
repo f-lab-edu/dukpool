@@ -34,6 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-typescript", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:7.23.3"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@tanstack/react-query", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.17.9"],\
+            ["@tanstack/react-query-devtools", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.24.1"],\
             ["@types/babel__core", "npm:7.20.4"],\
             ["@types/babel__preset-env", "npm:7.9.5"],\
             ["@types/eslint", "npm:8.44.7"],\
@@ -4692,6 +4693,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@tanstack/query-devtools", [\
+        ["npm:5.24.0", {\
+          "packageLocation": "./.yarn/cache/@tanstack-query-devtools-npm-5.24.0-b1be9e6d5b-c557eb0931.zip/node_modules/@tanstack/query-devtools/",\
+          "packageDependencies": [\
+            ["@tanstack/query-devtools", "npm:5.24.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@tanstack/react-query", [\
         ["npm:5.17.9", {\
           "packageLocation": "./.yarn/cache/@tanstack-react-query-npm-5.17.9-496ab8d9c2-f8b77dbbdc.zip/node_modules/@tanstack/react-query/",\
@@ -4710,6 +4720,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "packagePeers": [\
             "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@tanstack/react-query-devtools", [\
+        ["npm:5.24.1", {\
+          "packageLocation": "./.yarn/cache/@tanstack-react-query-devtools-npm-5.24.1-7b9ff0bd5c-81535bc9f6.zip/node_modules/@tanstack/react-query-devtools/",\
+          "packageDependencies": [\
+            ["@tanstack/react-query-devtools", "npm:5.24.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.24.1", {\
+          "packageLocation": "./.yarn/__virtual__/@tanstack-react-query-devtools-virtual-7f57eea5ef/0/cache/@tanstack-react-query-devtools-npm-5.24.1-7b9ff0bd5c-81535bc9f6.zip/node_modules/@tanstack/react-query-devtools/",\
+          "packageDependencies": [\
+            ["@tanstack/react-query-devtools", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.24.1"],\
+            ["@tanstack/query-devtools", "npm:5.24.0"],\
+            ["@tanstack/react-query", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.17.9"],\
+            ["@types/react", "npm:18.2.37"],\
+            ["@types/tanstack__react-query", null],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@tanstack/react-query",\
+            "@types/react",\
+            "@types/tanstack__react-query",\
             "react"\
           ],\
           "linkType": "HARD"\
@@ -7234,6 +7271,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-typescript", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:7.23.3"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@tanstack/react-query", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.17.9"],\
+            ["@tanstack/react-query-devtools", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.24.1"],\
             ["@types/babel__core", "npm:7.20.4"],\
             ["@types/babel__preset-env", "npm:7.9.5"],\
             ["@types/eslint", "npm:8.44.7"],\

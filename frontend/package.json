@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "@tanstack/react-query": "^5.17.9",
+    "@tanstack/react-query-devtools": "^5.24.1",
     "assert": "^2.1.0",
     "axios": "^1.6.2",
     "jotai": "^2.6.1",
