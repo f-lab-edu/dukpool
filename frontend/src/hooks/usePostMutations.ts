@@ -3,6 +3,7 @@ import { useAtomCallback } from 'jotai/utils';
 import { ensuredAuthClientAtom } from '@atoms/authAtom';
 import { ContentResponse } from 'src/@types/content';
 import { useNavigate } from 'react-router-dom';
+import useApiError from '@hooks/useApiError';
 
 export const usePostArticle = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export const usePostArticle = () => {
 
 export const usePostArticlePrefer = () => {
   const queryClient = useQueryClient();
+  const { defaultMutationHandler } = useApiError();
   return useMutation({
     mutationKey: ['postArticlePrefer'],
     mutationFn: useAtomCallback((get, _, content: string): Promise<void> => {
@@ -43,7 +45,8 @@ export const usePostArticlePrefer = () => {
       );
       return { prevContent };
     },
-    onError: (_, contentId, context) => {
+    onError: (err, contentId, context) => {
+      defaultMutationHandler(err);
       queryClient.setQueryData(['article', contentId], context?.prevContent);
     },
     onSettled: () => {
@@ -92,6 +95,7 @@ export const usePostTalk = () => {
 
 export const usePostTalkPrefer = () => {
   const queryClient = useQueryClient();
+  const { defaultMutationHandler } = useApiError();
   return useMutation({
     mutationKey: ['postTalkPrefer'],
     mutationFn: useAtomCallback((get, _, content: string): Promise<void> => {
@@ -108,7 +112,8 @@ export const usePostTalkPrefer = () => {
       }));
       return { prevContent };
     },
-    onError: (_, contentId, context) => {
+    onError: (err, contentId, context) => {
+      defaultMutationHandler(err);
       queryClient.setQueryData(['talk', contentId], context?.prevContent);
     },
     onSettled: () => {

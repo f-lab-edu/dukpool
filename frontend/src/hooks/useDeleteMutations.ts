@@ -5,6 +5,7 @@ import { ContentResponse } from 'src/@types/content';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { ToastContext } from '@context/ToastContext';
+import useApiError from '@hooks/useApiError';
 
 export const useDeleteArticle = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export const useDeleteArticle = () => {
 
 export const useDeleteArticlePrefer = () => {
   const queryClient = useQueryClient();
+  const { defaultMutationHandler } = useApiError();
   return useMutation({
     mutationKey: ['deleteArticlePrefer'],
     mutationFn: useAtomCallback((get, set, id: string) => {
@@ -43,7 +45,8 @@ export const useDeleteArticlePrefer = () => {
       );
       return { prevContent };
     },
-    onError: (_, contentId, context) => {
+    onError: (err, contentId, context) => {
+      defaultMutationHandler(err);
       queryClient.setQueryData(['article', contentId], context?.prevContent);
     },
     onSettled: () => {
@@ -54,6 +57,7 @@ export const useDeleteArticlePrefer = () => {
 
 export const useDeleteArticleComment = () => {
   const queryClient = useQueryClient();
+  const { defaultMutationHandler } = useApiError();
   const { showToast } = useContext(ToastContext);
   return useMutation({
     mutationKey: ['deleteArticleComment'],
@@ -79,7 +83,8 @@ export const useDeleteArticleComment = () => {
       );
       return { prevContent };
     },
-    onError: (_, params, context) => {
+    onError: (err, params, context) => {
+      defaultMutationHandler(err);
       queryClient.setQueryData(
         ['article', params.contentId],
         context?.prevContent,
@@ -112,6 +117,7 @@ export const useDeleteTalk = () => {
 
 export const useDeleteTalkPrefer = () => {
   const queryClient = useQueryClient();
+  const { defaultMutationHandler } = useApiError();
   return useMutation({
     mutationKey: ['deleteTalkPrefer'],
     mutationFn: useAtomCallback((get, set, id: string) => {
@@ -128,7 +134,8 @@ export const useDeleteTalkPrefer = () => {
       }));
       return { prevContent };
     },
-    onError: (_, contentId, context) => {
+    onError: (err, contentId, context) => {
+      defaultMutationHandler(err);
       queryClient.setQueryData(['talk', contentId], context?.prevContent);
     },
     onSettled: () => {
@@ -139,6 +146,7 @@ export const useDeleteTalkPrefer = () => {
 
 export const useDeleteTalkComment = () => {
   const queryClient = useQueryClient();
+  const { defaultMutationHandler } = useApiError();
   const { showToast } = useContext(ToastContext);
   return useMutation({
     mutationKey: ['deleteTalkComment'],
@@ -161,7 +169,8 @@ export const useDeleteTalkComment = () => {
       );
       return { prevContent };
     },
-    onError: (_, params, context) => {
+    onError: (err, params, context) => {
+      defaultMutationHandler(err);
       queryClient.setQueryData(
         ['talk', params.contentId],
         context?.prevContent,

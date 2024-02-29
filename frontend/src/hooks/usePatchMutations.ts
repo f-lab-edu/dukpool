@@ -6,6 +6,7 @@ import { ContentResponse } from 'src/@types/content';
 import assert from 'assert';
 import { useContext } from 'react';
 import { ToastContext } from '@context/ToastContext';
+import useApiError from '@hooks/useApiError';
 
 type ContentParams = {
   id: string;
@@ -40,6 +41,7 @@ export const usePatchArticle = () => {
 
 export const usePatchArticleComment = () => {
   const queryClient = useQueryClient();
+  const { defaultMutationHandler } = useApiError();
   return useMutation({
     mutationKey: ['patchArticleComment'],
     mutationFn: useAtomCallback(
@@ -75,7 +77,8 @@ export const usePatchArticleComment = () => {
       );
       return { prevContent };
     },
-    onError: (_, params, context) => {
+    onError: (err, params, context) => {
+      defaultMutationHandler(err);
       queryClient.setQueryData(
         ['article', params.content],
         context?.prevContent,
@@ -107,6 +110,7 @@ export const usePatchTalk = () => {
 
 export const usePatchTalkComment = () => {
   const queryClient = useQueryClient();
+  const { defaultMutationHandler } = useApiError();
   return useMutation({
     mutationKey: ['patchTalkComment'],
     mutationFn: useAtomCallback(
@@ -139,7 +143,8 @@ export const usePatchTalkComment = () => {
       }));
       return { prevContent };
     },
-    onError: (_, params, context) => {
+    onError: (err, params, context) => {
+      defaultMutationHandler(err);
       queryClient.setQueryData(['talk', params.content], context?.prevContent);
     },
     onSettled: () => {
