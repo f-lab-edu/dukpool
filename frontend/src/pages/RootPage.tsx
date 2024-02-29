@@ -10,23 +10,28 @@ import { ToastProvider } from '@context/ToastContext';
 import { Provider } from 'jotai';
 import ClientProvider from '@context/ClientContext';
 import { ModalProvider } from '@context/ModalContext';
+import ModalContainer from '@components/common/Modal/ModalContainer';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { CONFIG } from '@config';
 
 const RootPage = () => {
   const { isMobile } = useMediaQuery();
   const { reset } = useQueryErrorResetBoundary();
   return (
     <Provider>
-      <ClientProvider>
-        <ModalProvider>
-          <ToastProvider>
+      <ModalProvider>
+        <ToastProvider>
+          <ClientProvider>
+            <ModalContainer />
+            {CONFIG.ENV === 'development' ? <ReactQueryDevtools /> : <></>}
             <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
               <Header />
               <Outlet />
               {isMobile ? <MobileNavbar /> : <Footer />}
             </ErrorBoundary>
-          </ToastProvider>
-        </ModalProvider>
-      </ClientProvider>
+          </ClientProvider>
+        </ToastProvider>
+      </ModalProvider>
     </Provider>
   );
 };
