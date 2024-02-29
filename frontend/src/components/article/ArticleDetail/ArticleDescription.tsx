@@ -15,7 +15,6 @@ import placeholderImage from '@assets/images/placeholder-image.png';
 import Tag from '@components/common/Tag';
 import LikeButton from '@components/common/Button/LikeButton';
 import PostModal from '@components/common/Modal/PostModal';
-import LoginModal from '@components/common/Modal/LoginModal';
 
 const ArticleDescription = memo(
   ({
@@ -41,11 +40,8 @@ const ArticleDescription = memo(
       }
     };
     const handlePrefer = () => {
-      if (!userUniqId) openModal(<LoginModal />).catch(() => false);
-      else {
-        if (isLiked) unlike(id);
-        else like(id);
-      }
+      if (isLiked) unlike(id);
+      else like(id);
     };
     return (
       <StyledWrapper>
