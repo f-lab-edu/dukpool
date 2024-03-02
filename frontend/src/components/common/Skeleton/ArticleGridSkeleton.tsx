@@ -2,7 +2,7 @@ import { media } from '@styles/media';
 import { memo } from 'react';
 import styled from 'styled-components';
 import ArticleCardSkeleton from '@components/common/Skeleton/ArticleCardSkeleton';
-import range from 'lodash/range';
+import range from 'lodash-es/range';
 
 const articleSkeletonArray = range(8).map((_, idx) => (
   <ArticleCardSkeleton key={idx} />

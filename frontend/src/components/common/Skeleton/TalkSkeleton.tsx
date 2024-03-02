@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import { MultipleRowSliderOption } from '@constants/sliderOption';
 import TalkCardSkeleton from '@components/common/Skeleton/TalkCardSkeleton';
-import range from 'lodash/range';
+import range from 'lodash-es/range';
 
 const SkeletonArray = range(4).map((_, idx) => <TalkCardSkeleton key={idx} />);
 
