@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ContentResponse } from 'src/@types/content';
 import MyArticleCard from '@components/article/ArticleCard/MyArticleCard';
 import MyTalkCard from '@components/talk/TalkCard/MyTalkCard';
+import { useNavigate } from 'react-router-dom';
 
 type UserPostsType = {
   userNickname: string;
@@ -14,11 +15,12 @@ type UserPostsType = {
 
 const MyPosts = memo(
   ({ userNickname, userProfile, articles, talks }: UserPostsType) => {
+    const navigate = useNavigate();
     return (
       <StyledSection>
         <StyledSectionTitle>나의 덕질 활동</StyledSectionTitle>
-        {articles.length && talks.length ? (
-          <StyledContainer>
+        <StyledContainer>
+          {articles.length ? (
             <StyledArticleUl>
               {articles.map((article) => (
                 <MyArticleCard
@@ -29,6 +31,15 @@ const MyPosts = memo(
                 />
               ))}
             </StyledArticleUl>
+          ) : (
+            <StyledNoneResultBox>
+              <span>지금 바로 나의 덕질을 자랑해보세요!</span>
+              <StyledButton onClick={() => navigate('/article/new')}>
+                덕질 자랑하기
+              </StyledButton>
+            </StyledNoneResultBox>
+          )}
+          {talks.length ? (
             <StyledTalkUl>
               {talks.map((talk) => (
                 <MyTalkCard
@@ -39,12 +50,15 @@ const MyPosts = memo(
                 />
               ))}
             </StyledTalkUl>
-          </StyledContainer>
-        ) : (
-          <StyledNoneResultBox>
-            아직 작성한 게시물이 없어요🥲
-          </StyledNoneResultBox>
-        )}
+          ) : (
+            <StyledNoneResultBox>
+              <span>지금 바로 덕질에 대한 이야기를 나눠보세요!</span>
+              <StyledButton onClick={() => navigate('/talk/new')}>
+                덕질 토크하기
+              </StyledButton>
+            </StyledNoneResultBox>
+          )}
+        </StyledContainer>
       </StyledSection>
     );
   },
@@ -76,12 +90,23 @@ const StyledContainer = styled.div`
 
 const StyledNoneResultBox = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 8px;
   width: 100%;
-  height: 100px;
   justify-content: center;
   align-items: center;
   font-size: 14px;
   color: var(--gray-1);
+  padding: 20px 0;
+`;
+
+const StyledButton = styled.button`
+  width: 100px;
+  padding: 10px 8px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary);
+  color: var(--white);
 `;
 
 const StyledArticleUl = styled.ul`
