@@ -1,22 +1,24 @@
+import useMediaQuery from '@hooks/useMediaQuery';
+import useRouteChangeTracker from '@hooks/useRouteChangeTracker';
 import Header from '@components/common/Header';
 import Footer from '@components/common/Footer';
-import useMediaQuery from '@hooks/useMediaQuery';
 import MobileNavbar from '@components/common/Navbar/MobileNavbar';
 import ErrorFallback from '@components/common/ErrorFallback';
+import ModalContainer from '@components/common/Modal/ModalContainer';
 import { Outlet } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
-import { useQueryErrorResetBoundary } from '@tanstack/react-query';
-import { ToastProvider } from '@context/ToastContext';
 import { Provider } from 'jotai';
+import { ToastProvider } from '@context/ToastContext';
 import ClientProvider from '@context/ClientContext';
 import { ModalProvider } from '@context/ModalContext';
-import ModalContainer from '@components/common/Modal/ModalContainer';
+import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { CONFIG } from '@config';
 
 const RootPage = () => {
   const { isMobile } = useMediaQuery();
   const { reset } = useQueryErrorResetBoundary();
+  useRouteChangeTracker();
   return (
     <Provider>
       <ModalProvider>
