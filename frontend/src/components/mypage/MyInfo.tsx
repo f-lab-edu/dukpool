@@ -30,7 +30,6 @@ const MyInfo = memo(() => {
   const onSubmit = ({ nickname }: FormValue) => {
     if (!validate) updateNickname(nickname);
   };
-  console.log(validate);
   return (
     <FormProvider {...methods}>
       <StyledSection>
