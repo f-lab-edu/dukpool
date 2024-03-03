@@ -65,6 +65,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:18.2.0"],\
             ["react-error-boundary", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:4.0.12"],\
+            ["react-ga4", "npm:2.1.0"],\
             ["react-hook-form", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:7.49.3"],\
             ["react-router-dom", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:6.18.0"],\
             ["react-slick", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:0.29.0"],\
@@ -7312,6 +7313,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:18.2.0"],\
             ["react-error-boundary", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:4.0.12"],\
+            ["react-ga4", "npm:2.1.0"],\
             ["react-hook-form", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:7.49.3"],\
             ["react-router-dom", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:6.18.0"],\
             ["react-slick", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:0.29.0"],\
@@ -10475,6 +10477,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/react",\
             "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-ga4", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/cache/react-ga4-npm-2.1.0-2d2287b7a6-f7fb411414.zip/node_modules/react-ga4/",\
+          "packageDependencies": [\
+            ["react-ga4", "npm:2.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\

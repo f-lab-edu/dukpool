@@ -31,7 +31,6 @@ const NewArticle = () => {
   const { mutate: postNewArticle } = usePostArticle();
 
   const onSubmit = ({ title, tags, desc, files }: FormValues) => {
-    console.log(title, tags, desc, files);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('desc', desc);

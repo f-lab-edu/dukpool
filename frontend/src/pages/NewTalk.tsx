@@ -30,7 +30,6 @@ const NewTalk = () => {
   const { mutate: postNewTalk } = usePostTalk();
 
   const onSubmit = ({ title, tags, desc, files }: FormValues) => {
-    console.log(title, tags, desc, files);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('desc', desc);

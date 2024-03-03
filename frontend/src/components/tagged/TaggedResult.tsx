@@ -10,7 +10,6 @@ const TaggedResult = memo(() => {
   const { tagName } = useParams();
   assert(tagName);
   const { data: taggedData } = useTagged(tagName);
-  console.log(taggedData);
   return (
     <>
       <StyledResultText>
