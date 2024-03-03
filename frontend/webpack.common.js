@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ProvidePlugin } = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: {
@@ -15,7 +16,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
+      favicon: 'public/favicon.ico',
     }),
+    new Dotenv(),
     new ProvidePlugin({
       React: 'react',
     }),
@@ -24,14 +27,17 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
     alias: {
       '@components': path.resolve(__dirname, 'src/components'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
       '@apis': path.resolve(__dirname, 'src/apis'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@constants': path.resolve(__dirname, 'src/constants'),
+      '@context': path.resolve(__dirname, 'src/context'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@atoms': path.resolve(__dirname, 'src/atoms'),
       '@public': path.resolve(__dirname, 'public'),
-      '@styles': path.resolve(__dirname, 'src/styles'),
-      '@contexts': path.resolve(__dirname, 'src/contexts'),
+      '@config': path.resolve(__dirname, 'config.ts'),
     },
   },
   module: {
@@ -44,10 +50,23 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpe?g|webp)$/,
         type: 'asset',
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'url-loader'],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)?$/,
+        type: 'asset',
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

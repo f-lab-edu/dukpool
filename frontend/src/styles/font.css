@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'Netmarble';
+  font-weight: 500;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.eot');
+  src:
+    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.woff2')
+      format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.woff')
+      format('woff'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.ttf')
+      format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Netmarble';
+  font-weight: 700;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.eot');
+  src:
+    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.woff2')
+      format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.woff')
+      format('woff'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.ttf')
+      format('truetype');
+  font-display: swap;
+}

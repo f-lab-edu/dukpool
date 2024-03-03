@@ -23,18 +23,22 @@
     // 'baseUrl'을 기준으로 상대 위치로 가져오기를 다시 매핑하는 항목 설정
     "paths": {
       "@components/*": ["src/components/*"],
+      "@styles/*": ["src/styles/*"],
       "@apis/*": ["src/apis/*"],
+      "@assets/*": ["src/assets/*"],
       "@pages/*": ["src/pages/*"],
       "@constants/*": ["src/constants/*"],
+      "@context/*": ["src/context/*"],
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
+      "@atoms/*": ["src/atoms/*"],
       "@public/*": ["public/*"],
       "@config": ["config.ts"]
     },
     // 컴파일 목록에 자동으로 포함시킬 패키지들의 경로
     // "typeRoots": [],
     // typeRoots 프로퍼티에 지정된 경로에서 컴파일 목록에 포함시킬 특정 패키지
-    "types": [],
+    "types": ["node"],
     /* Emit */
     // 컴파일 시 타입스크립트 소스의 주석을 모두 제거
     "removeComments": true,
