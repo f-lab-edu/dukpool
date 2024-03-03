@@ -12,7 +12,7 @@ const PostImage = memo(({ images }: { images: string[] }) => {
         <StyledSlider {...ArticleImageSliderOption}>
           {images.length ? (
             images.map((image) => (
-              <StyledImgContainer>
+              <StyledImgContainer key={image}>
                 <StyledImg src={image} />
               </StyledImgContainer>
             ))
@@ -70,6 +70,9 @@ const StyledImg = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
+  ${media.phone`
+  border-radius: 0px;
+  `}
 `;
 
 export default PostImage;

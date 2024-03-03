@@ -4,10 +4,13 @@ import { CONFIG } from '@config';
 import styled from 'styled-components';
 import KakaoLogo from '@assets/icons/kakao.svg';
 
+const REDIRECT_URI =
+  CONFIG.ENV === 'development' ? CONFIG.LOCAL : CONFIG.DOMAIN;
+
 const KakaoLoginButton = memo(() => {
   return (
     <StyledLink
-      to={`https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.LOGIN}&redirect_uri=${CONFIG.LOCAL}/api/auth/kakao/callback&response_type=code`}
+      to={`https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.LOGIN}&redirect_uri=${REDIRECT_URI}/api/auth/kakao/callback&response_type=code`}
     >
       <StyledKakaoLogo src={KakaoLogo} />
       <StyledInfoText>카카오 로그인</StyledInfoText>

@@ -34,10 +34,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-typescript", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:7.23.3"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@tanstack/react-query", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.17.9"],\
+            ["@tanstack/react-query-devtools", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.24.1"],\
             ["@types/babel__core", "npm:7.20.4"],\
             ["@types/babel__preset-env", "npm:7.9.5"],\
             ["@types/eslint", "npm:8.44.7"],\
-            ["@types/lodash", "npm:4.14.202"],\
+            ["@types/lodash-es", "npm:4.17.12"],\
             ["@types/node", "npm:20.10.4"],\
             ["@types/react", "npm:18.2.37"],\
             ["@types/react-dom", "npm:18.2.15"],\
@@ -57,7 +58,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["html-webpack-plugin", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.5.3"],\
             ["jotai", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:2.6.1"],\
             ["jwt-decode", "npm:4.0.0"],\
-            ["lodash", "npm:4.17.21"],\
+            ["lodash-es", "npm:4.17.21"],\
             ["make-error", "npm:1.3.6"],\
             ["prettier", "npm:3.1.0"],\
             ["process", "npm:0.11.10"],\
@@ -4692,6 +4693,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@tanstack/query-devtools", [\
+        ["npm:5.24.0", {\
+          "packageLocation": "./.yarn/cache/@tanstack-query-devtools-npm-5.24.0-b1be9e6d5b-c557eb0931.zip/node_modules/@tanstack/query-devtools/",\
+          "packageDependencies": [\
+            ["@tanstack/query-devtools", "npm:5.24.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@tanstack/react-query", [\
         ["npm:5.17.9", {\
           "packageLocation": "./.yarn/cache/@tanstack-react-query-npm-5.17.9-496ab8d9c2-f8b77dbbdc.zip/node_modules/@tanstack/react-query/",\
@@ -4710,6 +4720,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "packagePeers": [\
             "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@tanstack/react-query-devtools", [\
+        ["npm:5.24.1", {\
+          "packageLocation": "./.yarn/cache/@tanstack-react-query-devtools-npm-5.24.1-7b9ff0bd5c-81535bc9f6.zip/node_modules/@tanstack/react-query-devtools/",\
+          "packageDependencies": [\
+            ["@tanstack/react-query-devtools", "npm:5.24.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.24.1", {\
+          "packageLocation": "./.yarn/__virtual__/@tanstack-react-query-devtools-virtual-7f57eea5ef/0/cache/@tanstack-react-query-devtools-npm-5.24.1-7b9ff0bd5c-81535bc9f6.zip/node_modules/@tanstack/react-query-devtools/",\
+          "packageDependencies": [\
+            ["@tanstack/react-query-devtools", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.24.1"],\
+            ["@tanstack/query-devtools", "npm:5.24.0"],\
+            ["@tanstack/react-query", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.17.9"],\
+            ["@types/react", "npm:18.2.37"],\
+            ["@types/tanstack__react-query", null],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@tanstack/react-query",\
+            "@types/react",\
+            "@types/tanstack__react-query",\
             "react"\
           ],\
           "linkType": "HARD"\
@@ -4939,6 +4976,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:4.14.202", {\
           "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.202-76de3e302b-a91acf3564.zip/node_modules/@types/lodash/",\
           "packageDependencies": [\
+            ["@types/lodash", "npm:4.14.202"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/lodash-es", [\
+        ["npm:4.17.12", {\
+          "packageLocation": "./.yarn/cache/@types-lodash-es-npm-4.17.12-87dce3f795-990a99e224.zip/node_modules/@types/lodash-es/",\
+          "packageDependencies": [\
+            ["@types/lodash-es", "npm:4.17.12"],\
             ["@types/lodash", "npm:4.14.202"]\
           ],\
           "linkType": "HARD"\
@@ -7234,10 +7281,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-typescript", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:7.23.3"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@tanstack/react-query", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.17.9"],\
+            ["@tanstack/react-query-devtools", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.24.1"],\
             ["@types/babel__core", "npm:7.20.4"],\
             ["@types/babel__preset-env", "npm:7.9.5"],\
             ["@types/eslint", "npm:8.44.7"],\
-            ["@types/lodash", "npm:4.14.202"],\
+            ["@types/lodash-es", "npm:4.17.12"],\
             ["@types/node", "npm:20.10.4"],\
             ["@types/react", "npm:18.2.37"],\
             ["@types/react-dom", "npm:18.2.15"],\
@@ -7257,7 +7305,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["html-webpack-plugin", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:5.5.3"],\
             ["jotai", "virtual:eacc0b7848c13c68949dfa724f1e0779de3816ec1130b5cf970daa8b8cbadc766326c2089df696340431ad3759f591197050720ca3f763af471dbf2fb89bb8a7#npm:2.6.1"],\
             ["jwt-decode", "npm:4.0.0"],\
-            ["lodash", "npm:4.17.21"],\
+            ["lodash-es", "npm:4.17.21"],\
             ["make-error", "npm:1.3.6"],\
             ["prettier", "npm:3.1.0"],\
             ["process", "npm:0.11.10"],\
@@ -9184,6 +9232,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/",\
           "packageDependencies": [\
             ["lodash", "npm:4.17.21"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lodash-es", [\
+        ["npm:4.17.21", {\
+          "packageLocation": "./.yarn/cache/lodash-es-npm-4.17.21-b45832dfce-05cbffad6e.zip/node_modules/lodash-es/",\
+          "packageDependencies": [\
+            ["lodash-es", "npm:4.17.21"]\
           ],\
           "linkType": "HARD"\
         }]\

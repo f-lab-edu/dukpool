@@ -44,7 +44,7 @@ const MyTalkCard = memo(({ nickname, profileImg, data }: MyTalkCardProps) => {
               </StyledCount>
             </StyledCountBox>
           </StyledProfileContainer>
-          <StyledDate>{data.createdAt}</StyledDate>
+          <StyledDate>{data.createdAt.slice(0, 10)}</StyledDate>
         </StyledInfoContainer>
       </StyledLink>
     </StyledList>

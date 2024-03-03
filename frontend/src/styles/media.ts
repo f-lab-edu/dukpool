@@ -1,4 +1,4 @@
-import { mapValues } from 'lodash';
+import mapValues from 'lodash-es/mapValues';
 import { css, CSSObject, Interpolation } from 'styled-components';
 
 type DeviceType = 'desktop' | 'tablet' | 'phone';

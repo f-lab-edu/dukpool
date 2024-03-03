@@ -21,11 +21,11 @@ const base = css`
   }
   * {
     color: var(--black);
-    font-family: 'GmarketSans';
+    font-family: 'Netmarble';
     font-weight: 500;
   }
   #root {
-    font-family: 'GmarketSans';
+    font-family: 'Netmarble';
   }
   body {
     margin: auto;

@@ -1,15 +1,10 @@
-import {
-  createContext,
-  useState,
-  Fragment,
-  useEffect,
-  cloneElement,
-} from 'react';
+import { createContext, useState, useEffect, cloneElement } from 'react';
 import { useLocation } from 'react-router-dom';
 
 type ModalProps = {
   openModal: <T extends {}>(element: React.ReactElement) => Promise<T>;
   hideModal: () => void;
+  modals: React.ReactElement[];
 };
 
 interface Props {
@@ -19,6 +14,7 @@ interface Props {
 const ModalContext = createContext<ModalProps>({
   openModal: async () => Promise.resolve({} as any),
   hideModal: () => {},
+  modals: [],
 });
 
 const ModalProvider = ({ children }: Props): JSX.Element => {
@@ -61,11 +57,8 @@ const ModalProvider = ({ children }: Props): JSX.Element => {
   };
 
   return (
-    <ModalContext.Provider value={{ openModal, hideModal }}>
+    <ModalContext.Provider value={{ openModal, hideModal, modals }}>
       {children}
-      {modals.map((modal, idx) => (
-        <Fragment key={idx}>{modal}</Fragment>
-      ))}
     </ModalContext.Provider>
   );
 };

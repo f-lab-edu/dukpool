@@ -134,6 +134,20 @@ export const useUserData = () => {
   });
 };
 
+export const useSearchPreview = (searchText: string = '') => {
+  return useQuery({
+    queryKey: ['search', searchText],
+    queryFn: useAtomCallback(async (get): Promise<SearchResponse> => {
+      const client = get(defaultClientAtom);
+      const { data } = await client.get(
+        `/search?searchQuery=${searchText}&take=10`,
+      );
+      return data.data;
+    }),
+    enabled: !!searchText.length,
+  });
+};
+
 export const useCheckNickname = (nickname: string, currentNickname: string) => {
   return useQuery({
     queryKey: ['nicknameCheck', nickname],

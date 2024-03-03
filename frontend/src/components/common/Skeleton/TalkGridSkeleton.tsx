@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { range } from 'lodash';
+import range from 'lodash-es/range';
 import TalkCardSkeleton from '@components/common/Skeleton/TalkCardSkeleton';
 
 const talkSkeletonArray = range(6).map((_, idx) => (

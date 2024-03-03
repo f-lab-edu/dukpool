@@ -29,6 +29,7 @@ const TalkComment = memo(({ contentId, comments }: PostCommentProps) => {
   });
   const onSubmit = ({ desc }: FormValue) => {
     postComment({ desc, content: contentId });
+    methods.resetField('desc');
   };
   return (
     <FormProvider {...methods}>
