@@ -77,9 +77,9 @@ export const defaultClientAtom = atom((get) => {
   });
   instance.interceptors.request.use((config) => {
     const [token, _] = get(updateTokenAtom);
+    config.withCredentials = true;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      config.withCredentials = true;
     }
     return config;
   });
