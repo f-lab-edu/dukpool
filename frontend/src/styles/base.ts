@@ -21,11 +21,11 @@ const base = css`
   }
   * {
     color: var(--black);
-    font-family: 'Netmarble';
+    font-family: 'TheJamsil';
     font-weight: 500;
   }
   #root {
-    font-family: 'Netmarble';
+    font-family: 'TheJamsil';
   }
   body {
     margin: auto;

@@ -11,7 +11,7 @@ const TalkDetail = () => {
   const { data } = useTalk(talkId);
   return (
     <>
-      <PostImage images={data.img} />
+      <PostImage title={data.title} images={data.img} />
       <TalkDescription {...data} />
       <TalkComment contentId={data.id} comments={data.comment} />
     </>

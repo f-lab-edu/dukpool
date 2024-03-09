@@ -5,27 +5,29 @@ import { ArticleImageSliderOption } from '@constants/sliderOption';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import { media } from '@styles/media';
 
-const PostImage = memo(({ images }: { images: string[] }) => {
-  return (
-    <StyledWrapper>
-      <StyledContainer>
-        <StyledSlider {...ArticleImageSliderOption}>
-          {images.length ? (
-            images.map((image) => (
-              <StyledImgContainer key={image}>
-                <StyledImg src={image} />
+const PostImage = memo(
+  ({ title, images }: { title: string; images: string[] }) => {
+    return (
+      <StyledWrapper>
+        <StyledContainer>
+          <StyledSlider {...ArticleImageSliderOption}>
+            {images.length ? (
+              images.map((image, idx) => (
+                <StyledImgContainer key={image}>
+                  <StyledImg alt={`${title} ${idx + 1}`} src={image} />
+                </StyledImgContainer>
+              ))
+            ) : (
+              <StyledImgContainer>
+                <StyledImg src={placeholderImage} />
               </StyledImgContainer>
-            ))
-          ) : (
-            <StyledImgContainer>
-              <StyledImg src={placeholderImage} />
-            </StyledImgContainer>
-          )}
-        </StyledSlider>
-      </StyledContainer>
-    </StyledWrapper>
-  );
-});
+            )}
+          </StyledSlider>
+        </StyledContainer>
+      </StyledWrapper>
+    );
+  },
+);
 
 PostImage.displayName = 'PostImage';
 

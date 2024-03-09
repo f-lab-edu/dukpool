@@ -6,8 +6,8 @@ import downArrow from '@assets/icons/arrow-down.svg';
 
 const DROPDOWN_OPTIONS = [
   { type: '', name: '최신순' },
-  { type: 'like', name: '좋아요 많은 순' },
-  { type: 'commentcount', name: '댓글 많은 순' },
+  { type: 'like', name: '좋아요순' },
+  { type: 'commentcount', name: '댓글순' },
 ];
 
 const Dropdown = memo(
@@ -33,7 +33,7 @@ const Dropdown = memo(
       <StyledWrapper ref={dropdownRef}>
         <StyledDropdownBtn onClick={toggleDropdown}>
           <StyledSortOption>{currentSortType(sortType)}</StyledSortOption>
-          <StyledArrow src={isOpen ? upArrow : downArrow} />
+          <StyledArrow alt="arrow" src={isOpen ? upArrow : downArrow} />
         </StyledDropdownBtn>
         {isOpen && (
           <DropdownMenu>

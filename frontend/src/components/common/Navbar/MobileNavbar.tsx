@@ -18,36 +18,46 @@ const MobileNavbar = memo(() => {
   return (
     <StyledNavbar>
       <StyledUl>
-        <Link to="/">
-          <StyledItem>
-            <StyledLogo src={pathname === '/' ? FocusedHomeIcon : HomeIcon} />
-            <p>홈</p>
-          </StyledItem>
-        </Link>
-        <Link to="/article">
-          <StyledItem>
+        <StyledItem>
+          <Link to="/">
             <StyledLogo
+              alt="홈"
+              src={pathname === '/' ? FocusedHomeIcon : HomeIcon}
+            />
+            <p>홈</p>
+          </Link>
+        </StyledItem>
+        <StyledItem>
+          <Link to="/article">
+            <StyledLogo
+              alt="덕질자랑"
               src={pathname.includes('/article') ? FocusedEmojiIcon : EmojiIcon}
             />
             <p>덕질자랑</p>
-          </StyledItem>
-        </Link>
-        <Link to="/talk">
-          <StyledItem>
+          </Link>
+        </StyledItem>
+        <StyledItem>
+          <Link to="/talk">
             <StyledLogo
+              alt="덕질토크"
               src={pathname.includes('/talk') ? FocusedCoffeeIcon : CoffeeIcon}
             />
             <p>덕질토크</p>
-          </StyledItem>
-        </Link>
-        <Link to="/mypage">
-          <StyledItem>
+          </Link>
+        </StyledItem>
+        <StyledItem>
+          <Link to={isLoggined ? '/mypage' : '/login'}>
             <StyledLogo
-              src={pathname.includes('/mypage') ? FocusedUserIcon : UserIcon}
+              alt="유저"
+              src={
+                pathname.includes('/mypage') || pathname.includes('/login')
+                  ? FocusedUserIcon
+                  : UserIcon
+              }
             />
             <p>{isLoggined ? '내정보' : '로그인'}</p>
-          </StyledItem>
-        </Link>
+          </Link>
+        </StyledItem>
       </StyledUl>
     </StyledNavbar>
   );
@@ -74,6 +84,7 @@ const StyledItem = styled.li`
   align-items: center;
   padding: 0.8rem 1.2rem;
   font-size: 10px;
+  text-align: center;
 `;
 
 const StyledLogo = styled.img`

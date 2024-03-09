@@ -6,13 +6,13 @@ import { media } from '@styles/media';
 
 const ArrowLeft = ({ currentSlide, slideCount, ...props }: any) => (
   <StyledLeftArrowImgContainer {...props}>
-    <StyledImg src={prev} />
+    <StyledImg alt="arrow" src={prev} />
   </StyledLeftArrowImgContainer>
 );
 
 const ArrowRight = ({ currentSlide, slideCount, ...props }: any) => (
   <StyledRightArrowImgContainer {...props}>
-    <StyledImg src={next} />
+    <StyledImg alt="arrow" src={next} />
   </StyledRightArrowImgContainer>
 );
 

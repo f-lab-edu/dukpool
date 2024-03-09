@@ -40,7 +40,6 @@ const CommentInput = memo(
               type="submit"
               text={buttonText}
               disabled={userUniqId ? false : true}
-              $colorType="dark"
             />
           </StyledButtonWrapper>
         </StyledButtonContainer>

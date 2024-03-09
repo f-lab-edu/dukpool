@@ -15,13 +15,12 @@ const NotFound = () => {
     <Layout>
       <StyledWrapper $height={height}>
         <StyledInfo>
-          <StyledLogo src={Logo} alt="Dukpool 로고" />
+          <StyledLogo src={Logo} alt="Dukpool Logo" />
           <StyledParagraph>요청하신 페이지를 찾을 수 없습니다.</StyledParagraph>
         </StyledInfo>
         <Button
           text="메인 페이지로 돌아가기"
           disabled={false}
-          $colorType="dark"
           onClick={goToMainPage}
         />
       </StyledWrapper>

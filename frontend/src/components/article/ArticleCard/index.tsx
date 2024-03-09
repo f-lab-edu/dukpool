@@ -20,13 +20,14 @@ const ArticleCard = memo(
       <StyledList>
         <StyledLink to={`/article/${id}`}>
           <StyledImgContainer>
-            <StyledImage src={img[0] ?? placeholderImage} />
+            <StyledImage alt={title} src={img[0] ?? placeholderImage} />
           </StyledImgContainer>
           <StyledInfoContainer>
             <StyledTitle>{title}</StyledTitle>
             <StyledProfileContainer>
               <StyledProfileImageContainer>
                 <StyledProfileImage
+                  alt={writer.nickname}
                   src={writer.profileImg ?? placeholderImage}
                 />
               </StyledProfileImageContainer>

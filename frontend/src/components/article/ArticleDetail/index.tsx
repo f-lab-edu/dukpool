@@ -12,7 +12,7 @@ const ArticleDetail = () => {
   const { data } = useArticle(articleId);
   return (
     <StyledArticle>
-      <PostImage images={data.img} />
+      <PostImage title={data.title} images={data.img} />
       <ArticleDescription {...data} />
       <ArticleComment contentId={data.id} comments={data.comment} />
     </StyledArticle>

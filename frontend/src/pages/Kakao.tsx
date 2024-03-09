@@ -20,7 +20,7 @@ const Kakao = () => {
   return (
     <Layout>
       <StyledContainer $height={height}>
-        <StyledLogo src={Logo} alt="DukpoolLogo" />
+        <StyledLogo src={Logo} alt="Dukpool Logo" />
       </StyledContainer>
     </Layout>
   );
