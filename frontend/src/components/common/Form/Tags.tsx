@@ -17,7 +17,7 @@ const Tags = memo(() => {
     const target = event.target as HTMLInputElement;
     if (
       target.value.length &&
-      event.key === ' ' &&
+      event.key === 'Enter' &&
       !currentTags.includes(target.value) &&
       !event.nativeEvent.isComposing
     ) {
@@ -37,8 +37,8 @@ const Tags = memo(() => {
           }
           type="text"
           value={tagItem}
-          onKeyUp={onKeyPress}
-          placeholder="스페이스바를 눌러 관련있는 태그를 추가해보세요."
+          onKeyDown={onKeyPress}
+          placeholder="Enter를 눌러 관련있는 태그를 추가해보세요."
         />
         <StyledTagsContainer>
           {currentTags.map((tag) => (
