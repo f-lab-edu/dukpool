@@ -50,9 +50,9 @@ const NewArticle = () => {
               placeholder="제목을 입력해주세요."
               registerType="title"
               required={true}
-              minLength={5}
+              minLength={2}
             />
-            {<ErrorMessage field="제목" type={title?.type!} length={5} />}
+            {<ErrorMessage field="제목" type={title?.type!} length={2} />}
             <Tags />
             <TextArea
               label="내용"
@@ -65,12 +65,7 @@ const NewArticle = () => {
             <Images />
             <StyledButtonContainer>
               <StyledButtonWrapper>
-                <Button
-                  type="submit"
-                  text="등록"
-                  disabled={false}
-                  $colorType="dark"
-                />
+                <Button type="submit" text="등록" disabled={false} />
               </StyledButtonWrapper>
             </StyledButtonContainer>
           </StyledForm>
