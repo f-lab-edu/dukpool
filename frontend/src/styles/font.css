@@ -1,32 +1,32 @@
 @font-face {
-  font-family: 'Netmarble';
-  font-weight: 500;
+  font-family: 'TheJamsil';
+  font-weight: 400;
   font-style: normal;
-  src: url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Regular.eot');
   src:
-    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.eot?#iefix')
+    url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Regular.eot?#iefix')
       format('embedded-opentype'),
-    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.woff2')
+    url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Regular.woff2')
       format('woff2'),
-    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.woff')
+    url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Regular.woff')
       format('woff'),
-    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleMedium.ttf')
+    url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Regular.ttf')
       format('truetype');
   font-display: swap;
 }
 @font-face {
-  font-family: 'Netmarble';
+  font-family: 'TheJamsil';
   font-weight: 700;
   font-style: normal;
-  src: url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Bold.eot');
   src:
-    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.eot?#iefix')
+    url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Bold.eot?#iefix')
       format('embedded-opentype'),
-    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.woff2')
+    url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Bold.woff2')
       format('woff2'),
-    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.woff')
+    url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Bold.woff')
       format('woff'),
-    url('https://cdn.jsdelivr.net/gh/webfontworld/netmarble/NetmarbleBold.ttf')
+    url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Bold.ttf')
       format('truetype');
   font-display: swap;
 }
