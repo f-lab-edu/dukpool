@@ -13,7 +13,7 @@ const LikeButton = memo(({ onClick, likeCount, isLiked }: ButtonProps) => {
   return (
     <StyledButtonContainer>
       <StyledButton type="button" onClick={onClick}>
-        <StyledLogo src={isLiked ? ActivelikeIcon : likeIcon} />
+        <StyledLogo alt="like" src={isLiked ? ActivelikeIcon : likeIcon} />
         <StyledCount>{likeCount}</StyledCount>
       </StyledButton>
     </StyledButtonContainer>

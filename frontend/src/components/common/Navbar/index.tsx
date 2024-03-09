@@ -11,26 +11,28 @@ const Navbar = memo(() => {
   return (
     <StyledNavbar>
       <StyledUl>
-        <Link to="/">
-          <StyledItem $active={pathname === '/'}>
+        <StyledItem $active={pathname === '/'}>
+          <Link to="/">
             <p>홈</p>
-          </StyledItem>
-        </Link>
-        <Link to="/article">
-          <StyledItem $active={pathname.includes('/article')}>
+          </Link>
+        </StyledItem>
+        <StyledItem $active={pathname.includes('/article')}>
+          <Link to="/article">
             <p>덕질자랑</p>
-          </StyledItem>
-        </Link>
-        <Link to="/talk">
-          <StyledItem $active={pathname.includes('/talk')}>
+          </Link>
+        </StyledItem>
+        <StyledItem $active={pathname.includes('/talk')}>
+          <Link to="/talk">
             <p>덕질토크</p>
-          </StyledItem>
-        </Link>
-        <Link to="/mypage">
-          <StyledItem $active={pathname.includes('/mypage')}>
+          </Link>
+        </StyledItem>
+        <StyledItem
+          $active={pathname.includes('/mypage') || pathname.includes('/login')}
+        >
+          <Link to={isLoggined ? '/mypage' : '/login'}>
             <p>{isLoggined ? '내정보' : '로그인'}</p>
-          </StyledItem>
-        </Link>
+          </Link>
+        </StyledItem>
       </StyledUl>
     </StyledNavbar>
   );
@@ -51,10 +53,13 @@ const StyledUl = styled.ul`
 const StyledItem = styled.li<{ $active: boolean }>`
   padding: 1.2rem 2rem;
   background-color: ${({ $active }) => ($active ? 'var(--primary)' : 'white')};
-  & > p {
+  & > a > p {
     color: ${({ $active }) => ($active ? 'var(--white)' : 'var(--black)')};
   }
   border-radius: 12px;
 `;
+
+// const StyledSpan = styled.span`
+// `
 
 export default Navbar;

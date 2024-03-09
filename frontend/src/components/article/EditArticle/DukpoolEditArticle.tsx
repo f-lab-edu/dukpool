@@ -65,10 +65,10 @@ const DukpoolEditArticle = memo(() => {
           placeholder="제목을 입력해주세요."
           registerType="title"
           required={true}
-          minLength={5}
+          minLength={2}
         />
         {titleErrorState && (
-          <ErrorMessage field="제목" type={titleErrorState.type} length={5} />
+          <ErrorMessage field="제목" type={titleErrorState.type} length={2} />
         )}
         <Tags />
         <TextArea
@@ -84,12 +84,7 @@ const DukpoolEditArticle = memo(() => {
         <Images />
         <StyledButtonContainer>
           <StyledButtonWrapper>
-            <Button
-              type="submit"
-              text="등록"
-              disabled={false}
-              $colorType="dark"
-            />
+            <Button type="submit" text="등록" disabled={false} />
           </StyledButtonWrapper>
         </StyledButtonContainer>
       </form>

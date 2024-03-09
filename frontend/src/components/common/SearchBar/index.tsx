@@ -36,11 +36,12 @@ const SearchBar = memo(() => {
       />
       {searchText && (
         <StyledBtn type="button" onClick={() => dispatch({ type: 'clear' })}>
-          <img src={closeIcon} />
+          <img alt="clear" src={closeIcon} />
         </StyledBtn>
       )}
       {searchData && isFocused && (
         <PreviewList
+          searchText={debouncedSearchText}
           contents={searchData.contents.data}
           talkContents={searchData.talkContents.data}
         />

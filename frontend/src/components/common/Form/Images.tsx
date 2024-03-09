@@ -29,9 +29,9 @@ const Images = memo(() => {
       <StyledContainer>
         <label htmlFor="fileImage">
           <StyledCustomInput>
-            <StyledCameraImg src={cameraIcon} />
+            <StyledCameraImg alt="camera" src={cameraIcon} />
             <StyledTopContainer>
-              <StyledTopImg src={plusIcon} />
+              <StyledTopImg alt="add" src={plusIcon} />
             </StyledTopContainer>
           </StyledCustomInput>
         </label>

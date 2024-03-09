@@ -3,52 +3,62 @@ import { ContentResponse } from 'src/@types/content';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import searchIcon from '@assets/icons/search.svg';
+import HighlightText from '@components/search/HighlightText';
 
 type PreviewListProps = {
   contents: Omit<ContentResponse, 'comment'>[];
   talkContents: Omit<ContentResponse, 'comment'>[];
+  searchText: string;
 };
 
-const PreviewList = memo(({ contents, talkContents }: PreviewListProps) => {
-  if (!contents.length && !talkContents.length) {
-    return null;
-  }
+const PreviewList = memo(
+  ({ contents, talkContents, searchText }: PreviewListProps) => {
+    if (!contents.length && !talkContents.length) {
+      return null;
+    }
 
-  return (
-    <StyledPreviewContainer>
-      {contents.length > 0 && (
-        <StyledSection>
-          <StyledSearchSectionTitle>📸 덕질자랑</StyledSearchSectionTitle>
-          <ul>
-            {contents.map((content) => (
-              <Link to={`/article/${content.id}`} key={content.id}>
-                <StyledSearchList>
-                  <StyledSearchIcon src={searchIcon} />
-                  <span>{content.title}</span>
-                </StyledSearchList>
-              </Link>
-            ))}
-          </ul>
-        </StyledSection>
-      )}
-      {talkContents.length > 0 && (
-        <StyledSection>
-          <StyledSearchSectionTitle>🎙️ 덕질토크</StyledSearchSectionTitle>
-          <ul>
-            {talkContents.map((content) => (
-              <Link to={`/talk/${content.id}`} key={content.id}>
-                <StyledSearchList>
-                  <StyledSearchIcon src={searchIcon} />
-                  <span>{content.title}</span>
-                </StyledSearchList>
-              </Link>
-            ))}
-          </ul>
-        </StyledSection>
-      )}
-    </StyledPreviewContainer>
-  );
-});
+    return (
+      <StyledPreviewContainer>
+        {contents.length > 0 && (
+          <StyledSection>
+            <StyledSearchSectionTitle>📸 덕질자랑</StyledSearchSectionTitle>
+            <ul>
+              {contents.map((content) => (
+                <Link to={`/article/${content.id}`} key={content.id}>
+                  <StyledSearchList>
+                    <StyledSearchIcon alt="search" src={searchIcon} />
+                    <HighlightText
+                      searchText={searchText}
+                      searchResult={content.title}
+                    />
+                  </StyledSearchList>
+                </Link>
+              ))}
+            </ul>
+          </StyledSection>
+        )}
+        {talkContents.length > 0 && (
+          <StyledSection>
+            <StyledSearchSectionTitle>🎙️ 덕질토크</StyledSearchSectionTitle>
+            <ul>
+              {talkContents.map((content) => (
+                <Link to={`/talk/${content.id}`} key={content.id}>
+                  <StyledSearchList>
+                    <StyledSearchIcon alt="search" src={searchIcon} />
+                    <HighlightText
+                      searchText={searchText}
+                      searchResult={content.title}
+                    />
+                  </StyledSearchList>
+                </Link>
+              ))}
+            </ul>
+          </StyledSection>
+        )}
+      </StyledPreviewContainer>
+    );
+  },
+);
 
 PreviewList.displayName = 'PreviewList';
 

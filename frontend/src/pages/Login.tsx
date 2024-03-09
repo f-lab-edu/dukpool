@@ -10,7 +10,7 @@ const Login = () => {
     <Layout>
       <StyledContainer $height={height}>
         <StyledInfo>
-          <StyledLogo src={Logo} alt="Dukpool 로고" />
+          <StyledLogo src={Logo} alt="Dukpool Logo" />
           <StyledInfoText>나만의 덕질 취향을 공유해보세요.</StyledInfoText>
         </StyledInfo>
         <KakaoLoginButton />

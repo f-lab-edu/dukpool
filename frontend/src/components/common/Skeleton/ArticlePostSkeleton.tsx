@@ -12,7 +12,7 @@ const ArticlePostSkeleton = memo(() => {
         <SkeletonContainer>
           <SkeletonSlider {...ArticleImageSliderOption}>
             <SkeletonImgContainer>
-              <StyledImg src={placeholderImage} />
+              <StyledImg alt="placeholderImage" src={placeholderImage} />
             </SkeletonImgContainer>
           </SkeletonSlider>
         </SkeletonContainer>
@@ -21,7 +21,10 @@ const ArticlePostSkeleton = memo(() => {
         <SkeletonInfoContainer>
           <SkeletonUserProfile>
             <SkeletonProfileImgContainer>
-              <SkeletonProfileImg src={placeholderImage} />
+              <SkeletonProfileImg
+                alt="placeholderImage"
+                src={placeholderImage}
+              />
             </SkeletonProfileImgContainer>
             <SkeletonProfileName />
           </SkeletonUserProfile>

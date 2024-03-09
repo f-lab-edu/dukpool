@@ -11,8 +11,8 @@ const MyInfoSkeleton = memo(() => {
       <SkeletonSection>
         <SkeletonTitle />
         <SkeletonContainer>
-          <StyledImg src={placeholderImage} />
-          <SkeletonInputContainer />
+          <StyledImg alt="placeholderImage" src={placeholderImage} />
+          <SkeletonInfoContainer />
         </SkeletonContainer>
       </SkeletonSection>
       <SkeletonSection>
@@ -69,18 +69,16 @@ const SkeletonPostContainer = styled.div`
 `;
 
 const StyledImg = styled.img`
-  max-width: 160px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
   border-radius: 50%;
   aspect-ratio: 1;
 `;
 
-const SkeletonInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 70%;
+const SkeletonInfoContainer = styled.div`
+  width: 200px;
+  height: 100px;
   border-radius: 8px;
   background-color: var(--skeleton);
 `;

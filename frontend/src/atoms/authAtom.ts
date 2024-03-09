@@ -36,53 +36,21 @@ const tokenBaseAtom = atomWithStorage<string | null>(
 export const updateTokenAtom = atomWithUpdater(tokenBaseAtom);
 
 // atomEffect
-export const authClientAtom = atom((get) => {
-  get(userUniqIdAtom);
-  const instance = axios.create({
-    baseURL: CONFIG.BASE_URL,
-  });
-
-  instance.interceptors.request.use((config) => {
-    const [token, _] = get(updateTokenAtom);
-    config.headers.Authorization = `Bearer ${token}`;
-    config.withCredentials = true;
-    return config;
-  });
-
-  instance.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    async (error) => {
-      const { config: originalRequest, response } = error;
-      const { data } = response;
-      if (data.message === 'Unauthorized') {
-        const [_, updateToken] = get(updateTokenAtom);
-        const { data } = await instance.get(`/auth/refresh`);
-        updateToken(data);
-        return instance.request(originalRequest);
-      }
-      if (error.code === 'SERVER_ERROR') throw new ServerError();
-      if (error.code === 'EXPIRED_REFRESH_TOKEN')
-        throw new ExpiredRefreshTokenError();
-    },
-  );
-  return instance;
-});
-
 export const defaultClientAtom = atom((get) => {
+  get(userUniqIdAtom);
   const instance = axios.create({
     baseURL: CONFIG.BASE_URL,
     withCredentials: true,
   });
+
   instance.interceptors.request.use((config) => {
     const [token, _] = get(updateTokenAtom);
-    config.withCredentials = true;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   });
+
   instance.interceptors.response.use(
     (response) => {
       return response;
@@ -90,22 +58,29 @@ export const defaultClientAtom = atom((get) => {
     async (error) => {
       const { config: originalRequest, response } = error;
       const { data } = response;
-      if (data.message === 'Unauthorized') {
+      if (data.message === 'Expired AccessToken') {
         const [_, updateToken] = get(updateTokenAtom);
         const { data } = await instance.get(`/auth/refresh`);
-        updateToken(data);
+        updateToken(data.data);
         return instance.request(originalRequest);
       }
-      if (error.code === 'SERVER_ERROR') throw new ServerError();
-      if (error.code === 'EXPIRED_REFRESH_TOKEN')
+      if (data.message === 'Expired RefreshToken') {
+        window.localStorage.removeItem(TOKEN_KEY);
+        if (CONFIG.ENV === 'development') {
+          window.location.href = `${CONFIG.LOCAL}/login`;
+        } else if (CONFIG.ENV === 'production') {
+          window.location.href = `${CONFIG.DOMAIN}/login`;
+        }
         throw new ExpiredRefreshTokenError();
+      }
+      if (error.code === 'SERVER_ERROR') throw new ServerError();
     },
   );
   return instance;
 });
 
 export const ensuredAuthClientAtom = atom((get) => {
-  const client = get(authClientAtom);
+  const client = get(defaultClientAtom);
   const isLoggedin = get(loginStatusAtom);
   if (!isLoggedin) {
     throw new UnAuthorizedError();
@@ -118,7 +93,7 @@ export const loginStatusAtom = atom<boolean>((get) => {
   return !!token;
 });
 
-export const loginAtom = atom(null, async (get, set) => {
+export const loginAtom = atom(null, async (get) => {
   const client = get(defaultClientAtom);
   const [_, updateToken] = get(updateTokenAtom);
   const code = new URL(window.location.href).searchParams.get('code');
@@ -127,8 +102,26 @@ export const loginAtom = atom(null, async (get, set) => {
   updateToken(token);
 });
 
-export const logoutAtom = atom(null, (get, set) => {
-  set(tokenBaseAtom, null);
+export const logoutAtom = atom(null, async (get) => {
+  const client = get(ensuredAuthClientAtom);
+  await client.post(`/auth/logout`);
+  window.localStorage.removeItem(TOKEN_KEY);
+  if (CONFIG.ENV === 'development') {
+    window.location.href = `${CONFIG.LOCAL}`;
+  } else if (CONFIG.ENV === 'production') {
+    window.location.href = `${CONFIG.DOMAIN}`;
+  }
+});
+
+export const withdrawAtom = atom(null, async (get) => {
+  const client = get(ensuredAuthClientAtom);
+  await client.delete(`/auth`);
+  window.localStorage.removeItem(TOKEN_KEY);
+  if (CONFIG.ENV === 'development') {
+    window.location.href = `${CONFIG.LOCAL}`;
+  } else if (CONFIG.ENV === 'production') {
+    window.location.href = `${CONFIG.DOMAIN}`;
+  }
 });
 
 export const userUniqIdAtom = atom((get) => {

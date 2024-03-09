@@ -14,7 +14,7 @@ const Tag = ({ tagName, buttonHandler }: tagProps) => {
         <>
           <StyledTagName>#{tagName}</StyledTagName>
           <StyledButton type="button" onClick={buttonHandler}>
-            <StyledImg src={closeIcon} alt="삭제" />
+            <StyledImg src={closeIcon} alt="close" />
           </StyledButton>
         </>
       ) : (

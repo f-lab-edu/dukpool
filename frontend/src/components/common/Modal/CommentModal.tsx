@@ -16,13 +16,14 @@ const CommentModal = memo(({ onSubmit, onAbort }: ModalProps) => {
       <StyledContainer>
         <StyledCloseBtnContainer>
           <StyledCloseIcon
+            alt="close"
             src={closeIcon}
             onClick={() => onAbort?.(new Error())}
           />
         </StyledCloseBtnContainer>
         <StyledFlexContainer>
           <StyledLogoContainer>
-            <StyledLogo src={alert} />
+            <StyledLogo alt="alert" src={alert} />
           </StyledLogoContainer>
           <StyledSpan>작성하신 댓글을 삭제하시겠어요?</StyledSpan>
           <StyledButtonContainer>
@@ -36,8 +37,7 @@ const CommentModal = memo(({ onSubmit, onAbort }: ModalProps) => {
               text="삭제"
               disabled={false}
               onClick={() => onSubmit?.(true)}
-              $colorType="dark"
-              error={true}
+              $colorType="error"
             />
           </StyledButtonContainer>
         </StyledFlexContainer>

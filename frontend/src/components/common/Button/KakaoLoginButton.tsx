@@ -12,7 +12,7 @@ const KakaoLoginButton = memo(() => {
     <StyledLink
       to={`https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.LOGIN}&redirect_uri=${REDIRECT_URI}/api/auth/kakao/callback&response_type=code`}
     >
-      <StyledKakaoLogo src={KakaoLogo} />
+      <StyledKakaoLogo alt="kakao logo" src={KakaoLogo} />
       <StyledInfoText>카카오 로그인</StyledInfoText>
     </StyledLink>
   );
