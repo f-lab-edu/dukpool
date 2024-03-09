@@ -8,7 +8,7 @@ const ArticleCardSkeleton = memo(() => {
     <SkeletonList>
       <SkeletonContainer>
         <SkeletonImgContainer>
-          <SkeletonImage src={placeholderImage} />
+          <SkeletonImage alt="placeholderImage" src={placeholderImage} />
         </SkeletonImgContainer>
         <SkeletonInfoContainer>
           <SkeletonTitle />

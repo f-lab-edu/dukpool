@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Header = memo(() => (
   <StyledHeader>
     <Link to={'/'}>
-      <StyledLogo src={Logo} />
+      <StyledLogo alt="Dukpool Logo" src={Logo} />
     </Link>
     <Navbar />
   </StyledHeader>

@@ -8,7 +8,7 @@ const TalkCardSkeleton = memo(() => {
       <SkeletonWrapper>
         <SkeletonContainer>
           <SkeletonImgContainer>
-            <SkeletonImage src={placeholderImage} />
+            <SkeletonImage alt="placeholderImage" src={placeholderImage} />
           </SkeletonImgContainer>
           <SkeletonContentContainer>
             <SkeletonTitle />
@@ -87,14 +87,14 @@ const SkeletonContentContainer = styled.div`
 
 const SkeletonContent = styled.div`
   width: 100%;
-  height: 13px;
+  height: 12px;
   line-height: 1.36;
   background-color: var(--skeleton);
   border-radius: 8px;
 `;
 
 const SkeletonTitle = styled.div`
-  height: 18px;
+  height: 16px;
   margin-bottom: 8px;
   background-color: var(--skeleton);
   border-radius: 8px;

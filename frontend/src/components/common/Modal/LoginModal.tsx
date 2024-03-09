@@ -16,13 +16,14 @@ const LoginModal = memo(({ onSubmit, onAbort }: ModalProps) => {
       <StyledContainer>
         <StyledCloseBtnContainer>
           <StyledCloseIcon
+            alt="close"
             src={closeIcon}
             onClick={() => onAbort?.(new Error())}
           />
         </StyledCloseBtnContainer>
         <StyledFlexContainer>
           <StyledLogoContainer>
-            <StyledLogo src={logo} />
+            <StyledLogo alt="alert" src={logo} />
           </StyledLogoContainer>
           <StyledSpan>로그인 후에 이용해보세요!</StyledSpan>
           <StyledButtonContainer onClick={() => onSubmit?.(true)}>

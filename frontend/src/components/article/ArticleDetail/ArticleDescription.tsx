@@ -49,7 +49,10 @@ const ArticleDescription = memo(
           <StyledUserProfileContainer>
             <StyledUserProfile>
               <StyledProfileImgContainer>
-                <StyledProfileImg src={writer.profileImg ?? placeholderImage} />
+                <StyledProfileImg
+                  alt={writer.nickname}
+                  src={writer.profileImg ?? placeholderImage}
+                />
               </StyledProfileImgContainer>
               <StyledProfileName>{writer.nickname}</StyledProfileName>
             </StyledUserProfile>

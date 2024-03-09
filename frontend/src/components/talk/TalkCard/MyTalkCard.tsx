@@ -18,7 +18,10 @@ const MyTalkCard = memo(({ nickname, profileImg, data }: MyTalkCardProps) => {
       <StyledLink to={`/talk/${data.id}`}>
         <StyledContainer>
           <StyledImgContainer>
-            <StyledImage src={data.img[0] ?? placeholderImage} />
+            <StyledImage
+              alt={data.title}
+              src={data.img[0] ?? placeholderImage}
+            />
           </StyledImgContainer>
           <StyledContentContainer>
             <StyledTitle>{data.title}</StyledTitle>
@@ -29,7 +32,10 @@ const MyTalkCard = memo(({ nickname, profileImg, data }: MyTalkCardProps) => {
           <StyledProfileContainer>
             <StyledProfileDiv>
               <StyledProfileImageContainer>
-                <StyledProfileImage src={profileImg ?? placeholderImage} />
+                <StyledProfileImage
+                  alt={nickname}
+                  src={profileImg ?? placeholderImage}
+                />
               </StyledProfileImageContainer>
               <StyledProfile>{nickname}</StyledProfile>
             </StyledProfileDiv>
@@ -93,7 +99,7 @@ const StyledContentContainer = styled.div`
 const StyledContent = styled.div`
   width: 100%;
   line-height: 1.36;
-  font-size: 13px;
+  font-size: 12px;
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
@@ -103,7 +109,7 @@ const StyledContent = styled.div`
 `;
 
 const StyledTitle = styled.h3`
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 8px;
   text-overflow: ellipsis;
   overflow: hidden;

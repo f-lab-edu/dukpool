@@ -14,7 +14,7 @@ const Footer = memo(() => (
         <p>COPYRIGHT © 2023 DUKPOOL ALL RIGHTS RESERVED</p>
       </div>
       <Link target="_blank" to="https://github.com/f-lab-edu/dukpool">
-        <StyledLogo src={GithubLogo} />
+        <StyledLogo alt="github logo" src={GithubLogo} />
       </Link>
     </StyledLine>
   </StyledFooter>

@@ -52,6 +52,7 @@ const TalkCommentItem = memo(
             <StyledCommentUserProfileContainer>
               <StyledCommentProfileImgContainer>
                 <StyledCommentProfileImg
+                  alt={writer.nickname}
                   src={writer.profileImg ?? placeholderImage}
                 />
               </StyledCommentProfileImgContainer>

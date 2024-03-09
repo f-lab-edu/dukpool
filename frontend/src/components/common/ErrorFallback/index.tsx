@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo, useContext, useEffect } from 'react';
 import { FallbackProps } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
 import useMediaQuery from '@hooks/useMediaQuery';
@@ -9,21 +9,29 @@ import Layout from '@components/common/Layout';
 import MobileNavbar from '@components/common/Navbar/MobileNavbar';
 import Footer from '@components/common/Footer';
 import Logo from '@assets/logo/dukpool-logo.svg';
-import { UnAuthorizedError } from '@utils/errors';
+import { UnAuthorizedError, ExpiredRefreshTokenError } from '@utils/errors';
 import useInnerHeight from '@hooks/useInnerHeight';
+import { ToastContext } from '@context/ToastContext';
 
 const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
   const { height } = useInnerHeight();
   const { isMobile } = useMediaQuery();
   const navigate = useNavigate();
+  const { showToast } = useContext(ToastContext);
+
   useEffect(() => {
     if (error instanceof UnAuthorizedError) {
       navigate('/login');
       resetErrorBoundary();
     }
+    if (error instanceof ExpiredRefreshTokenError) {
+      showToast('토큰이 만료되었습니다. 다시 로그인해주세요');
+      resetErrorBoundary();
+    }
   }, []);
 
   if (error instanceof UnAuthorizedError) return null;
+  if (error instanceof ExpiredRefreshTokenError) return null;
 
   return (
     <>
@@ -31,7 +39,7 @@ const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
       <Layout>
         <StyledWrapper $height={height}>
           <StyledInfo>
-            <StyledLogo src={Logo} alt="Dukpool 로고" />
+            <StyledLogo src={Logo} alt="Dukpool Logo" />
             <StyledParagraph>
               데이터를 불러오는데 오류가 발생했습니다.
             </StyledParagraph>
@@ -40,7 +48,6 @@ const ErrorFallback = memo(({ error, resetErrorBoundary }: FallbackProps) => {
           <Button
             text="재시도"
             disabled={false}
-            $colorType="dark"
             onClick={resetErrorBoundary}
           ></Button>
         </StyledWrapper>
