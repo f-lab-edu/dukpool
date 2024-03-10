@@ -10,7 +10,6 @@ const HighlightText = memo(
     searchResult: string;
   }) => {
     const matchText = searchResult.split(new RegExp(`(${searchText})`, 'gi'));
-    console.log(matchText);
     return (
       <div>
         {matchText.map((part, idx) => (

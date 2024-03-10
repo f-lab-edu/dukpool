@@ -1,17 +1,24 @@
 name: front-dev-deploy
 
 on:
-  push: # 적용될 액션
-    branches: main # 적용될 브랜치
+  push:
+    branches: main
 defaults:
   run:
-    working-directory: ./frontend # workflow에서 default working directory
+    working-directory: ./frontend
 jobs:
   deploy:
-    runs-on: ubuntu-latest # 인스턴스 OS
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v2 # 워크플로에서 액세스할 수 있도록 에서 저장소를 체크아웃
+        uses: actions/checkout@v2
+      - name: .env setting
+        run: |
+        echo "LOCAL=${{ secrets.LOCAL }}" >> .env
+        echo "DOMAIN=${{ secrets.DOMAIN }}" >> .env
+        echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
+        echo "GOOGLE_ANALYTICS=${{ secrets.GOOGLE_ANALYTICS }}" >> .env
+        echo "KAKAO_LOGIN_API_KEY=${{ secrets.KAKAO_LOGIN_API_KEY }}" >> .env
       - name: Install Dependencies
         run: yarn install
       - name: Build
@@ -21,3 +28,9 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: aws s3 sync --delete --region ap-northeast-2 ./dist s3://dukpool.co.kr
+      - name: CloudFront Invalidation
+        env:
+          AWS_DISTRIBUTION_ID: ${{ secrets.AWS_DISTRIBUTION_ID}}
+        run: |
+        aws cloudfront create-invalidation \
+        --distribution-id $AWS_DISTRIBUTION_ID --paths /*
