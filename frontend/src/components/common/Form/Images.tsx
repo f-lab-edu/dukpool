@@ -5,15 +5,24 @@ import cameraIcon from '@assets/icons/camera.svg';
 import plusIcon from '@assets/icons/plus.svg';
 import { makeBlob } from '@utils/makeBlob';
 import { useFormContext } from 'react-hook-form';
+import { compressImage } from '@utils/compressImage';
 
 const Images = memo(() => {
   const { setValue, watch } = useFormContext();
   const currentImages: (string | File)[] = watch('files');
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const files = event.target.files;
     if (files && currentImages.length + files.length <= 5) {
-      setValue('files', [...currentImages, ...files]);
+      const compressedImages = [];
+      for (const file of files) {
+        const compressedFile = await compressImage(file);
+        compressedImages.push(compressedFile);
+        console.log(compressedImages);
+      }
+      setValue('files', [...currentImages, ...compressedImages]);
     }
   };
 
