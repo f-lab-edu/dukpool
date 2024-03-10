@@ -3,34 +3,42 @@ name: front-dev-deploy
 on:
   push:
     branches: main
+
 defaults:
   run:
     working-directory: ./frontend
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
+
       - name: .env setting
         run: |
-        echo "LOCAL=${{ secrets.LOCAL }}" >> .env
-        echo "DOMAIN=${{ secrets.DOMAIN }}" >> .env
-        echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
-        echo "GOOGLE_ANALYTICS=${{ secrets.GOOGLE_ANALYTICS }}" >> .env
-        echo "KAKAO_LOGIN_API_KEY=${{ secrets.KAKAO_LOGIN_API_KEY }}" >> .env
+          echo "LOCAL=${{ secrets.LOCAL }}" >> .env
+          echo "DOMAIN=${{ secrets.DOMAIN }}" >> .env
+          echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
+          echo "GOOGLE_ANALYTICS=${{ secrets.GOOGLE_ANALYTICS }}" >> .env
+          echo "KAKAO_LOGIN_API_KEY=${{ secrets.KAKAO_LOGIN_API_KEY }}" >> .env
+
       - name: Install Dependencies
         run: yarn install
+
       - name: Build
         run: yarn build
+
       - name: Sync Bucket
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: aws s3 sync --delete --region ap-northeast-2 ./dist s3://dukpool.co.kr
+
       - name: CloudFront Invalidation
         env:
-          AWS_DISTRIBUTION_ID: ${{ secrets.AWS_DISTRIBUTION_ID}}
+          AWS_DISTRIBUTION_ID: ${{ secrets.AWS_DISTRIBUTION_ID }}
         run: |
-        aws cloudfront create-invalidation \
-        --distribution-id $AWS_DISTRIBUTION_ID --paths /*
+          aws cloudfront create-invalidation \
+          --distribution-id $AWS_DISTRIBUTION_ID --paths /*
