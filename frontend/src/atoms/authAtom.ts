@@ -63,8 +63,7 @@ export const defaultClientAtom = atom((get) => {
         const { data } = await instance.get(`/auth/refresh`);
         updateToken(data.data);
         return instance.request(originalRequest);
-      }
-      if (data.message === 'Expired RefreshToken') {
+      } else if (data.message === 'Expired RefreshToken') {
         window.localStorage.removeItem(TOKEN_KEY);
         if (CONFIG.ENV === 'development') {
           window.location.href = `${CONFIG.LOCAL}/login`;
@@ -72,8 +71,7 @@ export const defaultClientAtom = atom((get) => {
           window.location.href = `${CONFIG.DOMAIN}/login`;
         }
         throw new ExpiredRefreshTokenError();
-      }
-      if (error.code === 'SERVER_ERROR') throw new ServerError();
+      } else throw new ServerError();
     },
   );
   return instance;
