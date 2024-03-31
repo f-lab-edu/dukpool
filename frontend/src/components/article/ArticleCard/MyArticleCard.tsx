@@ -5,6 +5,7 @@ import placeholderImage from '@assets/images/placeholder-image.png';
 import likeIcon from '@assets/icons/like.svg';
 import commentIcon from '@assets/icons/comment.svg';
 import { ContentResponse } from 'src/@types/content';
+import LazyImage from '@components/common/Image/LazyImage';
 
 type MyArticleCardProps = {
   nickname: string;
@@ -17,12 +18,7 @@ const MyArticleCard = memo(
     return (
       <StyledList>
         <StyledLink to={`/article/${data.id}`}>
-          <StyledImgContainer>
-            <StyledImage
-              alt={data.title}
-              src={data.img[0] ?? placeholderImage}
-            />
-          </StyledImgContainer>
+          <LazyImage src={data.img[0]} alt={data.title} />
           <StyledInfoContainer>
             <StyledTitle>{data.title}</StyledTitle>
             <StyledProfileContainer>
@@ -37,11 +33,11 @@ const MyArticleCard = memo(
             <StyledDate>{data.createdAt.slice(0, 10)}</StyledDate>
             <StyledCountBox>
               <StyledCount>
-                <StyledIcon src={likeIcon} />
+                <StyledIcon src={likeIcon} alt="like" />
                 <span>{data.likeCount}</span>
               </StyledCount>
               <StyledCount>
-                <StyledIcon src={commentIcon} />
+                <StyledIcon src={commentIcon} alt="comment" />
                 <span>{data.commentCount}</span>
               </StyledCount>
             </StyledCountBox>
@@ -64,19 +60,6 @@ const StyledLink = styled(Link)`
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-`;
-
-const StyledImgContainer = styled.div`
-  width: 100%;
-  overflow: hidden;
-  border-radius: 8px;
-  aspect-ratio: 1;
-`;
-
-const StyledImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
 
 const StyledInfoContainer = styled.div`

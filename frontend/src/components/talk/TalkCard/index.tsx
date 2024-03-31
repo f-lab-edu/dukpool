@@ -5,6 +5,7 @@ import placeholderImage from '@assets/images/placeholder-image.png';
 import likeIcon from '@assets/icons/like.svg';
 import commentIcon from '@assets/icons/comment.svg';
 import { AllContentResponse } from 'src/@types/content';
+import LazyImage from '@components/common/Image/LazyImage';
 
 const TalkCard = memo(
   ({
@@ -21,9 +22,7 @@ const TalkCard = memo(
       <StyledList>
         <StyledLink to={`/talk/${id}`}>
           <StyledContainer>
-            <StyledImgContainer>
-              <StyledImage alt={title} src={img[0] ?? placeholderImage} />
-            </StyledImgContainer>
+            <LazyImage src={img[0]} alt={title} isTalkContentImg={true} />
             <StyledContentContainer>
               <StyledTitle>{title}</StyledTitle>
               <StyledContent>{desc}</StyledContent>
@@ -42,11 +41,11 @@ const TalkCard = memo(
               </StyledProfileDiv>
               <StyledCountBox>
                 <StyledCount>
-                  <StyledIcon src={likeIcon} />
+                  <StyledIcon src={likeIcon} alt="like" />
                   <span>{likeCount}</span>
                 </StyledCount>
                 <StyledCount>
-                  <StyledIcon src={commentIcon} />
+                  <StyledIcon src={commentIcon} alt="comment" />
                   <span>{commentCount}</span>
                 </StyledCount>
               </StyledCountBox>
@@ -78,20 +77,6 @@ const StyledContainer = styled.div`
   height: 100%;
   justify-content: space-between;
   display: flex;
-`;
-
-const StyledImgContainer = styled.div`
-  width: 30%;
-  min-width: 80px;
-  overflow: hidden;
-  border-radius: 8px;
-  aspect-ratio: 1;
-`;
-
-const StyledImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
 
 const StyledContentContainer = styled.div`
