@@ -5,6 +5,7 @@ import cameraIcon from '@assets/icons/camera.svg';
 import plusIcon from '@assets/icons/plus.svg';
 import { makeBlob } from '@utils/makeBlob';
 import { useFormContext } from 'react-hook-form';
+import { changeImgFileExtension } from '@utils/changeImgFileExtension';
 import { compressImage } from '@utils/compressImage';
 
 const Images = memo(() => {
@@ -18,7 +19,11 @@ const Images = memo(() => {
     if (files && currentImages.length + files.length <= 5) {
       const compressedImages = [];
       for (const file of files) {
-        const compressedFile = await compressImage(file);
+        const blob = new Blob([file], { type: 'image/webp' });
+        const webpFile = new File([blob], changeImgFileExtension(file.name), {
+          type: 'image/webp',
+        });
+        const compressedFile = await compressImage(webpFile);
         compressedImages.push(compressedFile);
         console.log(compressedImages);
       }

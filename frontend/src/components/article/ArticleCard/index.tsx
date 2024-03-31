@@ -1,10 +1,12 @@
-import { memo } from 'react';
+import { lazy, memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import placeholderImage from '@assets/images/placeholder-image.png';
 import likeIcon from '@assets/icons/like.svg';
 import commentIcon from '@assets/icons/comment.svg';
 import { AllContentResponse } from 'src/@types/content';
+
+const LazyImage = lazy(() => import('@components/common/Image/LazyImage'));
 
 const ArticleCard = memo(
   ({
@@ -19,9 +21,7 @@ const ArticleCard = memo(
     return (
       <StyledList>
         <StyledLink to={`/article/${id}`}>
-          <StyledImgContainer>
-            <StyledImage alt={title} src={img[0] ?? placeholderImage} />
-          </StyledImgContainer>
+          <LazyImage src={img[0]} alt={title} />
           <StyledInfoContainer>
             <StyledTitle>{title}</StyledTitle>
             <StyledProfileContainer>
@@ -36,11 +36,11 @@ const ArticleCard = memo(
             <StyledDate>{createdAt.slice(0, 10)}</StyledDate>
             <StyledCountBox>
               <StyledCount>
-                <StyledIcon src={likeIcon} />
+                <StyledIcon src={likeIcon} alt="like" />
                 <span>{likeCount}</span>
               </StyledCount>
               <StyledCount>
-                <StyledIcon src={commentIcon} />
+                <StyledIcon src={commentIcon} alt="comment" />
                 <span>{commentCount}</span>
               </StyledCount>
             </StyledCountBox>
@@ -63,19 +63,6 @@ const StyledLink = styled(Link)`
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-`;
-
-const StyledImgContainer = styled.div`
-  width: 100%;
-  overflow: hidden;
-  border-radius: 8px;
-  aspect-ratio: 1;
-`;
-
-const StyledImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
 
 const StyledInfoContainer = styled.div`
